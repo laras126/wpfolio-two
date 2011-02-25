@@ -10,33 +10,52 @@
 
 // Adds a home link to your menu
 // http://codex.wordpress.org/Template_Tags/wp_page_menu
-//function childtheme_menu_args($args) {
-//    $args = array(
-//        'show_home' => 'Home',
-//        'sort_column' => 'menu_order',
-//        'menu_class' => 'menu',
-//        'echo' => true
-//    );
-//	return $args;
-//}
-//add_filter('wp_page_menu_args','childtheme_menu_args');
+function childtheme_menu_args($args) {
+    $args = array(
+        'show_home' => 'Home',
+        'sort_column' => 'menu_order',
+        'menu_class' => 'menu',
+        'echo' => true
+    );
+	return $args;
+}
+add_filter('wp_page_menu_args','childtheme_menu_args');
 
 // Unleash the power of Thematic's dynamic classes
-// 
-//define('THEMATIC_COMPATIBLE_BODY_CLASS', true);
-//define('THEMATIC_COMPATIBLE_POST_CLASS', true);
+
+define('THEMATIC_COMPATIBLE_BODY_CLASS', true);
+define('THEMATIC_COMPATIBLE_POST_CLASS', true);
 
 // Unleash the power of Thematic's comment form
-//
-// define('THEMATIC_COMPATIBLE_COMMENT_FORM', true);
+define('THEMATIC_COMPATIBLE_COMMENT_FORM', true);
 
 // Unleash the power of Thematic's feed link functions
-//
-// define('THEMATIC_COMPATIBLE_FEEDLINKS', true);
+define('THEMATIC_COMPATIBLE_FEEDLINKS', true);
 
-
-// enable post formats
+// Enable post formats
 add_theme_support( 'post-formats', array( 'aside', 'gallery', 'video', 'link', 'image', 'quote') );
+
+
+// testing formats...doesn't work. Extra '{' on line 38? What?
+/*if ( has_post_format('link') {?>
+	<div id='welcome-blurb'>
+	<p>THIS IS A LINK: <?php bloginfo('name'); ?>.</p>
+	</div>
+<?php } */
+
+
+// Thematic function practice
+
+function childtheme_welcome_blurb(){
+	if (is_home() & !is_paged()) { ?>
+	<div id='welcome-blurb'>
+	<p>Welcome to <?php bloginfo('name'); ?>.</p>
+	</div>
+	<?php }
+}
+
+add_action('thematic_belowheader', 'childtheme_welcome_blurb');
+
 
 ///////////////////////
 // ADDING A TAXONOMY //

@@ -2,7 +2,7 @@
 Theme Name: WPFolio - Thematic Child
 Theme URI: 
 Description: Use this theme to start your Thematic Child Theme development.
-Author: Lara
+Author: Lara + ...
 Author URI: http://themeshaper.com/
 Template: thematic
 Version: 1.0
@@ -31,4 +31,8 @@ Thematic is © Ian Stewart http://themeshaper.com/
 /* Prepare theme for plugins */
 @import url('../thematic/library/styles/plugins.css');
 
-
+#welcome-blurb {
+	color: blue;
+	font-weight: bold;
+	background-color: gray;
+}
