@@ -31,8 +31,33 @@ Thematic is © Ian Stewart http://themeshaper.com/
 /* Prepare theme for plugins */
 @import url('../thematic/library/styles/plugins.css');
 
-#welcome-blurb {
-	color: blue;
-	font-weight: bold;
-	background-color: gray;
+
+/* Post format styles */
+
+.gallery-format {
+	background-color: green;	
+}
+
+.image-format {
+	background-color: blue;	
+}
+
+.link-format {
+	background-color: aqua;	
+}
+
+.audio-format {
+	background-color: red;	
+}
+
+.aside-format {
+	background-color: gray;	
+}
+
+.quote-format {
+	background-color: yellow;	
+}
+
+h2.format {
+	color: white;
 }

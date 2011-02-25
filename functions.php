@@ -36,26 +36,55 @@ define('THEMATIC_COMPATIBLE_FEEDLINKS', true);
 add_theme_support( 'post-formats', array( 'aside', 'gallery', 'video', 'link', 'image', 'quote') );
 
 
-// testing formats...doesn't work. Extra '{' on line 38? What?
-/*if ( has_post_format('link') {?>
-	<div id='welcome-blurb'>
-	<p>THIS IS A LINK: <?php bloginfo('name'); ?>.</p>
-	</div>
-<?php } */
+// Define post format styles
+function wpfolio_post_formats() {
+
+		if ( has_post_format( 'gallery' )) {
+			echo '<div class="gallery-format">';
+			echo '<h2 class="format">GALLERY</h2>';			
+			echo the_content();
+			echo '</div>';
+		} else if ( has_post_format( 'image' )) {
+			echo '<div class="image-format">';
+			echo '<h2 class="format">IMAGE</h2>';			
+			echo the_content();
+			echo '</div>';		
+		} else if ( has_post_format( 'link' )) {
+			echo '<div class="link-format">';
+			echo '<h2 class="format">LINK</h2>';			
+			echo the_content();
+			echo '</div>';
+		} else if ( has_post_format( 'video' )) {
+			echo '<div class="video-format">';
+			echo '<h2 class="format">VIDEO</h2>';			
+			echo the_content();
+			echo '</div>';		
+		} else if ( has_post_format( 'audio' )) {
+			echo '<div class="audio-format">';
+			echo '<h2 class="format">AUDIO</h2>';
+			echo the_content();
+			echo '</div>';
+		} else if ( has_post_format( 'aside' )) {
+			echo '<div class="aside-format">';
+			echo '<h2 class="format">ASIDE</h2>';
+			echo the_content();
+			echo '</div>';		
+		} else if ( has_post_format( 'quote' )) {
+			echo '<div class="quote-format">';
+			echo '<h2 class="format">QUOTE</h2>';
+			echo the_content();
+			echo '</div>';				
+		}
+		
+} // end formats
+	 
+add_action('thematic_post', 'wpfolio_post_formats');
 
 
-// Thematic function practice
 
-function childtheme_welcome_blurb(){
-	if (is_home() & !is_paged()) { ?>
-	<div id='welcome-blurb'>
-	<p>Welcome to <?php bloginfo('name'); ?>.</p>
-	</div>
-	<?php }
-}
 
-add_action('thematic_belowheader', 'childtheme_welcome_blurb');
 
+// Pre-Thematic functions follow:
 
 ///////////////////////
 // ADDING A TAXONOMY //
