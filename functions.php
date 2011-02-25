@@ -35,8 +35,8 @@ define('THEMATIC_COMPATIBLE_FEEDLINKS', true);
 // Enable post formats
 add_theme_support( 'post-formats', array( 'aside', 'gallery', 'video', 'link', 'image', 'quote') );
 
-
-// Define post format styles
+// Post formats function
+// Added a label for each format and a class in styles.css for each
 function wpfolio_post_formats() {
 
 		if ( has_post_format( 'gallery' )) {
