@@ -34,6 +34,10 @@
 //
 // define('THEMATIC_COMPATIBLE_FEEDLINKS', true);
 
+
+// enable post formats
+add_theme_support( 'post-formats', array( 'aside', 'gallery', 'video', 'link', 'image', 'quote') );
+
 ///////////////////////
 // ADDING A TAXONOMY //
 ///////////////////////
