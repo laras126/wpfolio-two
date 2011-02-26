@@ -34,15 +34,23 @@ Thematic is © Ian Stewart http://themeshaper.com/
 
 /* Post format styles */
 
-.gallery-format {
+h2.format {
+	color: lime;
+}
+
+.gallery {
 	background-color: green;	
+}
+
+.gallery a {
+	font-weight: bold;
 }
 
 .image-format {
 	background-color: blue;	
 }
 
-.link-format {
+.link {
 	background-color: aqua;	
 }
 
@@ -58,6 +66,3 @@ Thematic is © Ian Stewart http://themeshaper.com/
 	background-color: yellow;	
 }
 
-h2.format {
-	color: white;
-}

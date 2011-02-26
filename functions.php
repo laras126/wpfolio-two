@@ -32,28 +32,41 @@ define('THEMATIC_COMPATIBLE_COMMENT_FORM', true);
 // Unleash the power of Thematic's feed link functions
 define('THEMATIC_COMPATIBLE_FEEDLINKS', true);
 
+
+///////////////////////
+//// POST FORMATS /////
+///////////////////////
+
+
 // Enable post formats
 add_theme_support( 'post-formats', array( 'aside', 'gallery', 'video', 'link', 'image', 'quote') );
 
 // Post formats function
 // Added a label for each format and a class in styles.css for each
 function wpfolio_post_formats() {
+	$format = get_post_format( $post_id );
 
 		if ( has_post_format( 'gallery' )) {
-			echo '<div class="gallery-format">';
-			echo '<h2 class="format">GALLERY</h2>';			
+			echo '<div id="<?php $post_id;?>" class="<?php $format;?>">'; 
 			echo the_content();
+			echo $post_id . " - " . $format; 
+	
+	// hmm still figuring this out. what class and what id?
+	// check http://flashingcursor.com/wordpress/intro-to-post-formats-in-wordpress-3-1-739 
+	// and post_class()? 
+	// also http://wordcastnet.com/2011/wordpress-post-formats-tutorial-add-tumblr-style-features-to-your-blog-with-wordpress-3-1/
+			
 			echo '</div>';
+		} else if ( has_post_format( 'link' )) {
+			echo '<div class="<?php $format;?>">'; 
+			echo the_content();
+			echo $post_id . " - " . $format;
+			echo '</div>';		
 		} else if ( has_post_format( 'image' )) {
 			echo '<div class="image-format">';
 			echo '<h2 class="format">IMAGE</h2>';			
 			echo the_content();
-			echo '</div>';		
-		} else if ( has_post_format( 'link' )) {
-			echo '<div class="link-format">';
-			echo '<h2 class="format">LINK</h2>';			
-			echo the_content();
-			echo '</div>';
+			echo '</div>';	
 		} else if ( has_post_format( 'video' )) {
 			echo '<div class="video-format">';
 			echo '<h2 class="format">VIDEO</h2>';			
@@ -74,6 +87,8 @@ function wpfolio_post_formats() {
 			echo '<h2 class="format">QUOTE</h2>';
 			echo the_content();
 			echo '</div>';				
+		} else {
+			echo the_content();
 		}
 		
 } // end formats
@@ -81,6 +96,12 @@ function wpfolio_post_formats() {
 add_action('thematic_post', 'wpfolio_post_formats');
 
 
+
+// Shortcode to add lorem ipsum 
+function add_lorem ($atts, $content = null) {
+	return 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+}
+add_shortcode("lorem", "add_lorem");
 
 
 
@@ -112,7 +133,7 @@ add_action('init', 'wpfolio_create_taxonomies', 0);
 // ADMIN & THEME OPTIONS INTERFACE //
 /////////////////////////////////////
 
-// customize admin footer text to add wpfolio to links
+// Customize admin footer text to add WPFolio to links
 function wpfolio_admin_footer() {
 	echo 'Thank you for creating with <a href="http://wordpress.org/" target="_blank">WordPress</a>. | <a href="http://codex.wordpress.org/" target="_blank">Documentation</a> | <a href="http://wordpress.org/support/forum/4" target="_blank">Feedback</a> | <a href="http://wpfolio.visitsteve.com/">Theme by WPFolio</a>';
 } 
