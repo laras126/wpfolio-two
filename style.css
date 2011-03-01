@@ -32,37 +32,34 @@ Thematic is © Ian Stewart http://themeshaper.com/
 @import url('../thematic/library/styles/plugins.css');
 
 
-/* Post format styles */
+/* Supposedly generate format classes */
 
-h2.format {
-	color: lime;
+.format-aside {
 }
 
-.gallery {
-	background-color: green;	
+.format-gallery .entry-content {
+	background-color: gray;
 }
 
-.gallery a {
-	font-weight: bold;
+.link-format {
+	background-color: olive;
 }
 
-.image-format {
-	background-color: blue;	
+.format-image {
 }
 
-.link {
-	background-color: aqua;	
+.format-quote {
 }
 
-.audio-format {
-	background-color: red;	
+.format-status {
 }
 
-.aside-format {
-	background-color: gray;	
+.format-video {
 }
 
-.quote-format {
-	background-color: yellow;	
+.format-audio {
 }
 
+.format-chat {
+}
+*/

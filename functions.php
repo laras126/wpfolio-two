@@ -39,61 +39,70 @@ define('THEMATIC_COMPATIBLE_FEEDLINKS', true);
 
 
 // Enable post formats
-add_theme_support( 'post-formats', array( 'aside', 'gallery', 'video', 'link', 'image', 'quote') );
+add_theme_support( 'post-formats', array( 'aside', 'gallery', 'link', 'image', 'quote', 'status', 'video', 'audio', 'chat' ) );
+
+
+function wpfolio_formats_again() {
+
+	$format = get_post_format();
+	if ( false === $format )
+		$format = 'standard';
+
+	if ( has_post_format( 'gallery' )) {
+		echo '<?php post_class(); ?>';
+		echo the_content();
+		echo '</div>';
+	} else if ( has_post_format( 'link' )) {
+		echo '<div class="link-format">';
+	//	echo '<h2 class="format">LINK</h2>'; 
+		echo the_content();
+		echo '</div>';		
+	} else if ( has_post_format( 'image' )) {
+		echo '<div class="image-format">';
+		echo '<h2 class="format">IMAGE</h2>';			
+		echo the_content();
+		echo '</div>';
+	} else if ( has_post_format( 'video' )) {
+		echo '<div class="video-format">';
+		echo '<h2 class="format">VIDEO</h2>';			
+		echo the_content();
+		echo '</div>';		
+	} else if ( has_post_format( 'audio' )) {
+		echo '<div class="audio-format">';
+		echo '<h2 class="format">AUDIO</h2>';
+		echo the_content();
+		echo '</div>';
+	} else if ( has_post_format( 'aside' )) {
+		echo '<div class="aside-format">';
+		echo '<h2 class="format">ASIDE</h2>';
+		echo the_content();
+		echo '</div>';		
+	} else if ( has_post_format( 'quote' )) {
+		echo '<div class="quote-format">';
+		echo '<h2 class="format">QUOTE</h2>';
+		echo the_content();
+		echo '</div>';				
+	} else {
+	}
+
+
+}
+add_filter('post_class', 'wpfolio_formats_again');
+add_filter('body_class', 'wpfolio_formats_again');
+
+
 
 // Post formats function
 // Added a label for each format and a class in styles.css for each
 function wpfolio_post_formats() {
-	$format = get_post_format( $post_id );
 
-		if ( has_post_format( 'gallery' )) {
-			echo '<div id="<?php $post_id;?>" class="<?php $format;?>">'; 
-			echo the_content();
-			echo $post_id . " - " . $format; 
-	
-	// hmm still figuring this out. what class and what id?
-	// check http://flashingcursor.com/wordpress/intro-to-post-formats-in-wordpress-3-1-739 
-	// and post_class()? 
-	// also http://wordcastnet.com/2011/wordpress-post-formats-tutorial-add-tumblr-style-features-to-your-blog-with-wordpress-3-1/
-			
-			echo '</div>';
-		} else if ( has_post_format( 'link' )) {
-			echo '<div class="<?php $format;?>">'; 
-			echo the_content();
-			echo $post_id . " - " . $format;
-			echo '</div>';		
-		} else if ( has_post_format( 'image' )) {
-			echo '<div class="image-format">';
-			echo '<h2 class="format">IMAGE</h2>';			
-			echo the_content();
-			echo '</div>';	
-		} else if ( has_post_format( 'video' )) {
-			echo '<div class="video-format">';
-			echo '<h2 class="format">VIDEO</h2>';			
-			echo the_content();
-			echo '</div>';		
-		} else if ( has_post_format( 'audio' )) {
-			echo '<div class="audio-format">';
-			echo '<h2 class="format">AUDIO</h2>';
-			echo the_content();
-			echo '</div>';
-		} else if ( has_post_format( 'aside' )) {
-			echo '<div class="aside-format">';
-			echo '<h2 class="format">ASIDE</h2>';
-			echo the_content();
-			echo '</div>';		
-		} else if ( has_post_format( 'quote' )) {
-			echo '<div class="quote-format">';
-			echo '<h2 class="format">QUOTE</h2>';
-			echo the_content();
-			echo '</div>';				
-		} else {
-			echo the_content();
-		}
-		
+				
 } // end formats
 	 
-add_action('thematic_post', 'wpfolio_post_formats');
+//add_action('thematic_post', 'wpfolio_post_formats'); 
+
+
+
 
 
 
@@ -102,6 +111,8 @@ function add_lorem ($atts, $content = null) {
 	return 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 }
 add_shortcode("lorem", "add_lorem");
+
+
 
 
 
@@ -126,7 +137,7 @@ register_taxonomy('medium', 'post', array(
 	'show_tagcloud' => true,
 	'show_in_nav_menus' => true,));
 } 
-add_action('init', 'wpfolio_create_taxonomies', 0);
+//add_action('init', 'wpfolio_create_taxonomies', 0); -- commented out for work on metaboxes
 
 
 /////////////////////////////////////
@@ -178,6 +189,7 @@ function add_custom_dashboard_widget() {
 	wp_add_dashboard_widget('custom_dashboard_widget', 'WPFolio News', 'custom_dashboard_widget');
 }
 add_action('wp_dashboard_setup', 'add_custom_dashboard_widget');
+
 
 
 ?>
