@@ -36,73 +36,7 @@ define('THEMATIC_COMPATIBLE_FEEDLINKS', true);
 ///////////////////////
 //// POST FORMATS /////
 ///////////////////////
-
-
-// Enable post formats
-add_theme_support( 'post-formats', array( 'aside', 'gallery', 'link', 'image', 'quote', 'status', 'video', 'audio', 'chat' ) );
-
-
-function wpfolio_formats_again() {
-
-	$format = get_post_format();
-	if ( false === $format )
-		$format = 'standard';
-
-	if ( has_post_format( 'gallery' )) {
-		echo '<?php post_class(); ?>';
-		echo the_content();
-		echo '</div>';
-	} else if ( has_post_format( 'link' )) {
-		echo '<div class="link-format">';
-	//	echo '<h2 class="format">LINK</h2>'; 
-		echo the_content();
-		echo '</div>';		
-	} else if ( has_post_format( 'image' )) {
-		echo '<div class="image-format">';
-		echo '<h2 class="format">IMAGE</h2>';			
-		echo the_content();
-		echo '</div>';
-	} else if ( has_post_format( 'video' )) {
-		echo '<div class="video-format">';
-		echo '<h2 class="format">VIDEO</h2>';			
-		echo the_content();
-		echo '</div>';		
-	} else if ( has_post_format( 'audio' )) {
-		echo '<div class="audio-format">';
-		echo '<h2 class="format">AUDIO</h2>';
-		echo the_content();
-		echo '</div>';
-	} else if ( has_post_format( 'aside' )) {
-		echo '<div class="aside-format">';
-		echo '<h2 class="format">ASIDE</h2>';
-		echo the_content();
-		echo '</div>';		
-	} else if ( has_post_format( 'quote' )) {
-		echo '<div class="quote-format">';
-		echo '<h2 class="format">QUOTE</h2>';
-		echo the_content();
-		echo '</div>';				
-	} else {
-	}
-
-
-}
-add_filter('post_class', 'wpfolio_formats_again');
-add_filter('body_class', 'wpfolio_formats_again');
-
-
-
-// Post formats function
-// Added a label for each format and a class in styles.css for each
-function wpfolio_post_formats() {
-
-				
-} // end formats
-	 
-//add_action('thematic_post', 'wpfolio_post_formats'); 
-
-
-
+// not enabled
 
 
 
@@ -111,6 +45,61 @@ function add_lorem ($atts, $content = null) {
 	return 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 }
 add_shortcode("lorem", "add_lorem");
+
+
+
+
+///////////////////////
+// WPALCHEMY METABOX //
+///////////////////////
+
+// Dimas' excellent meta box class WPAlchemy: http://www.farinspace.com/wpalchemy-metabox/
+
+// custom constant (opposite of TEMPLATEPATH)
+define('_TEMPLATEURL', WP_CONTENT_URL . '/' . stristr(TEMPLATEPATH, 'themes'));
+
+include_once 'WPAlchemy/MetaBox.php';
+ 
+// include css to style the custom meta boxes, this should be a global
+// stylesheet used by all similar meta boxes
+if (is_admin()) 
+{
+	wp_enqueue_style('custom_meta_css', STYLESHEETPATH . 'custom/meta.css');
+}
+
+$artworkinfo_metabox = new WPAlchemy_MetaBox(array
+(
+	'id' => '_custom_meta', // underscore prefix hides fields from the custom fields area
+	'title' => 'Artwork Info',
+	'template' => STYLESHEETPATH . '/custom/artwork-meta.php',
+	'context' => 'normal',
+));
+
+// Display artwork info in post, below post content 
+add_filter('thematic_post', 'display_artwork_info');
+
+function display_artwork_info() {
+	
+	global $artworkinfo_metabox;
+	
+	echo the_content();
+		 
+	echo '<h4>';
+	// get the meta data for the current post
+	$artworkinfo_metabox->the_meta();
+	 
+	// get value directly
+	echo '<hr />';
+	$artworkinfo_metabox->the_value('title');
+	echo '<br />';
+	$artworkinfo_metabox->the_value('collabs');
+	echo '<br />';
+	$artworkinfo_metabox->the_value('dimen');
+	echo '<br />';
+	$artworkinfo_metabox->the_value('additional');
+	echo '</h4><br />'; 
+
+} 
 
 
 
