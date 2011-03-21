@@ -4,7 +4,6 @@
 //  Custom Child Theme Functions
 //
 
-// I've included a "commented out" sample function below that'll add a home link to your menu
 // More ideas can be found on "A Guide To Customizing The Thematic Theme Framework" 
 // http://themeshaper.com/thematic-for-wordpress/guide-customizing-thematic-theme-framework/
 
@@ -33,10 +32,40 @@ define('THEMATIC_COMPATIBLE_COMMENT_FORM', true);
 define('THEMATIC_COMPATIBLE_FEEDLINKS', true);
 
 
+////////////////////////
+//// THEME OPTIONS /////
+////////////////////////
+
+/*-----------------------------------------------------------------------------------*/
+/* Options Framework Functions
+/*-----------------------------------------------------------------------------------*/
+
+/* Set the file path based on whether the Options Framework is in a parent theme or child theme */
+
+if ( STYLESHEETPATH == TEMPLATEPATH ) {
+	define('OF_FILEPATH', TEMPLATEPATH);
+	define('OF_DIRECTORY', get_bloginfo('template_directory'));
+} else {
+	define('OF_FILEPATH', STYLESHEETPATH);
+	define('OF_DIRECTORY', get_bloginfo('stylesheet_directory'));
+}
+
+/* These files build out the options interface.  Likely won't need to edit these. */
+
+require_once (OF_FILEPATH . '/admin/admin-functions.php');		// Custom functions and plugins
+require_once (OF_FILEPATH . '/admin/admin-interface.php');		// Admin Interfaces (options,framework, seo)
+
+/* These files build out the theme specific options and associated functions. */
+
+require_once (OF_FILEPATH . '/admin/theme-options.php'); 		// Options panel settings and custom settings
+require_once (OF_FILEPATH . '/admin/theme-functions.php'); 	// Theme actions based on options settings
+
+
+
 ///////////////////////
 //// POST FORMATS /////
 ///////////////////////
-// not enabled
+// not enabled as of yet
 
 
 
