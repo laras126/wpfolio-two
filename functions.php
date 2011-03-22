@@ -40,6 +40,10 @@ define('THEMATIC_COMPATIBLE_FEEDLINKS', true);
 /* Options Framework Functions
 /*-----------------------------------------------------------------------------------*/
 
+// Do we want to include separate templates for header/footer options? Might be overkill
+include_once (STYLESHEETPATH . '/options/footer-options.php');	
+include_once (STYLESHEETPATH . '/options/header-options.php');	
+
 /* Set the file path based on whether the Options Framework is in a parent theme or child theme */
 
 if ( STYLESHEETPATH == TEMPLATEPATH ) {
@@ -52,13 +56,13 @@ if ( STYLESHEETPATH == TEMPLATEPATH ) {
 
 /* These files build out the options interface.  Likely won't need to edit these. */
 
-require_once (OF_FILEPATH . '/admin/admin-functions.php');		// Custom functions and plugins
-require_once (OF_FILEPATH . '/admin/admin-interface.php');		// Admin Interfaces (options,framework, seo)
+require_once (OF_FILEPATH . '/options/admin-functions.php');		// Custom functions and plugins
+require_once (OF_FILEPATH . '/options/admin-interface.php');		// Admin Interfaces (options,framework, seo)
 
 /* These files build out the theme specific options and associated functions. */
 
-require_once (OF_FILEPATH . '/admin/theme-options.php'); 		// Options panel settings and custom settings
-require_once (OF_FILEPATH . '/admin/theme-functions.php'); 	// Theme actions based on options settings
+require_once (OF_FILEPATH . '/options/theme-options.php'); 		// Options panel settings and custom settings
+require_once (OF_FILEPATH . '/options/theme-functions.php'); 	// Theme actions based on options settings
 
 
 

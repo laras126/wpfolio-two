@@ -41,7 +41,7 @@ $options_select = array("one","two","three","four","five");
 $options_radio = array("one" => "One","two" => "Two","three" => "Three","four" => "Four","five" => "Five"); 
 
 //Stylesheets Reader
-$alt_stylesheet_path = OF_FILEPATH . '/styles/';
+/*$alt_stylesheet_path = STYLESHEETPATH . '/styles/';
 $alt_stylesheets = array();
 
 if ( is_dir($alt_stylesheet_path) ) {
@@ -52,7 +52,7 @@ if ( is_dir($alt_stylesheet_path) ) {
             }
         }    
     }
-}
+} */
 
 //More Options
 $uploads_arr = wp_upload_dir();
@@ -90,22 +90,36 @@ $options[] = array( "name" => "Custom Favicon",
 					"id" => $shortname."_custom_favicon",
 					"std" => "",
 					"type" => "upload"); 
+
+// Choose a post category to be excluded from the front page and to be shown on blog template - courtesy of AutoFocus+ 					
+$options[] = array( "name" => __('Blog Category','thematic'),
+					"desc" => __('Select a post category to be shown in the Blog Template and excluded from the Front Page.','thematic'),
+					"id" => $shortname."_blog_cat",
+					"std" => "Select a category:",
+					"type" => "select",
+					"options" => $of_categories);
                                                
-$options[] = array( "name" => "Tracking Code",
+/*$options[] = array( "name" => "Tracking Code",
 					"desc" => "Paste your Google Analytics (or other) tracking code here. This will be added into the footer template of your theme.",
 					"id" => $shortname."_google_analytics",
 					"std" => "",
-					"type" => "textarea");                                                    
+					"type" => "textarea");*/                                                    
     
 $options[] = array( "name" => "Styling Options",
 					"type" => "heading");
 					
-$options[] = array( "name" => "Theme Stylesheet",
+/*$options[] = array( "name" => "Theme Stylesheet",
 					"desc" => "Select your themes alternative color scheme.",
 					"id" => $shortname."_alt_stylesheet",
 					"std" => "default.css",
 					"type" => "select",
-					"options" => $alt_stylesheets);
+					"options" => $alt_stylesheets); */
+					
+$options[] = array( "name" => "Header Color",
+					"desc" => "No color selected.",
+					"id" => $shortname."_heading_colorpicker",
+					"std" => "",
+					"type" => "color"); 
 					
 $options[] = array( "name" => "Custom CSS",
                     "desc" => "Quickly add some CSS to your theme by adding it to this block.",
@@ -153,12 +167,6 @@ $options[] = array( "name" => "Border",
 					"id" => $shortname."_border",
 					"std" => array('width' => '2','style' => 'dotted','color' => '#444444'),
 					"type" => "border");      
-					
-$options[] = array( "name" => "Colorpicker",
-					"desc" => "No color selected.",
-					"id" => $shortname."_example_colorpicker",
-					"std" => "",
-					"type" => "color"); 
 					
 $options[] = array( "name" => "Colorpicker (default #2098a8)",
 					"desc" => "Color selected.",
@@ -236,12 +244,12 @@ $options[] = array( "name" => "Multicheck",
 					"type" => "multicheck",
 					"options" => $options_radio);
                                         
-$options[] = array( "name" => "Select a Category",
+/*$options[] = array( "name" => "Select a Category",
 					"desc" => "A list of all the categories being used on the site.",
 					"id" => $shortname."_example_category",
 					"std" => "Select a category:",
 					"type" => "select",
-					"options" => $of_categories);
+					"options" => $of_categories); */
 
 update_option('of_template',$options); 					  
 update_option('of_themename',$themename);   

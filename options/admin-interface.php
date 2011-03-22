@@ -25,7 +25,7 @@ function optionsframework_add_admin() {
 		}
     }
 		
-    $of_page = add_submenu_page('themes.php', $themename, 'Theme Options', 'edit_theme_options', 'optionsframework','optionsframework_options_page'); // Default
+    $of_page = add_submenu_page('themes.php', $themename, 'WPFolio Options', 'edit_theme_options', 'optionsframework','optionsframework_options_page'); // Default
 	
 	// Add framework functionaily to the head individually
 	add_action("admin_print_scripts-$of_page", 'of_load_only');

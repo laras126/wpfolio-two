@@ -2,6 +2,8 @@
 
 /* These are functions specific to the included option settings and this theme */
 
+// Commented out what might not be necessary for WPFolio 
+
 /*-----------------------------------------------------------------------------------*/
 /* Theme Header Output - wp_head() */
 /*-----------------------------------------------------------------------------------*/
@@ -59,6 +61,8 @@ function of_head_css() {
 	
 }
 
+//if isset('_heading_colorpicker')
+
 /*-----------------------------------------------------------------------------------*/
 /* Add Body Classes for Layout
 /*-----------------------------------------------------------------------------------*/
@@ -98,12 +102,12 @@ add_action('wp_head', 'childtheme_favicon');
 /* Show analytics code in footer */
 /*-----------------------------------------------------------------------------------*/
 
-function childtheme_analytics(){
+/*function childtheme_analytics(){
 	$shortname =  get_option('of_shortname');
 	$output = get_option($shortname . '_google_analytics');
 	if ( $output <> "" ) 
 		echo stripslashes($output) . "\n";
 }
-add_action('wp_footer','childtheme_analytics');
+add_action('wp_footer','childtheme_analytics');*/
 
 ?>
