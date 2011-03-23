@@ -31,6 +31,7 @@ if (!function_exists('optionsframework_wp_head')) {
 	     }       
 			
 		// This prints out the custom css and specific styling options
+		of_options_output_css();
 		of_head_css();
 	}
 }
@@ -42,6 +43,7 @@ add_action('wp_head', 'optionsframework_wp_head');
 /* Output CSS from standarized options */
 /*-----------------------------------------------------------------------------------*/
 
+// Load Custom CSS 
 function of_head_css() {
 
 		$shortname =  get_option('of_shortname'); 
@@ -57,11 +59,20 @@ function of_head_css() {
 		if ($output <> '') {
 			$output = "<!-- Custom Styling -->\n<style type=\"text/css\">\n" . $output . "</style>\n";
 			echo $output;
-		}
-	
+		}	
 }
 
-//if isset('_heading_colorpicker')
+
+//	Load Color Options
+function of_options_output_css() { 
+global $post; ?>
+<style type="text/css">
+	/* <![CDATA[ */
+<?php $of_css_options_output = dirname( __FILE__ ) . '/style-output.php'; if( is_file( $of_css_options_output ) ) require $of_css_options_output; ?>
+
+	/* ]]> */
+</style>
+<?php }
 
 /*-----------------------------------------------------------------------------------*/
 /* Add Body Classes for Layout
@@ -99,6 +110,36 @@ function childtheme_favicon() {
 add_action('wp_head', 'childtheme_favicon');
 
 /*-----------------------------------------------------------------------------------*/
+/* Replace Blog Title With Logo
+/*-----------------------------------------------------------------------------------*/
+
+// If a logo is uploaded, unhook the page title and description
+
+function add_childtheme_logo() {
+	$shortname =  get_option('of_shortname');
+	$logo = get_option($shortname . '_logo');
+	if (!empty($logo)) {
+		remove_action('thematic_header','thematic_blogtitle', 3);
+		remove_action('thematic_header','thematic_blogdescription',5);
+		add_action('thematic_header','childtheme_logo', 3);
+	}
+}
+add_action('init','add_childtheme_logo');
+
+// Displays the logo
+function childtheme_logo() {
+	$shortname =  get_option('of_shortname');
+	$logo = get_option($shortname . '_logo');
+    $heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'div';?>
+    <<?php echo $heading_tag; ?> id="site-title">
+	<a href="<?php bloginfo('url'); ?>" title="<?php bloginfo('description'); ?>">
+    <img src="<?php echo $logo; ?>" alt="<?php bloginfo('name'); ?>"/>
+	</a>
+    </<?php echo $heading_tag; ?>>
+<?php }
+
+
+/*-----------------------------------------------------------------------------------*/
 /* Show analytics code in footer */
 /*-----------------------------------------------------------------------------------*/
 
@@ -109,5 +150,7 @@ add_action('wp_head', 'childtheme_favicon');
 		echo stripslashes($output) . "\n";
 }
 add_action('wp_footer','childtheme_analytics');*/
+
+
 
 ?>

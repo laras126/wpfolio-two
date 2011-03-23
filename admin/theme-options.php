@@ -105,6 +105,9 @@ $options[] = array( "name" => __('Blog Category','thematic'),
 					"std" => "",
 					"type" => "textarea");*/                                                    
     
+    
+//*-------------* STYLE OPTIONS *-------------*//
+
 $options[] = array( "name" => "Styling Options",
 					"type" => "heading");
 					
@@ -115,12 +118,24 @@ $options[] = array( "name" => "Styling Options",
 					"type" => "select",
 					"options" => $alt_stylesheets); */
 					
-$options[] = array( "name" => "Header Color",
-					"desc" => "No color selected.",
-					"id" => $shortname."_heading_colorpicker",
-					"std" => "",
-					"type" => "color"); 
+/*$options[] = array( "name" => __('Background Color','thematic'),
+					"desc" => __('Change the background color by entering a HEX color number. (ie: <span style="font-family:Monaco,Lucida Console,Courier,monospace;">#FFFFFF</span>)','thematic'),
+					"id" => $shortname."_bg_color",
+					"std" => "FFFFFF",
+					"type" => "color");  */
+										
+$options[] = array( "name" => "text_color (default #2098a8)",
+					"desc" => "Color selected.",
+					"id" => $shortname."_text_color",
+					"std" => "#2098a8",
+					"type" => "color");	
 					
+/*$options[] = array( "name" => "bg_color (default #2098a8)",
+					"desc" => "Color selected.",
+					"id" => $shortname."_bg_color",
+					"std" => "#2098a8",
+					"type" => "color");	*/		
+										
 $options[] = array( "name" => "Custom CSS",
                     "desc" => "Quickly add some CSS to your theme by adding it to this block.",
                     "id" => $shortname."_custom_css",
