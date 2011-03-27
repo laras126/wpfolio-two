@@ -124,18 +124,46 @@ $options[] = array( "name" => "Styling Options",
 					"std" => "FFFFFF",
 					"type" => "color");  */
 										
-$options[] = array( "name" => "text_color (default #2098a8)",
+$options[] = array( "name" => "Header Text Color",
 					"desc" => "Color selected.",
 					"id" => $shortname."_text_color",
 					"std" => "#2098a8",
 					"type" => "color");	
 					
-/*$options[] = array( "name" => "bg_color (default #2098a8)",
+$options[] = array( "name" => "hdr_color (default #2098a8)",
 					"desc" => "Color selected.",
-					"id" => $shortname."_bg_color",
+					"id" => $shortname."_hdr_color",
 					"std" => "#2098a8",
-					"type" => "color");	*/		
-										
+					"type" => "color");	
+
+$options[] = array( "name" => "wrpr_color (default #2098a8)",
+					"desc" => "Color selected.",
+					"id" => $shortname."_wrpr_color",
+					"std" => "#2098a8",
+					"type" => "color");		
+
+$options[] = array( "name" => "Body Font",
+		            "id" => $shortname."_body_font",
+		            "type" => "select",
+		            "std" => "Helvetica",
+		            "options" => array(
+		            "Arial, Helvetica Neue, Helvetica, sans-serif", 
+		            "Courier New, Courier, monospace",
+		            "Georgia, Palatino, Palatino Linotype, Times, Times New Roman, serif",
+		            "Gill Sans, Calibri, Trebuchet MS, sans-serif", 
+		            "Helvetica Neue, Arial, Helvetica, sans-serif", 
+		            "Lucida Sans, Lucida Grande, Lucida Sans Unicode, sans-serif", 
+		            "Palatino, Palatino Linotype, Georgia, Times, Times New Roman, serif", 
+		            "Times, Times New Roman, Georgia, serif", 
+		            "Verdana, Geneva, Tahoma, sans-serif"  
+		            ));
+
+$options[] = array( "name" => "Typography",
+					"desc" => "This is a typographic specific option.",
+					"id" => $shortname."_typography",
+					"std" => array('size' => '16','unit' => 'em','face' => 'verdana','style' => 'bold italic','color' => '#123456'),
+					"type" => "typography");  
+														
 $options[] = array( "name" => "Custom CSS",
                     "desc" => "Quickly add some CSS to your theme by adding it to this block.",
                     "id" => $shortname."_custom_css",
@@ -170,13 +198,7 @@ $options[] = array( "name" => "Custom Text (Right)",
 					
 $options[] = array( "name" => "Example Options",
 					"type" => "heading"); 	   
-
-$options[] = array( "name" => "Typograpy",
-					"desc" => "This is a typographic specific option.",
-					"id" => $shortname."_typograpy",
-					"std" => array('size' => '16','unit' => 'em','face' => 'verdana','style' => 'bold italic','color' => '#123456'),
-					"type" => "typography");  
-					
+	
 $options[] = array( "name" => "Border",
 					"desc" => "This is a border specific option.",
 					"id" => $shortname."_border",
