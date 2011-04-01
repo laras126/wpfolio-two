@@ -1,3 +1,2 @@
-#header {background-color: <?php echo $hdr_color ?>;}
-#wrapper {background-color: <?php echo $wrpr_color ?>;}
-#content {font-family:<?php echo $body_font; ?>;}
+#header {background-color: <?php echo $hdr_bg_color ?>;}
+body {font-family:<?php echo $body_font; ?>;background-color:<?php echo $body_bg_color ?>;}

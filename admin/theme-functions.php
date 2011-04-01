@@ -65,13 +65,13 @@ function of_head_css() {
 
 //	Load Color Options
 function of_options_output_css() { 
-global $post; ?>
-<style type="text/css">
-	/* <![CDATA[ */
-<?php $of_css_options_output = dirname( __FILE__ ) . '/style-output.php'; if( is_file( $of_css_options_output ) ) require $of_css_options_output; ?>
-
-	/* ]]> */
-</style>
+?>
+	<style type="text/css">
+		/* <![CDATA[ */
+	<?php $of_css_options_output = dirname( __FILE__ ) . '/style-output.php'; if( is_file( $of_css_options_output ) ) require $of_css_options_output; ?>
+	
+		/* ]]> */
+	</style>
 <?php }
 
 /*-----------------------------------------------------------------------------------*/

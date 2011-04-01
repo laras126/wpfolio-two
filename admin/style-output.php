@@ -2,11 +2,13 @@
 	$shortname = get_option('of_shortname'); 
 	$output = '';
 
-	$text_color = get_option($shortname . '_text_color');
-	$hdr_color = get_option($shortname . '_hdr_color');
-	$wrpr_color = get_option($shortname . '_wrpr_color');
-	$typography = get_option($shortname . '_typography'); 
+	$hdr_bg_color = get_option($shortname . '_hdr_bg_color');
+	$body_bg_color = get_option($shortname . '_body_bg_color');
 	$body_font = get_option($shortname . '_body_font');
+
+	$text_color = get_option($shortname . '_text_color');
+	$typography = get_option($shortname . '_typography'); 
+	
 
 
 	// Output styles

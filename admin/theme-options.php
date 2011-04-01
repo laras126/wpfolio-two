@@ -124,21 +124,21 @@ $options[] = array( "name" => "Styling Options",
 					"std" => "FFFFFF",
 					"type" => "color");  */
 										
-$options[] = array( "name" => "Header Text Color",
+/*$options[] = array( "name" => "Header Text Color",
 					"desc" => "Color selected.",
 					"id" => $shortname."_text_color",
 					"std" => "#2098a8",
-					"type" => "color");	
+					"type" => "color");	*/
 					
-$options[] = array( "name" => "hdr_color (default #2098a8)",
+$options[] = array( "name" => "Header Background Color",
 					"desc" => "Color selected.",
-					"id" => $shortname."_hdr_color",
+					"id" => $shortname."_hdr_bg_color",
 					"std" => "#2098a8",
 					"type" => "color");	
 
-$options[] = array( "name" => "wrpr_color (default #2098a8)",
+$options[] = array( "name" => "Body Background Color",
 					"desc" => "Color selected.",
-					"id" => $shortname."_wrpr_color",
+					"id" => $shortname."_body_bg_color",
 					"std" => "#2098a8",
 					"type" => "color");		
 
@@ -147,22 +147,22 @@ $options[] = array( "name" => "Body Font",
 		            "type" => "select",
 		            "std" => "Helvetica",
 		            "options" => array(
-		            "Arial, Helvetica Neue, Helvetica, sans-serif", 
-		            "Courier New, Courier, monospace",
-		            "Georgia, Palatino, Palatino Linotype, Times, Times New Roman, serif",
-		            "Gill Sans, Calibri, Trebuchet MS, sans-serif", 
-		            "Helvetica Neue, Arial, Helvetica, sans-serif", 
-		            "Lucida Sans, Lucida Grande, Lucida Sans Unicode, sans-serif", 
-		            "Palatino, Palatino Linotype, Georgia, Times, Times New Roman, serif", 
-		            "Times, Times New Roman, Georgia, serif", 
-		            "Verdana, Geneva, Tahoma, sans-serif"  
+			            "Arial, Helvetica Neue, Helvetica, sans-serif", 
+			            "Courier New, Courier, monospace",
+			            "Georgia, Palatino, Palatino Linotype, Times, Times New Roman, serif",
+			            "Gill Sans, Calibri, Trebuchet MS, sans-serif", 
+			            "Helvetica Neue, Arial, Helvetica, sans-serif", 
+			            "Lucida Sans, Lucida Grande, Lucida Sans Unicode, sans-serif", 
+			            "Palatino, Palatino Linotype, Georgia, Times, Times New Roman, serif", 
+			            "Times, Times New Roman, Georgia, serif", 
+			            "Verdana, Geneva, Tahoma, sans-serif"  
 		            ));
 
-$options[] = array( "name" => "Typography",
+/*$options[] = array( "name" => "Typography",
 					"desc" => "This is a typographic specific option.",
 					"id" => $shortname."_typography",
 					"std" => array('size' => '16','unit' => 'em','face' => 'verdana','style' => 'bold italic','color' => '#123456'),
-					"type" => "typography");  
+					"type" => "typography");  */
 														
 $options[] = array( "name" => "Custom CSS",
                     "desc" => "Quickly add some CSS to your theme by adding it to this block.",
