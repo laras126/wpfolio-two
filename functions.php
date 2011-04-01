@@ -32,13 +32,55 @@ define('THEMATIC_COMPATIBLE_COMMENT_FORM', true);
 define('THEMATIC_COMPATIBLE_FEEDLINKS', true);
 
 
-////////////////////////
-//// THEME OPTIONS /////
-////////////////////////
 
-/*-----------------------------------------------------------------------------------*/
-/* Options Framework Functions
-/*-----------------------------------------------------------------------------------*/
+
+////////////
+// IMAGES //
+////////////
+
+// This sets the Large image size to 900px
+
+if ( ! isset( $content_width ) ) 
+	$content_width = 900;
+
+// Remove inline styles on gallery shortcode
+
+function wpfolio_remove_gallery_css( $css ) {
+	return preg_replace( "#<style type='text/css'>(.*?)</style>#s", '', $css );
+	}
+add_filter( 'gallery_style', 'wpfolio_remove_gallery_css' );
+
+// END - Remove inline styles on gallery shortcode
+
+
+// Thumbnail Function - this creates a default thumbnail if one is specified
+function get_thumb ($post_ID){
+    $thumbargs = array(
+    'post_type' => 'attachment',
+    'numberposts' => 1,
+    'post_status' => null,
+    'post_parent' => $post_ID
+    );
+    $thumb = get_posts($thumbargs);
+    if ($thumb) {
+        return wp_get_attachment_image($thumb[0]->ID);
+    }
+} 
+
+// This adds support for post thumbnails of 150px square
+add_theme_support('post-thumbnails');
+set_post_thumbnail_size( 150, 150,true );
+
+// END - Thumbnail Function
+
+
+
+
+//////////////////////////////////////
+//// OPTIONS FRAMEWORK FUNCTIONS /////
+//////////////////////////////////////
+
+// Options Framework by Devin at WPTheming, based on WooThemes. http://wptheming.com/2010/12/options-framework/
 
 // Do we want to include separate templates for header/footer options? Might be overkill
 //include_once (STYLESHEETPATH . '/admin/footer-options.php');	
@@ -66,18 +108,12 @@ require_once (OF_FILEPATH . '/admin/theme-functions.php'); 	// Theme actions bas
 
 
 
+
 ///////////////////////
 //// POST FORMATS /////
 ///////////////////////
 // not enabled as of yet
 
-
-
-// Shortcode to add lorem ipsum 
-function add_lorem ($atts, $content = null) {
-	return 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
-}
-add_shortcode("lorem", "add_lorem");
 
 
 
@@ -108,7 +144,7 @@ $artworkinfo_metabox = new WPAlchemy_MetaBox(array
 	'context' => 'normal',
 ));
 
-// Display artwork info in post, below post content 
+// Display artwork info in post, below post content -- will put this in a loop
 add_filter('thematic_post', 'display_artwork_info');
 
 function display_artwork_info() {
@@ -116,29 +152,24 @@ function display_artwork_info() {
 	global $artworkinfo_metabox;
 	
 	echo the_content();
-		 
-	echo '<h4>';
+
 	// get the meta data for the current post
 	$artworkinfo_metabox->the_meta();
 	 
 	// get value directly
-	echo '<hr />';
+	echo '<div id="artwork-meta"><strong>';
 	$artworkinfo_metabox->the_value('title');
-	echo '<br />';
+	echo '</strong><br />';
 	$artworkinfo_metabox->the_value('collabs');
 	echo '<br />';
 	$artworkinfo_metabox->the_value('dimen');
 	echo '<br />';
 	$artworkinfo_metabox->the_value('additional');
-	echo '</h4><br />'; 
+	echo '<br /></div>'; 
 
 } 
 
 
-
-
-
-// Pre-Thematic functions follow:
 
 ///////////////////////
 // ADDING A TAXONOMY //
@@ -159,12 +190,24 @@ register_taxonomy('medium', 'post', array(
 	'show_tagcloud' => true,
 	'show_in_nav_menus' => true,));
 } 
-//add_action('init', 'wpfolio_create_taxonomies', 0); -- commented out for work on metaboxes
+add_action('init', 'wpfolio_create_taxonomies', 0); 
 
 
-/////////////////////////////////////
-// ADMIN & THEME OPTIONS INTERFACE //
-/////////////////////////////////////
+/////////////////////
+// ADMIN INTERFACE //
+/////////////////////
+
+
+// Remove some widget areas
+function child_remove_widget_area() {
+	$widgetareas = array ('index-top', 'index-insert', '1st-subsidiary-aside', '2nd-subsidiary-aside', '3rd-subsidiary-aside', 'single-insert', );
+	
+	foreach ( $widgetareas as &$area ) {
+		unregister_sidebar($area);
+	}
+}
+add_action( 'admin_init', 'child_remove_widget_area');
+
 
 // Customize admin footer text to add WPFolio to links
 function wpfolio_admin_footer() {
@@ -213,5 +256,15 @@ function add_custom_dashboard_widget() {
 add_action('wp_dashboard_setup', 'add_custom_dashboard_widget');
 
 
+
+///////////////////
+// DEV FUNCTIONS //
+///////////////////
+
+// Shortcode to add lorem ipsum 
+function add_lorem ($atts, $content = null) {
+	return 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+}
+add_shortcode("lorem", "add_lorem");
 
 ?>

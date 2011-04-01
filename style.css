@@ -35,7 +35,80 @@ Thematic is © Ian Stewart http://themeshaper.com/
 @import url('css/wpf-styles.php');
 
 
-/* Supposedly generate format classes */
+/* Grid style 
+
+body {
+	background-repeat: "/Volumes/OSX/Lara/Dropbox/Sites/wp-content/themes/thematic/library/grids/960_grid_12_col_18px_height.gif";
+} */
+
+
+/*
+
+Adapt the following for use in your Child Themes when using
+different font-sizes and line-heights
+
+.entry-content img,
+.wp-caption {
+    margin-bottom:--px;
+}
+.wp-smiley {
+    max-height:--px;
+}
+
+All other styles can be overridden--or ignored!--in Child Theme stylesheets
+
+*/
+
+/*
+
+Adapt the following for use in your Child Themes when using
+different font-sizes and line-heights
+
+body, input, textarea {
+    font: --px Arial,sans-serif;
+    line-height:--px;
+}
+p, ul, ol, dd, pre {
+    margin-bottom:--px;
+}
+pre, code {
+	font:--px Monaco, monospace;
+	line-height:--px;
+}
+
+All other styles can be overridden--or ignored!--in Child Theme stylesheets
+
+*/
+
+#main {
+	padding: 30px;
+}
+
+#container, #content {
+	width: 900px;
+}
+
+#artwork-meta {
+	width: 500px;
+	font-size: 12px;
+	line-height: 14px;
+	margin-bottom: 15px;
+}
+/* Remove some borders, hide some stuff. Doesn't work right now*/
+
+#primary, h2.page-title, .entry-meta, h1.entry-title {
+	display: none;
+}
+
+.entry-meta {
+	display: none;
+}
+
+#access, .menu a, a:hover, a:focus, ul, li, .current_page_item {
+	border: none;
+}
+
+/* Supposedly generated format classes */
 
 .format-aside {
 }
@@ -65,4 +138,4 @@ Thematic is © Ian Stewart http://themeshaper.com/
 
 .format-chat {
 }
-*/
+
