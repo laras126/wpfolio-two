@@ -32,26 +32,75 @@ define('THEMATIC_COMPATIBLE_COMMENT_FORM', true);
 define('THEMATIC_COMPATIBLE_FEEDLINKS', true);
 
 
+///////////////////////
+// WIDGETS & SIDEBAR //
+///////////////////////
+
+
+// Filter thematic_sidebar() .. no display for the page 'Lorem Ipsum', keep it for the rest
+// http://programming.thematic4you.com/2010/01/how-to-remove-the-sidebar-from-a-certain-page/
+// Maybe hack to make it an option: Check pages and/or categories to have include sidebar on
+// Disabled until figured out what to do with it
+function remove_sidebar() {
+	if (!is_page('Blog')) {
+		return FALSE;
+	} else {
+		return TRUE;
+	}
+}
+
+
+//add_filter('thematic_sidebar', 'remove_sidebar');
+
+// Another possible function for the above
+// http://johndturner.com/controlling-sidebars-in-thematic
+// Sidebar Logic
+function childtheme_sidebar_logic() {
+	function childtheme_sidebar_logic_filter($sidebars_widgets){
+		if(is_home() || is_single()) {
+			unset($sidebars_widgets['primary-aside']);
+		} else {
+			unset($sidebars_widgets['secondary-aside']);
+		}
+		return $sidebars_widgets;
+	}
+	add_filter('sidebars_widgets','childtheme_sidebar_logic_filter' );
+}
+
+//add_action('thematic_abovemainasides','childtheme_sidebar_logic'); */
+
+
+//------Widgets------//
+// http://themeshaper.com/forums/topic/something-new-bout-widgetized-areas#post-6601
+
+// Remove some widget areas
+// Add the name of the widget you want to remove in the $widgetareas array
+function child_remove_widget_area() {
+	$widgetareas = array ('index-insert', 'single-insert', );
+	
+	foreach ( $widgetareas as &$area ) {
+		unregister_sidebar($area);
+	}
+}
+add_action( 'admin_init', 'child_remove_widget_area');
+
+// Rename some widget areas
+function rename_widgetized_area($content) {
+	$content['Single Bottom']['args']['name'] = 'Before Single Post';
+	$content['Single Top']['args']['name'] = 'After Single Post';
+	$content['1st Subsidiary Aside']['args']['name'] = 'Footer Left'; 
+	$content['2nd Subsidiary Aside']['args']['name'] = 'Footer Middle'; 
+	$content['3rd Subsidiary Aside']['args']['name'] = 'Footer Right';
+	$content['Index Bottom']['args']['name'] = 'Posts Page Bottom';
+	$content['Index Top']['args']['name'] = 'Posts Page Top';
+	return $content;
+}
+add_filter('thematic_widgetized_areas', 'rename_widgetized_area');
 
 
 ////////////
 // IMAGES //
 ////////////
-
-// This sets the Large image size to 900px
-
-if ( ! isset( $content_width ) ) 
-	$content_width = 900;
-
-// Remove inline styles on gallery shortcode
-
-function wpfolio_remove_gallery_css( $css ) {
-	return preg_replace( "#<style type='text/css'>(.*?)</style>#s", '', $css );
-	}
-add_filter( 'gallery_style', 'wpfolio_remove_gallery_css' );
-
-// END - Remove inline styles on gallery shortcode
-
 
 // Thumbnail Function - this creates a default thumbnail if one is specified
 function get_thumb ($post_ID){
@@ -72,6 +121,21 @@ add_theme_support('post-thumbnails');
 set_post_thumbnail_size( 150, 150,true );
 
 // END - Thumbnail Function
+
+
+//------Stuff that doesn't work but is necessary from 1.7------//
+
+// This sets the Large image size to 900px
+/*if ( ! isset( $content_width ) ) 
+	$content_width = 900; */
+
+// Remove inline styles on gallery shortcode
+function wpfolio_remove_gallery_css( $css ) {
+	return preg_replace( "#<style type='text/css'>(.*?)</style>#s", '', $css );
+	}
+//add_filter( 'gallery_style', 'wpfolio_remove_gallery_css' );
+
+// END - Remove inline styles on gallery shortcode
 
 
 
@@ -196,17 +260,6 @@ add_action('init', 'wpfolio_create_taxonomies', 0);
 /////////////////////
 // ADMIN INTERFACE //
 /////////////////////
-
-
-// Remove some widget areas
-function child_remove_widget_area() {
-	$widgetareas = array ('index-top', 'index-insert', '1st-subsidiary-aside', '2nd-subsidiary-aside', '3rd-subsidiary-aside', 'single-insert', );
-	
-	foreach ( $widgetareas as &$area ) {
-		unregister_sidebar($area);
-	}
-}
-add_action( 'admin_init', 'child_remove_widget_area');
 
 
 // Customize admin footer text to add WPFolio to links

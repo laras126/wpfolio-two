@@ -85,7 +85,7 @@ All other styles can be overridden--or ignored!--in Child Theme stylesheets
 }
 
 #container, #content {
-	width: 900px;
+	width: 960px;
 }
 
 #artwork-meta {
@@ -94,18 +94,31 @@ All other styles can be overridden--or ignored!--in Child Theme stylesheets
 	line-height: 14px;
 	margin-bottom: 15px;
 }
-/* Remove some borders, hide some stuff. Doesn't work right now*/
 
-#primary, h2.page-title, .entry-meta, h1.entry-title {
-	display: none;
-}
+
+/* Remove some borders, hide some stuff. */
 
 .entry-meta {
 	display: none;
 }
 
 #access, .menu a, a:hover, a:focus, ul, li, .current_page_item {
-	border: none;
+	display: compact;
+}
+
+#primary {
+}
+
+.sf-menu {
+    border: none;
+    float: left;
+}
+
+
+/* Widget Areas */
+
+#index-bottom {
+	background-color: green;
 }
 
 /* Supposedly generated format classes */

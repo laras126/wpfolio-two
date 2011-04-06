@@ -36,11 +36,12 @@ $options_thumb_align = array("alignleft" => "Left","alignright" => "Right","alig
 // Image Links to Options
 $options_image_link_to = array("image" => "The Image","post" => "The Post"); 
 
-//Testing 
+// Testing arrays, for Example Options
 $options_select = array("one","two","three","four","five"); 
 $options_radio = array("one" => "One","two" => "Two","three" => "Three","four" => "Four","five" => "Five"); 
 
-//Stylesheets Reader
+// Stylesheets Reader, see Theme Stylesheet in Styling Options 
+// Could this be used for switching around stylesheets for resume, etc.
 /*$alt_stylesheet_path = STYLESHEETPATH . '/styles/';
 $alt_stylesheets = array();
 
@@ -65,6 +66,10 @@ $body_pos = array("top left","top center","top right","center left","center cent
 // Set the Options Array
 $options = array();
 
+
+//*-------------* GENERAL SETTINGS *-------------*//
+// Options for Custom Logo, Custom Favicon. 
+// Commented out: Post cat excluded from blog (not complete, just visible option), Tracking code for Analytics, 
 $options[] = array( "name" => "General Settings",
                     "type" => "heading");
 					
@@ -91,15 +96,16 @@ $options[] = array( "name" => "Custom Favicon",
 					"std" => "",
 					"type" => "upload"); 
 
-// Choose a post category to be excluded from the front page and to be shown on blog template - courtesy of AutoFocus+ 					
-$options[] = array( "name" => __('Blog Category','thematic'),
+// Not using now, will be hacked to apply blog template to specified categories. Checkboxes or something.
+// As of now: choose a post category to be excluded from the front page and to be shown on blog template - courtesy of AutoFocus+ 					
+/*$options[] = array( "name" => __('Blog Category','thematic'),
 					"desc" => __('Select a post category to be shown in the Blog Template and excluded from the Front Page.','thematic'),
 					"id" => $shortname."_blog_cat",
 					"std" => "Select a category:",
 					"type" => "select",
 					"options" => $of_categories);
                                                
-/*$options[] = array( "name" => "Tracking Code",
+$options[] = array( "name" => "Tracking Code",
 					"desc" => "Paste your Google Analytics (or other) tracking code here. This will be added into the footer template of your theme.",
 					"id" => $shortname."_google_analytics",
 					"std" => "",
@@ -107,6 +113,10 @@ $options[] = array( "name" => __('Blog Category','thematic'),
     
     
 //*-------------* STYLE OPTIONS *-------------*//
+// Options for Header and Body background colors, Body Font, Text field for short custom CSS
+// About Body Font: should use type => "typography", but is just an array right now 
+// Commented out: Theme Stylesheet, Header Text Color (no rule for this in wpf-styles.php)
+// Note: to use Theme Stylesheet, uncomment $alt_stylesheet_path...; lines 45-56
 
 $options[] = array( "name" => "Styling Options",
 					"type" => "heading");
@@ -117,32 +127,27 @@ $options[] = array( "name" => "Styling Options",
 					"std" => "default.css",
 					"type" => "select",
 					"options" => $alt_stylesheets); */
-					
-/*$options[] = array( "name" => __('Background Color','thematic'),
-					"desc" => __('Change the background color by entering a HEX color number. (ie: <span style="font-family:Monaco,Lucida Console,Courier,monospace;">#FFFFFF</span>)','thematic'),
-					"id" => $shortname."_bg_color",
-					"std" => "FFFFFF",
-					"type" => "color");  */
 										
 /*$options[] = array( "name" => "Header Text Color",
-					"desc" => "Color selected.",
+					"desc" => "",
 					"id" => $shortname."_text_color",
 					"std" => "#2098a8",
 					"type" => "color");	*/
 					
 $options[] = array( "name" => "Header Background Color",
-					"desc" => "Color selected.",
+					"desc" => "",
 					"id" => $shortname."_hdr_bg_color",
 					"std" => "#2098a8",
 					"type" => "color");	
 
 $options[] = array( "name" => "Body Background Color",
-					"desc" => "Color selected.",
+					"desc" => "",
 					"id" => $shortname."_body_bg_color",
 					"std" => "#2098a8",
 					"type" => "color");		
 
 $options[] = array( "name" => "Body Font",
+					"desc" => "",
 		            "id" => $shortname."_body_font",
 		            "type" => "select",
 		            "std" => "Helvetica",
@@ -157,18 +162,17 @@ $options[] = array( "name" => "Body Font",
 			            "Times, Times New Roman, Georgia, serif", 
 			            "Verdana, Geneva, Tahoma, sans-serif"  
 		            ));
-
-/*$options[] = array( "name" => "Typography",
-					"desc" => "This is a typographic specific option.",
-					"id" => $shortname."_typography",
-					"std" => array('size' => '16','unit' => 'em','face' => 'verdana','style' => 'bold italic','color' => '#123456'),
-					"type" => "typography");  */
 														
 $options[] = array( "name" => "Custom CSS",
                     "desc" => "Quickly add some CSS to your theme by adding it to this block.",
                     "id" => $shortname."_custom_css",
                     "std" => "",
                     "type" => "textarea");
+                    
+                    
+//*-------------* FOOTER OPTIONS *-------------*//
+// None of these work. I think will need footer-options.php which is here from TwentyTen- started working on it, and will contine later
+            
 $options[] = array( "name" => "Footer Options",
 					"type" => "heading");      
 
@@ -196,8 +200,18 @@ $options[] = array( "name" => "Custom Text (Right)",
 					"std" => "",
 					"type" => "textarea");
 					
+					
+//*-------------* EXAMPLE OPTIONS *-------------*//
+// Do nothing, visual examples
+					
 $options[] = array( "name" => "Example Options",
 					"type" => "heading"); 	   
+	
+$options[] = array( "name" => "Typography",
+					"desc" => "This is a typographic specific option.",
+					"id" => $shortname."_typography",
+					"std" => array('size' => '16','unit' => 'em','face' => 'verdana','style' => 'bold italic','color' => '#123456'),
+					"type" => "typography");	
 	
 $options[] = array( "name" => "Border",
 					"desc" => "This is a border specific option.",
@@ -281,12 +295,12 @@ $options[] = array( "name" => "Multicheck",
 					"type" => "multicheck",
 					"options" => $options_radio);
                                         
-/*$options[] = array( "name" => "Select a Category",
+$options[] = array( "name" => "Select a Category",
 					"desc" => "A list of all the categories being used on the site.",
 					"id" => $shortname."_example_category",
 					"std" => "Select a category:",
 					"type" => "select",
-					"options" => $of_categories); */
+					"options" => $of_categories); 
 
 update_option('of_template',$options); 					  
 update_option('of_themename',$themename);   
