@@ -10,8 +10,6 @@ $body_font = get_option($shortname . '_body_font');
 
 $text_color = get_option($shortname . '_text_color');
 $typography = get_option($shortname . '_typography'); 
-$hdr_gfont = get_option($shortname . '_google_hdr_font');
-
 
 // Output styles
 if ($output <> '') {

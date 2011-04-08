@@ -56,8 +56,6 @@ if ( is_dir($alt_stylesheet_path) ) {
 } */
 
 
-
-
 //More Options
 $uploads_arr = wp_upload_dir();
 $all_uploads_path = $uploads_arr['path'];
@@ -132,10 +130,29 @@ $options[] = array( "name" => "Styling Options",
 					"options" => $alt_stylesheets); */
 										
 $options[] = array( "name" => "Header Font",
-					"desc" => "Choose a front from the <a href='http://google.com/webfonts'>Google WebFont Directory</a> and type its name in the text field.",
+					"desc" => "Choose a font from the <a href='http://google.com/webfonts'>Google WebFont Directory</a> and type its name in the text field.",
 					"id" => $shortname."_google_hdr_font",
 					"std" => "Lobster",
-					"type" => "text");	
+					"type" => "text");
+				
+// Will be incorporated with above option						
+$options[] = array( "name" => "Default Header Font",
+					"desc" => "Select a font to be used if the WebFont does not load.",
+					"id" => $shortname."_default_hdr_font",
+					"std" => "Arial",
+		            "type" => "select",
+		            "options" => array(
+			            "Arial, Helvetica Neue, Helvetica, sans-serif", 
+			            "Courier New, Courier, monospace",
+			            "Georgia, Palatino, Palatino Linotype, Times, Times New Roman, serif",
+			            "Gill Sans, Calibri, Trebuchet MS, sans-serif", 
+			            "Helvetica Neue, Arial, Helvetica, sans-serif", 
+			            "Lucida Sans, Lucida Grande, Lucida Sans Unicode, sans-serif", 
+			            "Palatino, Palatino Linotype, Georgia, Times, Times New Roman, serif", 
+			            "Times, Times New Roman, Georgia, serif", 
+			            "Verdana, Geneva, Tahoma, sans-serif"  
+			            ));
+
 					
 $options[] = array( "name" => "Header Background Color",
 					"desc" => "",

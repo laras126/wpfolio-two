@@ -33,7 +33,12 @@ if (!function_exists('optionsframework_wp_head')) {
 		// This prints out the custom css and specific styling options
 		of_options_output_css();
 		of_head_css();
-		gfonts_api('Lobster');
+		
+		// Get options for WebFont and default font; put into vars
+		$hdr_gfont = get_option($shortname . '_google_hdr_font' );
+		$hdr_dfont = get_option($shortname . '_default_hdr_font' );
+		
+		gfonts_api($hdr_gfont, $hdr_dfont);
 	}
 }
 
@@ -61,37 +66,8 @@ function of_head_css() {
 			$output = "<!-- Custom Styling -->\n<style type=\"text/css\">\n" . $output . "</style>\n";
 			echo $output;
 		}	
-		
-		//get_google_font();
 }
 
-	
-// Call font script in wp_head
-function get_google_font() {
-	global $hdr_gfont;
-	echo "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js'></script>
-	<script type='text/javascript'>
-	var gFont = <?php echo $hdr_gfont; ?>.;
-	WebFont.load({ google: {families: [ 'Miltonian' ]}})</script>
-	<style type='text/css'>.wf-inactive * {font-family: '';}.wf-active  * {font-family: 'Miltonian';}</style>";
-	echo '<h1> asdasd <?php echo $hdr_gfont; ?> WHAT FONT! </h1>';
-}
-
-function gfonts_api($hdr_font) {
-
-	$addfont = <<<ADDFONTS
-
-<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js'></script>
-
-<script type='text/javascript'>WebFont.load({ google: {families: [ '$hdr_font' ]}})</script>
-
-<style type='text/css'>.wf-inactive * {font-family: '';}.wf-active  * {font-family: $hdr_font, serif;}</style>
-
-ADDFONTS;
-
-		echo $addfont;
-
-	}
 
 //	Load Color Options
 function of_options_output_css() { 
@@ -103,6 +79,22 @@ function of_options_output_css() {
 		/* ]]> */
 	</style>
 <?php }
+
+
+// Load WebFont, called in optionsframework_wp_head
+function gfonts_api($gf1, $df1) {
+
+	$addfont = <<<ADDFONTS
+
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js'></script>
+<script type='text/javascript'>WebFont.load({ google: {families: [ '$gf1' ]}})</script>
+<style type='text/css'>.wf-inactive {font-family: '$df1';} #blog-title {font-family: '$gf1', serif;}</style>
+
+ADDFONTS;
+
+	echo $addfont;
+} 
+	
 
 /*-----------------------------------------------------------------------------------*/
 /* Add Body Classes for Layout
