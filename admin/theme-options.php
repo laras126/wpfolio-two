@@ -55,6 +55,9 @@ if ( is_dir($alt_stylesheet_path) ) {
     }
 } */
 
+
+
+
 //More Options
 $uploads_arr = wp_upload_dir();
 $all_uploads_path = $uploads_arr['path'];
@@ -128,11 +131,11 @@ $options[] = array( "name" => "Styling Options",
 					"type" => "select",
 					"options" => $alt_stylesheets); */
 										
-/*$options[] = array( "name" => "Header Text Color",
-					"desc" => "",
-					"id" => $shortname."_text_color",
-					"std" => "#2098a8",
-					"type" => "color");	*/
+$options[] = array( "name" => "Header Font",
+					"desc" => "Choose a front from the <a href='http://google.com/webfonts'>Google WebFont Directory</a> and type its name in the text field.",
+					"id" => $shortname."_google_hdr_font",
+					"std" => "Lobster",
+					"type" => "text");	
 					
 $options[] = array( "name" => "Header Background Color",
 					"desc" => "",

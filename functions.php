@@ -172,7 +172,6 @@ require_once (OF_FILEPATH . '/admin/theme-functions.php'); 	// Theme actions bas
 
 
 
-
 ///////////////////////
 //// POST FORMATS /////
 ///////////////////////
