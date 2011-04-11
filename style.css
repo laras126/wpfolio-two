@@ -80,6 +80,8 @@ All other styles can be overridden--or ignored!--in Child Theme stylesheets
 
 */
 
+/* Some main stuff */
+
 #main {
 	padding: 30px;
 }
@@ -95,18 +97,28 @@ All other styles can be overridden--or ignored!--in Child Theme stylesheets
 	margin-bottom: 15px;
 }
 
+#footer, #siteinfo{
+	border-top:1.5px solid #999;
+}
+
+#siteinfo {
+	width:inherit;
+	padding-left: 50px;
+}
 
 /* Remove some borders, hide some stuff. */
 
 .entry-meta {
-	display: none;
+
 }
 
 #access, .menu a, a:hover, a:focus, ul, li, .current_page_item {
 	display: compact;
+	border: none;
 }
 
-#primary {
+#primary, #secondary {
+	border:1.5px solid #999;
 }
 
 .sf-menu {
@@ -114,12 +126,28 @@ All other styles can be overridden--or ignored!--in Child Theme stylesheets
     float: left;
 }
 
+.menu {
+	background-color: inherit;
+}
 
 /* Widget Areas */
 
 #index-bottom {
-	background-color: green;
+	background-color: green;	
 }
+
+
+/* Comments */
+
+#comments {
+	width: 600px;
+	margin:none;
+}
+
+#respond {
+	background-color: inherit;
+}
+
 
 /* Supposedly generated format classes */
 
