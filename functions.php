@@ -32,45 +32,11 @@ define('THEMATIC_COMPATIBLE_COMMENT_FORM', true);
 define('THEMATIC_COMPATIBLE_FEEDLINKS', true);
 
 
-///////////////////////
-// WIDGETS & SIDEBAR //
-///////////////////////
+/////////////
+// WIDGETS //
+/////////////
 
 
-// Filter thematic_sidebar() .. no display for the page 'Lorem Ipsum', keep it for the rest
-// http://programming.thematic4you.com/2010/01/how-to-remove-the-sidebar-from-a-certain-page/
-// Maybe hack to make it an option: Check pages and/or categories to have include sidebar on
-// Disabled until figured out what to do with it
-function remove_sidebar() {
-	if (!is_page('Blog')) {
-		return FALSE;
-	} else {
-		return TRUE;
-	}
-}
-
-
-//add_filter('thematic_sidebar', 'remove_sidebar');
-
-// Another possible function for the above
-// http://johndturner.com/controlling-sidebars-in-thematic
-// Sidebar Logic
-function childtheme_sidebar_logic() {
-	function childtheme_sidebar_logic_filter($sidebars_widgets){
-		if(is_home() || is_single()) {
-			unset($sidebars_widgets['primary-aside']);
-		} else {
-			unset($sidebars_widgets['secondary-aside']);
-		}
-		return $sidebars_widgets;
-	}
-	add_filter('sidebars_widgets','childtheme_sidebar_logic_filter' );
-}
-
-//add_action('thematic_abovemainasides','childtheme_sidebar_logic'); */
-
-
-//------Widgets------//
 // http://themeshaper.com/forums/topic/something-new-bout-widgetized-areas#post-6601
 
 // Remove some widget areas
@@ -207,7 +173,7 @@ $artworkinfo_metabox = new WPAlchemy_MetaBox(array
 	'context' => 'normal',
 ));
 
-// Display artwork info in post, below post content -- will put this in a loop
+// Display artwork info in post, below post content -- will put this in a loop and need to get rid of <br />s and use \n instead, wasn't working for some reason
 add_filter('thematic_post', 'display_artwork_info');
 
 function display_artwork_info() {
@@ -256,6 +222,7 @@ register_taxonomy('medium', 'post', array(
 add_action('init', 'wpfolio_create_taxonomies', 0); 
 
 
+
 /////////////////////
 // ADMIN INTERFACE //
 /////////////////////
@@ -266,7 +233,6 @@ function wpfolio_admin_footer() {
 	echo 'Thank you for creating with <a href="http://wordpress.org/" target="_blank">WordPress</a>. | <a href="http://codex.wordpress.org/" target="_blank">Documentation</a> | <a href="http://wordpress.org/support/forum/4" target="_blank">Feedback</a> | <a href="http://wpfolio.visitsteve.com/">Theme by WPFolio</a>';
 } 
 add_filter('admin_footer_text', 'wpfolio_admin_footer');
-
 
 
 // Add WPFolio Wiki site as a Dashboard Feed 
@@ -306,6 +272,55 @@ function add_custom_dashboard_widget() {
 	wp_add_dashboard_widget('custom_dashboard_widget', 'WPFolio News', 'custom_dashboard_widget');
 }
 add_action('wp_dashboard_setup', 'add_custom_dashboard_widget');
+
+
+///////////////////////
+// MARGINS & SIDEBAR //
+///////////////////////
+
+// Shortcode to add wide margins to a post page - works as is, but is applied in post lists
+
+function wide_margins_shortcode ($atts, $content = null) {
+	return '<div class="widemargins">' . do_shortcode($content) . '</div>';
+}
+add_shortcode("margin", "wide_margins_shortcode");
+
+
+//*---Sidebar---*//
+
+// Filter thematic_sidebar() .. no display for the page 'Lorem Ipsum', keep it for the rest
+// http://programming.thematic4you.com/2010/01/how-to-remove-the-sidebar-from-a-certain-page/
+// Maybe hack to make it an option: Check pages and/or categories to have include sidebar on
+// Disabled until figured out what to do with it
+function remove_sidebar() {
+	if (!is_page('Blog')) {
+		return FALSE;
+	} else {
+		return TRUE;
+	}
+}
+
+
+//add_filter('thematic_sidebar', 'remove_sidebar');
+
+// Another possible function for the above
+// http://johndturner.com/controlling-sidebars-in-thematic
+// Sidebar Logic
+function childtheme_sidebar_logic() {
+	function childtheme_sidebar_logic_filter($sidebars_widgets){
+		if(is_home() || is_single()) {
+			unset($sidebars_widgets['primary-aside']);
+		} else {
+			unset($sidebars_widgets['secondary-aside']);
+		}
+		return $sidebars_widgets;
+	}
+	//add_filter('sidebars_widgets','childtheme_sidebar_logic_filter' );
+}
+
+//add_action('thematic_abovemainasides','childtheme_sidebar_logic'); */
+
+
 
 
 

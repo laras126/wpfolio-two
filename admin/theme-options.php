@@ -21,14 +21,17 @@ $of_categories = array();
 $of_categories_obj = get_categories('hide_empty=0');
 foreach ($of_categories_obj as $of_cat) {
     $of_categories[$of_cat->cat_ID] = $of_cat->cat_name;}
-$categories_tmp = array_unshift($of_categories, "Select a category:");    
+//$categories_tmp = array_unshift($of_categories, "Select a Category:");  
+//Use unshift_array with a dropdown - makes the first selection a description not acknowledged in array
+
        
 //Access the WordPress Pages via an Array
 $of_pages = array();
 $of_pages_obj = get_pages('sort_column=post_parent,menu_order');    
 foreach ($of_pages_obj as $of_page) {
     $of_pages[$of_page->ID] = $of_page->post_name; }
-$of_pages_tmp = array_unshift($of_pages, "Select a page:");       
+//$of_pages_tmp = array_unshift($of_pages, "Select a page:");       
+//See above comment in Access Categories
 
 // Image Alignment radio box
 $options_thumb_align = array("alignleft" => "Left","alignright" => "Right","aligncenter" => "Center"); 
@@ -64,6 +67,11 @@ $other_entries = array("Select a number:","1","2","3","4","5","6","7","8","9","1
 $body_repeat = array("no-repeat","repeat-x","repeat-y","repeat");
 $body_pos = array("top left","top center","top right","center left","center center","center right","bottom left","bottom center","bottom right");
 
+// Get options for WebFont and default font; put into vars
+$hdr_gfont = get_option($shortname . '_google_hdr_font' );
+$hdr_dfont = get_option($shortname . '_default_hdr_font' );
+
+
 // Set the Options Array
 $options = array();
 
@@ -74,7 +82,21 @@ $options = array();
 $options[] = array( "name" => "General Settings",
                     "type" => "heading");
 					
+$options[] = array( "name" => "Categories with Blog Template and Sidebar",
+					"desc" => "Select the categories that will use the blog template.",
+					"id" => $shortname."_categories_with_blog_template",
+					"std" => "",
+					"type" => "multicheck",
+					"options" => $of_categories);
 
+//Do we also need an option for hiding it on all single posts? I think so, working on that.
+$options[] = array( "name" => "Hide Footer from Specified Pages",
+					"desc" => "By default, all pages show the footer widget area. Hide it on selected pages and/or on all single page posts.",
+					"id" => $shortname."_pages_hide_footer",
+					"std" => "",
+					"type" => "multicheck",
+					"options" => $of_pages);
+					
 $options[] = array( "name" => "Custom Logo",
 					"desc" => "Upload a logo for your theme, or specify the image address of your online logo. (http://yoursite.com/logo.png)",
 					"id" => $shortname."_logo",

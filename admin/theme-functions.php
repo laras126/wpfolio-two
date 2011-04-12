@@ -34,11 +34,28 @@ if (!function_exists('optionsframework_wp_head')) {
 		of_options_output_css();
 		of_head_css();
 		
-		// Get options for WebFont and default font; put into vars
+		// Get options for WebFont and default font; put into vars. Might be better to put vars in another location so you only call the function here.
 		$hdr_gfont = get_option($shortname . '_google_hdr_font' );
 		$hdr_dfont = get_option($shortname . '_default_hdr_font' );
 		
 		gfonts_api($hdr_gfont, $hdr_dfont);
+		
+		// Get categories in which to show footer and blog template
+		$cats_blgtemp = get_option($shortname."_categories_with_blog_template");
+		$pages_hide_ftr = get_option($shortname."_pages_hide_footer");
+		
+		foreach($pages_hide_ftr as $page) {
+			hide_footer_areas($page);
+		}
+		
+		// Categories with Blog Template
+		//Need to create category/blog template for this first
+		/*foreach ($cats_blgtemp as $cat) {
+			
+		}*/
+		
+		
+
 	}
 }
 
@@ -95,6 +112,19 @@ ADDFONTS;
 	echo $addfont;
 } 
 	
+/*-----------------------------------------------------------------------------------*/
+/* Footer and Category Options
+/*-----------------------------------------------------------------------------------*/
+	
+// Function to hide footer areas from selected pages
+
+function hide_footer_areas($page) {
+	$footer_areas = array('Footer Left', 'Footer Middle', 'Footer Right');
+
+	foreach ($footer_areas as &$area) {
+		unregister_sidebar($area);
+	}
+}
 
 /*-----------------------------------------------------------------------------------*/
 /* Add Body Classes for Layout

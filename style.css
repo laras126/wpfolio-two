@@ -76,9 +76,10 @@ pre, code {
 	line-height:--px;
 }
 
-All other styles can be overridden--or ignored!--in Child Theme stylesheets
+All other styles can be overridden--or ignored!--in Child Theme stylesheets */
 
-*/
+
+/* Note that Lara's comments here are vague and will be more detailed as stylesheet develops. */
 
 /* Some main stuff */
 
@@ -106,7 +107,23 @@ All other styles can be overridden--or ignored!--in Child Theme stylesheets
 	padding-left: 50px;
 }
 
-/* Remove some borders, hide some stuff. */
+
+/* Pages */
+
+h1.entry-title {
+	text-align: center;
+}
+
+.widemargins {
+	margin: auto 135px;
+}
+
+.widemargins-override{
+margin: auto -135px;
+}
+
+
+/* Remove some borders, hide some stuff */
 
 .entry-meta {
 
@@ -129,6 +146,7 @@ All other styles can be overridden--or ignored!--in Child Theme stylesheets
 .menu {
 	background-color: inherit;
 }
+
 
 /* Widget Areas */
 
