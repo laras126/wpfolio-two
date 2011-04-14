@@ -1,6 +1,7 @@
 <?php
 
 //
+//  WPFolio:
 //  Custom Child Theme Functions
 //
 
@@ -32,6 +33,35 @@ define('THEMATIC_COMPATIBLE_COMMENT_FORM', true);
 define('THEMATIC_COMPATIBLE_FEEDLINKS', true);
 
 
+
+///////////////////////
+// MARGINS & SIDEBAR //
+///////////////////////
+
+// Shortcode to add wide margins to a post page - works as is, but is applied in post lists
+
+function wide_margins_shortcode ($atts, $content = null) {
+	return '<div class="widemargins">' . do_shortcode($content) . '</div>';
+}
+add_shortcode('margin', 'wide_margins_shortcode');
+
+//function childtheme_override_content() {
+
+//*---Sidebar---*//
+
+// http://programming.thematic4you.com/2010/01/how-to-remove-the-sidebar-from-a-certain-page/
+
+// Filter thematic_sidebar() .. remove from everything except the blog template
+function remove_sidebar() {
+	if ( is_page() || is_archive() || is_single() ) {
+		return FALSE;
+	} else {
+		return TRUE;
+	}
+}
+add_filter('thematic_sidebar', 'remove_sidebar');
+
+
 /////////////
 // WIDGETS //
 /////////////
@@ -39,21 +69,11 @@ define('THEMATIC_COMPATIBLE_FEEDLINKS', true);
 
 // http://themeshaper.com/forums/topic/something-new-bout-widgetized-areas#post-6601
 
-// Remove some widget areas
-// Add the name of the widget you want to remove in the $widgetareas array
-function child_remove_widget_area() {
-	$widgetareas = array ('index-insert', 'single-insert', );
-	
-	foreach ( $widgetareas as &$area ) {
-		unregister_sidebar($area);
-	}
-}
-add_action( 'admin_init', 'child_remove_widget_area');
 
 // Rename some widget areas
 function rename_widgetized_area($content) {
-	$content['Single Bottom']['args']['name'] = 'Before Single Post';
-	$content['Single Top']['args']['name'] = 'After Single Post';
+	$content['Single Bottom']['args']['name'] = 'After Single Post';
+	$content['Single Top']['args']['name'] = 'Before Single Post';
 	$content['1st Subsidiary Aside']['args']['name'] = 'Footer Left'; 
 	$content['2nd Subsidiary Aside']['args']['name'] = 'Footer Middle'; 
 	$content['3rd Subsidiary Aside']['args']['name'] = 'Footer Right';
@@ -62,6 +82,18 @@ function rename_widgetized_area($content) {
 	return $content;
 }
 add_filter('thematic_widgetized_areas', 'rename_widgetized_area');
+
+// Remove some widget areas
+// Add the name of the widget area you want to remove to the $widgetareas array/ remove name of area you want to add
+function child_remove_widget_area() {
+	$widgetareas = array ('index-insert', 'single-insert', 'single-bottom', 'single-top', 'index-bottom', 'index-top', 'page-top', 'page-bottom');
+	
+	foreach ( $widgetareas as &$area ) {
+		unregister_sidebar($area);
+	}
+}
+add_action( 'admin_init', 'child_remove_widget_area');
+
 
 
 ////////////
@@ -82,9 +114,23 @@ function get_thumb ($post_ID){
     }
 } 
 
+
+// may or may not work
+add_action('thematic_post', 'check_thumb');
+function check_thumb() {		
+	global $post;
+			
+	if( has_post_thumbnail() ) {
+		the_post_thumbnail();
+	}
+	else {			
+		echo get_thumb($post->ID); 
+	}
+}
+
 // This adds support for post thumbnails of 150px square
 add_theme_support('post-thumbnails');
-set_post_thumbnail_size( 150, 150,true );
+set_post_thumbnail_size( 150, 150, true );
 
 // END - Thumbnail Function
 
@@ -151,7 +197,7 @@ require_once (OF_FILEPATH . '/admin/theme-functions.php'); 	// Theme actions bas
 // WPALCHEMY METABOX //
 ///////////////////////
 
-// Dimas' excellent meta box class WPAlchemy: http://www.farinspace.com/wpalchemy-metabox/
+// Dimas' meta box class WPAlchemy: http://www.farinspace.com/wpalchemy-metabox/
 
 // custom constant (opposite of TEMPLATEPATH)
 define('_TEMPLATEURL', WP_CONTENT_URL . '/' . stristr(TEMPLATEPATH, 'themes'));
@@ -200,9 +246,9 @@ function display_artwork_info() {
 
 
 
-///////////////////////
-// ADDING A TAXONOMY //
-///////////////////////
+/////////////////////
+// MEDIUM TAXONOMY //
+/////////////////////
 
 // We don't use this to it's full extent yet, but we could (will?)
 
@@ -274,56 +320,6 @@ function add_custom_dashboard_widget() {
 add_action('wp_dashboard_setup', 'add_custom_dashboard_widget');
 
 
-///////////////////////
-// MARGINS & SIDEBAR //
-///////////////////////
-
-// Shortcode to add wide margins to a post page - works as is, but is applied in post lists
-
-function wide_margins_shortcode ($atts, $content = null) {
-	return '<div class="widemargins">' . do_shortcode($content) . '</div>';
-}
-add_shortcode("margin", "wide_margins_shortcode");
-
-
-//*---Sidebar---*//
-
-// Filter thematic_sidebar() .. no display for the page 'Lorem Ipsum', keep it for the rest
-// http://programming.thematic4you.com/2010/01/how-to-remove-the-sidebar-from-a-certain-page/
-// Maybe hack to make it an option: Check pages and/or categories to have include sidebar on
-// Disabled until figured out what to do with it
-function remove_sidebar() {
-	if (!is_page('Blog')) {
-		return FALSE;
-	} else {
-		return TRUE;
-	}
-}
-
-
-//add_filter('thematic_sidebar', 'remove_sidebar');
-
-// Another possible function for the above
-// http://johndturner.com/controlling-sidebars-in-thematic
-// Sidebar Logic
-function childtheme_sidebar_logic() {
-	function childtheme_sidebar_logic_filter($sidebars_widgets){
-		if(is_home() || is_single()) {
-			unset($sidebars_widgets['primary-aside']);
-		} else {
-			unset($sidebars_widgets['secondary-aside']);
-		}
-		return $sidebars_widgets;
-	}
-	//add_filter('sidebars_widgets','childtheme_sidebar_logic_filter' );
-}
-
-//add_action('thematic_abovemainasides','childtheme_sidebar_logic'); */
-
-
-
-
-
 ///////////////////
 // DEV FUNCTIONS //
 ///////////////////
@@ -333,5 +329,7 @@ function add_lorem ($atts, $content = null) {
 	return 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 }
 add_shortcode("lorem", "add_lorem");
+
+
 
 ?>

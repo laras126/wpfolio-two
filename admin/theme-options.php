@@ -67,11 +67,6 @@ $other_entries = array("Select a number:","1","2","3","4","5","6","7","8","9","1
 $body_repeat = array("no-repeat","repeat-x","repeat-y","repeat");
 $body_pos = array("top left","top center","top right","center left","center center","center right","bottom left","bottom center","bottom right");
 
-// Get options for WebFont and default font; put into vars
-$hdr_gfont = get_option($shortname . '_google_hdr_font' );
-$hdr_dfont = get_option($shortname . '_default_hdr_font' );
-
-
 // Set the Options Array
 $options = array();
 
@@ -82,21 +77,13 @@ $options = array();
 $options[] = array( "name" => "General Settings",
                     "type" => "heading");
 					
-$options[] = array( "name" => "Categories with Blog Template and Sidebar",
-					"desc" => "Select the categories that will use the blog template.",
-					"id" => $shortname."_categories_with_blog_template",
+$options[] = array( "name" => "Exclude Categories from Blog",
+					"desc" => "Select the categories that will be excluded from the blog page.",
+					"id" => $shortname."_cats_in_blog",
 					"std" => "",
-					"type" => "multicheck",
+					"type" => "select",
 					"options" => $of_categories);
 
-//Do we also need an option for hiding it on all single posts? I think so, working on that.
-$options[] = array( "name" => "Hide Footer from Specified Pages",
-					"desc" => "By default, all pages show the footer widget area. Hide it on selected pages and/or on all single page posts.",
-					"id" => $shortname."_pages_hide_footer",
-					"std" => "",
-					"type" => "multicheck",
-					"options" => $of_pages);
-					
 $options[] = array( "name" => "Custom Logo",
 					"desc" => "Upload a logo for your theme, or specify the image address of your online logo. (http://yoursite.com/logo.png)",
 					"id" => $shortname."_logo",
