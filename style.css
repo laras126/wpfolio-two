@@ -88,11 +88,11 @@ All other styles can be overridden--or ignored!--in Child Theme stylesheets */
 	margin: auto;
 }
 
-.page #container {
-	width:940px
+#branding {
+	padding: 36px 0 18px;
 }
-.page #content {
-	margin: auto;
+#main{
+	padding-top: 54px;
 }
 
 #artwork-meta {
@@ -118,25 +118,34 @@ h1.entry-title {
 
 /* Remove some borders, hide some stuff */
 
-.entry-meta {
-
-}
-
 #access, .menu a, a:hover, a:focus, ul, li, .current_page_item {
 	display: compact;
 	border: none;
 }
 
 .sf-menu {
-    border: none;
-    float: left;
 }
 
 .menu {
 	background-color: inherit;
 }
 
+/* @group sidebar */
+
+#primary, #secondary ul li ul li {
+	list-style-type: none;
+}
+
+/* @end */
+
 /* @group Pages */
+
+.page #container {
+	width:940px
+}
+.page #content {
+	margin: auto;
+}
 
 /*.widemargins {
 	margin: auto 135px;
