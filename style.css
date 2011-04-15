@@ -83,12 +83,16 @@ All other styles can be overridden--or ignored!--in Child Theme stylesheets */
 
 /* Some main stuff */
 
-#main {
-	padding: 30px;
+#wrapper {
+	width:960px;
+	margin: auto;
 }
 
-#container, #content {
-	width: 960px;
+.page #container {
+	width:940px
+}
+.page #content {
+	margin: auto;
 }
 
 #artwork-meta {
@@ -99,7 +103,7 @@ All other styles can be overridden--or ignored!--in Child Theme stylesheets */
 }
 
 #footer, #siteinfo{
-	border-top:1.5px solid #999;
+	border-top:1.5px solid #999; /* change this later */
 }
 
 #siteinfo {
@@ -107,19 +111,8 @@ All other styles can be overridden--or ignored!--in Child Theme stylesheets */
 	padding-left: 50px;
 }
 
-
-/* Pages */
-
 h1.entry-title {
 	text-align: center;
-}
-
-.widemargins {
-	margin: auto 135px;
-}
-
-.widemargins-override{
-margin: auto -135px;
 }
 
 
@@ -134,10 +127,6 @@ margin: auto -135px;
 	border: none;
 }
 
-#primary, #secondary {
-	border:1.5px solid #999;
-}
-
 .sf-menu {
     border: none;
     float: left;
@@ -147,18 +136,35 @@ margin: auto -135px;
 	background-color: inherit;
 }
 
+/* @group Pages */
 
-/* Widget Areas */
+/*.widemargins {
+	margin: auto 135px;
+}
+
+.widemargins-override{
+margin: auto -135px;
+}*/
+
+/* @end */
+
+/* @group Widget areas */
 
 #index-bottom {
 	background-color: green;	
 }
 
+#primary, #secondary {
+	border:1.5px solid #999;
+}
 
-/* Comments */
+
+
+/* @end */
+
+/* @group comments */
 
 #comments {
-	width: 600px;
 	margin:none;
 }
 
@@ -166,8 +172,9 @@ margin: auto -135px;
 	background-color: inherit;
 }
 
+/* @end */
 
-/* Supposedly generated format classes */
+/* @group post formats */
 
 .format-aside {
 }
@@ -197,4 +204,6 @@ margin: auto -135px;
 
 .format-chat {
 }
+
+/* @end */
 
