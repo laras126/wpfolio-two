@@ -248,11 +248,11 @@ $options[] = array( "name" => "Custom Text (Right)",
 					"type" => "textarea");
 
 //*-------------* WPFolio Community *-------------*//					
-// need to find some "type" that is static text or make one
+// need to find some "type" that is static text or make one - working on this
 $options[] = array( "name" => "WPFolio Community",
 					"type" => "heading");
 					
-$options[] = array( "name" => "WPFolio Community",
+/*$options[] = array( "name" => "WPFolio Community",
 					"id" => $shortname."_wpfolio_community",
 					"type" => "static",
 					"std" => '<h3>Support Site</h3>
@@ -290,7 +290,7 @@ $options[] = array( "name" => "WPFolio Community",
 				
 						<p>Thanks.</p>
 						
-					</div>');
+					</div>'); */
 					
 //*-------------* EXAMPLE OPTIONS *-------------*//
 // Do nothing, visual examples
@@ -399,9 +399,6 @@ update_option('of_shortname',$shortname);
 
 }
 }
-/*-----------------------------------------------------------------------------------*/
-/* WPFolio Community
-/*-----------------------------------------------------------------------------------*/
 
 
 

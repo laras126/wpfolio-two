@@ -221,13 +221,22 @@ $artworkinfo_metabox = new WPAlchemy_MetaBox(array
 
 // Display artwork info in post, below post content -- will put this in a loop and need to get rid of <br />s and use \n instead, wasn't working for some reason
 
+// Print the meta box data - called in display_artwork_info()
+function print_meta($val){
+	global $artworkinfo_metabox;
+	if($val != '') {
+		$artworkinfo_metabox->the_value($val);
+		echo "<br />"; // Does not conditionally echo...
+	}
+}
+
+// Display Artwork Info fields in post
 function display_artwork_info() {
 	
 	global $artworkinfo_metabox;
 	global $post;
 	global $terms;
 	
-	$terms = get_the_terms( $post->ID , 'medium' );
 	$values = array('title','collabs','dimen','additional');
 	$artworkinfo_metabox->the_meta();
 
@@ -236,33 +245,18 @@ function display_artwork_info() {
 	
 	// Loop through the meta values
 	foreach ($values as $val){
-		echo_meta($val);
+		print_meta($val);
 	}
 	
-	// Print the medium taxonomy
-	if($terms) {
-		foreach( $terms as $term ) {
-			if ($term != '') {
-				print_r($term->name . ' ');
-			}
-		}
-	}
+	// If it exists, print the medium taxonomy
+	print_medium();
 	
 	echo '</div>';
 } 
 
-add_filter('thematic_post', 'display_artwork_info');
+add_action('thematic_post', 'display_artwork_info');
 
 
-function echo_meta($val){
-	global $artworkinfo_metabox;
-	if($val != '') {
-		$artworkinfo_metabox->the_value($val);
-		echo '<br />';
-	}
-}
-
-	
 /////////////////////
 // MEDIUM TAXONOMY //
 /////////////////////
@@ -283,6 +277,19 @@ register_taxonomy('medium', 'post', array(
 add_action('init', 'wpfolio_create_taxonomies', 0); 
 
 
+// Print the medium taxonomy - called in display_artwork_info()
+function print_medium() {
+	global $terms;
+	global $post;
+	$terms = get_the_terms( $post->ID , 'medium' );
+	if($terms) {
+		foreach( $terms as $term ) {
+			if ($term != '') {
+				print_r($term->name . ' ');
+			}
+		}
+	}
+}
 
 /////////////////////
 // ADMIN INTERFACE //
