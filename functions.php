@@ -100,7 +100,40 @@ add_action( 'admin_init', 'child_remove_widget_area');
 // IMAGES //
 ////////////
 
-// Thumbnail Function - this creates a default thumbnail if one is specified
+
+/*----- CUSTOM HEADER IMAGE -----*/
+// Need to add images/default_header.jpg
+// Disabled Header Text - covered by WebFonts option
+
+define('NO_HEADER_TEXT', true );
+define('HEADER_TEXTCOLOR', '');
+define('HEADER_IMAGE', '%s/images/default_header.jpg'); // %s is the template dir uri
+define('HEADER_IMAGE_WIDTH', 775); // use width and height appropriate for your theme
+define('HEADER_IMAGE_HEIGHT', 200);
+
+// gets included in the site header
+function header_style() {
+    ?><style type="text/css">
+        #header {
+            background: url(<?php header_image(); ?>);
+        }
+    </style><?php
+}
+
+// gets included in the admin header
+function admin_header_style() {
+	?><style type="text/css">
+		#headimg {
+			width: <?php echo HEADER_IMAGE_WIDTH; ?>px;
+			height: <?php echo HEADER_IMAGE_HEIGHT; ?>px;
+		}
+	</style><?php
+}
+
+add_custom_image_header('header_style', 'admin_header_style'); 
+
+/*----- GET THUMBNAILS ----*/
+// Thumbnail Function - this creates a default thumbnail if one is not specified
 function get_thumb ($post_ID){
     $thumbargs = array(
     'post_type' => 'attachment',
@@ -114,8 +147,6 @@ function get_thumb ($post_ID){
     }
 } 
 
-
-// may or may not work
 add_action('thematic_post', 'check_thumb');
 function check_thumb() {		
 	global $post;
