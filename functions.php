@@ -220,39 +220,54 @@ $artworkinfo_metabox = new WPAlchemy_MetaBox(array
 ));
 
 // Display artwork info in post, below post content -- will put this in a loop and need to get rid of <br />s and use \n instead, wasn't working for some reason
-add_filter('thematic_post', 'display_artwork_info');
 
 function display_artwork_info() {
 	
 	global $artworkinfo_metabox;
+	global $post;
+	global $terms;
 	
-	echo the_content();
-
-	// get the meta data for the current post
+	$terms = get_the_terms( $post->ID , 'medium' );
+	$values = array('title','collabs','dimen','additional');
 	$artworkinfo_metabox->the_meta();
-	 
-	// get value directly
-	echo '<div id="artwork-meta"><strong>';
-	$artworkinfo_metabox->the_value('title');
-	echo '</strong><br />';
-	$artworkinfo_metabox->the_value('collabs');
-	echo '<br />';
-	$artworkinfo_metabox->the_value('dimen');
-	echo '<br />';
-	$artworkinfo_metabox->the_value('additional');
-	echo '<br /></div>'; 
 
+	echo the_content();	 
+	echo '<div id="artwork-meta">';
+	
+	// Loop through the meta values
+	foreach ($values as $val){
+		echo_meta($val);
+	}
+	
+	// Print the medium taxonomy
+	if($terms) {
+		foreach( $terms as $term ) {
+			if ($term != '') {
+				print_r($term->name . ' ');
+			}
+		}
+	}
+	
+	echo '</div>';
 } 
 
+add_filter('thematic_post', 'display_artwork_info');
 
 
+function echo_meta($val){
+	global $artworkinfo_metabox;
+	if($val != '') {
+		$artworkinfo_metabox->the_value($val);
+		echo '<br />';
+	}
+}
+
+	
 /////////////////////
 // MEDIUM TAXONOMY //
 /////////////////////
 
-// We don't use this to it's full extent yet, but we could (will?)
-
-// enabling a taxonomy for Medium
+// Enable a taxonomy for Medium
 
 function wpfolio_create_taxonomies() {
 register_taxonomy('medium', 'post', array( 

@@ -144,8 +144,8 @@ $options[] = array( "name" => "Header Font",
 					"std" => "Lobster",
 					"type" => "text");
 				
-// Will be incorporated with above option						
-$options[] = array( "name" => "Default Header Font",
+// Will be under same header as above - not working right now						
+/*$options[] = array( "name" => "Default Header Font",
 					"desc" => "Select a font to be used if the WebFont does not load.",
 					"id" => $shortname."_default_hdr_font",
 					"std" => "Arial",
@@ -160,7 +160,7 @@ $options[] = array( "name" => "Default Header Font",
 			            "Palatino, Palatino Linotype, Georgia, Times, Times New Roman, serif", 
 			            "Times, Times New Roman, Georgia, serif", 
 			            "Verdana, Geneva, Tahoma, sans-serif"  
-			            ));
+			            )); */
 
 					
 $options[] = array( "name" => "Header Background Color",
@@ -175,9 +175,27 @@ $options[] = array( "name" => "Body Background Color",
 					"std" => "#2098a8",
 					"type" => "color");		
 
-$options[] = array( "name" => "Body Font",
+$options[] = array( "name" => "Footer Background Color",
 					"desc" => "",
-		            "id" => $shortname."_body_font",
+					"id" => $shortname."_ftr_bg_color",
+					"std" => "#2098a8",
+					"type" => "color");
+
+$options[] = array( "name" => "Body p Typography",
+					"desc" => "Specify the font properties for your site's header. This will not effect the title WebFont.",
+					"id" => $shortname."_typography",
+					"std" => array('size' => '1','unit' => 'em','face' => 'verdana','style' => 'bold italic','color' => '#123456'),
+					"type" => "typography");
+
+/*$options[] = array( "name" => "Footer Typography",
+					"desc" => "Specify the font properties for your site's footer.",
+					"id" => $shortname."ftr_typography",
+					"std" => array('size' => '16','unit' => 'em','face' => 'verdana','style' => 'bold italic','color' => '#123456'),
+					"type" => "typography");*/
+
+/*$options[] = array( "name" => "Body Font",
+					"desc" => "",
+		            "id" => $shortname."_body_text",
 		            "type" => "select",
 		            "std" => "Helvetica",
 		            "options" => array(
@@ -190,7 +208,7 @@ $options[] = array( "name" => "Body Font",
 			            "Palatino, Palatino Linotype, Georgia, Times, Times New Roman, serif", 
 			            "Times, Times New Roman, Georgia, serif", 
 			            "Verdana, Geneva, Tahoma, sans-serif"  
-		            ));
+		            )); */
 														
 $options[] = array( "name" => "Custom CSS",
                     "desc" => "Quickly add some CSS to your theme by adding it to this block.",
@@ -228,7 +246,51 @@ $options[] = array( "name" => "Custom Text (Right)",
 					"id" => $shortname."_footer_right_text",
 					"std" => "",
 					"type" => "textarea");
+
+//*-------------* WPFolio Community *-------------*//					
+// need to find some "type" that is static text or make one
+$options[] = array( "name" => "WPFolio Community",
+					"type" => "heading");
 					
+$options[] = array( "name" => "WPFolio Community",
+					"id" => $shortname."_wpfolio_community",
+					"type" => "static",
+					"std" => '<h3>Support Site</h3>
+						<p>If you haven\'t been already, check out the <a href="http://wpfolio.visitsteve.com">WPFolio Wiki</a> for help.</p>
+				
+						<h3>Sign up for email updates</h3>
+						<p>Receive emails when new versions of WPFolio are available and other news to help you with updating. Your information will never be shared. Messages will be sent around 1-2 times per month, often less.</p>
+				
+							<form action="http://scripts.dreamhost.com/add_list.cgi" method="post"> 
+							<input name="list" type="hidden" value="update" />
+							<input name="domain" type="hidden" value="http://wpfolio.visitsteve.com" />
+							<input name="url" type="hidden" />
+							<input name="unsuburl" type="hidden" />
+							<input name="alreadyonurl" type="hidden" />
+							<input name="notonurl" type="hidden" />
+							<input name="invalidurl" type="hidden" />
+							<input name="emailconfirmurl" type="hidden" />
+							<input name="emailit" type="hidden" value="1" />
+							Name: <input name="name" /> 
+							E-mail: <input name="email" /> <br />
+							<input name="submit" type="submit" value="Join Our Announcement List" />
+							<input name="unsub" type="submit" value="Unsubscribe" />
+							</form>
+						</p>
+				
+						<h3>Donate to support WPFolio and Free Software</h3>
+				
+						<p>WPFolio is a labor of love. We make it to help you.</p>
+				
+						<p>WPFolio took us <em>a lot</em> of time to build, develop, and document. Did our project save you time? Save you the costs of a designer or webmaster? Would you have otherwise needed a tutor? If you met us in person, would you buy us a beer? A dinner? Would you like to see new features implemented? Please consider making a donation based on what you think WPFolio was worth to you. Although we\'ll likely never make back what we\'ve put into this, we can use your donations to offset costs of production.</p>
+				
+						<p>WPFolio is Free Software under the <a href="http://www.gnu.org/licenses/quick-guide-gplv3.html">GPLv3</a>. Our <a href="http://wpfolio.visitsteve.com">WPFolio Wiki</a> includes instructions to help you make the most of the WPFolio theme. You are free to modify, share, and distribute WPFolio however you like. We do all this because we want artists to have great websites using the best, free and open source software available. You can contribute by helping with the <a href="http://github.com/slambert/WPFolio/">development of the theme</a>, or by donating. </p>
+				
+						<form action="https://www.paypal.com/cgi-bin/webscr" method="post"> <input name="cmd" type="hidden" value="_s-xclick" /> <input name="hosted_button_id" type="hidden" value="ZMXNTHG3LHX8Q" /> <input alt="PayPal - The safer, easier way to pay online!" name="submit" src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" type="image" /> </form>
+				
+						<p>Thanks.</p>
+						
+					</div>');
 					
 //*-------------* EXAMPLE OPTIONS *-------------*//
 // Do nothing, visual examples
@@ -337,4 +399,10 @@ update_option('of_shortname',$shortname);
 
 }
 }
+/*-----------------------------------------------------------------------------------*/
+/* WPFolio Community
+/*-----------------------------------------------------------------------------------*/
+
+
+
 ?>
