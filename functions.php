@@ -218,10 +218,24 @@ require_once (OF_FILEPATH . '/admin/theme-functions.php'); 	// Theme actions bas
 ///////////////////////
 //// POST FORMATS /////
 ///////////////////////
-// not enabled as of yet
+// Thanks to this thread:
+// http://wordpress.stackexchange.com/questions/12420/post-format-selector-in-thematic-child-theme-post-class
 
+// Enable post formats
+add_theme_support('post-formats', array( 'link', 'aside', 'gallery', 'image', 'video' ));
 
+// Add the format selector to post_class
+function my_thematic_post_format_class( $classes = array() ) {
+  $format = get_post_format();
+  if ( '' == $format )
+    $format = 'standard';
 
+  $classes[] = 'format-' . $format;
+
+  return $classes;
+}
+
+add_filter( 'post_class', 'my_thematic_post_format_class' );
 
 
 ///////////////////////

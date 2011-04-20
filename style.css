@@ -186,9 +186,10 @@ margin: auto -135px;
 /* @group post formats */
 
 .format-aside {
+	background-color: aqua;
 }
 
-.format-gallery .entry-content {
+.format-gallery {
 	background-color: gray;
 }
 
