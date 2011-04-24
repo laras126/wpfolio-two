@@ -242,64 +242,61 @@ add_filter( 'post_class', 'my_thematic_post_format_class' );
 // WPALCHEMY METABOX //
 ///////////////////////
 
-// Dimas' meta box class WPAlchemy: http://www.farinspace.com/wpalchemy-metabox/
+// Dimas' WPAlchemy Meta Box PHP Class: http://www.farinspace.com/wpalchemy-metabox/
 
 // custom constant (opposite of TEMPLATEPATH)
 define('_TEMPLATEURL', WP_CONTENT_URL . '/' . stristr(TEMPLATEPATH, 'themes'));
 
 include_once 'WPAlchemy/MetaBox.php';
  
-// include css to style the custom meta boxes, this should be a global
 // stylesheet used by all similar meta boxes
 if (is_admin()) 
 {
 	wp_enqueue_style('custom_meta_css', STYLESHEETPATH . 'custom/meta.css');
 }
 
-$artworkinfo_metabox = new WPAlchemy_MetaBox(array
+$prefix = 'wpf_';
+$mb = new WPAlchemy_MetaBox(array
 (
-	'id' => '_custom_meta', // underscore prefix hides fields from the custom fields area
-	'title' => 'Artwork Info',
-	'template' => STYLESHEETPATH . '/custom/artwork-meta.php',
-	'context' => 'normal',
+    'id' => '_custom_meta', // underscore prefix hides fields from the custom fields area
+    'title' => 'Artwork Info',
+    'template' => STYLESHEETPATH . '/custom/artwork-meta.php',
+    'context' => 'normal',
 ));
 
-// Display artwork info in post, below post content -- will put this in a loop and need to get rid of <br />s and use \n instead, wasn't working for some reason
-add_filter('thematic_post', 'display_artwork_info');
-
+// Display Artwork Info fields in post
 function display_artwork_info() {
-	
-	global $artworkinfo_metabox;
-	
-	echo the_content();
 
-	// get the meta data for the current post
-	$artworkinfo_metabox->the_meta();
-	 
-	// get value directly
-	echo '<div id="artwork-meta"><strong>';
-	$artworkinfo_metabox->the_value('title');
-	echo '</strong><br />';
-	$artworkinfo_metabox->the_value('collabs');
-	echo '<br />';
-	$artworkinfo_metabox->the_value('dimen');
-	echo '<br />';
-	$artworkinfo_metabox->the_value('additional');
-	echo '<br /></div>'; 
+	global $mb;
+		
+	$mb->the_meta();
+	$values = array('title','collabs','dimen','additional'); 
+	
+	echo the_content();	 
+	echo '<div id="artwork-meta">';
 
+	foreach ($values as $val) {
+	    if ($mb->get_the_value($val) != ''){
+	        $mb->the_value($val);
+	        echo '<br />';
+	    }
+	}  
+	
+	echo '</div>';
 } 
 
+add_action('thematic_post', 'display_artwork_info');
 
 
 /////////////////////
 // MEDIUM TAXONOMY //
 /////////////////////
 
-// We don't use this to it's full extent yet, but we could (will?)
+// Disabled. Added Medium field to metabox instead - may make more sense. 
 
-// enabling a taxonomy for Medium
+// Enable a taxonomy for Medium
 
-function wpfolio_create_taxonomies() {
+/* function wpfolio_create_taxonomies() { // uncomment this function to enable
 register_taxonomy('medium', 'post', array( 
 	'label' => 'Medium',
 	'hierarchical' => false,  
@@ -310,8 +307,7 @@ register_taxonomy('medium', 'post', array(
 	'show_tagcloud' => true,
 	'show_in_nav_menus' => true,));
 } 
-add_action('init', 'wpfolio_create_taxonomies', 0); 
-
+add_action('init', 'wpfolio_create_taxonomies', 0); */
 
 
 /////////////////////

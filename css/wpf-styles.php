@@ -1,3 +1,5 @@
 #header {background-color: <?php echo $hdr_bg_color ?>;}
-body {font-family:<?php echo $body_font; ?>;background-color:<?php echo $body_bg_color ?>;}
-h1.entry-title {font-family:<?php echo $body_font; ?>;font-weight:normal;}
+body {background-color:<?php echo $body_bg_color ?>; color:<?php echo $ftr_type["color"] ?>;}
+#footer {background-color:<?php echo $ftr_bg_color; ?>;}
+	
+<?php //echo 'p {font:'.$font_text["style"].' '.$font_text["size"].$font_text["unit"].'/1.5em '.stripslashes($font_text["face"]).';color:'.$font_text["color"].'}' . "\n"; ?>
