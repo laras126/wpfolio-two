@@ -247,9 +247,11 @@ add_action('thematic_post', 'display_artwork_info');
 // MEDIUM TAXONOMY //
 /////////////////////
 
+// Disabled. Added Medium field to metabox instead - may make more sense. 
+
 // Enable a taxonomy for Medium
 
-function wpfolio_create_taxonomies() {
+/* function wpfolio_create_taxonomies() { // uncomment this function to enable
 register_taxonomy('medium', 'post', array( 
 	'label' => 'Medium',
 	'hierarchical' => false,  
@@ -260,22 +262,8 @@ register_taxonomy('medium', 'post', array(
 	'show_tagcloud' => true,
 	'show_in_nav_menus' => true,));
 } 
-add_action('init', 'wpfolio_create_taxonomies', 0); 
+add_action('init', 'wpfolio_create_taxonomies', 0); */
 
-
-// Print the medium taxonomy - called in display_artwork_info()
-function print_medium() {
-	global $terms;
-	global $post;
-	$terms = get_the_terms( $post->ID , 'medium' );
-	if($terms) {
-		foreach( $terms as $term ) {
-			if ($term != '') {
-				print_r($term->name . ' ');
-			}
-		}
-	}
-}
 
 /////////////////////
 // ADMIN INTERFACE //
