@@ -197,59 +197,45 @@ require_once (OF_FILEPATH . '/admin/theme-functions.php'); 	// Theme actions bas
 // WPALCHEMY METABOX //
 ///////////////////////
 
-// Dimas' meta box class WPAlchemy: http://www.farinspace.com/wpalchemy-metabox/
+// Dimas' WPAlchemy Meta Box PHP Class: http://www.farinspace.com/wpalchemy-metabox/
 
 // custom constant (opposite of TEMPLATEPATH)
 define('_TEMPLATEURL', WP_CONTENT_URL . '/' . stristr(TEMPLATEPATH, 'themes'));
 
 include_once 'WPAlchemy/MetaBox.php';
  
-// include css to style the custom meta boxes, this should be a global
 // stylesheet used by all similar meta boxes
 if (is_admin()) 
 {
 	wp_enqueue_style('custom_meta_css', STYLESHEETPATH . 'custom/meta.css');
 }
 
-$artworkinfo_metabox = new WPAlchemy_MetaBox(array
+$prefix = 'wpf_';
+$mb = new WPAlchemy_MetaBox(array
 (
-	'id' => '_custom_meta', // underscore prefix hides fields from the custom fields area
-	'title' => 'Artwork Info',
-	'template' => STYLESHEETPATH . '/custom/artwork-meta.php',
-	'context' => 'normal',
+    'id' => '_custom_meta', // underscore prefix hides fields from the custom fields area
+    'title' => 'Artwork Info',
+    'template' => STYLESHEETPATH . '/custom/artwork-meta.php',
+    'context' => 'normal',
 ));
-
-// Display artwork info in post, below post content -- will put this in a loop and need to get rid of <br />s and use \n instead, wasn't working for some reason
-
-// Print the meta box data - called in display_artwork_info()
-function print_meta($val){
-	global $artworkinfo_metabox;
-	if($val != '') {
-		$artworkinfo_metabox->the_value($val);
-		echo "<br />"; // Does not conditionally echo...
-	}
-}
 
 // Display Artwork Info fields in post
 function display_artwork_info() {
-	
-	global $artworkinfo_metabox;
-	global $post;
-	global $terms;
-	
-	$values = array('title','collabs','dimen','additional');
-	$artworkinfo_metabox->the_meta();
 
+	global $mb;
+		
+	$mb->the_meta();
+	$values = array('title','collabs','dimen','additional'); 
+	
 	echo the_content();	 
 	echo '<div id="artwork-meta">';
-	
-	// Loop through the meta values
-	foreach ($values as $val){
-		print_meta($val);
-	}
-	
-	// If it exists, print the medium taxonomy
-	print_medium();
+
+	foreach ($values as $val) {
+	    if ($mb->get_the_value($val) != ''){
+	        $mb->the_value($val);
+	        echo '<br />';
+	    }
+	}  
 	
 	echo '</div>';
 } 

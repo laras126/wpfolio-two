@@ -10,6 +10,14 @@
 		<span></span> <!--here you can add descriptive text for the field; chose not to-->
 	</p>
  
+	<label>Medium</label>
+ 
+	<p>
+		<?php $mb->the_field('medium'); ?>
+		<input type="text" style="width:99%" name="<?php $mb->the_name(); ?>" value="<?php $mb->the_value(); ?>"/>
+		<span></span> <!--here you can add descriptive text for the field; chose not to-->
+	</p>
+ 
 	<label>Dimensions</label>
  
 	<p>
