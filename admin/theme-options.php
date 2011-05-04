@@ -106,16 +106,9 @@ $options[] = array( "name" => "Custom Favicon",
 					"std" => "",
 					"type" => "upload"); 
 
-// Not using now, will be hacked to apply blog template to specified categories. Checkboxes or something.
-// As of now: choose a post category to be excluded from the front page and to be shown on blog template - courtesy of AutoFocus+ 					
-/*$options[] = array( "name" => __('Blog Category','thematic'),
-					"desc" => __('Select a post category to be shown in the Blog Template and excluded from the Front Page.','thematic'),
-					"id" => $shortname."_blog_cat",
-					"std" => "Select a category:",
-					"type" => "select",
-					"options" => $of_categories);
-                                               
-$options[] = array( "name" => "Tracking Code",
+
+// Analytics option - not using
+/*$options[] = array( "name" => "Tracking Code",
 					"desc" => "Paste your Google Analytics (or other) tracking code here. This will be added into the footer template of your theme.",
 					"id" => $shortname."_google_analytics",
 					"std" => "",
@@ -138,7 +131,7 @@ $options[] = array( "name" => "Styling Options",
 					"type" => "select",
 					"options" => $alt_stylesheets); */
 										
-$options[] = array( "name" => "Header Font",
+$options[] = array( "name" => "Header WebFont",
 					"desc" => "Choose a font from the <a href='http://google.com/webfonts'>Google WebFont Directory</a> and type its name in the text field.",
 					"id" => $shortname."_google_hdr_font",
 					"std" => "Lobster",
@@ -166,32 +159,33 @@ $options[] = array( "name" => "Header Font",
 $options[] = array( "name" => "Header Background Color",
 					"desc" => "",
 					"id" => $shortname."_hdr_bg_color",
-					"std" => "#2098a8",
+					"std" => "#FFFFFF",
 					"type" => "color");	
 
 $options[] = array( "name" => "Body Background Color",
 					"desc" => "",
 					"id" => $shortname."_body_bg_color",
-					"std" => "#2098a8",
+					"std" => "#FFFFFF",
 					"type" => "color");		
 
 $options[] = array( "name" => "Footer Background Color",
 					"desc" => "",
 					"id" => $shortname."_ftr_bg_color",
-					"std" => "#2098a8",
+					"std" => "#FFFFFF",
 					"type" => "color");
 
-$options[] = array( "name" => "Body p Typography",
-					"desc" => "Specify the font properties for your site's header. This will not effect the title WebFont.",
-					"id" => $shortname."_typography",
-					"std" => array('size' => '1','unit' => 'em','face' => 'verdana','style' => 'bold italic','color' => '#123456'),
+$options[] = array( "name" => "h1 Typography",
+					"desc" => "Specify the font properties for your site's main body font. This will not effect the title WebFont.",
+					"id" => $shortname."_h1_typography",
+					"std" => array('size' => '16','unit' => 'em','face' => 'verdana','style' => 'bold italic','color' => '#123456'),
+					"type" => "typography"); 
+					
+$options[] = array( "name" => "Body Typography",
+					"desc" => "Specify the font properties for your site's main body font. This will not effect the title WebFont.",
+					"id" => $shortname."_p_typography",
+					"std" => array('size' => '16','unit' => 'em','face' => 'verdana','style' => 'bold italic','color' => '#123456'),
 					"type" => "typography");
 
-/*$options[] = array( "name" => "Footer Typography",
-					"desc" => "Specify the font properties for your site's footer.",
-					"id" => $shortname."ftr_typography",
-					"std" => array('size' => '16','unit' => 'em','face' => 'verdana','style' => 'bold italic','color' => '#123456'),
-					"type" => "typography");*/
 
 /*$options[] = array( "name" => "Body Font",
 					"desc" => "",

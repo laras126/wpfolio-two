@@ -8,16 +8,11 @@ $hdr_bg_color = get_option($shortname . '_hdr_bg_color');
 $body_bg_color = get_option($shortname . '_body_bg_color');
 $ftr_bg_color = get_option($shortname . '_ftr_bg_color');
 
-$body_text = get_option($shortname . '_body_text');
+//$body_text = get_option($shortname . '_body_text');
+//$h1_text = get_option($shortname . '_h1_typography');
 
-$text_color = get_option($shortname . '_text_color');
-$typography = get_option($shortname . '_typography'); 
-
-$hdr_type = get_option($shortname . '_hdr_typograpy');
-$bdy_type = get_option($shortname . '_bdy_typograpy');  
-$ftr_type = get_option($shortname . '_ftr_typograpy');
-
-$font_text = get_option($shortname . '_typograpy'); // Or whatever the name of option is
+$p_text = get_option($shortname . '_p_typography'); 
+$h1_text = get_option($shortname . '_h1_typography'); 
 
 // Output styles
 if ($output <> '') {

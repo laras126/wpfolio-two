@@ -1,3 +1,5 @@
+/* @override http://localhost:8888/wp-content/themes/wpfolio/style.css */
+
 /*   
 Theme Name: WPFolio - Thematic Child
 Theme URI: 
@@ -83,6 +85,12 @@ All other styles can be overridden--or ignored!--in Child Theme stylesheets */
 
 /* Some main stuff */
 
+/* @group general */
+
+body {
+	font-size: 100%;
+}
+
 #wrapper {
 	width:960px;
 	margin: auto;
@@ -95,6 +103,12 @@ All other styles can be overridden--or ignored!--in Child Theme stylesheets */
 	padding-top: 54px;
 }
 
+#footer, #siteinfo{
+	border-top:1.5px solid #999; /* change this later */
+}
+
+/* @end */
+
 #artwork-meta {
 	width: 500px;
 	font-size: 12px;
@@ -102,13 +116,7 @@ All other styles can be overridden--or ignored!--in Child Theme stylesheets */
 	margin-bottom: 15px;
 }
 
-#footer, #siteinfo{
-	border-top:1.5px solid #999; /* change this later */
-}
-
 #siteinfo {
-	width:inherit;
-	padding-left: 50px;
 }
 
 h1.entry-title {
@@ -123,12 +131,33 @@ h1.entry-title {
 	border: none;
 }
 
+#access {
+	background: white; /* wpfstyle */
+}
+
 .sf-menu {
+	border: none;
 }
 
 .menu {
 	background-color: inherit;
 }
+
+/* @group news */
+
+/* @end */
+
+/* @group portfolio */
+
+.portfolio #container {
+	width: 100%;
+}
+.portfolio #content {
+	width:940px;
+	margin-right: 10px;
+}
+
+/* @end */
 
 /* @group sidebar */
 
@@ -163,11 +192,9 @@ margin: auto -135px;
 	background-color: green;	
 }
 
-#primary, #secondary {
-	border:1.5px solid #999;
-}
-
-
+#primary {
+	border: none;
+	}
 
 /* @end */
 

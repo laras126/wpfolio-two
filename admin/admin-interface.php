@@ -802,6 +802,10 @@ function optionsframework_machine($options) {
 			$font07 = ''; 
 			$font08 = '';
 			$font09 = '';
+		///// Adding Gill and Courier - Lara
+			$font10 = '';
+			$font11 = '';
+		/////////////////////////
 
 			if (strpos($val, 'Arial, sans-serif') !== false){ $font01 = 'selected="selected"'; }
 			if (strpos($val, 'Verdana, Geneva') !== false){ $font02 = 'selected="selected"'; }
@@ -811,7 +815,10 @@ function optionsframework_machine($options) {
 			if (strpos($val, 'Tahoma, Geneva') !== false){ $font06 = 'selected="selected"'; }
 			if (strpos($val, 'Palatino') !== false){ $font07 = 'selected="selected"'; }
 			if (strpos($val, 'Helvetica') !== false){ $font08 = 'selected="selected"'; }
-			
+		///// Adding Gill and Courier - Lara
+			if (strpos($val, 'Gill Sans') !== false){ $font09 = 'selected="selected"'; }
+			if (strpos($val, 'Courier') !== false){ $font10 = 'selected="selected"'; }
+		/////////////////////////	
 			$output .= '<select class="of-typography of-typography-face" name="'. $value['id'].'_face" id="'. $value['id'].'_face">';
 			$output .= '<option value="Arial, sans-serif" '. $font01 .'>Arial</option>';
 			$output .= '<option value="Verdana, Geneva, sans-serif" '. $font02 .'>Verdana</option>';
@@ -821,8 +828,13 @@ function optionsframework_machine($options) {
 			$output .= '<option value="Tahoma, Geneva, Verdana, sans-serif"'. $font06 .'>Tahoma</option>';
 			$output .= '<option value="Palatino, &quot;Palatino Linotype&quot;, serif"'. $font07 .'>Palatino</option>';
 			$output .= '<option value="&quot;Helvetica Neue&quot;, Helvetica, sans-serif" '. $font08 .'>Helvetica*</option>';
+
+		///// Adding Gill and Courier - Lara
+			$output .= '<option value="&quot;Gill Sans&quot;, Calibri, Trebuchet MS, sans-serif" '. $font09 .'>Gill Sans</option>';
+			$output .= '<option value="&quot;Courier New&quot;, Courier, monospace" '. $font10 .'>Courier</option>';
 			$output .= '</select>';
-			
+		/////////////////////////
+		
 			/* Font Weight */
 			$val = $default['style'];
 			if ( $typography_stored['style'] != "") { $val = $typography_stored['style']; }

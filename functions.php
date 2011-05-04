@@ -372,5 +372,17 @@ function add_lorem ($atts, $content = null) {
 add_shortcode("lorem", "add_lorem");
 
 
-
+// Add link for WPFolio options to the admin bar
+function my_admin_bar_link() {
+	global $wp_admin_bar;
+		if ( !is_super_admin() || !is_admin_bar_showing() )
+			return;
+	$wp_admin_bar->add_menu( array(
+			'id' => 'new_link',
+			'parent' => false,
+			'title' => __( 'Options'),
+			'href' => admin_url( 'themes.php?page=optionsframework' )
+	));
+}
+add_action('admin_bar_menu', 'my_admin_bar_link');
 ?>
