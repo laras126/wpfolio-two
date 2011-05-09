@@ -3,12 +3,14 @@
 $shortname = get_option('of_shortname'); 
 $output = '';
 
+
+
 // Variables for style values
 $hdr_bg_color = get_option($shortname . '_hdr_bg_color');
 $body_bg_color = get_option($shortname . '_body_bg_color');
 $ftr_bg_color = get_option($shortname . '_ftr_bg_color');
 
-//$body_text = get_option($shortname . '_body_text');
+$body_text = get_option($shortname . '_body_text');
 //$h1_text = get_option($shortname . '_h1_typography');
 
 $p_text = get_option($shortname . '_p_typography'); 

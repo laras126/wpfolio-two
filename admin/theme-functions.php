@@ -33,8 +33,8 @@ if (!function_exists('optionsframework_wp_head')) {
 		// This prints out the custom css and specific styling options
 		of_options_output_css();
 		of_head_css();
-		exclude_cats();
-
+		get_blog_cat();
+		
 		// Get options for WebFont and default font and put into vars. Might be better to put vars in another location so you only call the function here, but fine now.
 		$hdr_gfont = get_option($shortname . '_google_hdr_font' );
 		$hdr_dfont = get_option($shortname . '_default_hdr_font' );
@@ -86,36 +86,39 @@ function of_options_output_css() {
 
 // Load WebFont, called in optionsframework_wp_head
 function gfonts_api($gf1, $df1) {
+	global $shortname;
 
 	$addfont = <<<ADDFONTS
 
 <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js'></script>
 <script type='text/javascript'>WebFont.load({ google: {families: [ '$gf1' ]}})</script>
-<style type='text/css'>.wf-inactive {font-family: '$df1';} #blog-title {font-family: '$gf1', serif;}</style>
+<style type='text/css'>.wf-inactive {font-family: Gill Sans;} #blog-title {font-family: '$gf1';}</style>
 
 ADDFONTS;
 
 	echo $addfont;
 } 
-	
+//color: <?php echo $title_color.';'.'font-size:'.$title_size.'em' 	
 /*-----------------------------------------------------------------------------------*/
 /* Footer and Category Options
 /*-----------------------------------------------------------------------------------*/
 
-// Exclude selected category from the blog - will be multicheck and 'include these categories on blog', but 'exclude' and a single select for now.
+// Get all posts from category specified in the Blog Category option. This is the only category displayed on the blog page. Called in optionsframework_wp_head().
 
-function exclude_cats()	{
+function get_blog_cat()	{
 	
-	$shortname =  get_option('of_shortname');
-	$cat = get_option($shortname.'_cats_in_blog');
-	$catid = get_cat_ID($cat);
-	
+	$shortname = get_option('of_shortname');
+	$catoptions = array();
+	$cat_option = get_option($shortname.'_cats_in_blog');
+	$cat = get_cat_ID($cat_option);
+
 	if ( is_home() ) {
-		query_posts( "cat=-$catid" );
-	}
+		query_posts( "cat=$cat" );
+	}	
 }
-	
-	
+			
+
+
 // Function to hide footer areas from selected pages
 
 /*function hide_footer_areas($page) {

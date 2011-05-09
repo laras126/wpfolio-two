@@ -1,13 +1,13 @@
 <?php
 
 // Translate font size to em for IE 
+$title_size = title/16;
 $psize = $p_text["size"]/16;
 $h1size = $h1_text["size"]/16;
 
+//#blog-title {color: <?php echo $title_color ; font-size: $title_size}
 ?>
 
 #header {background-color: <?php echo $hdr_bg_color ?>;}
-body {background-color:<?php echo $body_bg_color ?>;}
-h2{font: <?php echo $h1_text["style"].' '.$h1size.'em '.$h1_text["face"].'; color:'.$h1_text["color"].';' ?>}
-p{font: <?php echo $p_text["style"].' '.$psize.'em '.$p_text["face"].'; color:'.$p_text["color"].';' ?>}
+body {background-color:<?php echo $body_bg_color.';font-family:'.$body_text; ?>;}
 #footer {background-color:<?php echo $ftr_bg_color; ?>;}

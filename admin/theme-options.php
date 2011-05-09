@@ -2,13 +2,16 @@
 
 add_action('init','of_options');
 
+
 if (!function_exists('of_options')) {
 function of_options(){
+
 	
 // VARIABLES
 $themename = get_theme_data(STYLESHEETPATH . '/style.css');
 $themename = $themename['Name'];
 $shortname = "of";
+
 
 // Populate OptionsFramework option in array for use in theme
 global $of_options;
@@ -16,12 +19,13 @@ $of_options = get_option('of_options');
 
 $GLOBALS['template_path'] = OF_DIRECTORY;
 
+
 //Access the WordPress Categories via an Array
 $of_categories = array();  
 $of_categories_obj = get_categories('hide_empty=0');
 foreach ($of_categories_obj as $of_cat) {
     $of_categories[$of_cat->cat_ID] = $of_cat->cat_name;}
-//$categories_tmp = array_unshift($of_categories, "Select a Category:");  
+$categories_tmp = array_unshift($of_categories, "Select a Category:");  
 //Use unshift_array with a dropdown - makes the first selection a description not acknowledged in array
 
        
@@ -33,15 +37,23 @@ foreach ($of_pages_obj as $of_page) {
 //$of_pages_tmp = array_unshift($of_pages, "Select a page:");       
 //See above comment in Access Categories
 
+
+// Font sizes array
+$font_sizes = array(16, 24, 32, 64, 72);
+
+
 // Image Alignment radio box
 $options_thumb_align = array("alignleft" => "Left","alignright" => "Right","aligncenter" => "Center"); 
+
 
 // Image Links to Options
 $options_image_link_to = array("image" => "The Image","post" => "The Post"); 
 
+
 // Testing arrays, for Example Options
 $options_select = array("one","two","three","four","five"); 
 $options_radio = array("one" => "One","two" => "Two","three" => "Three","four" => "Four","five" => "Five"); 
+
 
 // Stylesheets Reader, see Theme Stylesheet in Styling Options 
 // Could this be used for switching around stylesheets for resume, etc.
@@ -77,8 +89,8 @@ $options = array();
 $options[] = array( "name" => "General Settings",
                     "type" => "heading");
 					
-$options[] = array( "name" => "Exclude Categories from Blog",
-					"desc" => "Select the categories that will be excluded from the blog page.",
+$options[] = array( "name" => "Blog Category",
+					"desc" => "Select the category that will be blog posts. All other categories will be in the portfolio format.",
 					"id" => $shortname."_cats_in_blog",
 					"std" => "",
 					"type" => "select",
@@ -107,7 +119,7 @@ $options[] = array( "name" => "Custom Favicon",
 					"type" => "upload"); 
 
 
-// Analytics option - not using
+// Analytics option
 /*$options[] = array( "name" => "Tracking Code",
 					"desc" => "Paste your Google Analytics (or other) tracking code here. This will be added into the footer template of your theme.",
 					"id" => $shortname."_google_analytics",
@@ -131,14 +143,26 @@ $options[] = array( "name" => "Styling Options",
 					"type" => "select",
 					"options" => $alt_stylesheets); */
 										
-$options[] = array( "name" => "Header WebFont",
-					"desc" => "Choose a font from the <a href='http://google.com/webfonts'>Google WebFont Directory</a> and type its name in the text field.",
+$options[] = array( "name" => "Title WebFont",
+					"desc" => "Choose a font from the <a href='http://google.com/webfonts'>Google WebFont Directory</a> and type its name in the text field. This font will be used for your site title.",
 					"id" => $shortname."_google_hdr_font",
 					"std" => "Lobster",
 					"type" => "text");
-				
-// Will be under same header as above - not working right now						
-/*$options[] = array( "name" => "Default Header Font",
+
+/*$options[] = array( "name" => "Title Color",
+					"desc" => "Select a color for your site title.",
+					"id" => $shortname."_title_color",
+					"std" => array('size' => '16','unit' => 'em','face' => 'verdana','style' => 'bold italic','color' => '#123456'),
+					"type" => 'color');
+									
+$options[] = array( "name" => "Title Size",
+					"desc" => "Select the text size for your site's title.",
+					"id" => $shortname."_title_size",
+					"std" => '',
+					"type" => 'select',
+					"options" => $font_sizes);*/		
+											
+$options[] = array( "name" => "",
 					"desc" => "Select a font to be used if the WebFont does not load.",
 					"id" => $shortname."_default_hdr_font",
 					"std" => "Arial",
@@ -153,7 +177,7 @@ $options[] = array( "name" => "Header WebFont",
 			            "Palatino, Palatino Linotype, Georgia, Times, Times New Roman, serif", 
 			            "Times, Times New Roman, Georgia, serif", 
 			            "Verdana, Geneva, Tahoma, sans-serif"  
-			            )); */
+			            ));
 
 					
 $options[] = array( "name" => "Header Background Color",
@@ -174,7 +198,7 @@ $options[] = array( "name" => "Footer Background Color",
 					"std" => "#FFFFFF",
 					"type" => "color");
 
-$options[] = array( "name" => "h1 Typography",
+/*$options[] = array( "name" => "h1 Typography",
 					"desc" => "Specify the font properties for your site's main body font. This will not effect the title WebFont.",
 					"id" => $shortname."_h1_typography",
 					"std" => array('size' => '16','unit' => 'em','face' => 'verdana','style' => 'bold italic','color' => '#123456'),
@@ -184,10 +208,10 @@ $options[] = array( "name" => "Body Typography",
 					"desc" => "Specify the font properties for your site's main body font. This will not effect the title WebFont.",
 					"id" => $shortname."_p_typography",
 					"std" => array('size' => '16','unit' => 'em','face' => 'verdana','style' => 'bold italic','color' => '#123456'),
-					"type" => "typography");
+					"type" => "typography");*/
 
 
-/*$options[] = array( "name" => "Body Font",
+$options[] = array( "name" => "Body Font",
 					"desc" => "",
 		            "id" => $shortname."_body_text",
 		            "type" => "select",
@@ -202,7 +226,7 @@ $options[] = array( "name" => "Body Typography",
 			            "Palatino, Palatino Linotype, Georgia, Times, Times New Roman, serif", 
 			            "Times, Times New Roman, Georgia, serif", 
 			            "Verdana, Geneva, Tahoma, sans-serif"  
-		            )); */
+		            )); 
 														
 $options[] = array( "name" => "Custom CSS",
                     "desc" => "Quickly add some CSS to your theme by adding it to this block.",

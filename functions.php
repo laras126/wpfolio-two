@@ -169,8 +169,8 @@ set_post_thumbnail_size( 150, 150, true );
 //------Stuff that doesn't work but is necessary from 1.7------//
 
 // This sets the Large image size to 900px
-/*if ( ! isset( $content_width ) ) 
-	$content_width = 900; */
+if ( ! isset( $content_width ) ) 
+	$content_width = 900; 
 
 // Remove inline styles on gallery shortcode
 function wpfolio_remove_gallery_css( $css ) {
@@ -229,7 +229,6 @@ function my_thematic_post_format_class( $classes = array() ) {
   $format = get_post_format();
   if ( '' == $format )
     $format = 'standard';
-
   $classes[] = 'format-' . $format;
 
   return $classes;
