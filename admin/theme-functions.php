@@ -33,7 +33,6 @@ if (!function_exists('optionsframework_wp_head')) {
 		// This prints out the custom css and specific styling options
 		of_options_output_css();
 		of_head_css();
-		get_blog_cat();
 		
 		// Get options for WebFont and default font and put into vars. Might be better to put vars in another location so you only call the function here, but fine now.
 		$hdr_gfont = get_option($shortname . '_google_hdr_font' );
@@ -99,54 +98,44 @@ ADDFONTS;
 	echo $addfont;
 } 
 //color: <?php echo $title_color.';'.'font-size:'.$title_size.'em' 	
+
+
 /*-----------------------------------------------------------------------------------*/
-/* Footer and Category Options
+/* Blog Category Option
 /*-----------------------------------------------------------------------------------*/
 
-// Get all posts from category specified in the Blog Category option. This is the only category displayed on the blog page. Called in optionsframework_wp_head().
+// Get all posts from category specified in the Blog Category option. This is the only category displayed on the blog page. 
 
 function get_blog_cat()	{
 	
 	$shortname = get_option('of_shortname');
-	$catoptions = array();
 	$cat_option = get_option($shortname.'_cats_in_blog');
 	$cat = get_cat_ID($cat_option);
-
-	if ( is_home() ) {
-		query_posts( "cat=$cat" );
-	}	
+	query_posts( "cat=$cat" );
+		
 }
-			
+add_filter('thematic_above_indexloop', 'get_blog_cat');
 
-
-// Function to hide footer areas from selected pages
-
-/*function hide_footer_areas($page) {
-	$footer_areas = array('Footer Left', 'Footer Middle', 'Footer Right');
-
-	foreach ($footer_areas as &$area) {
-		unregister_sidebar($area);
-	}
-} */
 
 /*-----------------------------------------------------------------------------------*/
 /* Add Body Classes for Layout
 /*-----------------------------------------------------------------------------------*/
 
-// This used to be done through an additional stylesheet call, but it seemed like
-// a lot of extra files for something so simple. Adds a body class to indicate sidebar position.
+// Adds a body class to indicate sidebar position.
 
-add_filter('body_class','of_body_class');
+add_filter('thematic_body_class','of_body_class');
  
 function of_body_class($classes) {
 	$shortname =  get_option('of_shortname');
 	$layout = get_option($shortname .'_layout');
+	
 	if ($layout == '') {
-		$layout = 'layout-2cr';
+		$layout = 'sidebar-r';
 	}
 	$classes[] = $layout;
 	return $classes;
 }
+
 
 /*-----------------------------------------------------------------------------------*/
 /* Add Favicon

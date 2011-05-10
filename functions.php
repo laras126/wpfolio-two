@@ -35,6 +35,20 @@ define('THEMATIC_COMPATIBLE_FEEDLINKS', true);
 
 
 ///////////////////////
+// FILTER BODY CLASS //
+///////////////////////
+
+function my_body_classes($classes, $class) {
+	// add 'my-class' to the $classes array
+	$classes[] = 'wpfportfolio';
+	// return the $classes array
+	return $classes;
+}
+
+
+//add_filter('body_class','my_body_classes');
+
+///////////////////////
 // MARGINS & SIDEBAR //
 ///////////////////////
 
@@ -45,15 +59,20 @@ function wide_margins_shortcode ($atts, $content = null) {
 }
 add_shortcode('margin', 'wide_margins_shortcode');
 
-//function childtheme_override_content() {
-
-//*---Sidebar---*//
-
-// http://programming.thematic4you.com/2010/01/how-to-remove-the-sidebar-from-a-certain-page/
-
-// Filter thematic_sidebar() .. remove from everything except the blog template
+// Filter thematic_sidebar() .. remove from everything except the blog (category chosen in theme options).
 function remove_sidebar() {
-	if ( is_page() || is_archive() || is_single() ) {
+	
+	$shortname = get_option('of_shortname');
+	$cat_option = get_option($shortname.'_cats_in_blog');
+	$cat = get_cat_ID($cat_option);
+	
+	if ($cat != '') {
+		if ( is_category($cat) ) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	} else if ( !is_home()){
 		return FALSE;
 	} else {
 		return TRUE;
@@ -62,10 +81,20 @@ function remove_sidebar() {
 add_filter('thematic_sidebar', 'remove_sidebar');
 
 
+// Add portfolio body class to anything that isn't the blog			
+function portfolio_body_class($class) {
+	if ( !is_home() ) {
+		$class[] = 'portfolio';
+		return $class;
+	} 
+}
+add_filter('thematic_body_class','portfolio_body_class');		
+
+
+
 /////////////
 // WIDGETS //
 /////////////
-
 
 // http://themeshaper.com/forums/topic/something-new-bout-widgetized-areas#post-6601
 
@@ -84,7 +113,7 @@ function rename_widgetized_area($content) {
 add_filter('thematic_widgetized_areas', 'rename_widgetized_area');
 
 // Remove some widget areas
-// Add the name of the widget area you want to remove to the $widgetareas array/ remove name of area you want to add
+// Add the name of the widget area you want to remove to the $widgetareas array / remove name of area you want to add
 function child_remove_widget_area() {
 	$widgetareas = array ('index-insert', 'single-insert', 'single-bottom', 'single-top', 'index-bottom', 'index-top', 'page-top', 'page-bottom');
 	
@@ -99,7 +128,6 @@ add_action( 'admin_init', 'child_remove_widget_area');
 ////////////
 // IMAGES //
 ////////////
-
 
 /*----- CUSTOM HEADER IMAGE -----*/
 // Need to add images/default_header.jpg
@@ -188,10 +216,6 @@ function wpfolio_remove_gallery_css( $css ) {
 //////////////////////////////////////
 
 // Options Framework by Devin at WPTheming, based on WooThemes. http://wptheming.com/2010/12/options-framework/
-
-// Do we want to include separate templates for header/footer options? Might be overkill
-//include_once (STYLESHEETPATH . '/admin/footer-options.php');	
-//include_once (STYLESHEETPATH . '/admin/header-options.php');	
 
 /* Set the file path based on whether the Options Framework is in a parent theme or child theme */
 

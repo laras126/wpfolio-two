@@ -85,7 +85,7 @@ $options = array();
 
 //*-------------* GENERAL SETTINGS *-------------*//
 // Options for Custom Logo, Custom Favicon. 
-// Commented out: Post cat excluded from blog (not complete, just visible option), Tracking code for Analytics, 
+// Commented out: Sidebar alignment, Tracking code for Analytics 
 $options[] = array( "name" => "General Settings",
                     "type" => "heading");
 					
@@ -109,9 +109,10 @@ $options[] = array( "name" => "Main Layout",
 					"std" => "layout-2cr",
 					"type" => "images",
 					"options" => array(
-						'layout-2cr' => $url . '2cr.png',
-						'layout-2cl' => $url . '2cl.png')
+						'sidebar-r' => $url . '2cr.png',
+						'sidebar-l' => $url . '2cl.png')
 					);
+					
 $options[] = array( "name" => "Custom Favicon",
 					"desc" => "Upload a 16px x 16px Png/Gif image that will represent your website's favicon.",
 					"id" => $shortname."_custom_favicon",

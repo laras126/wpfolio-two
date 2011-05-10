@@ -161,8 +161,13 @@ h1.entry-title {
 
 /* @group sidebar */
 
-#primary, #secondary ul li ul li {
+#primary, #secondary, .main-aside ul li ul li {
 	list-style-type: none;
+	border: none;
+
+/* this does not work yet */	
+.sidebar-r .aside {
+	background-color: green;
 }
 
 /* @end */
