@@ -81,8 +81,6 @@ pre, code {
 All other styles can be overridden--or ignored!--in Child Theme stylesheets */
 
 
-/* Note that Lara's comments here are vague and will be more detailed as stylesheet develops. */
-
 /* Some main stuff */
 
 /* @group general */
@@ -96,9 +94,19 @@ body {
 	margin: auto;
 }
 
+#respond {
+    background:transparent;
+}
+
 #branding {
 	padding: 36px 0 18px;
 }
+
+#access {
+	background: transparent; /* wpfstyle */
+	padding-left: 15px;
+}
+
 #main{
 	padding-top: 54px;
 }
@@ -131,10 +139,6 @@ h1.entry-title {
 	border: none;
 }
 
-#access {
-	background: white; /* wpfstyle */
-}
-
 .sf-menu {
 	border: none;
 }
@@ -156,6 +160,35 @@ h1.entry-title {
 	width:940px;
 	margin-right: 10px;
 }
+/* experiment */
+.portfolio .the-thumb{
+	width: 150px;
+	height: 150px;
+	overflow: hidden;
+}
+span.thumb-list {
+	width: 220px;
+	height: 200px;
+	float: left;
+	margin: auto;
+	padding-left: 11px;
+}
+h4.thumb-title {
+	font-size: .8em;
+	line-height: 1.1em;
+	text-align: center;
+	padding-bottom: 8px;
+}
+img.attachment-post-thumbnail {
+	border: 1.5px #999999 solid;
+	padding: 4px;
+	margin:0 30px 0 30px;
+	/* experiment */
+	min-width: 150px;
+	min-height: 150px;
+	max-width: 250px;
+	max-height: 250px;
+}
 
 /* @end */
 
@@ -164,11 +197,6 @@ h1.entry-title {
 #primary, #secondary, .main-aside ul li ul li {
 	list-style-type: none;
 	border: none;
-
-/* this does not work yet */	
-.sidebar-r .aside {
-	background-color: green;
-}
 
 /* @end */
 
@@ -181,11 +209,12 @@ h1.entry-title {
 	margin: auto;
 }
 
-/*.widemargins {
+.widemargins {
 	margin: auto 135px;
+	color: aqua;
 }
 
-.widemargins-override{
+/*.widemargins-override{
 margin: auto -135px;
 }*/
 
@@ -225,11 +254,12 @@ margin: auto -135px;
 	background-color: gray;
 }
 
-.link-format {
+.format-link {
 	background-color: olive;
 }
 
 .format-image {
+	color: aqua;
 }
 
 .format-quote {

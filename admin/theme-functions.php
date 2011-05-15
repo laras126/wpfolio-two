@@ -121,9 +121,9 @@ add_filter('thematic_above_indexloop', 'get_blog_cat');
 /* Add Body Classes for Layout
 /*-----------------------------------------------------------------------------------*/
 
-// Adds a body class to indicate sidebar position.
+// Adds a body class to indicate sidebar position - uncomment the filter and the option in theme-options.php to use it (you'll probably have to do some troubleshooting).
 
-add_filter('thematic_body_class','of_body_class');
+// add_filter('thematic_body_class','of_body_class');
  
 function of_body_class($classes) {
 	$shortname =  get_option('of_shortname');

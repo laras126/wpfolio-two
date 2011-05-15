@@ -33,31 +33,40 @@ define('THEMATIC_COMPATIBLE_COMMENT_FORM', true);
 define('THEMATIC_COMPATIBLE_FEEDLINKS', true);
 
 
+// Require functions located in /library
+require_once("library/widgets.php");
+require_once("library/portfolio.php");
+require_once("library/page-margins.php");
+require_once("library/attachment-fix.php");
 
-///////////////////////
-// FILTER BODY CLASS //
-///////////////////////
 
-function my_body_classes($classes, $class) {
-	// add 'my-class' to the $classes array
-	$classes[] = 'wpfportfolio';
-	// return the $classes array
-	return $classes;
+
+////////////////////
+// FILTER CONTENT //
+////////////////////
+
+function override_content() {
+	if ( is_page() ){
+		add_filter('thematic_content', 'add_wide_margins'); 
+	} else if( is_attachment() ) {
+		add_filter('thematic_content', 'fix_attachment'); 
+	} 
 }
 
+//add_filter('thematic_content', 'override_content');
 
-//add_filter('body_class','my_body_classes');
-
-///////////////////////
-// MARGINS & SIDEBAR //
-///////////////////////
-
-// Shortcode to add wide margins to a post page - works as is, but is applied in post lists
-
-function wide_margins_shortcode ($atts, $content = null) {
-	return '<div class="widemargins">' . do_shortcode($content) . '</div>';
+// Try to fix attachment bug, no dice
+function filter_attachment_link($link) {
+	global $post;
+	$link = "$post->ID, true";
+	
+	return $link;
 }
-add_shortcode('margin', 'wide_margins_shortcode');
+//add_filter('the_attachment_link','filter_attachment_link');
+
+/////////////
+// SIDEBAR //
+/////////////
 
 // Filter thematic_sidebar() .. remove from everything except the blog (category chosen in theme options).
 function remove_sidebar() {
@@ -79,49 +88,6 @@ function remove_sidebar() {
 	}
 }
 add_filter('thematic_sidebar', 'remove_sidebar');
-
-
-// Add portfolio body class to anything that isn't the blog			
-function portfolio_body_class($class) {
-	if ( !is_home() ) {
-		$class[] = 'portfolio';
-		return $class;
-	} 
-}
-add_filter('thematic_body_class','portfolio_body_class');		
-
-
-
-/////////////
-// WIDGETS //
-/////////////
-
-// http://themeshaper.com/forums/topic/something-new-bout-widgetized-areas#post-6601
-
-
-// Rename some widget areas
-function rename_widgetized_area($content) {
-	$content['Single Bottom']['args']['name'] = 'After Single Post';
-	$content['Single Top']['args']['name'] = 'Before Single Post';
-	$content['1st Subsidiary Aside']['args']['name'] = 'Footer Left'; 
-	$content['2nd Subsidiary Aside']['args']['name'] = 'Footer Middle'; 
-	$content['3rd Subsidiary Aside']['args']['name'] = 'Footer Right';
-	$content['Index Bottom']['args']['name'] = 'Posts Page Bottom';
-	$content['Index Top']['args']['name'] = 'Posts Page Top';
-	return $content;
-}
-add_filter('thematic_widgetized_areas', 'rename_widgetized_area');
-
-// Remove some widget areas
-// Add the name of the widget area you want to remove to the $widgetareas array / remove name of area you want to add
-function child_remove_widget_area() {
-	$widgetareas = array ('index-insert', 'single-insert', 'single-bottom', 'single-top', 'index-bottom', 'index-top', 'page-top', 'page-bottom');
-	
-	foreach ( $widgetareas as &$area ) {
-		unregister_sidebar($area);
-	}
-}
-add_action( 'admin_init', 'child_remove_widget_area');
 
 
 
@@ -160,9 +126,9 @@ function admin_header_style() {
 
 add_custom_image_header('header_style', 'admin_header_style'); 
 
-/*----- GET THUMBNAILS ----*/
-// Thumbnail Function - this creates a default thumbnail if one is not specified
-function get_thumb ($post_ID){
+/*----- GET FEATURED IMAGE ----*/
+// Thumbnail Function - this creates a default featured image if one is not specified
+/*function get_thumb ($post_ID){
     $thumbargs = array(
     'post_type' => 'attachment',
     'numberposts' => 1,
@@ -175,21 +141,48 @@ function get_thumb ($post_ID){
     }
 } 
 
-add_action('thematic_post', 'check_thumb');
+add_action('thematic_content', 'check_thumb');
 function check_thumb() {		
 	global $post;
 			
-	if( has_post_thumbnail() ) {
-		the_post_thumbnail();
-	}
-	else {			
+	if( !has_post_thumbnail() ) {		
 		echo get_thumb($post->ID); 
 	}
-}
+}*/
 
-// This adds support for post thumbnails of 150px square
+
+// Add support for post thumbnails of 150px square
 add_theme_support('post-thumbnails');
 set_post_thumbnail_size( 150, 150, true );
+
+//function to call first uploaded image in functions file
+function main_image() {
+	global $post;
+
+	$files = get_children('post_parent='.get_the_ID().'&post_type=attachment
+&post_mime_type=image&order=desc');
+	if($files) :
+		$keys = array_reverse(array_keys($files));
+	    $j=0;
+	    $num = $keys[$j];
+	    $image=wp_get_attachment_image($num, array(150,150), false);
+	    $imagepieces = explode('"', $image);
+	    $imagepath = $imagepieces[1];
+	    $main=wp_get_attachment_url($num);
+			$template=get_template_directory();
+			$the_title=get_the_title();
+			$the_link=get_permalink();
+			// can add width and height 150 but doesn't keep proportions. don't know why set_post_thumbnail_size isn't working
+	    echo "<div class='the-thumb'><a href='$the_link'><img src='$main' alt='$the_title' class='attachment-post-thumbnail' /></a></div>";
+	endif;
+}
+
+// Make post thumbnail a link to post
+add_filter( 'post_thumbnail_html', 'my_post_image_html', 10, 3 );
+function my_post_image_html( $html, $post_id, $post_image_id ) {
+	$html = '<a href="' . get_permalink( $post_id ) . '" title="' . esc_attr( get_post_field( 'post_title', $post_id ) ) . '">' . $html . '</a>';
+	return $html;
+}
 
 // END - Thumbnail Function
 
@@ -207,8 +200,6 @@ function wpfolio_remove_gallery_css( $css ) {
 //add_filter( 'gallery_style', 'wpfolio_remove_gallery_css' );
 
 // END - Remove inline styles on gallery shortcode
-
-
 
 
 //////////////////////////////////////
@@ -249,7 +240,7 @@ require_once (OF_FILEPATH . '/admin/theme-functions.php'); 	// Theme actions bas
 add_theme_support('post-formats', array( 'link', 'aside', 'gallery', 'image', 'video' ));
 
 // Add the format selector to post_class
-function my_thematic_post_format_class( $classes = array() ) {
+function post_format_class( $classes = array() ) {
   $format = get_post_format();
   if ( '' == $format )
     $format = 'standard';
@@ -258,7 +249,7 @@ function my_thematic_post_format_class( $classes = array() ) {
   return $classes;
 }
 
-add_filter( 'post_class', 'my_thematic_post_format_class' );
+add_filter( 'post_class', 'post_format_class' );
 
 
 ///////////////////////

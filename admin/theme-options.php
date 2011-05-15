@@ -102,7 +102,7 @@ $options[] = array( "name" => "Custom Logo",
 					"std" => "",
 					"type" => "upload");
 					
-$url =  OF_DIRECTORY . '/admin/images/';
+/*$url =  OF_DIRECTORY . '/admin/images/';
 $options[] = array( "name" => "Main Layout",
 					"desc" => "Select main content and sidebar alignment.",
 					"id" => $shortname."_layout",
@@ -111,7 +111,7 @@ $options[] = array( "name" => "Main Layout",
 					"options" => array(
 						'sidebar-r' => $url . '2cr.png',
 						'sidebar-l' => $url . '2cl.png')
-					);
+					); */
 					
 $options[] = array( "name" => "Custom Favicon",
 					"desc" => "Upload a 16px x 16px Png/Gif image that will represent your website's favicon.",
