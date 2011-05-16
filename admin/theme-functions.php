@@ -162,9 +162,12 @@ add_action('wp_head', 'childtheme_favicon');
 function add_childtheme_logo() {
 	$shortname =  get_option('of_shortname');
 	$logo = get_option($shortname . '_logo');
-	if (!empty($logo)) {
+	$show_title = get_option($shortname . '_title_choice');
+	if (!empty($logo) && $show_title == 1) {
 		remove_action('thematic_header','thematic_blogtitle', 3);
 		remove_action('thematic_header','thematic_blogdescription',5);
+		add_action('thematic_header','childtheme_logo', 3);
+	} else if (!empty($logo) && $show_title == 0) {
 		add_action('thematic_header','childtheme_logo', 3);
 	}
 }
@@ -174,13 +177,15 @@ add_action('init','add_childtheme_logo');
 function childtheme_logo() {
 	$shortname =  get_option('of_shortname');
 	$logo = get_option($shortname . '_logo');
+	
     $heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'div';?>
-    <<?php echo $heading_tag; ?> id="site-title">
+    <div id="header">
 	<a href="<?php bloginfo('url'); ?>" title="<?php bloginfo('description'); ?>">
     <img src="<?php echo $logo; ?>" alt="<?php bloginfo('name'); ?>"/>
 	</a>
-    </<?php echo $heading_tag; ?>>
+    </div>
 <?php }
+
 
 
 /*-----------------------------------------------------------------------------------*/

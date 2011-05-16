@@ -90,14 +90,12 @@ function remove_sidebar() {
 add_filter('thematic_sidebar', 'remove_sidebar');
 
 
-
 ////////////
 // IMAGES //
 ////////////
 
 /*----- CUSTOM HEADER IMAGE -----*/
-// Need to add images/default_header.jpg
-// Disabled Header Text - covered by WebFonts option
+// Disabled - this is covered in the Options Panel.
 
 define('NO_HEADER_TEXT', true );
 define('HEADER_TEXTCOLOR', '');

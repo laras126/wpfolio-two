@@ -84,7 +84,7 @@ $options = array();
 
 
 //*-------------* GENERAL SETTINGS *-------------*//
-// Options for Custom Logo, Custom Favicon. 
+// Options for Custom Header, Custom Favicon. 
 // Commented out: Sidebar alignment, Tracking code for Analytics 
 $options[] = array( "name" => "General Settings",
                     "type" => "heading");
@@ -96,12 +96,18 @@ $options[] = array( "name" => "Blog Category",
 					"type" => "select",
 					"options" => $of_categories);
 
-$options[] = array( "name" => "Custom Logo",
-					"desc" => "Upload a logo for your theme, or specify the image address of your online logo. (http://yoursite.com/logo.png)",
+$options[] = array( "name" => "Custom Header Image",
+					"desc" => "Unlike the 'Header' option in the Appearance panel, images uploaded here can be any size and the site title and description will be hidden.",
 					"id" => $shortname."_logo",
 					"std" => "",
 					"type" => "upload");
 					
+$options[] = array( "name" => "",
+					"desc" => "Would you like the site title and description to continue to be shown over top the header image?",
+					"id" => $shortname."_title_choice",
+					"std" => "Show title",
+					"type" => "radio",
+					"options" => array('Show title','Don\'t show title'));			
 /*$url =  OF_DIRECTORY . '/admin/images/';
 $options[] = array( "name" => "Main Layout",
 					"desc" => "Select main content and sidebar alignment.",
@@ -114,7 +120,7 @@ $options[] = array( "name" => "Main Layout",
 					); */
 					
 $options[] = array( "name" => "Custom Favicon",
-					"desc" => "Upload a 16px x 16px Png/Gif image that will represent your website's favicon.",
+					"desc" => "Upload a 16px x 16px png/gif/ico image that will represent your website's favicon. To automatically create a favicon from a larger image, check out the <a href='http://www.degraeve.com/favicon/'>Favicon Generator</a> then upload it here.",
 					"id" => $shortname."_custom_favicon",
 					"std" => "",
 					"type" => "upload"); 
@@ -164,7 +170,7 @@ $options[] = array( "name" => "Title Size",
 					"options" => $font_sizes);*/		
 											
 $options[] = array( "name" => "",
-					"desc" => "Select a font to be used if the WebFont does not load.",
+					"desc" => "Select a font to be used if the WebFont does not load. If you'd rather use a regular font, select it here and leave the WebFont field blank.",
 					"id" => $shortname."_default_hdr_font",
 					"std" => "Arial",
 		            "type" => "select",
@@ -180,13 +186,18 @@ $options[] = array( "name" => "",
 			            "Verdana, Geneva, Tahoma, sans-serif"  
 			            ));
 
+$options[] = array( "name" => "Wrapper Border",
+					"desc" => "Add a border around the content of your site.",
+					"id" => $shortname."_wpr_border",
+					"std" => array('width' => '2','style' => 'dotted','color' => '#444444'),
+					"type" => "border");
 					
-$options[] = array( "name" => "Header Background Color",
+$options[] = array( "name" => "Wrapper Background Color",
 					"desc" => "",
-					"id" => $shortname."_hdr_bg_color",
+					"id" => $shortname."_wpr_bg_color",
 					"std" => "#FFFFFF",
-					"type" => "color");	
-
+					"type" => "color");
+					
 $options[] = array( "name" => "Body Background Color",
 					"desc" => "",
 					"id" => $shortname."_body_bg_color",
@@ -321,13 +332,7 @@ $options[] = array( "name" => "Typography",
 					"desc" => "This is a typographic specific option.",
 					"id" => $shortname."_typography",
 					"std" => array('size' => '16','unit' => 'em','face' => 'verdana','style' => 'bold italic','color' => '#123456'),
-					"type" => "typography");	
-	
-$options[] = array( "name" => "Border",
-					"desc" => "This is a border specific option.",
-					"id" => $shortname."_border",
-					"std" => array('width' => '2','style' => 'dotted','color' => '#444444'),
-					"type" => "border");      
+					"type" => "typography");	      
 					
 $options[] = array( "name" => "Colorpicker (default #2098a8)",
 					"desc" => "Color selected.",

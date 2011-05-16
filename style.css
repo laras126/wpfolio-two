@@ -91,7 +91,8 @@ body {
 
 #wrapper {
 	width:960px;
-	margin: auto;
+	margin: 20px auto;
+	padding: 10px;
 }
 
 #respond {

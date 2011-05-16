@@ -3,10 +3,9 @@
 $shortname = get_option('of_shortname'); 
 $output = '';
 
-
-
 // Variables for style values
-$hdr_bg_color = get_option($shortname . '_hdr_bg_color');
+$wpr_bdr = get_option($shortname . '_wpr_border');
+$wpr_bg_color = get_option($shortname . '_wpr_bg_color');
 $body_bg_color = get_option($shortname . '_body_bg_color');
 $ftr_bg_color = get_option($shortname . '_ftr_bg_color');
 
@@ -21,15 +20,6 @@ if ($output <> '') {
 	$output = "/* Custom Styling */\n\t" . $output;
 }
 
-/*function footer_test() {
-	global $hdr_bg_color;
-	$myText = print_r($hdr_bg_color,true);
-
-	echo $myText;
-}
-
-add_action('thematic_header','footer_test'); */
-
 // Pull Styles from Dynamic StylesSheet (Look in /css/ )
 $wpf_coloroptions = STYLESHEETPATH . '/css/wpf-styles.php'; if( is_file( $wpf_coloroptions ) ) 
 require $wpf_coloroptions;
@@ -37,4 +27,12 @@ require $wpf_coloroptions;
 // Echo Optional Styles
 echo $output;
 	
+	
+function echo_test() {
+	$shortname = get_option('of_shortname'); 
+	$wpr_border = get_option($shortname . '_wpr_border');
+	print_r ($wpr_border);
+}	
+add_action('thematic_post', 'echo_test');
+
 ?>
