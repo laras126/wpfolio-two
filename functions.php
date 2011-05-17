@@ -36,9 +36,7 @@ define('THEMATIC_COMPATIBLE_FEEDLINKS', true);
 // Require functions located in /library
 require_once("library/widgets.php");
 require_once("library/portfolio.php");
-require_once("library/page-margins.php");
-require_once("library/attachment-fix.php");
-
+//require_once("library/page-margins.php");
 
 
 ////////////////////
@@ -48,11 +46,8 @@ require_once("library/attachment-fix.php");
 function override_content() {
 	if ( is_page() ){
 		add_filter('thematic_content', 'add_wide_margins'); 
-	} else if( is_attachment() ) {
-		add_filter('thematic_content', 'fix_attachment'); 
 	} 
 }
-
 //add_filter('thematic_content', 'override_content');
 
 // Try to fix attachment bug, no dice
@@ -63,6 +58,13 @@ function filter_attachment_link($link) {
 	return $link;
 }
 //add_filter('the_attachment_link','filter_attachment_link');
+
+// Shortcode to add wide margins to a post page - works as is, but is applied in post lists
+
+function wide_margins_shortcode ($atts, $content = null) {
+	return '<div class="widemargins">' . do_shortcode($content) . '</div>';
+}
+add_shortcode('margin', 'wide_margins_shortcode');
 
 /////////////
 // SIDEBAR //
@@ -282,7 +284,7 @@ function display_artwork_info() {
 	global $mb;
 		
 	$mb->the_meta();
-	$values = array('title','collabs','dimen','additional'); 
+	$values = array('title','medium','collabs','dimen','additional'); 
 	
 	echo the_content();	 
 	echo '<div id="artwork-meta">';

@@ -97,13 +97,13 @@ $options[] = array( "name" => "Blog Category",
 					"options" => $of_categories);
 
 $options[] = array( "name" => "Custom Header Image",
-					"desc" => "Unlike the 'Header' option in the Appearance panel, images uploaded here can be any size and the site title and description will be hidden.",
+					"desc" => "Unlike the 'Header' option in the Appearance panel, images uploaded here can be any size.",
 					"id" => $shortname."_logo",
 					"std" => "",
 					"type" => "upload");
 					
 $options[] = array( "name" => "",
-					"desc" => "Would you like the site title and description to continue to be shown over top the header image?",
+					"desc" => "If you've choses a header image, should the site title be shown above it?",
 					"id" => $shortname."_title_choice",
 					"std" => "Show title",
 					"type" => "radio",
@@ -156,7 +156,7 @@ $options[] = array( "name" => "Title WebFont",
 					"std" => "Lobster",
 					"type" => "text");
 
-/*$options[] = array( "name" => "Title Color",
+$options[] = array( "name" => "Title Color",
 					"desc" => "Select a color for your site title.",
 					"id" => $shortname."_title_color",
 					"std" => array('size' => '16','unit' => 'em','face' => 'verdana','style' => 'bold italic','color' => '#123456'),
@@ -167,9 +167,9 @@ $options[] = array( "name" => "Title Size",
 					"id" => $shortname."_title_size",
 					"std" => '',
 					"type" => 'select',
-					"options" => $font_sizes);*/		
+					"options" => $font_sizes);
 											
-$options[] = array( "name" => "",
+/*$options[] = array( "name" => "",
 					"desc" => "Select a font to be used if the WebFont does not load. If you'd rather use a regular font, select it here and leave the WebFont field blank.",
 					"id" => $shortname."_default_hdr_font",
 					"std" => "Arial",
@@ -184,15 +184,15 @@ $options[] = array( "name" => "",
 			            "Palatino, Palatino Linotype, Georgia, Times, Times New Roman, serif", 
 			            "Times, Times New Roman, Georgia, serif", 
 			            "Verdana, Geneva, Tahoma, sans-serif"  
-			            ));
+			            )); */
 
-$options[] = array( "name" => "Wrapper Border",
-					"desc" => "Add a border around the content of your site.",
+$options[] = array( "name" => "Container Border",
+					"desc" => "Add a border around the content of your site. Choose 0px for no border.",
 					"id" => $shortname."_wpr_border",
 					"std" => array('width' => '2','style' => 'dotted','color' => '#444444'),
 					"type" => "border");
 					
-$options[] = array( "name" => "Wrapper Background Color",
+$options[] = array( "name" => "Container Color",
 					"desc" => "",
 					"id" => $shortname."_wpr_bg_color",
 					"std" => "#FFFFFF",
@@ -204,24 +204,11 @@ $options[] = array( "name" => "Body Background Color",
 					"std" => "#FFFFFF",
 					"type" => "color");		
 
-$options[] = array( "name" => "Footer Background Color",
+/*$options[] = array( "name" => "Footer Background Color",
 					"desc" => "",
 					"id" => $shortname."_ftr_bg_color",
 					"std" => "#FFFFFF",
-					"type" => "color");
-
-/*$options[] = array( "name" => "h1 Typography",
-					"desc" => "Specify the font properties for your site's main body font. This will not effect the title WebFont.",
-					"id" => $shortname."_h1_typography",
-					"std" => array('size' => '16','unit' => 'em','face' => 'verdana','style' => 'bold italic','color' => '#123456'),
-					"type" => "typography"); 
-					
-$options[] = array( "name" => "Body Typography",
-					"desc" => "Specify the font properties for your site's main body font. This will not effect the title WebFont.",
-					"id" => $shortname."_p_typography",
-					"std" => array('size' => '16','unit' => 'em','face' => 'verdana','style' => 'bold italic','color' => '#123456'),
-					"type" => "typography");*/
-
+					"type" => "color"); */
 
 $options[] = array( "name" => "Body Font",
 					"desc" => "",

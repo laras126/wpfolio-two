@@ -9,5 +9,6 @@ $h1size = $h1_text["size"]/16;
 ?>
 
 #wrapper {border: <?php echo $wpr_bdr["width"].'px '.$wpr_bdr["style"].' '.$wpr_bdr["size"]; ?>; background-color: <?php echo $wpr_bg_color; ?>}
+.menu a {background-color:<?php echo $wpr_bg_color; ?>;}
 body {background-color:<?php echo $body_bg_color.';font-family:'.$body_text; ?>;}
-#footer {background-color:<?php echo $ftr_bg_color; ?>;}
+.entry-title,textarea,input,#respond h3{font-family:<?php echo $body_text;?>;}

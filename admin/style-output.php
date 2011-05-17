@@ -7,10 +7,8 @@ $output = '';
 $wpr_bdr = get_option($shortname . '_wpr_border');
 $wpr_bg_color = get_option($shortname . '_wpr_bg_color');
 $body_bg_color = get_option($shortname . '_body_bg_color');
-$ftr_bg_color = get_option($shortname . '_ftr_bg_color');
 
 $body_text = get_option($shortname . '_body_text');
-//$h1_text = get_option($shortname . '_h1_typography');
 
 $p_text = get_option($shortname . '_p_typography'); 
 $h1_text = get_option($shortname . '_h1_typography'); 
@@ -27,12 +25,12 @@ require $wpf_coloroptions;
 // Echo Optional Styles
 echo $output;
 	
-	
+// Function to test options output
 function echo_test() {
 	$shortname = get_option('of_shortname'); 
 	$wpr_border = get_option($shortname . '_wpr_border');
 	print_r ($wpr_border);
 }	
-add_action('thematic_post', 'echo_test');
+//add_action('thematic_post', 'echo_test');
 
 ?>

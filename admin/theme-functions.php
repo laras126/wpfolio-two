@@ -169,6 +169,7 @@ function add_childtheme_logo() {
 		add_action('thematic_header','childtheme_logo', 3);
 	} else if (!empty($logo) && $show_title == 0) {
 		add_action('thematic_header','childtheme_logo', 3);
+		remove_action('thematic_header','thematic_blogdescription',5);
 	}
 }
 add_action('init','add_childtheme_logo');

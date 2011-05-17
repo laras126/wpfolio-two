@@ -38,16 +38,16 @@ function childtheme_override_category_loop(){
 					echo 'class="';
 					thematic_post_class();
 					echo '">';
-				} ?>
-				
-				<h4 class="thumb-title"><?php
-				the_title(); 
-				echo '</h4>'; 
+				}  
 				if ( (function_exists('has_post_thumbnail')) && (has_post_thumbnail()) ) {
   					the_post_thumbnail();
 				} else {
 					echo main_image();
 				} ?>
+				
+				<h4 class="thumb-title"><a href="<?php the_permalink();?>"><?php
+				the_title(); ?></a></h4>
+				
 			</div><!-- #post -->
 		</span>
 
