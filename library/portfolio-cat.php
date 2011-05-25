@@ -1,17 +1,8 @@
 <?php
 
-///////////////
-// PORTFOLIO //
-///////////////
-
-// Add portfolio body class to anything that isn't the blog	
-function portfolio_body_class($class) {
-	if ( !is_home() ) {
-		$class[] = 'portfolio';
-		return $class;
-	} 
-}
-add_filter('thematic_body_class','portfolio_body_class');	
+/////////////////////////////
+// PORTFOLIO CATEGORY LOOP //
+/////////////////////////////	
 
 // Filter page title - get rid of 'Category Archive:' text in title
 function cat_override_page_title(){
@@ -41,15 +32,13 @@ function childtheme_override_category_loop(){
 				}  
 				if ( (function_exists('has_post_thumbnail')) && (has_post_thumbnail()) ) {
   					the_post_thumbnail();
-				} else {
-					echo main_image();
-				} ?>
-				
-				<h4 class="thumb-title"><a href="<?php the_permalink();?>"><?php
-				the_title(); ?></a></h4>
+				} else { ?>
+				<a href="href="<?php the_permalink();?>""><img src="<?php get_post_thumbnail(); ?>" alt="<?php the_title(); ?>" class="attachment-post-thumbnail" width="150" height="150" />
+ 				<?php } ?>
+   				<h4 class="thumb-title"><?php the_title(); ?></h4></a>
 				
 			</div><!-- #post -->
-		</span>
+		</span> <!-- .thumb-list -->
 
 	<?php 
 		thematic_belowpost();

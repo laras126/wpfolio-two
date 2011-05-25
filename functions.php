@@ -1,12 +1,9 @@
 <?php
 
 //
-//  WPFolio:
+//  WPFolio 3000:
 //  Custom Child Theme Functions
 //
-
-// More ideas can be found on "A Guide To Customizing The Thematic Theme Framework" 
-// http://themeshaper.com/thematic-for-wordpress/guide-customizing-thematic-theme-framework/
 
 // Adds a home link to your menu
 // http://codex.wordpress.org/Template_Tags/wp_page_menu
@@ -33,9 +30,20 @@ define('THEMATIC_COMPATIBLE_COMMENT_FORM', true);
 define('THEMATIC_COMPATIBLE_FEEDLINKS', true);
 
 
-// Require functions located in /library
+// Require files in library/
 require_once("library/widgets.php");
-require_once("library/portfolio.php");
+require_once("library/images.php");
+require_once("library/portfolio-cat.php");
+require_once("library/portfolio-post.php");
+
+// Will require files with a loop - not working yet
+/*$dir = 'library';
+$files = glob($dir . '/*.php');
+
+foreach ($files as $file) {
+    require_once($file);   
+}*/
+
 //require_once("library/page-margins.php");
 
 
@@ -50,14 +58,6 @@ function override_content() {
 }
 //add_filter('thematic_content', 'override_content');
 
-// Try to fix attachment bug, no dice
-function filter_attachment_link($link) {
-	global $post;
-	$link = "$post->ID, true";
-	
-	return $link;
-}
-//add_filter('the_attachment_link','filter_attachment_link');
 
 // Shortcode to add wide margins to a post page - works as is, but is applied in post lists
 
@@ -65,6 +65,20 @@ function wide_margins_shortcode ($atts, $content = null) {
 	return '<div class="widemargins">' . do_shortcode($content) . '</div>';
 }
 add_shortcode('margin', 'wide_margins_shortcode');
+
+////////////////////
+// ADD BODY CLASS //
+////////////////////
+
+// Add portfolio body class to anything that isn't the blog	
+function portfolio_body_class($class) {
+	if ( !is_home() ) {
+		$class[] = 'portfolio';
+		return $class;
+	} 
+}
+add_filter('thematic_body_class','portfolio_body_class');
+
 
 /////////////
 // SIDEBAR //
@@ -91,115 +105,6 @@ function remove_sidebar() {
 }
 add_filter('thematic_sidebar', 'remove_sidebar');
 
-
-////////////
-// IMAGES //
-////////////
-
-/*----- CUSTOM HEADER IMAGE -----*/
-// Disabled - this is covered in the Options Panel.
-
-define('NO_HEADER_TEXT', true );
-define('HEADER_TEXTCOLOR', '');
-define('HEADER_IMAGE', '%s/images/default_header.jpg'); // %s is the template dir uri
-define('HEADER_IMAGE_WIDTH', 775); // use width and height appropriate for your theme
-define('HEADER_IMAGE_HEIGHT', 200);
-
-// gets included in the site header
-function header_style() {
-    ?><style type="text/css">
-        #header {
-            background: url(<?php header_image(); ?>);
-        }
-    </style><?php
-}
-
-// gets included in the admin header
-function admin_header_style() {
-	?><style type="text/css">
-		#headimg {
-			width: <?php echo HEADER_IMAGE_WIDTH; ?>px;
-			height: <?php echo HEADER_IMAGE_HEIGHT; ?>px;
-		}
-	</style><?php
-}
-
-add_custom_image_header('header_style', 'admin_header_style'); 
-
-/*----- GET FEATURED IMAGE ----*/
-// Thumbnail Function - this creates a default featured image if one is not specified
-/*function get_thumb ($post_ID){
-    $thumbargs = array(
-    'post_type' => 'attachment',
-    'numberposts' => 1,
-    'post_status' => null,
-    'post_parent' => $post_ID
-    );
-    $thumb = get_posts($thumbargs);
-    if ($thumb) {
-        return wp_get_attachment_image($thumb[0]->ID);
-    }
-} 
-
-add_action('thematic_content', 'check_thumb');
-function check_thumb() {		
-	global $post;
-			
-	if( !has_post_thumbnail() ) {		
-		echo get_thumb($post->ID); 
-	}
-}*/
-
-
-// Add support for post thumbnails of 150px square
-add_theme_support('post-thumbnails');
-set_post_thumbnail_size( 150, 150, true );
-
-//function to call first uploaded image in functions file
-function main_image() {
-	global $post;
-
-	$files = get_children('post_parent='.get_the_ID().'&post_type=attachment
-&post_mime_type=image&order=desc');
-	if($files) :
-		$keys = array_reverse(array_keys($files));
-	    $j=0;
-	    $num = $keys[$j];
-	    $image=wp_get_attachment_image($num, array(150,150), false);
-	    $imagepieces = explode('"', $image);
-	    $imagepath = $imagepieces[1];
-	    $main=wp_get_attachment_url($num);
-			$template=get_template_directory();
-			$the_title=get_the_title();
-			$the_link=get_permalink();
-			// can add width and height 150 but doesn't keep proportions. don't know why set_post_thumbnail_size isn't working
-	    echo "<div class='the-thumb'><a href='$the_link'><img src='$main' alt='$the_title' class='attachment-post-thumbnail' /></a></div>";
-	endif;
-}
-
-// Make post thumbnail a link to post
-add_filter( 'post_thumbnail_html', 'my_post_image_html', 10, 3 );
-function my_post_image_html( $html, $post_id, $post_image_id ) {
-	$html = '<a href="' . get_permalink( $post_id ) . '" title="' . esc_attr( get_post_field( 'post_title', $post_id ) ) . '">' . $html . '</a>';
-	return $html;
-}
-
-// END - Thumbnail Function
-
-
-//------Stuff that doesn't work but is necessary from 1.7------//
-
-// This sets the Large image size to 900px
-if ( ! isset( $content_width ) ) 
-	$content_width = 900; 
-
-// Remove inline styles on gallery shortcode
-function wpfolio_remove_gallery_css( $css ) {
-	return preg_replace( "#<style type='text/css'>(.*?)</style>#s", '', $css );
-	}
-//add_filter( 'gallery_style', 'wpfolio_remove_gallery_css' );
-
-// END - Remove inline styles on gallery shortcode
 
 
 //////////////////////////////////////
@@ -233,6 +138,7 @@ require_once (OF_FILEPATH . '/admin/theme-functions.php'); 	// Theme actions bas
 ///////////////////////
 //// POST FORMATS /////
 ///////////////////////
+
 // Thanks to this thread:
 // http://wordpress.stackexchange.com/questions/12420/post-format-selector-in-thematic-child-theme-post-class
 

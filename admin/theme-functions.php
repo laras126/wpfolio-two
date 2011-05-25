@@ -174,6 +174,7 @@ function add_childtheme_logo() {
 }
 add_action('init','add_childtheme_logo');
 
+
 // Displays the logo
 function childtheme_logo() {
 	$shortname =  get_option('of_shortname');

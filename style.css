@@ -49,6 +49,10 @@ a {
 	text-decoration: none;
 }
 
+a:hover {
+	color: #999;
+}
+
 #header {
 	margin-top: 23px;
 }
@@ -57,7 +61,9 @@ a {
 	font-size: 4em;
 	margin-bottom: 7px;
 }
-
+#blog-title a:hover { 
+	color: #999;
+}
 
 #wrapper {
 	width:960px;
@@ -75,7 +81,7 @@ a {
 
 #access {
 	padding-top: 4px;
-	padding-left: 
+	padding-right: 20px; 
 }
 
 #main{
@@ -88,16 +94,6 @@ a {
 
 li.current-menu-item {
 	text-transform: uppercase;
-}
-
-
-/* @end */
-
-#artwork-meta {
-	width: 500px;
-	font-size: 12px;
-	line-height: 14px;
-	margin-bottom: 15px;
 }
 
 #siteinfo {
@@ -122,7 +118,27 @@ h2.entry-title {
 .entry-content {
 	padding-top: 0px;
 }
-/* Remove some borders, hide some stuff */
+
+/* @end */
+
+#artwork-meta {
+	width: 500px;
+	font-size: 12px;
+	line-height: 14px;
+	margin-bottom: 15px;
+}
+
+
+/* @group nav */
+
+.navigation a {
+	font-weight: bold;
+	font-style: normal;
+}
+
+.navigation a:hover {
+	color:#999;
+}
 
 #access, .menu a, a:hover, a:focus, ul, li, .current_page_item {
 	display: compact;
@@ -140,6 +156,8 @@ h2.entry-title {
 	box-shadow: .5px .5px 2px #cccccc;
 }
 
+/* @end */
+
 /* @group news */
 
 /* @end */
@@ -150,7 +168,7 @@ h2.entry-title {
 	width: 100%;
 }
 .portfolio #content {
-	width:910px;
+	width:940px;
 }
 
 /* experiment */
@@ -161,9 +179,24 @@ h2.entry-title {
 	overflow: hidden;
 }
 
-.portfolio .the-thumb img{
-	
+/*.portfolio .the-thumb img{
+	border: .5px solid #cccccc;
+	margin:0 30px 0 30px;
+	padding: 3px;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=100);
+    -moz-opacity:1;
+    -khtml-opacity: 1;
+    opacity: 1;	
 }
+
+.portfolio .the-thumb img:hover {
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    filter: alpha(opacity=50);
+    -moz-opacity:0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.5;
+}*/
 
 span.thumb-list {
 	width: 220px;
@@ -182,11 +215,11 @@ h4.thumb-title {
 
 h4.thumb-title a {
 	text-decoration: none;
-	color: inherit;
+	color: black;	
 }
 
 h4.thumb-title a:hover {
-	color: #FF4B33;	
+	color: #999;	
 }
 
 img.attachment-post-thumbnail {
@@ -201,11 +234,11 @@ img.attachment-post-thumbnail {
 }
 
 img.attachment-post-thumbnail:hover {
-	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-    filter: alpha(opacity=50);
-    -moz-opacity:0.5;
-    -khtml-opacity: 0.5;
-    opacity: 0.5;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+    filter: alpha(opacity=70);
+    -moz-opacity:0.7;
+    -khtml-opacity: 0.7;
+    opacity: 0.7;
 }
 
 /* @end */
