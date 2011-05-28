@@ -100,14 +100,6 @@ li.current-menu-item {
 	border: none;
 } 
 
-h1.entry-title {
-	text-align: center;
-	font-weight: normal;
-	font-size: 1.2em;
-	text-transform: uppercase;
-	padding-bottom: 25px;
-}
-
 h2.entry-title {
 	font-weight: bold;
 	font-size: 1.3em;
@@ -160,6 +152,12 @@ h2.entry-title {
 
 /* @group news */
 
+.news h1.entry-title {
+	font-size: 1.7em;
+	margin-bottom: 25px;
+	border-bottom: .5px solid #cccccc;
+}
+
 /* @end */
 
 /* @group portfolio */
@@ -167,36 +165,22 @@ h2.entry-title {
 .portfolio #container {
 	width: 100%;
 }
+
 .portfolio #content {
 	width:940px;
 }
 
-/* experiment */
-
-.portfolio .the-thumb{
-	width: 150px;
-	height: 150px;
-	overflow: hidden;
+.portfolio h1.entry-title {
+	text-align: center;
+	font-weight: normal;
+	font-size: 1.2em;
+	text-transform: uppercase;
+	padding-bottom: 25px;
 }
 
-/*.portfolio .the-thumb img{
-	border: .5px solid #cccccc;
-	margin:0 30px 0 30px;
-	padding: 3px;
-	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    filter: alpha(opacity=100);
-    -moz-opacity:1;
-    -khtml-opacity: 1;
-    opacity: 1;	
-}
+/* @end */
 
-.portfolio .the-thumb img:hover {
-	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-    filter: alpha(opacity=50);
-    -moz-opacity:0.5;
-    -khtml-opacity: 0.5;
-    opacity: 0.5;
-}*/
+/* @group category-archive */
 
 span.thumb-list {
 	width: 220px;
@@ -211,15 +195,6 @@ h4.thumb-title {
 	line-height: 1.1em;
 	text-align: center;
 	padding-top: 8px;
-}
-
-h4.thumb-title a {
-	text-decoration: none;
-	color: black;	
-}
-
-h4.thumb-title a:hover {
-	color: #999;	
 }
 
 img.attachment-post-thumbnail {

@@ -32,9 +32,9 @@ define('THEMATIC_COMPATIBLE_FEEDLINKS', true);
 
 // Require files in library/
 require_once("library/widgets.php");
-require_once("library/images.php");
+require_once("library/thumbs.php");
 require_once("library/portfolio-cat.php");
-require_once("library/portfolio-post.php");
+require_once("library/prevnext.php");
 
 // Will require files with a loop - not working yet
 /*$dir = 'library';
@@ -45,6 +45,7 @@ foreach ($files as $file) {
 }*/
 
 //require_once("library/page-margins.php");
+
 
 
 ////////////////////
@@ -66,18 +67,39 @@ function wide_margins_shortcode ($atts, $content = null) {
 }
 add_shortcode('margin', 'wide_margins_shortcode');
 
-////////////////////
-// ADD BODY CLASS //
-////////////////////
+
+
+//////////////////////////////
+// ADD PORTFOLIO BODY CLASS //
+//////////////////////////////
 
 // Add portfolio body class to anything that isn't the blog	
 function portfolio_body_class($class) {
-	if ( !is_home() ) {
-		$class[] = 'portfolio';
+
+	global $post;
+	$shortname = get_option('of_shortname');
+	$cat_option = get_option($shortname.'_cats_in_blog');
+	$cat = get_cat_ID($cat_option);
+	
+	if ( in_category($cat_option) || is_home() ) {
+		$class[] = 'news';
 		return $class;
-	} 
+	} else {
+		$class[] = 'portfolio';
+		return $class;	
+	}
 }
+
 add_filter('thematic_body_class','portfolio_body_class');
+
+
+function echotest() {
+	$shortname = get_option('of_shortname');
+	$cat_option = get_option($shortname.'_cats_in_blog');
+	$cat = get_cat_ID($cat_option);
+	print_r($cat_option);
+}
+add_action('thematic_belowheader', 'echotest');
 
 
 /////////////
@@ -91,18 +113,19 @@ function remove_sidebar() {
 	$cat_option = get_option($shortname.'_cats_in_blog');
 	$cat = get_cat_ID($cat_option);
 	
-	if ($cat != '') {
-		if ( is_category($cat) ) {
+	if ( $cat_option != '' ) {
+		if ( in_category($cat_option) ) {
 			return TRUE;
 		} else {
 			return FALSE;
 		}
-	} else if ( !is_home()){
+	} else if ( !is_home() ) {
 		return FALSE;
 	} else {
 		return TRUE;
 	}
 }
+
 add_filter('thematic_sidebar', 'remove_sidebar');
 
 
@@ -228,6 +251,57 @@ register_taxonomy('medium', 'post', array(
 	'show_in_nav_menus' => true,));
 } 
 add_action('init', 'wpfolio_create_taxonomies', 0); */
+
+
+////////////
+// IMAGES //
+////////////
+
+/*----- CUSTOM HEADER IMAGE -----*/
+// Disabled - this is covered in the Options Panel.
+
+define('NO_HEADER_TEXT', true );
+define('HEADER_TEXTCOLOR', '');
+define('HEADER_IMAGE', '%s/images/default_header.jpg'); // %s is the template dir uri
+define('HEADER_IMAGE_WIDTH', 775); // use width and height appropriate for your theme
+define('HEADER_IMAGE_HEIGHT', 200);
+
+// gets included in the site header
+function header_style() {
+    ?><style type="text/css">
+        #header {
+            background: url(<?php header_image(); ?>);
+        }
+    </style><?php
+}
+
+// gets included in the admin header
+function admin_header_style() {
+	?><style type="text/css">
+		#headimg {
+			width: <?php echo HEADER_IMAGE_WIDTH; ?>px;
+			height: <?php echo HEADER_IMAGE_HEIGHT; ?>px;
+		}
+	</style><?php
+}
+
+add_custom_image_header('header_style', 'admin_header_style'); 
+// END - Custom Header
+
+//------ Stuff that doesn't work but is necessary from 1.7? ------//
+
+// This sets the Large image size to 900px
+if ( ! isset( $content_width ) ) 
+	$content_width = 900; 
+
+// Remove inline styles on gallery shortcode
+function wpfolio_remove_gallery_css( $css ) {
+	return preg_replace( "#<style type='text/css'>(.*?)</style>#s", '', $css );
+	}
+//add_filter( 'gallery_style', 'wpfolio_remove_gallery_css' );
+
+// END - Remove inline styles on gallery shortcode
+
 
 
 /////////////////////
