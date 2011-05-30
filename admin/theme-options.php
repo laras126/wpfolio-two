@@ -136,9 +136,8 @@ $options[] = array( "name" => "Custom Favicon",
     
     
 //*-------------* STYLE OPTIONS *-------------*//
-// Options for Header and Body background colors, Body Font, Text field for short custom CSS
-// About Body Font: should use type => "typography", but is just an array right now 
-// Commented out: Theme Stylesheet, Header Text Color (no rule for this in wpf-styles.php)
+// Options for Header and Body background colors, Body Font, Text field for short custom CSS 
+// Commented out: Theme Stylesheet
 // Note: to use Theme Stylesheet, uncomment $alt_stylesheet_path...; lines 45-56
 
 $options[] = array( "name" => "Styling Options",
@@ -152,26 +151,13 @@ $options[] = array( "name" => "Styling Options",
 					"options" => $alt_stylesheets); */
 										
 $options[] = array( "name" => "Title WebFont",
-					"desc" => "Choose a font from the <a href='http://google.com/webfonts'>Google WebFont Directory</a> and type its name in the text field. This font will be used for your site title.",
+					"desc" => "Select a font from the <a href='http://google.com/webfonts'>Google WebFont Directory</a> for your site's and type its name in the text field. This font will be used for your site title.",
 					"id" => $shortname."_google_hdr_font",
 					"std" => "Lobster",
 					"type" => "text");
-
-/*$options[] = array( "name" => "Title Color",
-					"desc" => "Select a color for your site title.",
-					"id" => $shortname."_title_color",
-					"std" => array('size' => '16','unit' => 'em','face' => 'verdana','style' => 'bold italic','color' => '#123456'),
-					"type" => 'color');
-									
-$options[] = array( "name" => "Title Size",
-					"desc" => "Select the text size for your site's title.",
-					"id" => $shortname."_title_size",
-					"std" => '',
-					"type" => 'select',
-					"options" => $font_sizes); */
 											
 $options[] = array( "name" => "",
-					"desc" => "Select a font to be used if the WebFont does not load. If you'd rather use a regular font, select it here and leave the WebFont field blank.",
+					"desc" => "Select a font to be used while the WebFont loads. This font will also be used by default if the WebFont does not load. If you'd rather not use a WebFont, select it here and leave the WebFont field blank.",
 					"id" => $shortname."_default_hdr_font",
 					"std" => "Arial",
 		            "type" => "select",
@@ -187,12 +173,6 @@ $options[] = array( "name" => "",
 			            "Verdana, Geneva, Tahoma, sans-serif"  
 			            )); 
 
-$options[] = array( "name" => "Container Border",
-					"desc" => "Add a border around the content of your site. Choose 0px for no border.",
-					"id" => $shortname."_wpr_border",
-					"std" => array('width' => '0','style' => 'dotted','color' => '#444444'), 
-					"type" => "border");
-					
 $options[] = array( "name" => "Container Color",
 					"desc" => "",
 					"id" => $shortname."_wpr_bg_color",
@@ -204,19 +184,7 @@ $options[] = array( "name" => "Background Color",
 					"id" => $shortname."_body_bg_color",
 					"std" => "#FFFFFF",
 					"type" => "color");		
-
-$options[] = array( "name" => "Background Texture",
-					"desc" => "If you'd like to use a texture or tile background instead of a color, upload it here.",
-					"id" => $shortname."_texture",
-					"std" => "",
-					"type" => "upload"); 
 					
-/*$options[] = array( "name" => "Footer Background Color",
-					"desc" => "",
-					"id" => $shortname."_ftr_bg_color",
-					"std" => "#FFFFFF",
-					"type" => "color"); */
-
 $options[] = array( "name" => "Body Font",
 					"desc" => "",
 		            "id" => $shortname."_body_text",
@@ -240,11 +208,43 @@ $options[] = array( "name" => "Custom CSS",
                     "std" => "",
                     "type" => "textarea");
                     
+//*---------------* LICENSING *---------------*//
+// Display name and licensing in footer.
+
+$options[] = array( "name" => "Licensing",
+                    "type" => "heading");
+
+$options[] = array( "name" => "License",
+					"desc" => "Select your work's licensing to be displayed below the footer widget areas.",
+		            "id" => $shortname."_li_type",
+		            "type" => "select",
+		            "std" => "CC Attribution",
+		            "options" => array(
+						"CC Attribution",
+						"CC Attribution-Share Alike", 
+						"CC Attribution-No Derivative Works",
+						"CC Attribution-Noncommercial",
+						"CC Attribution-Noncommercial-Share Alike",
+						"CC Attribution-Noncommercial-No Derivative",
+						"Standard Copyright (not recommended)" )); 
+						
+$options[] = array( "name" => "",
+					"desc" => "Display the license symbol?",
+		            "id" => $shortname."_li_image",
+		            "type" => "radio",
+		            "std" => "",
+		            "options" => array( "Yes", "No" ));
+
+$options[] = array( "name" => "Name and Date",
+					"desc" => "Display the license symbol?",
+		            "id" => $shortname."_li_name",
+		            "type" => "text",
+		            "std" => "");
                     
+
 //*-------------* FOOTER OPTIONS *-------------*//
-// None of these work. I think will need footer-options.php which is here from TwentyTen- started working on it, and will contine later
             
-$options[] = array( "name" => "Footer Options",
+/*$options[] = array( "name" => "Footer Options",
 					"type" => "heading");      
 
 $options[] = array( "name" => "Enable Custom Footer (Left)",
@@ -269,7 +269,7 @@ $options[] = array( "name" => "Custom Text (Right)",
 					"desc" => "Custom HTML and Text that will appear in the footer of your theme.",
 					"id" => $shortname."_footer_right_text",
 					"std" => "",
-					"type" => "textarea");
+					"type" => "textarea"); */
 
 //*-------------* WPFolio Community *-------------*//					
 // need to find some "type" that is static text or make one - working on this
@@ -319,7 +319,7 @@ $options[] = array( "name" => "WPFolio Community",
 //*-------------* EXAMPLE OPTIONS *-------------*//
 // Do nothing, visual examples
 					
-$options[] = array( "name" => "Example Options",
+/*$options[] = array( "name" => "Example Options",
 					"type" => "heading"); 	   
 	
 $options[] = array( "name" => "Typography",
@@ -410,7 +410,7 @@ $options[] = array( "name" => "Select a Category",
 					"std" => "Select a category:",
 					"type" => "select",
 					"options" => $of_categories); 
-
+*/
 update_option('of_template',$options); 					  
 update_option('of_themename',$themename);   
 update_option('of_shortname',$shortname);

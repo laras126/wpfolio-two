@@ -113,15 +113,7 @@ h2.entry-title {
 
 /* @end */
 
-#artwork-meta {
-	width: 500px;
-	font-size: 12px;
-	line-height: 14px;
-	margin-bottom: 15px;
-}
-
-
-/* @group nav */
+/* @group Nav */
 
 .navigation a {
 	font-weight: bold;
@@ -150,7 +142,7 @@ h2.entry-title {
 
 /* @end */
 
-/* @group news */
+/* @group News */
 
 .news h1.entry-title {
 	font-size: 1.7em;
@@ -158,9 +150,13 @@ h2.entry-title {
 	border-bottom: .5px solid #cccccc;
 }
 
+.news #content {
+	width: 550px;
+}
+
 /* @end */
 
-/* @group portfolio */
+/* @group Portfolio */
 
 .portfolio #container {
 	width: 100%;
@@ -180,7 +176,7 @@ h2.entry-title {
 
 /* @end */
 
-/* @group category-archive */
+/* @group Category-archive */
 
 span.thumb-list {
 	width: 220px;
@@ -246,20 +242,31 @@ margin: auto -135px;
 
 /* @group Widget areas */
 
-#index-bottom {
-	background-color: green;	
-}
-
 #primary, #secondary {
 	border: none;
 }
 
+.aside h3 {
+	font-size: 18px;
+}
+
 /* @end */
 
-/* @group comments */
+/* @group Misc */
 
-#comments {
-	margin:none;
+#artwork-meta {
+	width: 500px;
+	font-size: 12px;
+	line-height: 14px;
+	margin-bottom: 15px;
+}
+
+/* @end */
+
+/* @group Comments */
+
+.portfolio #comments {
+	margin-right: 318px;
 }
 
 #respond {

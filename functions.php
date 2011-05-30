@@ -1,7 +1,7 @@
 <?php
 
 //
-//  WPFolio 3000:
+//  WPFolio Extended:
 //  Custom Child Theme Functions
 //
 
@@ -44,34 +44,11 @@ foreach ($files as $file) {
     require_once($file);   
 }*/
 
-//require_once("library/page-margins.php");
 
 
-
-////////////////////
-// FILTER CONTENT //
-////////////////////
-
-function override_content() {
-	if ( is_page() ){
-		add_filter('thematic_content', 'add_wide_margins'); 
-	} 
-}
-//add_filter('thematic_content', 'override_content');
-
-
-// Shortcode to add wide margins to a post page - works as is, but is applied in post lists
-
-function wide_margins_shortcode ($atts, $content = null) {
-	return '<div class="widemargins">' . do_shortcode($content) . '</div>';
-}
-add_shortcode('margin', 'wide_margins_shortcode');
-
-
-
-//////////////////////////////
-// ADD PORTFOLIO BODY CLASS //
-//////////////////////////////
+/////////////////////////////////
+// PORTFOLIO/NEWS BODY CLASSES //
+/////////////////////////////////
 
 // Add portfolio body class to anything that isn't the blog	
 function portfolio_body_class($class) {
@@ -91,15 +68,6 @@ function portfolio_body_class($class) {
 }
 
 add_filter('thematic_body_class','portfolio_body_class');
-
-
-function echotest() {
-	$shortname = get_option('of_shortname');
-	$cat_option = get_option($shortname.'_cats_in_blog');
-	$cat = get_cat_ID($cat_option);
-	print_r($cat_option);
-}
-add_action('thematic_belowheader', 'echotest');
 
 
 /////////////
@@ -129,7 +97,16 @@ function remove_sidebar() {
 add_filter('thematic_sidebar', 'remove_sidebar');
 
 
-
+if ( function_exists('register_sidebar') )
+	register_sidebar(array(
+		'name' => 'Footer Center',
+		'id' => 'footer_center',
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget' => '</div>',
+		'before_title' => '',
+		'after_title' => '',
+	));
+	
 //////////////////////////////////////
 //// OPTIONS FRAMEWORK FUNCTIONS /////
 //////////////////////////////////////
@@ -153,8 +130,10 @@ require_once (OF_FILEPATH . '/admin/admin-interface.php');		// Admin Interfaces 
 
 /* These files build out the theme specific options and associated functions. */
 
-require_once (OF_FILEPATH . '/admin/theme-options.php'); 		// Options panel settings and custom settings
-require_once (OF_FILEPATH . '/admin/theme-functions.php'); 	// Theme actions based on options settings
+// Options panel settings and custom settings
+require_once (OF_FILEPATH . '/admin/theme-options.php'); 
+// Theme actions based on options settings		
+require_once (OF_FILEPATH . '/admin/theme-functions.php');
 
 
 
@@ -304,6 +283,20 @@ function wpfolio_remove_gallery_css( $css ) {
 
 
 
+////////////////
+// SHORTCODES //
+////////////////
+
+
+// Shortcode to add wide margins to a post page - works as is, but is applied in post lists
+
+function wide_margins_shortcode ($atts, $content = null) {
+	return '<div class="widemargins">' . do_shortcode($content) . '</div>';
+} 
+add_shortcode('margin', 'wide_margins_shortcode');
+
+
+
 /////////////////////
 // ADMIN INTERFACE //
 /////////////////////
@@ -355,9 +348,21 @@ function add_custom_dashboard_widget() {
 add_action('wp_dashboard_setup', 'add_custom_dashboard_widget');
 
 
+
 ///////////////////
 // DEV FUNCTIONS //
 ///////////////////
+
+
+// Test the options output. This is set to print the Blog Category - ncomment add_action to use and change variables accordingly to print different options.
+function echotest() {
+	$shortname = get_option('of_shortname');
+	$cat_option = get_option($shortname.'_cats_in_blog');
+	$cat = get_cat_ID($cat_option);
+	print_r($cat_option);
+}
+//add_action('thematic_belowheader', 'echotest');
+
 
 // Shortcode to add lorem ipsum 
 function add_lorem ($atts, $content = null) {

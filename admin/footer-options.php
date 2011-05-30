@@ -44,7 +44,6 @@ function add_footer_options(){
                 <?php do_action( 'twentyten_credits' ); ?>
 				<a href="<?php echo esc_url( __('http://wordpress.org/', 'twentyten') ); ?>"
 						title="<?php esc_attr_e('Semantic Personal Publishing Platform', 'twentyten'); ?>" rel="generator">
-					<?php printf( __('Proudly powered by %s.', 'twentyten'), 'WordPress' ); ?>
 				</a>
                 </div><!-- #site-generator -->
                 <?php } ?>
