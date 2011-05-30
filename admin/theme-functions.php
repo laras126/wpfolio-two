@@ -188,6 +188,43 @@ function childtheme_logo() {
 <?php }
 
 
+/*-----------------------------------------------------------------------------------*/
+/* Show name, date, and licensing in footer */
+/*-----------------------------------------------------------------------------------*/
+
+// Remove site info
+//function childtheme_override_siteinfo() {}
+function childtheme_override_siteinfo(){}
+function childtheme_override_siteinfoopen(){}
+function childtheme_override_siteinfoclose(){}
+
+function license_info() {?>
+
+	<div id=siteinfo><?php
+	
+	$shortname =  get_option('of_shortname');
+	$li_type = get_option($shortname .'_li_type');
+	$li_symbol = get_option($shortname .'_li_symbol');
+	$li_name = get_option($shortname .'_li_name');
+	$li_date = get_option($shortname .'_li_date');
+	$li_optxt = get_option($shortname .'_li_optional_text');
+	$li_align = get_option($shortname .'_li_alignment');
+	
+	if ( $li_type != $li_tmp ) {
+		echo "asdasdsa"; 
+	} ?>
+	
+	</div> <!-- #siteinfo --> <?php
+	
+}
+add_filter('thematic_footer','license_info');
+
+function license_test() {
+	$shortname =  get_option('of_shortname');
+	$li_type = get_option($shortname .'_li_type');
+	echo $li_type;
+}
+
 
 /*-----------------------------------------------------------------------------------*/
 /* Show analytics code in footer */

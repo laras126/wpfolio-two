@@ -35,6 +35,7 @@ require_once("library/widgets.php");
 require_once("library/thumbs.php");
 require_once("library/portfolio-cat.php");
 require_once("library/prevnext.php");
+require_once("library/siteinfo.php");
 
 // Will require files with a loop - not working yet
 /*$dir = 'library';

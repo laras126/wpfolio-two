@@ -26,21 +26,38 @@ $of_categories_obj = get_categories('hide_empty=0');
 foreach ($of_categories_obj as $of_cat) {
     $of_categories[$of_cat->cat_ID] = $of_cat->cat_name;}
 $categories_tmp = array_unshift($of_categories, "Select a Category:");  
-//Use unshift_array with a dropdown - makes the first selection a description not acknowledged in array
-
        
 //Access the WordPress Pages via an Array
 $of_pages = array();
 $of_pages_obj = get_pages('sort_column=post_parent,menu_order');    
 foreach ($of_pages_obj as $of_page) {
     $of_pages[$of_page->ID] = $of_page->post_name; }
-//$of_pages_tmp = array_unshift($of_pages, "Select a page:");       
-//See above comment in Access Categories
+$of_pages_tmp = array_unshift($of_pages, "Select a page:");       
 
 
-// Font sizes array
+// Licensing arrays
+$li_choices = array(	"CC Attribution",
+						"CC Attribution-Share Alike", 
+						"CC Attribution-No Derivative Works",
+						"CC Attribution-Noncommercial",
+						"CC Attribution-Noncommercial-Share Alike",
+						"CC Attribution-Noncommercial-No Derivative",
+						"Standard Copyright (not recommended)" );
+
+$li_tmp = array_unshift($li_choices, "Select a License:"); 
+
+// Font arrays
 $font_sizes = array(16, 24, 32, 64, 72);
-
+// Fonts
+$fonts = array(	"Arial, Helvetica Neue, Helvetica, sans-serif", 
+				"Courier New, Courier, monospace",
+			    "Georgia, Palatino, Palatino Linotype, Times, Times New Roman, serif",
+			    "Gill Sans, Calibri, Trebuchet MS, sans-serif", 
+			    "Helvetica Neue, Arial, Helvetica, sans-serif", 
+			    "Lucida Sans, Lucida Grande, Lucida Sans Unicode, sans-serif", 
+			    "Palatino, Palatino Linotype, Georgia, Times, Times New Roman, serif", 
+			    "Times, Times New Roman, Georgia, serif", 
+			    "Verdana, Geneva, Tahoma, sans-serif"  );
 
 // Image Alignment radio box
 $options_thumb_align = array("alignleft" => "Left","alignright" => "Right","aligncenter" => "Center"); 
@@ -48,11 +65,6 @@ $options_thumb_align = array("alignleft" => "Left","alignright" => "Right","alig
 
 // Image Links to Options
 $options_image_link_to = array("image" => "The Image","post" => "The Post"); 
-
-
-// Testing arrays, for Example Options
-$options_select = array("one","two","three","four","five"); 
-$options_radio = array("one" => "One","two" => "Two","three" => "Three","four" => "Four","five" => "Five"); 
 
 
 // Stylesheets Reader, see Theme Stylesheet in Styling Options 
@@ -77,7 +89,7 @@ $all_uploads_path = $uploads_arr['path'];
 $all_uploads = get_option('of_uploads');
 $other_entries = array("Select a number:","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19");
 $body_repeat = array("no-repeat","repeat-x","repeat-y","repeat");
-$body_pos = array("top left","top center","top right","center left","center center","center right","bottom left","bottom center","bottom right");
+$body_pos = array("top left","top center","top right","center left","center center","center right","bottom left","bottom center","bottom right"); 
 
 // Set the Options Array
 $options = array();
@@ -190,17 +202,7 @@ $options[] = array( "name" => "Body Font",
 		            "id" => $shortname."_body_text",
 		            "type" => "select",
 		            "std" => "Helvetica",
-		            "options" => array(
-			            "Arial, Helvetica Neue, Helvetica, sans-serif", 
-			            "Courier New, Courier, monospace",
-			            "Georgia, Palatino, Palatino Linotype, Times, Times New Roman, serif",
-			            "Gill Sans, Calibri, Trebuchet MS, sans-serif", 
-			            "Helvetica Neue, Arial, Helvetica, sans-serif", 
-			            "Lucida Sans, Lucida Grande, Lucida Sans Unicode, sans-serif", 
-			            "Palatino, Palatino Linotype, Georgia, Times, Times New Roman, serif", 
-			            "Times, Times New Roman, Georgia, serif", 
-			            "Verdana, Geneva, Tahoma, sans-serif"  
-		            )); 
+		            "options" => $fonts ); 
 														
 $options[] = array( "name" => "Custom CSS",
                     "desc" => "Quickly add some CSS to your theme by adding it to this block.",
@@ -215,32 +217,44 @@ $options[] = array( "name" => "Licensing",
                     "type" => "heading");
 
 $options[] = array( "name" => "License",
-					"desc" => "Select your work's licensing to be displayed below the footer widget areas.",
+					"desc" => "Select your work's licensing to be displayed below the footer widget areas. <a href='http://creativecommons.org/choose/'> Use Creative Commons tools to choose license.</a>",
 		            "id" => $shortname."_li_type",
 		            "type" => "select",
-		            "std" => "CC Attribution",
-		            "options" => array(
-						"CC Attribution",
-						"CC Attribution-Share Alike", 
-						"CC Attribution-No Derivative Works",
-						"CC Attribution-Noncommercial",
-						"CC Attribution-Noncommercial-Share Alike",
-						"CC Attribution-Noncommercial-No Derivative",
-						"Standard Copyright (not recommended)" )); 
+		            "std" => $li_tmp,
+		            "options" => $li_choices ); 
 						
 $options[] = array( "name" => "",
-					"desc" => "Display the license symbol?",
-		            "id" => $shortname."_li_image",
-		            "type" => "radio",
-		            "std" => "",
-		            "options" => array( "Yes", "No" ));
+					"desc" => "Display license symbol?",
+					"id" => $shortname."_li_symbol",
+					"std" => "1",
+					"type" => "radio",
+					"options" => array("Yes","No"));
 
-$options[] = array( "name" => "Name and Date",
-					"desc" => "Display the license symbol?",
+$options[] = array( "name" => "Name, Date, Optional Text",
+					"desc" => "Enter your name here.",
 		            "id" => $shortname."_li_name",
 		            "type" => "text",
 		            "std" => "");
                     
+$options[] = array( "name" => "",
+					"desc" => "Type the first year your artwork was displayed.",
+		            "id" => $shortname."_li_date",
+		            "type" => "text",
+		            "std" => "");
+		            
+$options[] = array( "name" => "",
+					"desc" => "Text following your name and date.",
+		            "id" => $shortname."_li_optional_text",
+		            "type" => "text",
+		            "std" => "unless otherwise specified");
+
+$options[] = array( "name" => "Alignment",
+					"desc" => "Align the license text on the right, left, or center of the footer.",
+		            "id" => $shortname."_li_alignment",
+		            "type" => "radio",
+		            "std" => 0,
+		            "options" => array("Right","Left","Center"));
+
 
 //*-------------* FOOTER OPTIONS *-------------*//
             
