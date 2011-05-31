@@ -32,19 +32,17 @@ $of_pages = array();
 $of_pages_obj = get_pages('sort_column=post_parent,menu_order');    
 foreach ($of_pages_obj as $of_page) {
     $of_pages[$of_page->ID] = $of_page->post_name; }
-$of_pages_tmp = array_unshift($of_pages, "Select a page:");       
+$of_pages_tmp = array_unshift($of_pages, "Select a Page:");       
 
 
-// Licensing arrays
-$li_choices = array(	"CC Attribution",
-						"CC Attribution-Share Alike", 
-						"CC Attribution-No Derivative Works",
-						"CC Attribution-Noncommercial",
-						"CC Attribution-Noncommercial-Share Alike",
-						"CC Attribution-Noncommercial-No Derivative",
-						"Standard Copyright (not recommended)" );
-
-$li_tmp = array_unshift($li_choices, "Select a License:"); 
+$li_choices = array("Select a License:",
+					"CC Attribution",
+					"CC Attribution-Share Alike", 
+					"CC Attribution-No Derivative Works",
+					"CC Attribution-Noncommercial",
+					"CC Attribution-Noncommercial-Share Alike",
+					"CC Attribution-Noncommercial-No Derivative",
+					"Standard Copyright Symbol" );
 
 // Font arrays
 $font_sizes = array(16, 24, 32, 64, 72);
@@ -58,9 +56,6 @@ $fonts = array(	"Arial, Helvetica Neue, Helvetica, sans-serif",
 			    "Palatino, Palatino Linotype, Georgia, Times, Times New Roman, serif", 
 			    "Times, Times New Roman, Georgia, serif", 
 			    "Verdana, Geneva, Tahoma, sans-serif"  );
-
-// Image Alignment radio box
-$options_thumb_align = array("alignleft" => "Left","alignright" => "Right","aligncenter" => "Center"); 
 
 
 // Image Links to Options
@@ -210,51 +205,65 @@ $options[] = array( "name" => "Custom CSS",
                     "std" => "",
                     "type" => "textarea");
                     
-//*---------------* LICENSING *---------------*//
+//*---------------* LICENSING & CREDITS *---------------*//
 // Display name and licensing in footer.
 
-$options[] = array( "name" => "Licensing",
+$options[] = array( "name" => "Licensing and Credits",
                     "type" => "heading");
 
 $options[] = array( "name" => "License",
 					"desc" => "Select your work's licensing to be displayed below the footer widget areas. <a href='http://creativecommons.org/choose/'> Use Creative Commons tools to choose license.</a>",
 		            "id" => $shortname."_li_type",
 		            "type" => "select",
-		            "std" => $li_tmp,
+		            "std" => $li_choices[0],
 		            "options" => $li_choices ); 
 						
 $options[] = array( "name" => "",
 					"desc" => "Display license symbol?",
-					"id" => $shortname."_li_symbol",
-					"std" => "1",
+					"id" => $shortname."_li_symbol_show",
+					"std" => 1,
 					"type" => "radio",
 					"options" => array("Yes","No"));
 
 $options[] = array( "name" => "Name, Date, Optional Text",
+					"desc" => "Type the first year your artwork was displayed.",
+		            "id" => $shortname."_li_date",
+		            "type" => "text",
+		            "std" => "");
+		            
+$options[] = array ("name" => "",
 					"desc" => "Enter your name here.",
 		            "id" => $shortname."_li_name",
 		            "type" => "text",
 		            "std" => "");
                     
 $options[] = array( "name" => "",
-					"desc" => "Type the first year your artwork was displayed.",
-		            "id" => $shortname."_li_date",
-		            "type" => "text",
-		            "std" => "");
-		            
-$options[] = array( "name" => "",
 					"desc" => "Text following your name and date.",
 		            "id" => $shortname."_li_optional_text",
 		            "type" => "text",
 		            "std" => "unless otherwise specified");
 
-$options[] = array( "name" => "Alignment",
-					"desc" => "Align the license text on the right, left, or center of the footer.",
-		            "id" => $shortname."_li_alignment",
-		            "type" => "radio",
-		            "std" => 0,
-		            "options" => array("Right","Left","Center"));
+$options[] = array( "name" => "",
+					"desc" => "Choose the alignment of your work's license below the footer widget areas.",
+					"id" => $shortname."_li_alignment",
+					"std" => 2,
+					"type" => "radio",
+					"options" => array("Left","Right","Center"));
 
+$options[] = array( "name" => "Credits/RSS",
+					"desc" => "Choose show WPFolio credits and RSS/Comments feed icons.",
+					"id" => $shortname."_credits",
+					"std" => "Show Credits",
+					"type" => "multicheck",
+					"options" => array("Show RSS Feed Link","Show Comment Feed Link","Show Credits"));
+
+$options[] = array( "name" => "",
+					"desc" => "Choose the alignment of the Credits/RSS below the footer widget areas.",
+					"id" => $shortname."_li_alignment",
+					"std" => 0,
+					"type" => "radio",
+					"options" => array("Left","Right","Center"));
+					
 
 //*-------------* FOOTER OPTIONS *-------------*//
             

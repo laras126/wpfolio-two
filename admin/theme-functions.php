@@ -204,20 +204,43 @@ function license_info() {?>
 	
 	$shortname =  get_option('of_shortname');
 	$li_type = get_option($shortname .'_li_type');
-	$li_symbol = get_option($shortname .'_li_symbol');
+	$li_symbol_show = get_option($shortname .'_li_symbol_show');
 	$li_name = get_option($shortname .'_li_name');
-	$li_date = get_option($shortname .'_li_date');
+	$li_date = get_option($shortname .'_li_date') . ' - ' . date('Y');
 	$li_optxt = get_option($shortname .'_li_optional_text');
 	$li_align = get_option($shortname .'_li_alignment');
-	
-	if ( $li_type != $li_tmp ) {
-		echo "asdasdsa"; 
-	} ?>
+
+	// Show license symbol:
+	if ( $li_symbol_show == 0) {
+		 if ( $li_type == "CC Attribution" ) {
+		 	echo '<a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/us/80x15.png" /></a>' . ' ' . $li_date . ' ' . $li_name . ' ' . $li_optxt;
+		 } else if( $li_type == "CC Attribution-Share Alike" ) {
+		 	echo '<a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/us/80x15.png" /></a>' . ' ' . $li_date . ' ' . $li_name . ' ' . $li_optxt;
+		 } else if( $li_type == "CC Attribution-No Derivative Works" ) {
+		 	echo '<a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nd/3.0/us/80x15.png" /></a>' . ' ' .  $li_date . ' ' . $li_name . ' ' . $li_optxt;
+		 } else if( $li_type == "CC Attribution-Noncommercial" ) {
+		 	echo '<a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/3.0/us/80x15.png" /></a>' . ' ' . $li_date . ' ' . $li_name . ' ' . $li_optxt;
+		 } else if( $li_type == "CC Attribution-Noncommercial-Share Alike" ) {
+		 	echo '<a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/us/80x15.png" /></a>' . ' ' .  $li_date . ' ' . $li_name . ' ' . $li_optxt;
+		 } else if( $li_type == "CC Attribution-Noncommercial-No Derivative" ) {
+		 	echo '<a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/us/80x15.png" /></a>' . ' ' . $li_date . ' ' . $li_name . ' ' . $li_optxt;
+		 } else {
+			echo '&copy; '. $li_date . ' ' . $li_name . ' ' . $li_optxt;
+		}
+		
+	} else if ( $li_symbol_show == 1 ) {
+		echo $li_date . ' ' . $li_name . ' ' . $li_optxt;
+	}
+
+	// Show credits and/or RSS icons:
+	//if ()
+	?>
 	
 	</div> <!-- #siteinfo --> <?php
 	
 }
 add_filter('thematic_footer','license_info');
+
 
 function license_test() {
 	$shortname =  get_option('of_shortname');
