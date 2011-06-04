@@ -206,9 +206,10 @@ $options[] = array( "name" => "Custom CSS",
                     "type" => "textarea");
                     
 //*---------------* LICENSING & CREDITS *---------------*//
-// Display name and licensing in footer.
+// Options to choose license and display it in footer. Option to show/don't show credits and RSS
+// Commented out: alignment options and Credits - to be added on an update
 
-$options[] = array( "name" => "Licensing and Credits",
+$options[] = array( "name" => "Licensing", // and Credits
                     "type" => "heading");
 
 $options[] = array( "name" => "License",
@@ -225,15 +226,15 @@ $options[] = array( "name" => "",
 					"type" => "radio",
 					"options" => array("Yes","No"));
 
-$options[] = array( "name" => "Name, Date, Optional Text",
-					"desc" => "Type the first year your artwork was displayed.",
-		            "id" => $shortname."_li_date",
-		            "type" => "text",
-		            "std" => "");
-		            
-$options[] = array ("name" => "",
+$options[] = array ("name" => "Name, Date, Optional Text",
 					"desc" => "Enter your name here.",
 		            "id" => $shortname."_li_name",
+		            "type" => "text",
+		            "std" => "");
+
+$options[] = array( "name" => "",
+					"desc" => "Type the first year your artwork was displayed.",
+		            "id" => $shortname."_li_date",
 		            "type" => "text",
 		            "std" => "");
                     
@@ -242,27 +243,27 @@ $options[] = array( "name" => "",
 		            "id" => $shortname."_li_optional_text",
 		            "type" => "text",
 		            "std" => "unless otherwise specified");
-
-$options[] = array( "name" => "",
-					"desc" => "Choose the alignment of your work's license below the footer widget areas.",
+		            
+$options[] = array( "name" => "Alignment",
+					"desc" => "Choose the alignment of the license text below the footer.",
 					"id" => $shortname."_li_alignment",
-					"std" => 2,
+					"std" => "Right",
 					"type" => "radio",
-					"options" => array("Left","Right","Center"));
+					"options" => array("Left","Right","Center")); 
 
-$options[] = array( "name" => "Credits/RSS",
+/* $options[] = array( "name" => "Credits/RSS",
 					"desc" => "Choose show WPFolio credits and RSS/Comments feed icons.",
 					"id" => $shortname."_credits",
-					"std" => "Show Credits",
+					"std" => "",
 					"type" => "multicheck",
 					"options" => array("Show RSS Feed Link","Show Comment Feed Link","Show Credits"));
 
 $options[] = array( "name" => "",
 					"desc" => "Choose the alignment of the Credits/RSS below the footer widget areas.",
-					"id" => $shortname."_li_alignment",
-					"std" => 0,
+					"id" => $shortname."_cred_alignment",
+					"std" => "Left",
 					"type" => "radio",
-					"options" => array("Left","Right","Center"));
+					"options" => array("Left","Right","Center")); */
 					
 
 //*-------------* FOOTER OPTIONS *-------------*//

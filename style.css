@@ -85,21 +85,29 @@ a:hover {
 }
 
 #main{
-	padding-top: 30px;
+	padding-top: 15px;
 }
 
 #footer {
-	border-top:1.5px solid #cccccc; /* change this later */
-}
-
-li.current-menu-item {
-	text-transform: uppercase;
+	margin-bottom: 30px;
 }
 
 #siteinfo {
+	font-size: .8em;
+	margin-left: 0px;
+}
+
+#siteinfo.license {
 	border: none;
-	text-align: right;
+	float: left;
+	display: inline;
 } 
+
+#siteinfo.credits {
+	float: right;
+	display: inline;
+}
+
 
 h2.entry-title {
 	font-weight: bold;
@@ -123,6 +131,10 @@ h2.entry-title {
 
 .navigation a:hover {
 	color:#999;
+}
+
+li.current-menu-item {
+	text-transform: uppercase;
 }
 
 #access, .menu a, a:hover, a:focus, ul, li, .current_page_item {
@@ -175,6 +187,14 @@ h2.entry-title {
 	padding-bottom: 25px;
 }
 
+.portfolio .post h1.entry-title {
+	display: none;
+}
+
+.portfolio .entry-meta {
+	display: none;
+}
+
 /* @end */
 
 /* @group Category-archive */
@@ -220,6 +240,11 @@ img.attachment-post-thumbnail:hover {
 #primary, #secondary, .main-aside ul li ul li {
 	list-style-type: none;
 }
+
+ul.xoxo {
+	margin-left: 20px;
+}
+
 /* @end */
 
 /* @group Pages */
@@ -227,12 +252,14 @@ img.attachment-post-thumbnail:hover {
 .page #container {
 	width:910px
 }
+
 .page #content {
 	margin: auto;
 }
 
 .widemargins {
-	margin: auto 135px;
+	margin: auto 120px;
+	padding-right: 30px;
 }
 
 /*.widemargins-override{
@@ -251,14 +278,53 @@ margin: auto -135px;
 	font-size: 18px;
 }
 
+.main-aside ul {
+	padding-left: 40px;
+	padding-right: 0px;
+}
+
+#subsidiary {
+	margin-left: 0px;
+}
+
 /* @end */
 
 /* @group Misc */
 
+.edit-link a, span.edit a {
+	color: red;
+	font-weight: bold;
+	clear:both;
+	display:block;
+}
+
+.edit-link a:hover {
+	color: blue;
+	font-weight: bold;
+	clear:both;
+	display:block;
+}
+
+.entry-meta {
+	padding-bottom:20px;
+}
+
+.entry-meta abbr {
+    border:none;
+    cursor:text;
+    font-size:1em;
+    font-style:normal;
+    letter-spacing:0.05em;
+}
+
+.attachment h1.entry-title {
+	display: none;
+}
+
 #artwork-meta {
 	width: 500px;
-	font-size: 12px;
-	line-height: 14px;
+	font-size: 1em;
+	line-height: 1.1em;
 	margin-bottom: 15px;
 }
 

@@ -198,9 +198,11 @@ function childtheme_override_siteinfo(){}
 function childtheme_override_siteinfoopen(){}
 function childtheme_override_siteinfoclose(){}
 
-function license_info() {?>
+function license_cred_info() {?>
 
-	<div id=siteinfo><?php
+	<div id="siteinfo" class="license">
+	<?php
+	/*-------* LICENSE *-------*/
 	
 	$shortname =  get_option('of_shortname');
 	$li_type = get_option($shortname .'_li_type');
@@ -208,8 +210,7 @@ function license_info() {?>
 	$li_name = get_option($shortname .'_li_name');
 	$li_date = get_option($shortname .'_li_date') . ' - ' . date('Y');
 	$li_optxt = get_option($shortname .'_li_optional_text');
-	$li_align = get_option($shortname .'_li_alignment');
-
+	
 	// Show license symbol:
 	if ( $li_symbol_show == 0) {
 		 if ( $li_type == "CC Attribution" ) {
@@ -230,23 +231,32 @@ function license_info() {?>
 		
 	} else if ( $li_symbol_show == 1 ) {
 		echo $li_date . ' ' . $li_name . ' ' . $li_optxt;
-	}
+	}?>
+	</div> <!-- #siteinfo.license --> <?php
+	/*-------* CREDITS *-------*/ 
+	// Will be implemented on update
+	/*
+	<div id="siteinfo" class="credits"> 
+	
+	$credits = get_option($shortname .'_credits');
+	echo "asdasda";
+	
+
+	</div> <!-- #siteinfo.credits --> */
 
 	// Show credits and/or RSS icons:
-	//if ()
-	?>
 	
-	</div> <!-- #siteinfo --> <?php
 	
 }
-add_filter('thematic_footer','license_info');
+add_filter('thematic_belowfooter','license_cred_info');
 
 
 function license_test() {
 	$shortname =  get_option('of_shortname');
-	$li_type = get_option($shortname .'_li_type');
-	echo $li_type;
+	$cred = get_option($shortname .'_credits');
+	print_r($cred);
 }
+add_action('thematic_post','license_test');
 
 
 /*-----------------------------------------------------------------------------------*/

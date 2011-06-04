@@ -34,6 +34,7 @@ define('THEMATIC_COMPATIBLE_FEEDLINKS', true);
 require_once("library/widgets.php");
 require_once("library/thumbs.php");
 require_once("library/portfolio-cat.php");
+require_once("library/portfolio-post.php");
 require_once("library/prevnext.php");
 require_once("library/siteinfo.php");
 
@@ -57,7 +58,6 @@ function portfolio_body_class($class) {
 	global $post;
 	$shortname = get_option('of_shortname');
 	$cat_option = get_option($shortname.'_cats_in_blog');
-	$cat = get_cat_ID($cat_option);
 	
 	if ( in_category($cat_option) || is_home() ) {
 		$class[] = 'news';
@@ -80,15 +80,14 @@ function remove_sidebar() {
 	
 	$shortname = get_option('of_shortname');
 	$cat_option = get_option($shortname.'_cats_in_blog');
-	$cat = get_cat_ID($cat_option);
 	
-	if ( $cat_option != '' ) {
+	if ( $cat_option != 'Select a Category:' ) {
 		if ( in_category($cat_option) ) {
 			return TRUE;
 		} else {
 			return FALSE;
 		}
-	} else if ( !is_home() ) {
+	} elseif ( !is_home() ) {
 		return FALSE;
 	} else {
 		return TRUE;
@@ -107,6 +106,7 @@ if ( function_exists('register_sidebar') )
 		'before_title' => '',
 		'after_title' => '',
 	));
+	
 	
 //////////////////////////////////////
 //// OPTIONS FRAMEWORK FUNCTIONS /////

@@ -1,56 +1,99 @@
 <?php
 
-////////////////////
-// PORTFOLIO POST //
-////////////////////
+////////////////////////////////////
+// ENTRY META AND UTILITY FILTERS //
+////////////////////////////////////
 
-// Get rid of navigation links above
-function childtheme_override_nav_above() {
-} 
+// Create entry date for post meta
+function childtheme_override_postmeta_entrydate() {
+    $entrydate = '<span class="entry-date"><abbr class="published" title="';
+    $entrydate .= get_the_time(thematic_time_title()) . '">';
+    $entrydate .= get_the_time(thematic_time_display());
+    $entrydate .= '</abbr></span>';
+    
+    return apply_filters('thematic_post_meta_entrydate', $entrydate);
+   
+} // end postmeta_entrydate()
 
-// Change text of below navigation links in archives
-function childtheme_override_nav_below() {
-	if (is_single()) { ?>
+// Remove post header edit link
+function childtheme_override_postmeta_editlink() {
+} // end postmeta_editlink
+
+function childtheme_override_postheader_postmeta() {
+    $postmeta = '<div class="entry-meta">';
+    $postmeta .= thematic_postmeta_entrydate();
+    $postmeta .= thematic_postmeta_editlink();
+    $postmeta .= "</div><!-- .entry-meta -->\n";
+    
+    return apply_filters('thematic_postheader_postmeta',$postmeta); 
+
+} // end postheader_postmeta
+
+function childtheme_override_postfooter_postcomments() {
+    if (comments_open()) {
+        $postcommentnumber = get_comments_number();
+        if ($postcommentnumber > '1') {
+            $postcomments = ' <span class="comments-link"><a href="' . apply_filters('the_permalink', get_permalink()) . '#comments" title="' . __('Comment on ', 'thematic') . the_title_attribute('echo=0') . '">';
+            $postcomments .= get_comments_number() . __(' Comments', 'thematic') . '</a></span>';
+        } elseif ($postcommentnumber == '1') {
+            $postcomments = ' <span class="comments-link"><a href="' . apply_filters('the_permalink', get_permalink()) . '#comments" title="' . __('Comment on ', 'thematic') . the_title_attribute('echo=0') . '">';
+            $postcomments .= get_comments_number() . __(' Comment', 'thematic') . '</a></span>';
+        } elseif ($postcommentnumber == '0') {
+            $postcomments = ' <span class="comments-link"><a href="' . apply_filters('the_permalink', get_permalink()) . '#comments" title="' . __('Comment on ', 'thematic') . the_title_attribute('echo=0') . '">';
+            $postcomments .= __('Leave a comment', 'thematic') . '</a></span>';
+        }
+    } else {
+        $postcomments = ' <span class="comments-link comments-closed-link">' . __('Comments closed', 'thematic') .'</span>';
+    }
+    // Display edit link
+    if (current_user_can('edit_posts')) {
+        $postcomments .= thematic_postfooter_posteditlink();
+    }               
+    return apply_filters('thematic_postfooter_postcomments',$postcomments); 
+    
+}
+
+// Filter post footer for News and Portfolio classes. Display usual entry-utility on news posts and remove it from portfolio posts.
+function childtheme_override_postfooter() {
+
+    global $id, $post;
+    $shortname = get_option('of_shortname');
+	$cat_option = get_option($shortname.'_cats_in_blog');
+
+	if ( in_category($cat_option) ) {
+	    if ($post->post_type == 'page' && current_user_can('edit_posts')) { /* For logged-in "page" search results */
+	        $postfooter = '<div class="entry-utility">' . thematic_postfooter_posteditlink();
+	        $postfooter .= "</div><!-- .entry-utility -->\n";    
+	    } elseif ($post->post_type == 'page') { /* For logged-out "page" search results */
+	        $postfooter = '';
+	    } else {
+	        if (is_single()) {
+	            $postfooter = '<div class="entry-utility">' . thematic_postfooter_postcategory() . thematic_postfooter_posttags();
+	        } else {
+	            $postfooter = '<div class="entry-utility">' . thematic_postfooter_postcategory() . thematic_postfooter_posttags() . thematic_postfooter_postcomments();
+	        }
+	        $postfooter .= "</div><!-- .entry-utility -->\n";    
+	    }
+	} else {
+		if (current_user_can('edit_posts')) { /* For logged-in "page" search results */
+	        $postfooter = '<div class="entry-utility">' . thematic_postfooter_posteditlink();
+	        $postfooter .= "</div><!-- .entry-utility -->\n";    
+	    } elseif ($post->post_type == 'page') { /* For logged-out "page" search results */
+	        $postfooter = '';
+	    } else {
+	        if (is_single()) {
+	            $postfooter = '';	
+	        } else {
+	            $postfooter = '<div class="entry-utility">' . thematic_postfooter_postcategory() . thematic_postfooter_posttags() . thematic_postfooter_postcomments();
+	            $postfooter .= "</div><!-- .entry-utility -->\n";    
+	        }
+	        
+	    }
+	}   
+    // Put it on the screen
+    echo apply_filters( 'thematic_postfooter', $postfooter ); // Filter to override default post footer
+} // end postfooter
+
+
 	
-			<div id="nav-below" class="navigation">
-				<div class="nav-previous"><?php thematic_previous_post_link() ?></div>
-				<div class="nav-next"><?php thematic_next_post_link() ?></div>
-			</div>
-
-<?php
-	} else { ?>
-
-		<div id="nav-below" class="navigation">
-            <?php if(function_exists('wp_pagenavi')) { ?>
-            <?php wp_pagenavi(); ?>
-            <?php } else { ?>  
-			<div class="nav-previous"><?php next_posts_link(__('<span class="meta-nav">&larr;</span> Earlier', 'thematic')) ?></div>
-			<div class="nav-next"><?php previous_posts_link(__('Later <span class="meta-nav">&rarr;</span>', 'thematic')) ?></div>
-			<?php } ?>
-		</div>	
-	
-<?php
-	}
-}
-
-// Change text of previous post link
-function childtheme_override_previous_post_link(){
-	$args = array ( 'format' => '%link',
-					'link' => '<span class="meta-nav">&larr;</span> Earlier',
-					'in_same_cat' => FALSE,
-					'excluded_categories' => '');
-	$args = apply_filters('thematic_previous_post_link_args', $args );
-			previous_post_link($args['format'], $args['link'], $args['in_same_cat'], $args['excluded_categories']);
-}
-
-// Change text of next post link
-function childtheme_override_next_post_link(){
-	$args = array ( 'format' => '%link',
-					'link' => 'Later 8<span class="meta-nav">&rarr;</span>',
-					'in_same_cat' => FALSE,
-					'excluded_categories' => '');
-	$args = apply_filters('thematic_next_post_link_args', $args );
-			next_post_link($args['format'], $args['link'], $args['in_same_cat'], $args['excluded_categories']);
-}
-
 ?>
