@@ -164,21 +164,11 @@ $options[] = array( "name" => "Title WebFont",
 					"type" => "text");
 											
 $options[] = array( "name" => "",
-					"desc" => "Select a font to be used while the WebFont loads. This font will also be used by default if the WebFont does not load. If you'd rather not use a WebFont, select it here and leave the WebFont field blank.",
+					"desc" => "Select a font to be used while the WebFont loads and if it does not load. If you'd rather not use a WebFont, select it here and leave the WebFont field blank.",
 					"id" => $shortname."_default_hdr_font",
 					"std" => "Arial",
 		            "type" => "select",
-		            "options" => array(
-			            "Arial, Helvetica Neue, Helvetica, sans-serif", 
-			            "Courier New, Courier, monospace",
-			            "Georgia, Palatino, Palatino Linotype, Times, Times New Roman, serif",
-			            "Gill Sans, Calibri, Trebuchet MS, sans-serif", 
-			            "Helvetica Neue, Arial, Helvetica, sans-serif", 
-			            "Lucida Sans, Lucida Grande, Lucida Sans Unicode, sans-serif", 
-			            "Palatino, Palatino Linotype, Georgia, Times, Times New Roman, serif", 
-			            "Times, Times New Roman, Georgia, serif", 
-			            "Verdana, Geneva, Tahoma, sans-serif"  
-			            )); 
+		            "options" => $fonts ); 
 
 $options[] = array( "name" => "Container Color",
 					"desc" => "",
@@ -189,7 +179,7 @@ $options[] = array( "name" => "Container Color",
 $options[] = array( "name" => "Background Color",
 					"desc" => "",
 					"id" => $shortname."_body_bg_color",
-					"std" => "#FFFFFF",
+					"std" => "#cccccc",
 					"type" => "color");		
 					
 $options[] = array( "name" => "Body Font",
@@ -198,9 +188,27 @@ $options[] = array( "name" => "Body Font",
 		            "type" => "select",
 		            "std" => "Helvetica",
 		            "options" => $fonts ); 
-														
+		            
+$options[] = array( "name" => "Primary Font Color",
+					"desc" => "Site title, post/page titles, headings, and paragraph text.",
+					"id" => $shortname."_primary_font_color",
+					"std" => "#000",
+					"type" => "color");
+					
+$options[] = array( "name" => "Secondary Font Color",
+					"desc" => "Date title, post meta, prev/next navigation, borders, widget text.",
+					"id" => $shortname."_secondary_font_color",
+					"std" => "#666",
+					"type" => "color");
+											
+$options[] = array( "name" => "Menu Highlight Color",
+					"desc" => "Hover color on menu items.",
+					"id" => $shortname."_menu_hover_color",
+					"std" => "#FFFFFF",
+					"type" => "color");			
+					
 $options[] = array( "name" => "Custom CSS",
-                    "desc" => "Quickly add some CSS to your theme by adding it to this block.",
+                    "desc" => "Quickly add some CSS to your theme by typing it here.",
                     "id" => $shortname."_custom_css",
                     "std" => "",
                     "type" => "textarea");

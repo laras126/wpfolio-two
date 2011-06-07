@@ -36,7 +36,6 @@ require_once("library/thumbs.php");
 require_once("library/portfolio-cat.php");
 require_once("library/portfolio-post.php");
 require_once("library/prevnext.php");
-require_once("library/siteinfo.php");
 
 // Will require files with a loop - not working yet
 /*$dir = 'library';
@@ -97,17 +96,6 @@ function remove_sidebar() {
 add_filter('thematic_sidebar', 'remove_sidebar');
 
 
-if ( function_exists('register_sidebar') )
-	register_sidebar(array(
-		'name' => 'Footer Center',
-		'id' => 'footer_center',
-		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget' => '</div>',
-		'before_title' => '',
-		'after_title' => '',
-	));
-	
-	
 //////////////////////////////////////
 //// OPTIONS FRAMEWORK FUNCTIONS /////
 //////////////////////////////////////

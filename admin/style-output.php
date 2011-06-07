@@ -6,8 +6,11 @@ $output = '';
 // Variables for style values
 $wpr_bg_color = get_option($shortname . '_wpr_bg_color');
 $body_bg_color = get_option($shortname . '_body_bg_color');
-$body_text = get_option($shortname . '_body_text');
 
+$body_text = get_option($shortname . '_body_text');
+$prim_clr = get_option($shortname . '_primary_font_color');
+$sec_clr = get_option($shortname . '_secondary_font_color');
+$menu_clr = get_option($shortname.'_menu_hover_color');
 
 // Aligning credits and license. Need to add appropriate style to wpf-styles.php. Should be a loop, but this works:
 
