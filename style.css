@@ -92,7 +92,9 @@ a:hover {
 
 #siteinfo {
 	font-size: .8em;
-	margin-left: 0px;
+	margin:0px;
+	padding-bottom:40px;
+	padding-top: 0px;
 }
 
 #siteinfo.license {
@@ -205,7 +207,7 @@ li.current-menu-item {
 	font-weight: normal;
 	font-size: 1.2em;
 	text-transform: uppercase;
-	padding: 10px 0px 25px;
+	padding: 0px 0px 25px;
 }
 
 .portfolio .post h1.entry-title {
@@ -294,6 +296,10 @@ margin: auto -135px;
 
 #primary, #secondary {
 	border: none;
+}
+
+h3.widgettitle {
+	padding-bottom: 10px;
 }
 
 .aside h3 {

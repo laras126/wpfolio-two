@@ -56,7 +56,7 @@ function childtheme_override_postfooter_postcomments() {
 // Filter post footer for News and Portfolio classes. Display usual entry-utility on news posts and remove it from portfolio posts.
 function childtheme_override_postfooter() {
 
-    global $id, $post;
+    global $id, $post, $postfooter;
     $shortname = get_option('of_shortname');
 	$cat_option = get_option($shortname.'_cats_in_blog');
 

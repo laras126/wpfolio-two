@@ -34,7 +34,7 @@
 		<span></span> <!--can add text here; chose not to-->
 	</p>
  
-	<label>Additional info</label>
+	<label>Additional info (i.e. price or description)</label>
  
 	<p>
 		<?php $mb->the_field('additional'); ?>

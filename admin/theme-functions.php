@@ -2,7 +2,7 @@
 
 /* These are functions specific to the included option settings and this theme */
 
-// Commented out what might not be necessary for WPFolio 
+// Commented options to possibly be implemented on updates
 
 /*-----------------------------------------------------------------------------------*/
 /* Theme Header Output - wp_head() */
