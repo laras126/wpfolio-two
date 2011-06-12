@@ -1,7 +1,5 @@
-/* @override http://localhost:8888/wp-content/themes/wpfolio/style.css */
-
 /*   
-Theme Name: WPFolio - Thematic Child
+Theme Name: WPFolio 2
 Theme URI: 
 Description: Use this theme to start your Thematic Child Theme development.
 Author: Lara + ...
@@ -375,6 +373,7 @@ ul.sub-menu a {
 
 .portfolio #comments {
 	margin-right: 318px;
+	margin-left: 20px;
 }
 
 #respond {

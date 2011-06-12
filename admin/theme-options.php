@@ -158,13 +158,13 @@ $options[] = array( "name" => "Styling Options",
 					"options" => $alt_stylesheets); */
 										
 $options[] = array( "name" => "Title WebFont",
-					"desc" => "Select a font from the <a href='http://google.com/webfonts'>Google WebFont Directory</a> for your site's and type its name in the text field. This font will be used for your site title.",
+					"desc" => "Type the name of a font from the <a href='http://google.com/webfonts'>Google WebFont Directory</a> for your site's title. If you'd rather not use a WebFont, leave the field empty.",
 					"id" => $shortname."_google_hdr_font",
 					"std" => "Lobster",
 					"type" => "text");
 											
 $options[] = array( "name" => "",
-					"desc" => "Select a font to be used while the WebFont loads and if it does not load. If you'd rather not use a WebFont, select it here and leave the WebFont field blank.",
+					"desc" => "Select a font to be used while the WebFont loads, if it does not load, and if the above field is empty.",
 					"id" => $shortname."_default_hdr_font",
 					"std" => "Arial",
 		            "type" => "select",

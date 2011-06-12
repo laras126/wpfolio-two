@@ -36,6 +36,7 @@ require_once("library/thumbs.php");
 require_once("library/portfolio-cat.php");
 require_once("library/portfolio-post.php");
 require_once("library/prevnext.php");
+require_once("library/dev-functions.php");
 
 // Will require files with a loop - not working yet
 /*$dir = 'library';
@@ -336,41 +337,4 @@ function add_custom_dashboard_widget() {
 }
 add_action('wp_dashboard_setup', 'add_custom_dashboard_widget');
 
-
-
-///////////////////
-// DEV FUNCTIONS //
-///////////////////
-
-
-// Test the options output. This is set to print the Blog Category - ncomment add_action to use and change variables accordingly to print different options.
-function echotest() {
-	$shortname = get_option('of_shortname');
-	$cat_option = get_option($shortname.'_cats_in_blog');
-	$cat = get_cat_ID($cat_option);
-	print_r($cat_option);
-}
-//add_action('thematic_belowheader', 'echotest');
-
-
-// Shortcode to add lorem ipsum 
-function add_lorem ($atts, $content = null) {
-	return 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
-}
-add_shortcode("lorem", "add_lorem");
-
-
-// Add link for WPFolio options to the admin bar
-function my_admin_bar_link() {
-	global $wp_admin_bar;
-		if ( !is_super_admin() || !is_admin_bar_showing() )
-			return;
-	$wp_admin_bar->add_menu( array(
-			'id' => 'new_link',
-			'parent' => false,
-			'title' => __( 'Options'),
-			'href' => admin_url( 'themes.php?page=optionsframework' )
-	));
-}
-add_action('admin_bar_menu', 'my_admin_bar_link');
 ?>
