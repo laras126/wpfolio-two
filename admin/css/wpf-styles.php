@@ -7,3 +7,6 @@ p, #blog-title a, .entry-title a, .entry-content, h3.widgettitle, h1, h2, h3, h4
 #access a, #blog-description, .aside a, .aside, .entry-meta, .entry-utility, .entry-utility a, input#s, .navigation a, #blog-title a:hover, .textwidget p {color: <?php echo $sec_clr ?>}
 #footer, .news h2.entry-title, img.attachment-post-thumbnail, .single h1.entry-title, .gallery-icon {border-color:<?php echo $sec_clr ?>}
 #access a:hover {background-color:<?php echo $menu_clr ?>}
+
+<?php // If a logo was uploaded, acknowledge title option
+	 if (!empty($logo)): title_option(); endif; ?>

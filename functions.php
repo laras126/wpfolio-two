@@ -299,42 +299,4 @@ function wpfolio_admin_footer() {
 add_filter('admin_footer_text', 'wpfolio_admin_footer');
 
 
-// Add WPFolio Wiki site as a Dashboard Feed 
-// Thanks to bavotasan.com: http://bavotasan.com/tutorials/display-rss-feed-with-php/ 
-
-function custom_dashboard_widget() {
-
-	$rss = new DOMDocument();
-	$rss->load('http://wpfolio.visitsteve.com/wiki/feed');
-	$feed = array();
-	foreach ($rss->getElementsByTagName('item') as $node) {
-		$item = array ( 
-			'title' => $node->getElementsByTagName('title')->item(0)->nodeValue,
-			// 'desc' => $node->getElementsByTagName('description')->item(0)->nodeValue,
-			'link' => $node->getElementsByTagName('link')->item(0)->nodeValue,
-			'date' => $node->getElementsByTagName('pubDate')->item(0)->nodeValue,
-			);
-		array_push($feed, $item);
-	}
-	$limit = 5; // change how many posts to display here
-	echo '<ul>'; // wrap in a ul
-	for($x=0;$x<$limit;$x++) {
-		$title = str_replace(' & ', ' &amp; ', $feed[$x]['title']);
-		$link = $feed[$x]['link'];
-		// $description = $feed[$x]['desc'];
-		$date = date('l F d, Y', strtotime($feed[$x]['date']));
-		echo '<li><p><strong><a href="'.$link.'" title="'.$title.'">'.$title.'</a></strong>';
-		echo ' - '.$date.'</p></li>';
-		// echo '<p>'.$description.'</p>';
-	}
-	echo '</ul>';
-	echo '<p class="textright"><a href="http://wpfolio.visitsteve.com/wiki/category/news" class="button">View all</a></p>'; // link to site
-	
-}
-	
-function add_custom_dashboard_widget() {
-	wp_add_dashboard_widget('custom_dashboard_widget', 'WPFolio News', 'custom_dashboard_widget');
-}
-add_action('wp_dashboard_setup', 'add_custom_dashboard_widget');
-
 ?>

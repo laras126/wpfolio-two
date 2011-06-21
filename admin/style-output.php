@@ -6,11 +6,26 @@ $output = '';
 // Variables for style values
 $wpr_bg_color = get_option($shortname . '_wpr_bg_color');
 $body_bg_color = get_option($shortname . '_body_bg_color');
-
 $body_text = get_option($shortname . '_body_text');
 $prim_clr = get_option($shortname . '_primary_font_color');
 $sec_clr = get_option($shortname . '_secondary_font_color');
 $menu_clr = get_option($shortname.'_menu_hover_color');
+
+// Conditional styles for the logo option. 
+function title_option() {
+
+	$shortname = get_option('of_shortname'); 
+	$show_title = get_option($shortname . '_title_choice');
+	
+	if ( $show_title == 0 ) {
+		echo '#blog-title a {float:inherit;}#header img{margin-top:10px;}#blog-description {margin-top: 15px;}';
+	} else if ( $show_title == 1 ) {
+		echo '#blog-title a {float:right; margin:90px 60px 0;z-index:999;}#blog-description {margin-top: 15px;}';
+	} else if ( $show_title == 2 ) {
+		echo '#blog-title a {float:left;} #header img{float:right;}';
+	} 
+}	
+
 
 // Aligning credits and license. Need to add appropriate style to wpf-styles.php. Should be a loop, but this works:
 
@@ -45,12 +60,4 @@ require $wpf_coloroptions;
 // Echo Optional Styles
 echo $output;
 	
-// Function to test options output
-function echo_test() {
-	$shortname = get_option('of_shortname'); 
-	$wpr_border = get_option($shortname . '_li_alignment');
-	print_r ($wpr_border);
-}	
-//add_action('thematic_post', 'echo_test');
-
 ?>

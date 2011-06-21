@@ -59,6 +59,9 @@
 	        
 	        thematic_belowpost();
 	        
+	        ?>
+	        
+	        <div class="widemargins"> <?php
 	        // calling the comments template
        		if (THEMATIC_COMPATIBLE_COMMENT_HANDLING) {
 				if ( get_post_custom_values('comments') ) {
@@ -67,7 +70,9 @@
 				}
 			} else {
 				thematic_comments_template();
-			}
+			} ?>
+	        
+	        </div> <!-- .widemargins --> <?php
 	        
 	        // calling the widget area 'page-bottom'
 	        get_sidebar('page-bottom');

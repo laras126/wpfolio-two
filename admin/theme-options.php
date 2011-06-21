@@ -110,11 +110,11 @@ $options[] = array( "name" => "Header Logo",
 					"type" => "upload");
 					
 $options[] = array( "name" => "",
-					"desc" => "If you've uploaded a logo, should the site title be shown above it?",
+					"desc" => "If you've uploaded a logo, should the site title still be shown?",
 					"id" => $shortname."_title_choice",
 					"std" => "Show title",
 					"type" => "radio",
-					"options" => array('Show title','Don\'t show title'));		
+					"options" => array('Title above logo','Title right/Logo left','Title left/Logo right','Don\'t show title'));		
 						
 /*$url =  OF_DIRECTORY . '/admin/images/';
 $options[] = array( "name" => "Main Layout",
@@ -204,7 +204,7 @@ $options[] = array( "name" => "Secondary Font Color",
 $options[] = array( "name" => "Menu Highlight Color",
 					"desc" => "Hover color on menu items.",
 					"id" => $shortname."_menu_hover_color",
-					"std" => "#FFFFFF",
+					"std" => "#E8E8E8",
 					"type" => "color");			
 					
 $options[] = array( "name" => "Custom CSS",

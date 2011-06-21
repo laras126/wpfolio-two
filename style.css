@@ -1,8 +1,8 @@
 /*   
-Theme Name: WPFolio 2
+Theme Name: WPFolio Two
 Theme URI: 
-Description: Use this theme to start your Thematic Child Theme development.
-Author: Lara + ...
+Description: Transition of WPFolio - the WordPress theme for artists - to a Thematic child theme.
+Author: Lara Schenck
 Author URI: http://themeshaper.com/
 Template: thematic
 Version: 1.0
@@ -51,15 +51,13 @@ a:hover {
 	color: #FF4B33;
 }
 
-#header {
-}
-
 #blog-title {
 	font-size: 4em;
 	margin-bottom: 7px;
 }
-#blog-title a:hover { 
-	color: #999;
+
+#blog-description {
+	margin-top: 15px;
 }
 
 #wrapper {
@@ -72,7 +70,9 @@ a:hover {
 }
 
 #branding {
-	padding: 36px 0px 8px 40px;	
+	width:inherit;
+	margin:auto;
+	padding: 36px;	
 }
 
 #access {
@@ -114,6 +114,10 @@ a:hover {
 /* @end */
 
 /* @group Nav */
+
+.menu {
+	margin-top: 30px;
+}
 
 .navigation a {
 	font-weight: bold;
@@ -371,9 +375,8 @@ ul.sub-menu a {
 
 /* @group Comments */
 
-.portfolio #comments {
-	margin-right: 318px;
-	margin-left: 20px;
+.page-template-templatepage-fullwidth-php, .portfolio #comments {
+	width:623px;
 }
 
 #respond {

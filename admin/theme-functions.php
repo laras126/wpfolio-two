@@ -162,15 +162,22 @@ function add_childtheme_logo() {
 	$shortname =  get_option('of_shortname');
 	$logo = get_option($shortname . '_logo');
 	$show_title = get_option($shortname . '_title_choice');
-	if (!empty($logo) && $show_title == 1) {
+	if (!empty($logo) && $show_title == 3) {
 		remove_action('thematic_header','thematic_blogtitle', 3);
 		remove_action('thematic_header','thematic_blogdescription',5);
 		add_action('thematic_header','childtheme_logo', 3);
+	} else if (!empty($logo) && $show_title == 2) {
+		add_action('thematic_header','childtheme_logo', 3);
+		remove_action('thematic_header','thematic_blogdescription',5);
+	} else if (!empty($logo) && $show_title == 1) {
+		add_action('thematic_header','childtheme_logo', 3);
+		remove_action('thematic_header','thematic_blogdescription',5);
 	} else if (!empty($logo) && $show_title == 0) {
 		add_action('thematic_header','childtheme_logo', 3);
 		remove_action('thematic_header','thematic_blogdescription',5);
 	}
 }
+
 add_action('init','add_childtheme_logo');
 
 
@@ -249,15 +256,6 @@ function license_cred_info() {?>
 	
 }
 add_filter('thematic_belowfooter','license_cred_info');
-
-
-function license_test() {
-	$shortname =  get_option('of_shortname');
-	$cred = get_option($shortname .'_credits');
-	print_r($cred);
-}
-add_action('thematic_post','license_test');
-
 
 /*-----------------------------------------------------------------------------------*/
 /* Show analytics code in footer */

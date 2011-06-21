@@ -30,35 +30,25 @@ function my_admin_bar_link() {
 	$wp_admin_bar->add_menu( array(
 			'id' => 'new_link',
 			'parent' => false,
-			'title' => __( 'WPFolio 2 Options'),
+			'title' => __( 'WPFolio Two Options'),
 			'href' => admin_url( 'themes.php?page=optionsframework' )
 	));
 }
 add_action('admin_bar_menu', 'my_admin_bar_link');
 
+// Function to test options output
+function echo_test() {
+	$shortname = get_option('of_shortname'); 
+	$show_title = get_option($shortname . '_title_choice');
 
-// Create a widget for feedback - contains a contact form
-// http://safalra.com/programming/php/contact-feedback-form/
-function feedback_dashboard_widget_function(){
-	echo 'send us your feedback!'; 
-}
+	if ( $show_title == 1 ) {
+		echo '#blog_title{float:right;}';
+	} else {
+		echo '';
+	} 	
+}	
+//add_action('thematic_post', 'echo_test');
 
-// If the user hasn't reordered their widgets, move this one to the top
-function add_feedback_dashboard_widget() {
-	wp_add_dashboard_widget('feedback_dashboard_widget', 'What do you think of WPFolio Pro?', 'feedback_dashboard_widget_function');
-	
-	global $wp_meta_boxes;
 
-	$normal_dashboard = $wp_meta_boxes['dashboard']['normal']['core'];
-	
-	$example_widget_backup = array('example_dashboard_widget' => $normal_dashboard['feedback_dashboard_widget']);
-	unset($normal_dashboard['feedback_dashboard_widget']);
-
-	$sorted_dashboard = array_merge($example_widget_backup, $normal_dashboard);
-
-	$wp_meta_boxes['dashboard']['normal']['core'] = $sorted_dashboard;
-}
-
-add_action('wp_dashboard_setup', 'add_feedback_dashboard_widget');
 
 ?>
