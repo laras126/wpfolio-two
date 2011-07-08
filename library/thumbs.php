@@ -23,7 +23,7 @@ function get_post_thumbnail() {
 		$thumb=wp_get_attachment_thumb_url($num);
 		print $thumb;
 	else:
-		print "http://localhost:8888/wp-content/themes/wpfolio/library/imgs/default-thumb.png";
+		echo STYLESHEETPATH . '/library/imgs/default-thumb.png';
 	endif;
 }
 

@@ -8,5 +8,5 @@ p, #blog-title a, .entry-title a, .entry-content, h3.widgettitle, h1, h2, h3, h4
 #footer, .news h2.entry-title, img.attachment-post-thumbnail, .single h1.entry-title, .gallery-icon {border-color:<?php echo $sec_clr ?>}
 #access a:hover {background-color:<?php echo $menu_clr ?>}
 
-<?php // If a logo was uploaded, acknowledge title option
-	 if (!empty($logo)): title_option(); endif; ?>
+<?php // If a logo was uploaded, check title option
+	// if (!empty($logo)): title_option(); endif; ?>

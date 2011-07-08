@@ -114,7 +114,7 @@ $options[] = array( "name" => "",
 					"id" => $shortname."_title_choice",
 					"std" => "Show title",
 					"type" => "radio",
-					"options" => array('Title above logo','Title right/Logo left','Title left/Logo right','Don\'t show title'));		
+					"options" => array('Show title above logo','Don\'t show title'));		
 						
 /*$url =  OF_DIRECTORY . '/admin/images/';
 $options[] = array( "name" => "Main Layout",

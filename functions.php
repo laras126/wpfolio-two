@@ -232,8 +232,8 @@ add_action('init', 'wpfolio_create_taxonomies', 0); */
 define('NO_HEADER_TEXT', true );
 define('HEADER_TEXTCOLOR', '');
 define('HEADER_IMAGE', '%s/images/default_header.jpg'); // %s is the template dir uri
-define('HEADER_IMAGE_WIDTH', 775); // use width and height appropriate for your theme
-define('HEADER_IMAGE_HEIGHT', 200);
+define('HEADER_IMAGE_WIDTH', 960); // use width and height appropriate for your theme
+define('HEADER_IMAGE_HEIGHT', 198);
 
 // gets included in the site header
 function header_style() {

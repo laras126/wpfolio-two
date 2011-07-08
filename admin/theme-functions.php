@@ -162,20 +162,14 @@ function add_childtheme_logo() {
 	$shortname =  get_option('of_shortname');
 	$logo = get_option($shortname . '_logo');
 	$show_title = get_option($shortname . '_title_choice');
-	if (!empty($logo) && $show_title == 3) {
-		remove_action('thematic_header','thematic_blogtitle', 3);
-		remove_action('thematic_header','thematic_blogdescription',5);
-		add_action('thematic_header','childtheme_logo', 3);
-	} else if (!empty($logo) && $show_title == 2) {
-		add_action('thematic_header','childtheme_logo', 3);
-		remove_action('thematic_header','thematic_blogdescription',5);
-	} else if (!empty($logo) && $show_title == 1) {
-		add_action('thematic_header','childtheme_logo', 3);
-		remove_action('thematic_header','thematic_blogdescription',5);
-	} else if (!empty($logo) && $show_title == 0) {
-		add_action('thematic_header','childtheme_logo', 3);
-		remove_action('thematic_header','thematic_blogdescription',5);
-	}
+	if (!empty($logo) && $show_title == 1) {
+        remove_action('thematic_header','thematic_blogtitle', 3);
+        remove_action('thematic_header','thematic_blogdescription',5);
+        add_action('thematic_header','childtheme_logo', 3);
+    } else if (!empty($logo) && $show_title == 0) {
+        add_action('thematic_header','childtheme_logo', 3);
+        remove_action('thematic_header','thematic_blogdescription',5);
+    }
 }
 
 add_action('init','add_childtheme_logo');
