@@ -171,6 +171,13 @@ ul.sub-menu a {
 		-webkit-box-shadow: .5px .5px 2px #cccccc;
 }
 
+
+#subsidiary .sub-menu a, #primary .sub-menu a, #secondary .sub-menu a {
+	box-shadow: 0 0 0 transparent;
+		-moz-box-shadow: 0 0 0 transparent; 
+		-webkit-box-shadow: 0 0 0 transparent;
+}
+
 /* @end */
 
 /* @group News */
