@@ -1,7 +1,5 @@
 /* @override http://localhost:8888/wp-content/themes/wpfolio-two/style.css */
 
-/* @override http://localhost:8888/wp-content/themes/wpfolio-two/style.css */
-
 /*   
 Theme Name: WPFolio Two
 Theme URI: 
@@ -9,7 +7,7 @@ Description: Transition of WPFolio - the WordPress theme for artists - to a Them
 Author: Lara Schenck
 Author URI: http://themeshaper.com/
 Template: thematic
-Version: 0.8.9
+Version: 0.7.5
 Tags: Thematic
 .
 Thematic is © Ian Stewart http://themeshaper.com/
@@ -67,7 +65,8 @@ a:hover {
 }
 
 #blog-description {
-	margin-top: 15px;
+	margin: 10px 0 0 15px;
+	font-size: 1.2em;
 }
 
 #wrapper {
@@ -154,6 +153,7 @@ li.current-menu-item {
 }
 
 #access {
+	margin-left: 20px;
 	bottom: 10px;
 }
 
@@ -163,11 +163,13 @@ li.current-menu-item {
 
 .sf-menu ul {
 	border: none;	
-	-moz-box-shadow: .5px .5px 2px #cccccc; 
-	-webkit-box-shadow: .5px .5px 2px #cccccc; 
-	box-shadow: .5px .5px 2px #cccccc;
 }
 
+ul.sub-menu a {
+	box-shadow: 0.5px 0.5px 2px #cccccc;
+		-moz-box-shadow: .5px .5px 2px #cccccc; 
+		-webkit-box-shadow: .5px .5px 2px #cccccc;
+}
 
 /* @end */
 
@@ -210,7 +212,7 @@ li.current-menu-item {
 }
 
 .portfolio #content {
-	margin-top: 20px;
+	margin-top: 0;
 	width:940px;
 }
 
@@ -284,6 +286,10 @@ ul.xoxo {
 	margin-left: 30px;
 }
 
+#primary ul.xoxo, #secondary ul.xoxo {
+	margin-left: 10px;
+}
+
 /* @end */
 
 /* @group Pages */
@@ -336,6 +342,10 @@ h3.widgettitle {
 
 img.attachment-full {
 	padding: 10px 0px 10px;
+	clear: both;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .edit-link a, span.edit a {
@@ -381,10 +391,6 @@ img.attachment-full {
 	border-bottom: 1px solid;
 }
 
-ul.sub-menu a {
-	box-shadow: 0.5px 0.5px 2px #000;
-}
-
 /* @end */
 
 /* @group Comments */
@@ -403,6 +409,13 @@ ul.sub-menu a {
 
 /* @end */
 
+/* @group Typography */
+
+.entry-content h3 {
+	padding: 6px 0 6px 0;
+	font-style: normal;
+}
+
 /* @group default styles */
 
 	#wrapper {background-color:#FFFFFF;}
@@ -413,8 +426,6 @@ ul.sub-menu a {
 	#access a, #blog-description, .aside a, .aside, .entry-meta, .entry-utility, .entry-utility a, input#s, .navigation a, #blog-title a:hover, .textwidget p {color: #666}
 	#footer, .news h2.entry-title, img.attachment-post-thumbnail, .single h1.entry-title, .gallery-icon {border-color:#666}
 	#access a:hover {background-color:#E8E8E8}
-	
-
 
 
 /* @end */

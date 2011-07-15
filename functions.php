@@ -1,8 +1,8 @@
 <?php
 
 //
-//  WPFolio Extended:
-//  Custom Child Theme Functions
+//  WPFolio Two:
+//  Thematic Child Theme Functions
 //
 
 // Adds a home link to your menu
@@ -277,7 +277,6 @@ function wpfolio_remove_gallery_css( $css ) {
 // SHORTCODES //
 ////////////////
 
-
 // Shortcode to add wide margins to a post page - works as is, but is applied in post lists
 
 function wide_margins_shortcode ($atts, $content = null) {
@@ -290,7 +289,6 @@ add_shortcode('margin', 'wide_margins_shortcode');
 /////////////////////
 // ADMIN INTERFACE //
 /////////////////////
-
 
 // Customize admin footer text to add WPFolio to links
 function wpfolio_admin_footer() {
