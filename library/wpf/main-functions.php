@@ -4,22 +4,8 @@
 //  WPFolio Two Primary functions
 //  
 
-// Adds a home link to your menu
-// http://codex.wordpress.org/Template_Tags/wp_page_menu
-function childtheme_menu_args($args) {
-    $args = array(
-        'show_home' => 'Home',
-        'sort_column' => 'menu_order',
-        'menu_class' => 'menu',
-        'echo' => true
-    );
-	return $args;
-}
-add_filter('wp_page_menu_args','childtheme_menu_args');
-
-
 // Require files in library/
-require_once("widgets.php");
+//require_once("widgets.php");
 require_once("thumbs.php");
 require_once("portfolio-cat.php");
 require_once("portfolio-post.php");
