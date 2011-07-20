@@ -1,300 +1,151 @@
 <?php
 
-//
-//  WPFolio Two:
-//  Thematic Child Theme Functions
-//
+// Getting Theme and Child Theme Data
+// Credits: Joern Kretzschmar
 
-// Adds a home link to your menu
-// http://codex.wordpress.org/Template_Tags/wp_page_menu
-function childtheme_menu_args($args) {
-    $args = array(
-        'show_home' => 'Home',
-        'sort_column' => 'menu_order',
-        'menu_class' => 'menu',
-        'echo' => true
-    );
-	return $args;
-}
-add_filter('wp_page_menu_args','childtheme_menu_args');
+$themeData = get_theme_data(TEMPLATEPATH . '/style.css');
+$thm_version = trim($themeData['Version']);
+if(!$thm_version)
+    $thm_version = "unknown";
 
-// Unleash the power of Thematic's dynamic classes
+$ct=get_theme_data(STYLESHEETPATH . '/style.css');
+$templateversion = trim($ct['Version']);
+if(!$templateversion)
+    $templateversion = "unknown";
 
-define('THEMATIC_COMPATIBLE_BODY_CLASS', true);
-define('THEMATIC_COMPATIBLE_POST_CLASS', true);
+// set theme constants
+define('THEMENAME', $themeData['Title']);
+define('THEMEAUTHOR', $themeData['Author']);
+define('THEMEURI', $themeData['URI']);
+define('THEMATICVERSION', $thm_version);
 
-// Unleash the power of Thematic's comment form
-define('THEMATIC_COMPATIBLE_COMMENT_FORM', true);
-
-// Unleash the power of Thematic's feed link functions
-define('THEMATIC_COMPATIBLE_FEEDLINKS', true);
+// set child theme constants
+define('TEMPLATENAME', $ct['Title']);
+define('TEMPLATEAUTHOR', $ct['Author']);
+define('TEMPLATEURI', $ct['URI']);
+define('TEMPLATEVERSION', $templateversion);
 
 
-// Require files in library/
-require_once("library/widgets.php");
-require_once("library/thumbs.php");
-require_once("library/portfolio-cat.php");
-require_once("library/portfolio-post.php");
-require_once("library/prevnext.php");
-require_once("library/dev-functions.php");
-
-// Will require files with a loop - not working yet
-/*$dir = 'library';
-$files = glob($dir . '/*.php');
-
-foreach ($files as $file) {
-    require_once($file);   
-}*/
-
-
-
-/////////////////////////////////
-// PORTFOLIO/NEWS BODY CLASSES //
-/////////////////////////////////
-
-// Add portfolio body class to anything that isn't the blog	
-function portfolio_body_class($class) {
-
-	global $post;
-	$shortname = get_option('of_shortname');
-	$cat_option = get_option($shortname.'_cats_in_blog');
-	
-	if ( in_category($cat_option) || is_home() ) {
-		$class[] = 'news';
-		return $class;
+// set feed links handling
+// If you set this to TRUE, thematic_show_rss() and thematic_show_commentsrss() are used instead of add_theme_support( 'automatic-feed-links' )
+if (!defined('THEMATIC_COMPATIBLE_FEEDLINKS')) {	
+	if (function_exists('comment_form')) {
+		define('THEMATIC_COMPATIBLE_FEEDLINKS', false); // WordPress 3.0
 	} else {
-		$class[] = 'portfolio';
-		return $class;	
+		define('THEMATIC_COMPATIBLE_FEEDLINKS', true); // below WordPress 3.0
 	}
 }
 
-add_filter('thematic_body_class','portfolio_body_class');
+// set comments handling for pages, archives and links
+// If you set this to TRUE, comments only show up on pages with a key/value of "comments"
+if (!defined('THEMATIC_COMPATIBLE_COMMENT_HANDLING')) {
+	define('THEMATIC_COMPATIBLE_COMMENT_HANDLING', false);
+}
 
+// set body class handling to WP body_class()
+// If you set this to TRUE, Thematic will use thematic_body_class instead
+if (!defined('THEMATIC_COMPATIBLE_BODY_CLASS')) {
+	define('THEMATIC_COMPATIBLE_BODY_CLASS', false);
+}
 
-/////////////
-// SIDEBAR //
-/////////////
-
-// Filter thematic_sidebar() .. remove from everything except the blog (category chosen in theme options).
-function remove_sidebar() {
-	
-	$shortname = get_option('of_shortname');
-	$cat_option = get_option($shortname.'_cats_in_blog');
-	
-	if ( $cat_option != 'Select a Category:' ) {
-		if ( in_category($cat_option) ) {
-			return TRUE;
-		} else {
-			return FALSE;
-		}
-	} elseif ( !is_home() ) {
-		return FALSE;
+// set post class handling to WP post_class()
+// If you set this to TRUE, Thematic will use thematic_post_class instead
+if (!defined('THEMATIC_COMPATIBLE_POST_CLASS')) {
+	define('THEMATIC_COMPATIBLE_POST_CLASS', false);
+}
+// which comment form should be used
+if (!defined('THEMATIC_COMPATIBLE_COMMENT_FORM')) {
+	if (function_exists('comment_form')) {
+		define('THEMATIC_COMPATIBLE_COMMENT_FORM', false); // WordPress 3.0
 	} else {
-		return TRUE;
+		define('THEMATIC_COMPATIBLE_COMMENT_FORM', true); // below WordPress 3.0
 	}
 }
 
-add_filter('thematic_sidebar', 'remove_sidebar');
+// Check for WordPress mu or WordPress 3.0
+define('THEMATIC_MB', function_exists('get_blog_option'));
 
-
-//////////////////////////////////////
-//// OPTIONS FRAMEWORK FUNCTIONS /////
-//////////////////////////////////////
-
-// Options Framework by Devin at WPTheming, based on WooThemes. http://wptheming.com/2010/12/options-framework/
-
-/* Set the file path based on whether the Options Framework is in a parent theme or child theme */
-
-if ( STYLESHEETPATH == TEMPLATEPATH ) {
-	define('OF_FILEPATH', TEMPLATEPATH);
-	define('OF_DIRECTORY', get_bloginfo('template_directory'));
-} else {
-	define('OF_FILEPATH', STYLESHEETPATH);
-	define('OF_DIRECTORY', get_bloginfo('stylesheet_directory'));
+// Create the feedlinks
+if (!(THEMATIC_COMPATIBLE_FEEDLINKS)) {
+	add_theme_support( 'automatic-feed-links' );
 }
 
-/* These files build out the options interface.  Likely won't need to edit these. */
-
-require_once (OF_FILEPATH . '/admin/admin-functions.php');		// Custom functions and plugins
-require_once (OF_FILEPATH . '/admin/admin-interface.php');		// Admin Interfaces (options,framework, seo)
-
-/* These files build out the theme specific options and associated functions. */
-
-// Options panel settings and custom settings
-require_once (OF_FILEPATH . '/admin/theme-options.php'); 
-// Theme actions based on options settings		
-require_once (OF_FILEPATH . '/admin/theme-functions.php');
-
-
-
-///////////////////////
-//// POST FORMATS /////
-///////////////////////
-
-// Thanks to this thread:
-// http://wordpress.stackexchange.com/questions/12420/post-format-selector-in-thematic-child-theme-post-class
-
-// Enable post formats
-add_theme_support('post-formats', array( 'link', 'aside', 'gallery', 'image', 'video' ));
-
-// Add the format selector to post_class
-function post_format_class( $classes = array() ) {
-  $format = get_post_format();
-  if ( '' == $format )
-    $format = 'standard';
-  $classes[] = 'format-' . $format;
-
-  return $classes;
+// Check for WordPress 2.9 add_theme_support()
+if ( apply_filters( 'thematic_post_thumbs', TRUE) ) {
+	if ( function_exists( 'add_theme_support' ) )
+	add_theme_support( 'post-thumbnails' );
 }
 
-add_filter( 'post_class', 'post_format_class' );
+// Load jQuery
+wp_enqueue_script('jquery');
 
+// Path constants
+define('THEMELIB', TEMPLATEPATH . '/library');
 
-///////////////////////
-// WPALCHEMY METABOX //
-///////////////////////
+// Create Theme Options Page
+require_once(THEMELIB . '/extensions/theme-options.php');
 
-// Dimas' WPAlchemy Meta Box PHP Class: http://www.farinspace.com/wpalchemy-metabox/
+// Load legacy functions
+require_once(THEMELIB . '/legacy/deprecated.php');
 
-// custom constant (opposite of TEMPLATEPATH)
-define('_TEMPLATEURL', WP_CONTENT_URL . '/' . stristr(TEMPLATEPATH, 'themes'));
+// Load widgets
+require_once(THEMELIB . '/extensions/widgets.php');
 
-include_once 'WPAlchemy/MetaBox.php';
+// Load custom header extensions
+require_once(THEMELIB . '/extensions/header-extensions.php');
+
+// Load custom content filters
+require_once(THEMELIB . '/extensions/content-extensions.php');
+
+// Load custom Comments filters
+require_once(THEMELIB . '/extensions/comments-extensions.php');
  
-// stylesheet used by all similar meta boxes
-if (is_admin()) 
-{
-	wp_enqueue_style('custom_meta_css', STYLESHEETPATH . 'custom/meta.css');
+// Load custom discussion filters
+require_once(THEMELIB . '/extensions/discussion-extensions.php');
+
+// Load custom Widgets
+require_once(THEMELIB . '/extensions/widgets-extensions.php');
+
+// Load the Comments Template functions and callbacks
+require_once(THEMELIB . '/extensions/discussion.php');
+
+// Load custom sidebar hooks
+require_once(THEMELIB . '/extensions/sidebar-extensions.php');
+
+// Load custom footer hooks
+require_once(THEMELIB . '/extensions/footer-extensions.php');
+
+// Add Dynamic Contextual Semantic Classes
+require_once(THEMELIB . '/extensions/dynamic-classes.php');
+
+// Need a little help from our helper functions
+require_once(THEMELIB . '/extensions/helpers.php');
+
+// Load shortcodes
+require_once(THEMELIB . '/extensions/shortcodes.php');
+
+// Load WPF Functions
+require_once(THEMELIB . '/wpf/main-functions.php');
+
+// Adds filters for the description/meta content in archives.php
+add_filter( 'archive_meta', 'wptexturize' );
+add_filter( 'archive_meta', 'convert_smilies' );
+add_filter( 'archive_meta', 'convert_chars' );
+add_filter( 'archive_meta', 'wpautop' );
+
+// Remove the WordPress Generator - via http://blog.ftwr.co.uk/archives/2007/10/06/improving-the-wordpress-generator/
+function thematic_remove_generators() { return ''; }
+if (apply_filters('thematic_hide_generators', TRUE)) {  
+    add_filter('the_generator','thematic_remove_generators');
 }
 
-$prefix = 'wpf_';
-$mb = new WPAlchemy_MetaBox(array
-(
-    'id' => '_custom_meta', // underscore prefix hides fields from the custom fields area
-    'title' => 'Artwork Info',
-    'template' => STYLESHEETPATH . '/custom/artwork-meta.php',
-    'context' => 'normal',
-));
+// Translate, if applicable
+load_theme_textdomain('thematic', THEMELIB . '/languages');
 
-// Display Artwork Info fields in post
-function display_artwork_info() {
-
-	global $mb;
-		
-	$mb->the_meta();
-	$values = array('title','medium','collabs','dimen','additional'); 
-	
-	echo the_content();	 
-	echo '<div id="artwork-meta">';
-
-	foreach ($values as $val) {
-	    if ($mb->get_the_value($val) != ''){
-	        $mb->the_value($val);
-	        echo '<br />';
-	    }
-	}  
-	
-	echo '</div>';
-} 
-
-add_action('thematic_post', 'display_artwork_info');
-
-
-/////////////////////
-// MEDIUM TAXONOMY //
-/////////////////////
-
-// Disabled. Added Medium field to metabox instead - may make more sense. 
-
-// Enable a taxonomy for Medium
-
-/* function wpfolio_create_taxonomies() { // uncomment this function to enable
-register_taxonomy('medium', 'post', array( 
-	'label' => 'Medium',
-	'hierarchical' => false,  
-	'query_var' => true, 
-	'rewrite' => true,
-	'public' => true,
-	'show_ui' => true,
-	'show_tagcloud' => true,
-	'show_in_nav_menus' => true,));
-} 
-add_action('init', 'wpfolio_create_taxonomies', 0); */
-
-
-////////////
-// IMAGES //
-////////////
-
-/*----- CUSTOM HEADER IMAGE -----*/
-// Disabled - this is covered in the Options Panel.
-
-define('NO_HEADER_TEXT', true );
-define('HEADER_TEXTCOLOR', '');
-define('HEADER_IMAGE', '%s/images/default_header.jpg'); // %s is the template dir uri
-define('HEADER_IMAGE_WIDTH', 960); // use width and height appropriate for your theme
-define('HEADER_IMAGE_HEIGHT', 198);
-
-// gets included in the site header
-function header_style() {
-    ?><style type="text/css">
-        #header {
-            background: url(<?php header_image(); ?>);
-        }
-    </style><?php
-}
-
-// gets included in the admin header
-function admin_header_style() {
-	?><style type="text/css">
-		#headimg {
-			width: <?php echo HEADER_IMAGE_WIDTH; ?>px;
-			height: <?php echo HEADER_IMAGE_HEIGHT; ?>px;
-		}
-	</style><?php
-}
-
-add_custom_image_header('header_style', 'admin_header_style'); 
-// END - Custom Header
-
-//------ Stuff that doesn't work but is necessary from 1.7? ------//
-
-// This sets the Large image size to 900px
-if ( ! isset( $content_width ) ) 
-	$content_width = 900; 
-
-// Remove inline styles on gallery shortcode
-function wpfolio_remove_gallery_css( $css ) {
-	return preg_replace( "#<style type='text/css'>(.*?)</style>#s", '', $css );
-	}
-//add_filter( 'gallery_style', 'wpfolio_remove_gallery_css' );
-
-// END - Remove inline styles on gallery shortcode
-
-
-
-////////////////
-// SHORTCODES //
-////////////////
-
-// Shortcode to add wide margins to a post page - works as is, but is applied in post lists
-
-function wide_margins_shortcode ($atts, $content = null) {
-	return '<div class="widemargins">' . do_shortcode($content) . '</div>';
-} 
-add_shortcode('margin', 'wide_margins_shortcode');
-
-
-
-/////////////////////
-// ADMIN INTERFACE //
-/////////////////////
-
-// Customize admin footer text to add WPFolio to links
-function wpfolio_admin_footer() {
-	echo 'Thank you for creating with <a href="http://wordpress.org/" target="_blank">WordPress</a>. | <a href="http://codex.wordpress.org/" target="_blank">Documentation</a> | <a href="http://wordpress.org/support/forum/4" target="_blank">Feedback</a> | <a href="http://wpfolio.visitsteve.com/">Theme by WPFolio</a>';
-} 
-add_filter('admin_footer_text', 'wpfolio_admin_footer');
+$locale = get_locale();
+$locale_file = THEMELIB . "/languages/$locale.php";
+if ( is_readable($locale_file) )
+	require_once($locale_file);
 
 
 ?>

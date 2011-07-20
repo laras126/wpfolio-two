@@ -1,45 +1,85 @@
-/* @override http://localhost:8888/wp-content/themes/wpfolio-two/style.css */
-
 /*   
 Theme Name: WPFolio Two
-Theme URI: 
-Description: Transition of WPFolio - the WordPress theme for artists - to a Thematic child theme.
-Author: Lara Schenck
+Theme URI: http://wpfolio.visitsteve.com/wiki/
+Description: The transition of WPFolio - the WordPress theme for artists - to the Thematic theme framework. 
+Author: <a href="http://notlaura.com">Lara Schenck</a>
 Author URI: http://themeshaper.com/
-Template: thematic
-Version: 0.7.5
-Tags: Thematic
+Version: 0.4
+Tags: Thematic, portfolio, theme-options, fixed-width, white
 .
 Thematic is © Ian Stewart http://themeshaper.com/
 .
 */
 
 /* Reset browser defaults */
-@import url('../thematic/library/styles/reset.css');
+@import url('library/styles/reset.css');
 
 /* Apply basic typography styles */
-@import url('../thematic/library/styles/typography.css');
+@import url('library/styles/typography.css');
 
 /* Apply a basic layout */
-@import url('../thematic/library/layouts/2c-r-fixed.css');
+@import url('library/layouts/2c-r-fixed.css');
 
 /* Apply basic image styles */
-@import url('../thematic/library/styles/images.css');
+@import url('library/styles/images.css');
 
 /* Apply default theme styles and colors */
 /* It's better to actually copy over default.css into this file (or link to a copy in your child theme) if you're going to do anything outrageous */
-@import url('../thematic/library/styles/default.css');
+@import url('library/styles/default.css');
 
 /* Prepare theme for plugins */
-@import url('../thematic/library/styles/plugins.css');
+@import url('library/styles/plugins.css');
 
 /* Dynamic styles from WPFolio Theme Options */
-@import url('css/wpf-styles.php');
+@import url('wpf/css/wpf-styles.php');
 
 /* Import Lobster - default webfont */
 @import url('http://fonts.googleapis.com/css?family=Lobster&v1');
 
 
+.entry-content img {
+    height:auto;
+    margin: 0 0 18px 0;
+    max-width:100%;
+}
+.alignleft,
+img.alignleft {
+	float: left;
+    margin-right:20px;
+}
+.alignright,
+img.alignright {
+	display: block;
+	float: right;
+    margin-left:20px;
+}
+.aligncenter,
+img.aligncenter {
+	margin-left:auto;
+	margin-right:auto;
+	display: block;
+	clear: both;
+}
+.wp-caption {
+	text-align: center;
+	margin-bottom:18px;
+}
+.wp-caption img {
+	margin: 0;
+	padding: 0;
+	border: 0 none;
+}
+.wp-caption p.wp-caption-text {
+	margin: 0;
+	padding:5px;
+}
+.gallery img {
+    margin:0;
+}
+.wp-smiley { /* Prevent the smileys from breaking line-height */
+	max-height:12px;
+	margin:0 !important;
+}
 
 
 /* @group general */
