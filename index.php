@@ -34,8 +34,9 @@
             	// calling the widget area 'index-bottom'
             	get_sidebar('index-bottom');
 				
+ 				/// ***** WPFolio navigation
             	// create the navigation below the content
-            	thematic_navigation_below();
+            	wpf_navigation_below();
             	
             	?>
 				

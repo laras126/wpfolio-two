@@ -87,7 +87,6 @@ function wpf_category_loop(){
 // WPF Alterations to doctitle
 
 function wpf_doctitle() {
-
 	$site_name = get_bloginfo('name');
     $separator = '|';
         	

@@ -31,7 +31,7 @@
     	        get_sidebar('single-insert');
 		
     	        // create the navigation below the content
-				thematic_navigation_below();
+				wpf_navigation_below();
 		
     	        // calling the comments template
     	        thematic_comments_template();

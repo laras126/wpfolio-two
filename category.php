@@ -16,6 +16,7 @@
 	
 	            <?php
 	        
+	        	// ***** WPF ***** //
 	            // displays the page title
 	            wpf_page_title();
 	
@@ -25,6 +26,7 @@
 	            // action hook for placing content above the category loop
 	            thematic_above_categoryloop();			
 	            
+	            // ***** WPF ***** //
 	            // create WPF's conditional category loop
 				wpf_category_loop();
 	
@@ -32,7 +34,7 @@
 	            thematic_below_categoryloop();			
 	
 	            // create the navigation below the content
-	            thematic_navigation_below();
+	            wpf_navigation_below();
 	            
 	            ?>
 	

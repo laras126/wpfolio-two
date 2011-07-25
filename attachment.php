@@ -18,8 +18,9 @@
 	            
 	            the_post();
 	            
+	            /// **** WPFolio remove page title
 	            // displays the page title
-				thematic_page_title();
+				//thematic_page_title();
 				
 				thematic_abovepost();
 	            
@@ -43,7 +44,7 @@
 	                
 					<div class="entry-content">
 						<div class="entry-attachment"><?php 
-						// Lara's change: $post->post_ID to $post->ID 
+						///*** WPFolio: $post->post_ID to $post->ID 
 						the_attachment_link($post->ID, true) ?></div>
 	                    
 	                        <?php 
@@ -58,8 +59,9 @@
 	                
 					<?php
 	                
+	                // *** WPFolio remove postfooter in attachment page
 	                // creating the post footer
-	                thematic_postfooter();
+	                //thematic_postfooter();
 	                
 	                ?>
 	                
@@ -69,17 +71,25 @@
 	            
 	            thematic_belowpost();
 	            
-	            comments_template();
+	            ///*** Adding WPFolio attachment navigation ?>
+	            
+				<div class="navigation">
+					<div class="nav-previous"><?php previous_image_link( 0, '&larr; Previous' ); ?></div>
+					<div class="nav-next"><?php next_image_link( 0, 'Next &rarr;' ); ?></div> 
+				</div> <!--.prevnext --> 
+	            
+	            <?php 
+	            ///*** WPFolio remove attachment comments 
+	            // comments_template();
 	            
 	            ?>
 	
 			</div><!-- #content -->
 			
 			<?php thematic_belowcontent(); ?> 
-			<div class="navigation">
-		<div class="nav-previous"><?php previous_image_link( 0, '&larr; Earlier' ); ?></div>
-		<div class="nav-next"><?php next_image_link( 0, 'Later &rarr;' ); ?></div> 
-	</div> <!--.prevnext --> 
+			
+			
+		
 		</div><!-- #container -->
 
 <?php 

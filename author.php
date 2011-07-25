@@ -71,7 +71,7 @@
     	        thematic_authorloop();
 		
     	        // create the navigation below the content
-				thematic_navigation_below(); ?>
+				wpf_navigation_below(); ?>
 		
 			</div><!-- #content -->
 			

@@ -5,7 +5,9 @@ Description: The transition of WPFolio - the WordPress theme for artists - to th
 Author: <a href="http://notlaura.com">Lara Schenck</a>
 Author URI: http://themeshaper.com/
 Version: 0.4
-Tags: Thematic, portfolio, theme-options, fixed-width, white
+License: GPL
+License URI:
+Tags: theme-options, fixed-width, white
 .
 Thematic is © Ian Stewart http://themeshaper.com/
 .
@@ -396,18 +398,15 @@ img.attachment-full {
 }
 
 .edit-link a, span.edit a {
-	padding: 15px 0 0 20px;
+	padding: 5px;
 	color: red;
 	font-weight: bold;
-	clear:both;
-	display:block;
 }
 
-.edit-link a:hover {
-	color: blue;
+.edit-link a:hover, span.edit a:hover {
 	font-weight: bold;
+	color: green;
 	clear:both;
-	display:block;
 }
 
 .entry-meta {
@@ -436,6 +435,14 @@ img.attachment-full {
 
 .single h1.entry-title {
 	border-bottom: 1px solid;
+}
+
+span.meta-sep-edit {
+	display: none;
+}
+
+#nav-above.navigation {
+	display: none;
 }
 
 /* @end */

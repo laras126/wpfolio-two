@@ -313,7 +313,10 @@ if (function_exists('childtheme_override_archive_loop'))  {
 <?php thematic_content(); ?>
 
 					</div><!-- .entry-content -->
-					<?php thematic_postfooter(); ?>
+					<?php 
+					///***** WPFolio postfooter *****///
+					wpf_postfooter(); ?>
+					
 				</div><!-- #post -->
 
 			<?php 
@@ -354,7 +357,10 @@ if (function_exists('childtheme_override_author_loop'))  {
 <?php thematic_content(); ?>
 
 					</div><!-- .entry-content -->
-					<?php thematic_postfooter(); ?>
+					<?php 
+					///***** WPFolio postfooter *****///
+					wpf_postfooter(); ?>
+					
 				</div><!-- #post -->
 
 			<?php 
@@ -394,7 +400,10 @@ if (function_exists('childtheme_override_category_loop'))  {
 <?php thematic_content(); ?>
 	
 					</div><!-- .entry-content -->
-					<?php thematic_postfooter(); ?>
+					<?php 
+					///***** WPFolio postfooter *****///
+					wpf_postfooter(); ?>
+					
 				</div><!-- #post -->
 
 			<?php 
@@ -454,7 +463,10 @@ if (function_exists('childtheme_override_index_loop'))  {
 
 					<?php wp_link_pages('before=<div class="page-link">' .__('Pages:', 'thematic') . '&after=</div>') ?>
 					</div><!-- .entry-content -->
-					<?php thematic_postfooter(); ?>
+					<?php 
+					///***** WPFolio postfooter *****///
+					wpf_postfooter(); ?>
+					
 				</div><!-- #post -->
 
 			<?php 
@@ -500,7 +512,10 @@ if (function_exists('childtheme_override_single_post'))  {
 
 						<?php wp_link_pages('before=<div class="page-link">' .__('Pages:', 'thematic') . '&after=</div>') ?>
 					</div><!-- .entry-content -->
-					<?php thematic_postfooter(); ?>
+					<?php 
+					///***** WPFolio postfooter *****///
+					wpf_postfooter(); ?>
+					
 				</div><!-- #post -->
 		<?php
 
@@ -537,7 +552,10 @@ if (function_exists('childtheme_override_search_loop'))  {
 <?php thematic_content(); ?>
 
 					</div><!-- .entry-content -->
-					<?php thematic_postfooter(); ?>
+					<?php
+					///***** WPFolio postfooter *****///
+					wpf_postfooter(); ?>
+					
 				</div><!-- #post -->
 
 			<?php 
@@ -577,7 +595,9 @@ if (function_exists('childtheme_override_tag_loop'))  {
 <?php thematic_content() ?>
 
 					</div><!-- .entry-content -->
-					<?php thematic_postfooter(); ?>
+					<?php 
+					///***** WPFolio postfooter *****///
+					wpf_postfooter(); ?>
 				</div><!-- #post -->
 
 			<?php 
@@ -628,7 +648,7 @@ if (function_exists('childtheme_override_postheader'))  {
  	   if ( is_404() || $post->post_type == 'page') {
  	       $postheader = thematic_postheader_posttitle();        
  	   } else {
- 	       $postheader = thematic_postheader_posttitle() . 	wpf_postheader_postmeta();    
+ 	       $postheader = thematic_postheader_posttitle() . 	wpf_postheader_postmeta();  // ***** WPF ***** //  
  	   }
  	   
  	   echo apply_filters( 'thematic_postheader', $postheader ); // Filter to override default post header
@@ -686,18 +706,22 @@ if (function_exists('childtheme_override_postheader_posttitle'))  {
 
 // Create post meta
 if (function_exists('childtheme_override_postheader_postmeta'))  {
-	function wpf_postheader_postmeta() {
+	function thematic_postheader_postmeta() {
 		return childtheme_override_postheader_postmeta();
 	}
 } else {
-	function wpf_postheader_postmeta() {
+	function thematic_postheader_postmeta() {
 
-	$postmeta = '<div class="entry-meta">';
-    $postmeta .= wpf_postmeta_entrydate();
-    $postmeta .= thematic_postmeta_editlink();
-    $postmeta .= "</div><!-- .entry-meta -->\n";
-    
-    return apply_filters('wpf_postheader_postmeta',$postmeta);
+	    $postmeta = '<div class="entry-meta">';
+	    $postmeta .= thematic_postmeta_authorlink();
+	    $postmeta .= '<span class="meta-sep meta-sep-entry-date"> | </span>';
+	    $postmeta .= thematic_postmeta_entrydate();
+	    
+	    $postmeta .= thematic_postmeta_editlink();
+	                   
+	    $postmeta .= "</div><!-- .entry-meta -->\n";
+	    
+	    return apply_filters('thematic_postheader_postmeta',$postmeta); 
 	
 	}
 } // end postheader_postmeta
@@ -728,17 +752,20 @@ if (function_exists('childtheme_override_postmeta_authorlink'))  {
 
 // Create entry date for post meta
 if (function_exists('childtheme_override_postmeta_entrydate'))  {
-	function wpf_postmeta_entrydate() {
+	function thematic_postmeta_entrydate() {
 		return childtheme_override_postmeta_entrydate();
 	}
 } else {
-	function wpf_postmeta_entrydate() {
-		$entrydate = '<span class="entry-date"><abbr class="published" title="';
+	function thematic_postmeta_entrydate() {
+	
+	    $entrydate = '<span class="meta-prep meta-prep-entry-date">' . __('Published: ', 'thematic') . '</span>';
+	    $entrydate .= '<span class="entry-date"><abbr class="published" title="';
 	    $entrydate .= get_the_time(thematic_time_title()) . '">';
 	    $entrydate .= get_the_time(thematic_time_display());
 	    $entrydate .= '</abbr></span>';
 	    
-	    return apply_filters('wpf_postmeta_entrydate', $entrydate);
+	    return apply_filters('thematic_post_meta_entrydate', $entrydate);
+	   
 	}
 } // end postmeta_entrydate()
 

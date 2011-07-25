@@ -125,7 +125,7 @@ require_once(THEMELIB . '/extensions/helpers.php');
 require_once(THEMELIB . '/extensions/shortcodes.php');
 
 // Load WPF Functions
-require_once(THEMELIB . '/wpf/main-functions.php');
+require_once(THEMELIB . '/wpf/wpf-functions.php');
 
 // Adds filters for the description/meta content in archives.php
 add_filter( 'archive_meta', 'wptexturize' );
@@ -146,6 +146,36 @@ $locale = get_locale();
 $locale_file = THEMELIB . "/languages/$locale.php";
 if ( is_readable($locale_file) )
 	require_once($locale_file);
+
+
+//////////////////////////////////////
+//// OPTIONS FRAMEWORK FUNCTIONS /////
+//////////////////////////////////////
+
+// Options Framework by Devin at WPTheming, based on WooThemes. http://wptheming.com/2010/12/options-framework/
+
+/* Set the file path based on whether the Options Framework is in a parent theme or child theme */
+
+if ( STYLESHEETPATH == TEMPLATEPATH ) {
+	define('OF_FILEPATH', TEMPLATEPATH);
+	define('OF_DIRECTORY', get_bloginfo('template_directory'));
+} else {
+	define('OF_FILEPATH', STYLESHEETPATH);
+	define('OF_DIRECTORY', get_bloginfo('stylesheet_directory'));
+}
+
+/* These files build out the options interface.  Likely won't need to edit these. */
+
+require_once (OF_FILEPATH . '/admin/admin-functions.php');		// Custom functions and plugins
+require_once (OF_FILEPATH . '/admin/admin-interface.php');		// Admin Interfaces (options,framework, seo)
+
+/* These files build out the theme specific options and associated functions. */
+
+// Options panel settings and custom settings
+require_once (OF_FILEPATH . '/admin/theme-options.php'); 
+// Theme actions based on options settings		
+require_once (OF_FILEPATH . '/admin/theme-functions.php');
+
 
 
 ?>
