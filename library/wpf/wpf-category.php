@@ -11,7 +11,7 @@ function wpf_page_title(){
 		echo '<h1 class=entry-title>';
 		single_cat_title();
 		echo '</h1>';
-	}
+	} 
 } // end wpf_page_title
 
 

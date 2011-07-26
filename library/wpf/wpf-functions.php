@@ -9,7 +9,7 @@
 // Require files in library/
 require_once("wpf-widgets.php");
 require_once("thumbs.php");
-require_once("portfolio-cat.php");
+require_once("wpf-category.php");
 require_once("wpf-postmeta.php");
 require_once("wpf-prevnext.php");
 require_once("dev-functions.php");

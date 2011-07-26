@@ -23,7 +23,7 @@ function get_post_thumbnail() {
 		$thumb=wp_get_attachment_thumb_url($num);
 		print $thumb;
 	else:
-		echo STYLESHEETPATH . '/library/imgs/default-thumb.png';
+		echo 'http://notlaura.com/default-thumb.png';
 	endif;
 }
 
