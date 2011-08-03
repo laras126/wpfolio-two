@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Blog
+ * This is the blog template - disabled to avoid confusion and bad styling.
  *
  * This template allows you to display the latest posts on any page of the site.
  *
