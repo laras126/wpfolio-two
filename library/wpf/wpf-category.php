@@ -91,21 +91,20 @@ function wpf_doctitle() {
     $separator = '|';
         	
     if ( is_single() ) {
-      $content = single_post_title('', FALSE);
+      $content =  $site_name . ' | '. single_post_title('', FALSE);
     }
     elseif ( is_home() || is_front_page() ) { 
       $content = get_bloginfo('description');
     }
     elseif ( is_page() ) { 
-      $content = single_post_title('', FALSE); 
+      $content = $site_name . ' | ' . single_post_title('', FALSE); 
     }
     elseif ( is_search() ) { 
       $content = __('Search Results for:', 'thematic'); 
       $content .= ' ' . esc_html(stripslashes(get_search_query()));
     }
     elseif ( is_category() ) {
-      $content = __('', 'thematic');
-      $content .= ' ' . single_cat_title("", false);;
+      $content =  $site_name . ' | ' . single_cat_title("", false);
     }
     elseif ( is_tag() ) { 
       $content = __('Tag Archives:', 'thematic');
