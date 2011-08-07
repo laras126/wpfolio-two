@@ -251,13 +251,6 @@ $options[] = array( "name" => "",
 		            "id" => $shortname."_li_optional_text",
 		            "type" => "text",
 		            "std" => "unless otherwise specified");
-		            
-$options[] = array( "name" => "Alignment",
-					"desc" => "Choose the alignment of the license text below the footer.",
-					"id" => $shortname."_li_alignment",
-					"std" => "Right",
-					"type" => "radio",
-					"options" => array("Left","Right","Center")); 
 
 /* $options[] = array( "name" => "Credits/RSS",
 					"desc" => "Choose show WPFolio credits and RSS/Comments feed icons.",

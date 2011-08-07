@@ -118,22 +118,22 @@ add_filter('thematic_above_indexloop', 'get_blog_cat');
 
 
 /*-----------------------------------------------------------------------------------*/
-/* Add Body Classes for Layout
+/* Add Body ides for Layout
 /*-----------------------------------------------------------------------------------*/
 
-// Adds a body class to indicate sidebar position - uncomment the filter and the option in theme-options.php to use it (you'll probably have to do some troubleshooting).
+// Adds a body id to indicate sidebar position - uncomment the filter and the option in theme-options.php to use it (you'll probably have to do some troubleshooting).
 
-// add_filter('thematic_body_class','of_body_class');
+// add_filter('thematic_body_id','of_body_id');
  
-function of_body_class($classes) {
+function of_body_id($ides) {
 	$shortname =  get_option('of_shortname');
 	$layout = get_option($shortname .'_layout');
 	
 	if ($layout == '') {
 		$layout = 'sidebar-r';
 	}
-	$classes[] = $layout;
-	return $classes;
+	$ides[] = $layout;
+	return $ides;
 }
 
 
@@ -194,18 +194,9 @@ function childtheme_logo() {
 /* Show name, date, and licensing in footer */
 /*-----------------------------------------------------------------------------------*/
 
-// Remove site info
-//function childtheme_override_siteinfo() {}
-function childtheme_override_siteinfo(){}
-function childtheme_override_siteinfoopen(){}
-function childtheme_override_siteinfoclose(){}
+// called in extensions/footer-extensions.php line 86, thematic_siteinfo()
+function wpf_license_option() {
 
-function license_cred_info() {?>
-
-	<div id="siteinfo" class="license">
-	<?php
-	/*-------* LICENSE *-------*/
-	
 	$shortname =  get_option('of_shortname');
 	$li_type = get_option($shortname .'_li_type');
 	$li_symbol_show = get_option($shortname .'_li_symbol_show');
@@ -213,44 +204,36 @@ function license_cred_info() {?>
 	$li_date = get_option($shortname .'_li_date') . ' - ' . date('Y');
 	$li_optxt = get_option($shortname .'_li_optional_text');
 	
-	// Show license symbol:
-	if ( $li_symbol_show == 0) {
-		 if ( $li_type == "CC Attribution" ) {
-		 	echo '<a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/us/80x15.png" /></a>' . ' ' . $li_date . ' ' . $li_name . ' ' . $li_optxt;
-		 } else if( $li_type == "CC Attribution-Share Alike" ) {
-		 	echo '<a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/us/80x15.png" /></a>' . ' ' . $li_date . ' ' . $li_name . ' ' . $li_optxt;
-		 } else if( $li_type == "CC Attribution-No Derivative Works" ) {
-		 	echo '<a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nd/3.0/us/80x15.png" /></a>' . ' ' .  $li_date . ' ' . $li_name . ' ' . $li_optxt;
-		 } else if( $li_type == "CC Attribution-Noncommercial" ) {
-		 	echo '<a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/3.0/us/80x15.png" /></a>' . ' ' . $li_date . ' ' . $li_name . ' ' . $li_optxt;
-		 } else if( $li_type == "CC Attribution-Noncommercial-Share Alike" ) {
-		 	echo '<a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/us/80x15.png" /></a>' . ' ' .  $li_date . ' ' . $li_name . ' ' . $li_optxt;
-		 } else if( $li_type == "CC Attribution-Noncommercial-No Derivative" ) {
-		 	echo '<a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/us/80x15.png" /></a>' . ' ' . $li_date . ' ' . $li_name . ' ' . $li_optxt;
-		 } else {
-			echo '&copy; '. $li_date . ' ' . $li_name . ' ' . $li_optxt;
-		}
+	if ($li_type != "Select a License:" ) {
+	?>
+
+		<span id="license">
+		<?php
 		
-	} else if ( $li_symbol_show == 1 ) {
-		echo $li_date . ' ' . $li_name . ' ' . $li_optxt;
-	}?>
-	</div> <!-- #siteinfo.license --> <?php
-	/*-------* CREDITS *-------*/ 
-	// Will be implemented on update
-	/*
-	<div id="siteinfo" class="credits"> 
-	
-	$credits = get_option($shortname .'_credits');
-	echo "asdasda";
-	
-
-	</div> <!-- #siteinfo.credits --> */
-
-	// Show credits and/or RSS icons:
-	
-	
+		// Show license symbol:
+		if ( $li_symbol_show == 0) {
+			 if ( $li_type == "CC Attribution" ) {
+			 	echo '<a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/"><img id="lisym" alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/us/80x15.png" /></a>' . ' ' . $li_date . ' ' . $li_name . ' ' . $li_optxt;
+			 } else if( $li_type == "CC Attribution-Share Alike" ) {
+			 	echo '<a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/"><img id="lisym" alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/us/80x15.png" /></a>' . ' ' . $li_date . ' ' . $li_name . ' ' . $li_optxt;
+			 } else if( $li_type == "CC Attribution-No Derivative Works" ) {
+			 	echo '<a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/"><img id="lisym" alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nd/3.0/us/80x15.png" /></a>' . ' ' .  $li_date . ' ' . $li_name . ' ' . $li_optxt;
+			 } else if( $li_type == "CC Attribution-Noncommercial" ) {
+			 	echo '<a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/"><img id="lisym" alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/3.0/us/80x15.png" /></a>' . ' ' . $li_date . ' ' . $li_name . ' ' . $li_optxt;
+			 } else if( $li_type == "CC Attribution-Noncommercial-Share Alike" ) {
+			 	echo '<a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/"><img id="lisym" alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/us/80x15.png" /></a>' . ' ' .  $li_date . ' ' . $li_name . ' ' . $li_optxt;
+			 } else if( $li_type == "CC Attribution-Noncommercial-No Derivative" ) {
+			 	echo '<a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/"><img id="lisym" alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/us/80x15.png" /></a>' . ' ' . $li_date . ' ' . $li_name . ' ' . $li_optxt;
+			 } else {
+				echo '&copy; '. $li_date . ' ' . $li_name . ' ' . $li_optxt;
+			}
+			
+		} else if ( $li_symbol_show == 1 ) {
+			echo $li_type . ' ' . $li_date . ' ' . $li_name . ' ' . $li_optxt;
+		}?>
+		</span> <!-- #siteinfo --> <?php
+	} 
 }
-add_filter('thematic_belowfooter','license_cred_info');
 
 /*-----------------------------------------------------------------------------------*/
 /* Show analytics code in footer */

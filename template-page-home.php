@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Home Page 
- * This template is intended to serve as a static home page. There is no sidebar or comment area, the page title is hidden, and an onload fade has been added to the content area. 
+ * This template is intended to serve as a static home page. Comment form, sidebar, and page title are hidden, and an onload fade has been added to the content area. 
  * 
  */
 
@@ -72,7 +72,7 @@
 	        thematic_belowpost();
 	        
 	        // calling the comments template
-	        thematic_comments_template();
+	        // thematic_comments_template();
 	        
 	        // calling the widget area 'page-bottom'
 	        get_sidebar('page-bottom');
