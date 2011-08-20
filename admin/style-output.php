@@ -27,8 +27,8 @@ if ($output <> '') {
 }
 
 // Pull Styles from Dynamic StylesSheet (Look in /css/ )
-$wpf_coloroptions = STYLESHEETPATH . '/admin/css/wpf-styles.php'; if( is_file( $wpf_coloroptions ) ) 
-require $wpf_coloroptions;
+$wpf_styleoptions = TEMPLATEPATH . '/admin/css/wpf-styles.php'; if( is_file( $wpf_styleoptions ) ) 
+require $wpf_styleoptions;
 
 // Echo Optional Styles
 echo $output;
