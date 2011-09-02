@@ -14,14 +14,13 @@
 ?>
 	<!-- Fade in image content -->
 	<script type="text/javascript">
+		
 		jQuery.noConflict();
 
 		jQuery(document).ready(function(){
-		
-			jQuery('#content img').hide();
-			jQuery('#content img').fadeIn(1000);
-			
+			jQuery("#content").hide().fadeIn(1200);	
 		});	
+		
 	</script>
 	
 		<div id="container">

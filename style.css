@@ -4,7 +4,7 @@ Theme URI: http://wpfolio.visitsteve.com/wiki/
 Description: The transition of WPFolio - the WordPress theme for artists - to the Thematic theme framework. 
 Author: <a href="http://notlaura.com">Lara Schenck</a>
 Author URI: http://themeshaper.com/
-Version: 0.8.7
+Version: 0.8.9
 License: GPL
 License URI:
 Tags: theme-options, fixed-width, white
@@ -12,511 +12,385 @@ Tags: theme-options, fixed-width, white
 Thematic is © Ian Stewart http://themeshaper.com/
 .
 */
-
-/* Reset browser defaults */
-@import url('library/styles/reset.css');
-
-/* Apply basic typography styles */
-@import url('library/styles/typography.css');
-
-/* Apply a basic layout */
-@import url('library/layouts/2c-r-fixed.css');
-
-/* Apply basic image styles */
-@import url('library/styles/images.css');
-
-/* Apply default theme styles and colors */
-/* It's better to actually copy over default.css into this file (or link to a copy in your child theme) if you're going to do anything outrageous */
-@import url('library/styles/default.css');
-
-/* Prepare theme for plugins */
-@import url('library/styles/plugins.css');
-
-/* Dynamic styles from WPFolio Theme Options */
-@import url('wpf/css/wpf-styles.php');
-
-/* Import Lobster - default webfont */
-@import url('http://fonts.googleapis.com/css?family=Lobster&v1');
-
+@import url(library/styles/reset.css);
+@import url(library/styles/typography.css);
+@import url(library/layouts/2c-r-fixed.css);
+@import url(library/styles/images.css);
+@import url(library/styles/default.css);
+@import url(library/styles/plugins.css);
+@import url(wpf/css/wpf-styles.php);
+@import url(http://fonts.googleapis.com/css?family=Lobster&v1);
 
 .entry-content img {
-    height:auto;
-    margin: 0 0 18px 0;
-    max-width:100%;
+height:auto;
+max-width:100%;
+margin:0 0 18px;
 }
-.alignleft,
-img.alignleft {
-	float: left;
-    margin-right:20px;
+
+.alignleft,img.alignleft {
+float:left;
+margin-right:20px;
 }
-.alignright,
-img.alignright {
-	display: block;
-	float: right;
-    margin-left:20px;
+
+.alignright,img.alignright {
+display:block;
+float:right;
+margin-left:20px;
 }
-.aligncenter,
-img.aligncenter {
-	margin-left:auto;
-	margin-right:auto;
-	display: block;
-	clear: both;
+
+.aligncenter,img.aligncenter {
+margin-left:auto;
+margin-right:auto;
+display:block;
+clear:both;
 }
+
 .wp-caption {
-	text-align: center;
-	margin-bottom:18px;
+text-align:center;
+margin-bottom:18px;
 }
+
 .wp-caption img {
-	margin: 0;
-	padding: 0;
-	border: 0 none;
+border:0 none;
+margin:0;
+padding:0;
 }
+
 .wp-caption p.wp-caption-text {
-	margin: 0;
-	padding:5px;
+margin:0;
+padding:5px;
 }
+
 .gallery img {
-    margin:0;
-}
-.wp-smiley { /* Prevent the smileys from breaking line-height */
-	max-height:12px;
-	margin:0 !important;
+margin:0;
 }
 
-
-/**********************/
-/* WPFolio Two styles */
-/**********************/
-
-/* @group general */
+.wp-smiley {
+max-height:12px;
+margin:0!important;
+}
 
 body {
-	font-size: 100%;
-	font-size: .9em;
-	line-height: 1.3em;
+font-size:.9em;
+line-height:1.3em;
+background-color:#ccc;
+font-family:Arial, Helvetica Neue, Helvetica, sans-serif;
 }
 
 a {
-	text-decoration: none;
+text-decoration:none;
 }
 
 a:hover {
-	color: #FF4B33;
+color:#FF4B33;
 }
 
 #blog-title {
-	font-size: 4em;
-	margin-bottom: 7px;
-	font-family: 'Lobster', arial, serif; 
+font-size:4em;
+margin-bottom:7px;
+font-family:Lobster, arial, serif;
 }
 
 #blog-description {
-	margin: 20px 0;
-	font-size: 1.2em;
+font-size:1.2em;
+margin:20px 0;
 }
 
 #wrapper {
-	width:960px;
-	margin: 20px auto;
+width:960px;
+background-color:#FFF;
+margin:20px auto;
 }
 
 #respond {
-    background:transparent;
+background:transparent;
+background-color:inherit;
 }
 
 #branding {
-	width:inherit;
-	margin:auto;
-	padding: 36px 36px 0 36px;	
+width:inherit;
+margin:auto;
+padding:36px 36px 0;
 }
 
 #main {
-	padding-top: 0px;
-	margin-top: 20px;
+padding-top:0;
+margin-top:20px;
 }
 
 #footer {
-	margin-bottom: 30px;
+margin-bottom:30px;
 }
 
 .entry-content {
-	padding-top: 0px;
-	margin:auto;
+padding-top:0;
+margin:auto;
 }
 
-/* @end */
-
-/* @group Nav */
-
 .menu {
-	margin-top: 30px;
+margin-top:30px;
 }
 
 .navigation a {
-	font-weight: bold;
-	font-style: normal;
+font-weight:700;
+font-style:normal;
 }
 
 .nav-previous {
-	padding-left: 70px;
-	width:100px;
+padding-left:70px;
+width:100px;
 }
 
 .nav-next {
-	padding-right: 100px;
-	width:100px;
+padding-right:100px;
+width:100px;
 }
 
 .navigation a:hover {
-	color:#999;
+color:#999;
 }
 
 li.current-menu-item {
-	text-transform: uppercase;
+text-transform:uppercase;
 }
 
-#access, .menu a, a:hover, a:focus, ul, li, .current_page_item {
-	display: compact;
-	border: none;
+#access,.menu a,a:hover,a:focus,ul,li,.current_page_item {
+display:compact;
+border:none;
 }
 
 #access {
-	margin-left: 20px;
-	bottom: 10px;
-}
-
-.sf-menu, .sf-menu ul,.sf-menu .current_page_parent a {
-	border: none;	 
-}
-
-.sf-menu ul {
-	border: none;	
+margin-left:20px;
+bottom:10px;
 }
 
 ul.sub-menu a {
-	box-shadow: 0.5px 0.5px 2px #cccccc;
-		-moz-box-shadow: .5px .5px 2px #cccccc; 
-		-webkit-box-shadow: .5px .5px 2px #cccccc;
+box-shadow:.5px .5px 2px #ccc;
+-moz-box-shadow:.5px .5px 2px #ccc;
+-webkit-box-shadow:.5px .5px 2px #ccc;
 }
 
-
-#subsidiary .sub-menu a, #primary .sub-menu a, #secondary .sub-menu a {
-	box-shadow: 0 0 0 transparent;
-		-moz-box-shadow: 0 0 0 transparent; 
-		-webkit-box-shadow: 0 0 0 transparent;
+#subsidiary .sub-menu a,#primary .sub-menu a,#secondary .sub-menu a {
+box-shadow:0 0 0 transparent;
+-moz-box-shadow:0 0 0 transparent;
+-webkit-box-shadow:0 0 0 transparent;
 }
-
-/* @end */
-
-/* @group News */
 
 .news h1.entry-title {
-	font-size: 1.7em;
-	margin-bottom: 10px;
-	border-bottom: 1px solid #cccccc;
-	margin-top: 20px;
-	font-weight: normal;
+font-size:1.7em;
+margin-bottom:10px;
+border-bottom:1px solid #ccc;
+margin-top:20px;
+border:none;
+font-weight:700;
 }
 
 .news h2.entry-title {
-	font-weight: normal;
-	font-size: 1.7em;
-	margin: 20px 0 10px 0;
-	border-bottom: 1px solid #cccccc;
-}
-
-.news h1.entry-title {
-	border:  none;
-	font-weight: bold;
+font-weight:400;
+font-size:1.7em;
+border-bottom:1px solid #ccc;
+margin:20px 0 10px;
 }
 
 .news #container {
-	margin: 0px 0 0 28px;
+margin:0 0 0 28px;
 }
 
 .news #content {
-	width: 600px;
+width:600px;
 }
 
-/* @end */
-
-/* @group Portfolio */
-
 .portfolio #container {
-	width: 100%;
+width:100%;
 }
 
 .portfolio #content {
-	margin-top: 0;
-	width:940px;
+margin-top:0;
+width:940px;
 }
 
 .portfolio h1.entry-title {
-	text-align: center;
-	font-weight: normal;
-	font-size: 1.2em;
-	text-transform: uppercase;
-	padding: 0px 0px 25px;
+text-align:center;
+font-weight:400;
+font-size:1.2em;
+text-transform:uppercase;
+padding:0 0 25px;
 }
-
-.portfolio .post h1.entry-title {
-	display: none;
-}
-
-.portfolio .entry-meta {
-	display: none;
-}
-
-/* @end */
-
-/* @group Category-archive */
 
 span.thumb-list {
-	width: 220px;
-	height: 200px;
-	float: left;
-	margin: auto;
-	padding-left: 11px;
+width:220px;
+height:200px;
+float:left;
+padding-left:11px;
+margin:auto;
 }
 
-h4.thumb-title, h4.thumb-title a, h4.thumb-title a:hover {
-	font-size: .8em;
-	line-height: 1.1em;
-	text-align: center;
-	padding-top: 8px;
+h4.thumb-title,h4.thumb-title a,h4.thumb-title a:hover {
+font-size:.8em;
+line-height:1.1em;
+text-align:center;
+padding-top:8px;
 }
 
 img.attachment-post-thumbnail {
-	border: 1px solid #cccccc;
-	margin:0 30px 0 30px;
-	padding: 3px;
-	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    filter: alpha(opacity=100);
-    -moz-opacity:1;
-    -khtml-opacity: 1;
-	opacity: 1;
+border:1px solid #ccc;
+-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+filter:alpha(opacity=100);
+-moz-opacity:1;
+-khtml-opacity:1;
+opacity:1;
+margin:0 30px;
+padding:3px;
 }
 
-img.attachment-post-thumbnail:hover, .gallery-icon:hover {
-	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
-    filter: alpha(opacity=70);
-    -moz-opacity:0.7;
-    -khtml-opacity: 0.7;
-    opacity: 0.7; 
+img.attachment-post-thumbnail:hover,.gallery-icon:hover {
+-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+filter:alpha(opacity=70);
+-moz-opacity:0.7;
+-khtml-opacity:0.7;
+opacity:0.7;
 }
 
-.gallery-icon {
-	border: none;
-}
-
-/* @end */
-
-/* @group sidebar */
-
-#primary, #secondary, .main-aside ul li ul li {
-	list-style-type: none;
+#primary,#secondary,.main-aside ul li ul li {
+list-style-type:none;
 }
 
 ul.xoxo {
-	margin-left: 30px;
+margin-left:30px;
 }
 
-#primary ul.xoxo, #secondary ul.xoxo {
-	margin-left: 10px;
+#primary ul.xoxo,#secondary ul.xoxo {
+margin-left:10px;
 }
 
-/* @end */
-
-/* @group Pages */
-
-.page #container, .page #content {
-	width:910px;
-	margin: auto;
+.page #container,.page #content {
+width:910px;
+margin:auto;
 }
 
 .page #main {
-	margin-left: 29px;
+margin-left:29px;
 }
 
 .widemargins {
-	margin: auto 120px;
-	padding-right: 30px;
-}
-
-/*.widemargins-override{
-margin: auto -135px;
-}*/
-
-/* @end */
-
-/* @group Widget areas */
-
-#primary, #secondary {
-	border: none;
+padding-right:30px;
+margin:auto 120px;
 }
 
 h3.widgettitle {
-	padding-bottom: 10px;
+padding-bottom:10px;
 }
 
 .aside h3 {
-	font-size: 18px;
+font-size:18px;
 }
 
 .main-aside ul {
-	padding-top: 10px;
+padding-top:10px;
 }
 
 #subsidiary {
-	margin-left: 0px;
+margin-left:0;
 }
-
-/* @end */
-
-/* @group Misc */
 
 img.attachment-full {
-	padding: 10px 0px 10px;
-	clear: both;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+clear:both;
+display:block;
+margin-left:auto;
+margin-right:auto;
+padding:10px 0;
 }
 
-.edit-link a, span.edit a {
-	padding: 5px;
-	color: red;
-	font-weight: bold;
+.edit-link a,span.edit a {
+color:red;
+font-weight:700;
+padding:5px;
 }
 
-.edit-link a:hover, span.edit a:hover {
-	font-weight: bold;
-	color: green;
-	clear:both;
+.edit-link a:hover,span.edit a:hover {
+font-weight:700;
+color:green;
+clear:both;
 }
 
 .entry-meta {
-	padding-bottom:20px;
+padding-bottom:20px;
 }
 
 .entry-meta abbr {
-    border:none;
-    cursor:text;
-    font-size:1em;
-    font-style:normal;
-    letter-spacing:0.05em;
-}
-
-.attachment h1.entry-title {
-	display: none;
+border:none;
+cursor:text;
+font-size:1em;
+font-style:normal;
+letter-spacing:.05em;
 }
 
 #artwork-meta {
-	width: 500px;
-	font-size: 1em;
-	line-height: 1.1em;
-	margin-left: 20px;
-	margin-bottom: 30px;
+width:500px;
+font-size:1em;
+line-height:1.1em;
+margin-left:20px;
+margin-bottom:30px;
 }
 
 .single h1.entry-title {
-	border-bottom: 1px solid;
-}
-
-span.meta-sep-edit {
-	display: none;
-}
-
-#nav-above.navigation {
-	display: none;
+border-bottom:1px solid;
 }
 
 #siteinfo {
-	padding: 20px 0 20px 20px;
+padding:20px 0 20px 20px;
 }
 
-#credits{
-	float:left;
+#credits {
+float:left;
 }
 
 #license {
-	float: right;
-	margin-right: 20px;
+float:right;
+margin-right:20px;
 }
 
 #lisym {
-	display: inline;
-	/*padding-top: 10px;*/
+display:inline;
 }
 
-/* @end */
-
-/* @group Comments */
-
-.page-template-templatepage-fullwidth-php, .portfolio #comments {
-	width:623px;
-}
-
-#respond {
-	background-color: inherit;
+.page-template-templatepage-fullwidth-php,.portfolio #comments {
+width:623px;
 }
 
 #comments-list li.bypostauthor {
-	background-color: #fff;
+background-color:#fff;
 }
-
-/* @end */
-
-/* @group Typography */
 
 .entry-content h3 {
-	padding: 6px 0 6px 0;
-	font-style: normal;
+font-style:normal;
+padding:6px 0;
 }
 
-/* @group default styles */
-
-	#wrapper {background-color:#FFFFFF;}
-	body {background-color:#cccccc;font-family:Arial, Helvetica Neue, Helvetica, sans-serif}
-	h1,h2,h3,h4,h5,h6,p,#comments h3{font-family:Arial, Helvetica Neue, Helvetica, sans-serif}
-	.entry-content h2,.entry-title,textarea,input{font-family:Arial, Helvetica Neue, Helvetica, sans-serif}
-	p, #blog-title a, .entry-title a, .entry-content, h3.widgettitle, h1, h2, h3, h4{color: #000}
-	#access a, #blog-description, .aside a, .aside, .entry-meta, .entry-utility, .entry-utility a, input#s, .navigation a, #blog-title a:hover, .textwidget p {color: #666}
-	#footer, .news h2.entry-title, img.attachment-post-thumbnail, .single h1.entry-title, .gallery-icon {border-color:#666}
-	#access a:hover {background-color:#E8E8E8}
-
-
-/* @end */
-
-
-
-/* @group post formats */
-
-.format-aside {
+p,#blog-title a,.entry-title a,.entry-content,h3.widgettitle,h1,h2,h3,h4 {
+color:#000;
 }
 
-.format-gallery {
+#access a,#blog-description,.aside a,.aside,.entry-meta,.entry-utility,.entry-utility a,input#s,.navigation a,#blog-title a:hover,.textwidget p {
+color:#666;
 }
 
-.format-link {
+#footer,.news h2.entry-title,img.attachment-post-thumbnail,.single h1.entry-title,.gallery-icon {
+border-color:#666;
 }
 
-.format-image {
+#access a:hover {
+background-color:#E8E8E8;
 }
 
-.format-quote {
+.sf-menu,.sf-menu ul,.sf-menu .current_page_parent a,.sf-menu ul,.gallery-icon,#primary,#secondary {
+border:none;
 }
 
-.format-status {
+.portfolio .post h1.entry-title,.portfolio .entry-meta,.attachment h1.entry-title,span.meta-sep-edit,#nav-above.navigation {
+display:none;
 }
 
-.format-video {
+h1,h2,h3,h4,h5,h6,p,#comments h3,.entry-content h2,.entry-title,textarea,input {
+font-family:Arial, Helvetica Neue, Helvetica, sans-serif;
 }
-
-.format-audio {
-}
-
-.format-chat {
-}
-
-/* @end */

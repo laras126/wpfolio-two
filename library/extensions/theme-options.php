@@ -25,7 +25,7 @@ $options = array (
 				array(	"name" => __('Text in Footer','thematic'),
 						"desc" => __("You can use the following shortcodes in your footer text: [wp-link] [theme-link] [loginout-link] [blog-title] [blog-link] [the-year]",'thematic'),
 						"id" => $shortname."_footertext",
-						"std" => __("Powered by [wp-link]. Built on the [theme-link].", 'thematic'),
+						"std" => __("Powered by [wp-link]. Theme <a href='http://notlaura.com/wpfolio-two'>WPFolio-Two</a>. Built on the [theme-link].", 'thematic'),
 						"type" => "textarea",
 						"options" => array(	"rows" => "5",
 											"cols" => "94") ),
