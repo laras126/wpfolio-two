@@ -15,19 +15,4 @@ http://wpfolio.visitsteve.com
 
 @import url('../wpfolio-two/style.css');
 
-/* HEADER IMAGE example */
-/* 
-div#header {
-	background: url(images/dummy-header.png) 0 center;
-	height: 105px;
-}
-div.headertext {
-	margin-left: 120px;
-}
-*/
-
 /* add your changes below this line */
-
-#blog-description {
-	margin-top:100px;
-}
