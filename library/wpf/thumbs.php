@@ -1,26 +1,27 @@
 <?php
 
+// Add support for post thumbnails of 250px square
+if ( function_exists( 'add_theme_support' ) ) {
+	add_theme_support( 'post-thumbnails' );
+	set_post_thumbnail_size( 250, 250, true );
+}
+
 ////////////////
 // THUMBNAILS //
 ////////////////
 
-// Add support for post thumbnails of 150px square
-add_theme_support('post-thumbnails');
-set_post_thumbnail_size( 150, 150, true );
-
-
 // http://www.kingrosales.com/how-to-display-your-posts-first-image-thumbnail-automatically-in-wordpress/
-// Get the URL of the first attachment image - called in portfolio-cat.php
+// Get the URL of the first attachment image - called in wpf-category.php
 function get_post_thumbnail() {
 	$files = get_children('post_parent='.get_the_ID().'&post_type=attachment&post_mime_type=image');
 	if($files) :
 		$keys = array_reverse(array_keys($files));
-		$j=0;
+		$j = 0;
 		$num = $keys[$j];
-		$image=wp_get_attachment_image($num, array(150,150), false);
+		$image = wp_get_attachment_image($num, 'medium', false);
 		$imagepieces = explode('"', $image);
 		$imagepath = $imagepieces[1];
-		$thumb=wp_get_attachment_thumb_url($num);
+		$thumb = wp_get_attachment_thumb_url($num);
 		print $thumb;
 	else:
 		echo 'http://notlaura.com/default-thumb.png';

@@ -15,6 +15,12 @@ require_once("wpf-prevnext.php");
 require_once("dev-functions.php");
 
 
+// Add support for post thumbnails of 150px square
+if ( function_exists( 'add_theme_support' ) ) {
+	add_theme_support( 'post-thumbnails' );
+}
+
+
 /////////////////////////////////
 // PORTFOLIO/NEWS BODY CLASSES //
 /////////////////////////////////

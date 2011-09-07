@@ -39,9 +39,8 @@ function wpf_category_loop(){
 					}  
 					if ( (function_exists('has_post_thumbnail')) && (has_post_thumbnail()) ) {
 	  					the_post_thumbnail();
-	  					
 					} else { ?>
-					<a href="<?php the_permalink();?>"><img src="<?php get_post_thumbnail(); ?>" alt="<?php the_title(); ?>" class="attachment-post-thumbnail" width="150" height="150" /></a> 
+					<a href="<?php the_permalink();?>"><img src="<?php get_post_thumbnail(); ?>" alt="<?php the_title(); ?>" class="attachment-post-thumbnail" /></a> 
 	 				<?php } ?></a>
 	   				<h4 class="thumb-title"><?php the_title(); ?></h4>
 					
