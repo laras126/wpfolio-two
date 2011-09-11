@@ -1,32 +1,46 @@
 <?php
 
 // Add support for post thumbnails of 250px square
+// Add custom image size for cat thumbnails
 if ( function_exists( 'add_theme_support' ) ) {
 	add_theme_support( 'post-thumbnails' );
-	set_post_thumbnail_size( 250, 250, true );
+	set_post_thumbnail_size( 270, 270, true );
+	add_image_size('wpf-thumb', 270, 270, true);
 }
 
 ////////////////
 // THUMBNAILS //
 ////////////////
 
-// http://www.kingrosales.com/how-to-display-your-posts-first-image-thumbnail-automatically-in-wordpress/ -- (although this link is now dead)
-// Get the URL of the first attachment image - called in wpf-category.php
+// http://www.kingrosales.com/how-to-display-your-posts-first-image-thumbnail-automatically-in-wordpress/ -- (although this link is now dead, and function has been significantly hacked, it's worth a credit.)
 
-function get_post_thumbnail() {
-	$files = get_children('post_parent='.get_the_ID().'&post_type=attachment&post_mime_type=image');
-	if($files) :
-		$keys = array_reverse(array_keys($files));
-		$j = 0;
-		$num = $keys[$j];
-/*		$image = wp_get_attachment_image($num);
-		$imagepieces = explode('"', $image);
-		$imagepath = $imagepieces[1];*/
-		$thumb = wp_get_attachment_thumb_url($num);
-		print $thumb;
-	else:
-		echo 'http://notlaura.com/default-thumb.png';
-	endif;
+
+// Get post attachments
+function wpf_get_attachments() {
+	global $post;
+	return get_posts( 
+		array(
+			'post_parent' => get_the_ID(), 
+			'post_type' => 'attachment', 
+			'post_mime_type' => 'image') 
+		);
+}
+
+// Get the URL of the first attachment image - called in wpf-category.php. If no attachments, display default-thumb.png
+function wpf_get_first_thumb_url() {
+
+	$attr = array( 
+		'class'	=> "attachment-post-thumbnail wp-post-image");
+
+	$imgs = wpf_get_attachments();
+	if ($imgs) {
+		$keys = array_reverse($imgs);
+		$num = $keys[0];
+		$url = wp_get_attachment_image($num->ID, 'wpf-thumb', true,$attr);
+		print $url;
+	} else {
+		echo '<img src=http://notlaura.com/default-thumb.png alt="no attachments here!" title="default thumb" class="attachment-post-thumbnail wp-post-image">';
+	}
 }
 
 // END - get attachment function
@@ -62,7 +76,5 @@ function check_thumb() {
 		echo get_thumb($post->ID); 
 	}
 }*/
-
-
 
 ?>
