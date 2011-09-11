@@ -8,17 +8,12 @@
 
 // Require files in library/
 require_once("wpf-widgets.php");
-require_once("thumbs.php");
+require_once("wpf-thumbs.php");
 require_once("wpf-category.php");
 require_once("wpf-postmeta.php");
 require_once("wpf-prevnext.php");
 require_once("dev-functions.php");
 
-
-// Add support for post thumbnails of 150px square
-if ( function_exists( 'add_theme_support' ) ) {
-	add_theme_support( 'post-thumbnails' );
-}
 
 
 /////////////////////////////////
@@ -170,8 +165,13 @@ add_action('init', 'wpfolio_create_taxonomies', 0); */
 // IMAGES //
 ////////////
 
+// Thumbnail functions in wpf-thumbs.php
+
+// Set max width of images to 900px
+$content_width = 900;
+
 /*----- CUSTOM HEADER IMAGE -----*/
-// Disabled - this is covered in the Options Panel.
+// Also covered in the Options Panel
 
 define('NO_HEADER_TEXT', true );
 define('HEADER_TEXTCOLOR', '');

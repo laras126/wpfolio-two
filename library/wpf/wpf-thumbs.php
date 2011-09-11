@@ -10,17 +10,18 @@ if ( function_exists( 'add_theme_support' ) ) {
 // THUMBNAILS //
 ////////////////
 
-// http://www.kingrosales.com/how-to-display-your-posts-first-image-thumbnail-automatically-in-wordpress/
+// http://www.kingrosales.com/how-to-display-your-posts-first-image-thumbnail-automatically-in-wordpress/ -- (although this link is now dead)
 // Get the URL of the first attachment image - called in wpf-category.php
+
 function get_post_thumbnail() {
 	$files = get_children('post_parent='.get_the_ID().'&post_type=attachment&post_mime_type=image');
 	if($files) :
 		$keys = array_reverse(array_keys($files));
 		$j = 0;
 		$num = $keys[$j];
-		$image = wp_get_attachment_image($num, 'medium', false);
+/*		$image = wp_get_attachment_image($num);
 		$imagepieces = explode('"', $image);
-		$imagepath = $imagepieces[1];
+		$imagepath = $imagepieces[1];*/
 		$thumb = wp_get_attachment_thumb_url($num);
 		print $thumb;
 	else:
@@ -28,13 +29,14 @@ function get_post_thumbnail() {
 	endif;
 }
 
+// END - get attachment function
+
 // Make featured image thumbnail a permalink
 add_filter( 'post_thumbnail_html', 'my_post_image_html', 10, 3 );
 function my_post_image_html( $html, $post_id, $post_image_id ) {
 	$html = '<a href="' . get_permalink( $post_id ) . '" title="' . esc_attr( get_post_field( 'post_title', $post_id ) ) . '">' . $html . '</a>';
 	return $html;
 }
-// END - get attachment function
 
 
 /*----- GET FEATURED IMAGE (1.7 function)----*/
