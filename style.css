@@ -21,6 +21,8 @@ Thematic is © Ian Stewart http://themeshaper.com/
 @import url(wpf/css/wpf-styles.php);
 @import url(http://fonts.googleapis.com/css?family=Lobster&v1);
 
+/* Thematic styles */
+
 .entry-content img {
 height:auto;
 max-width:100%;
@@ -70,6 +72,10 @@ max-height:12px;
 margin:0!important;
 }
 
+/* end Thematic styles */
+
+/* WPF2 styles */
+
 body {
 font-size:.9em;
 line-height:1.3em;
@@ -85,6 +91,27 @@ a:hover {
 color:#FF4B33;
 }
 
+#wrapper {
+width:960px;
+background-color:#FFF;
+margin:20px auto;
+padding: 0 20px 0 20px;
+}
+
+#respond {
+background:transparent;
+background-color:inherit;
+}
+
+#header {
+margin-left:20px;
+}
+
+#branding {
+width:inherit;
+padding:36px 0 5px 0;
+}
+
 #blog-title {
 font-size:4em;
 margin-bottom:7px;
@@ -93,24 +120,12 @@ font-family:Lobster, arial, serif;
 
 #blog-description {
 font-size:1.2em;
-margin:20px 0;
+margin:20px 0 0 5px;
 }
 
-#wrapper {
-width:960px;
-background-color:#FFF;
-margin:20px auto;
-}
-
-#respond {
-background:transparent;
-background-color:inherit;
-}
-
-#branding {
-width:inherit;
-margin:auto;
-padding:36px 36px 0;
+#access {
+bottom:10px;
+right:10px;
 }
 
 #main {
@@ -118,8 +133,13 @@ padding-top:0;
 margin-top:20px;
 }
 
+#content {
+margin:0;
+}
+
 #footer {
-margin-bottom:30px;
+border-top:1px #f1f1f1 solid;
+padding-bottom:20px;
 }
 
 .entry-content {
@@ -159,11 +179,6 @@ display:compact;
 border:none;
 }
 
-#access {
-margin-left:20px;
-bottom:10px;
-}
-
 ul.sub-menu a {
 box-shadow:.5px .5px 2px #ccc;
 -moz-box-shadow:.5px .5px 2px #ccc;
@@ -193,11 +208,11 @@ margin:20px 0 10px;
 }
 
 .news #container {
-margin:0 0 0 28px;
+margin:0 0 0 24px;
 }
 
 .news #content {
-width:600px;
+width:620px;
 }
 
 .portfolio #container {
@@ -225,7 +240,7 @@ span.thumb-list {
 	height:300px;*/
 	float:left;
 	padding-left:11px;
-	margin:auto;
+	margin:auto; 
 }
 
 h4.thumb-title,h4.thumb-title a,h4.thumb-title a:hover {
@@ -357,6 +372,10 @@ display:inline;
 
 .page-template-templatepage-fullwidth-php,.portfolio #comments {
 width:623px;
+}
+
+.portfolio #comments {
+margin-left:20px;
 }
 
 #comments-list li.bypostauthor {
