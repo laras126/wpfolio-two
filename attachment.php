@@ -60,7 +60,7 @@
 	                
 	                // *** WPFolio remove postfooter in attachment page
 	                // creating the post footer
-	                //thematic_postfooter();
+	                // thematic_postfooter();
 	                
 	                ?>
 	                

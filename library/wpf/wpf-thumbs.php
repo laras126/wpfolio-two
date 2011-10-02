@@ -1,17 +1,17 @@
 <?php
 
-// Add support for post thumbnails of 250px square
-// Add custom image size for cat thumbnails
-if ( function_exists( 'add_theme_support' ) ) {
-	add_theme_support( 'post-thumbnails' );
-	set_post_thumbnail_size( 270, 270, true );
-	add_image_size('wpf-thumb', 270, 270, true);
-}
-
 ////////////////
 // THUMBNAILS //
 ////////////////
 
+
+// Add support for post thumbnails of 250px square
+// Add custom image size for cat thumbnails
+if ( function_exists( 'add_theme_support' ) ) {
+    add_theme_support( 'post-thumbnails' );
+    set_post_thumbnail_size( 270, 270, true );
+    add_image_size('wpf-thumb', 270, 270, true);
+}
 
 // Filter the gallery shortcode defaults
 // http://wordpress.stackexchange.com/questions/4343/how-to-customise-the-output-of-the-wp-image-gallery-shortcode-from-a-plugin

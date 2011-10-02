@@ -89,6 +89,7 @@ function post_format_class( $classes = array() ) {
 add_filter( 'post_class', 'post_format_class' );
 
 
+
 ///////////////////////
 // WPALCHEMY METABOX //
 ///////////////////////
