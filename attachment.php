@@ -18,9 +18,8 @@
 	            
 	            the_post();
 	            
-	            /// **** WPFolio remove page title
-	            // displays the page title
-				//thematic_page_title();
+	            /// **** WPFolio page title
+				wpf_page_title();
 				
 				thematic_abovepost();
 	            

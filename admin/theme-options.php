@@ -252,19 +252,19 @@ $options[] = array( "name" => "",
 		            "type" => "text",
 		            "std" => "unless otherwise specified");
 
-/* $options[] = array( "name" => "Credits/RSS",
-					"desc" => "Choose show WPFolio credits and RSS/Comments feed icons.",
+$options[] = array( "name" => "Show theme credits?",
+					"desc" => "It's a nice thing to do :)",
 					"id" => $shortname."_credits",
-					"std" => "",
-					"type" => "multicheck",
-					"options" => array("Show RSS Feed Link","Show Comment Feed Link","Show Credits"));
+					"std" => "Yes",
+					"type" => "radio",
+					"options" => array("Yes","No"));
 
-$options[] = array( "name" => "",
+/*$options[] = array( "name" => "",
 					"desc" => "Choose the alignment of the Credits/RSS below the footer widget areas.",
 					"id" => $shortname."_cred_alignment",
 					"std" => "Left",
 					"type" => "radio",
-					"options" => array("Left","Right","Center")); */
+					"options" => array("Left","Right","Center"));*/
 					
 
 //*-------------* FOOTER OPTIONS *-------------*//

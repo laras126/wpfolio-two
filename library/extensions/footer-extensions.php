@@ -63,6 +63,7 @@ function thematic_after() {
     	add_action('thematic_footer', 'thematic_siteinfoopen', 20);
     }
     
+    /// ***** WPFolio Two ***** ///
 	if (function_exists('childtheme_override_siteinfo'))  {
 		function wpf_siteinfo() {
 			childtheme_override_siteinfo();
@@ -81,12 +82,13 @@ function thematic_after() {
   					}
         		}
 			}
+
         	/* footer text set in theme options */
-        	echo do_shortcode(__(stripslashes(thematic_footertext($thm_footertext)), 'thematic'));
         	wpf_license_option();
         }
     	add_action('thematic_footer', 'wpf_siteinfo', 30);
     }
+    /// ***** End WPFolio Two ***** ///
     
 	if (function_exists('childtheme_override_siteinfoclose'))  {
 		function thematic_siteinfoclose() {

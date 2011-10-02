@@ -9,6 +9,7 @@
     // Creating the head profile
     thematic_head_profile();
 
+	/// ***** WPFolio Two ***** ///
     // Creating the doc title
     wpf_doctitle();
     

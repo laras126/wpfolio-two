@@ -30,9 +30,10 @@
     	        // calling the widget area 'single-insert'
     	        get_sidebar('single-insert');
 		
-    	        // create the navigation below the content
+				/// ***** WPFolio Two ***** ///
+    	        // create the navigation below the content, including breadcrumbs
 				wpf_navigation_below();
-		
+				
     	        // calling the comments template
     	        thematic_comments_template();
 		

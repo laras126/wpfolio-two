@@ -203,11 +203,12 @@ function wpf_license_option() {
 	$li_name = get_option($shortname .'_li_name');
 	$li_date = get_option($shortname .'_li_date') . ' - ' . date('Y');
 	$li_optxt = get_option($shortname .'_li_optional_text');
-	
+	$credits = get_option($shortname .'_credits');
+
 	if ($li_type != "Select a License:" ) {
 	?>
 
-		<span id="license">
+		<p id="license">
 		<?php
 		
 		// Show license symbol:
@@ -230,7 +231,18 @@ function wpf_license_option() {
 			
 		} else if ( $li_symbol_show == 1 ) {
 			echo $li_type . ' ' . $li_date . ' ' . $li_name . ' ' . $li_optxt;
-		}?>
+		} ?> 
+
+		</p> <!-- #license -->
+		<p id="credits">
+
+		<?php
+		
+		if ( $credits == 0 ) {
+			echo "Proudly Powered by <a href='http://wordpress.org'>WordPress</a>. Theme <a href='http://notlaura.com/wpfolio-two/'>WPFolio Two</a>.";
+		}
+		?>
+		</p> <!-- #credits -->
 		</span> <!-- #siteinfo --> <?php
 	} 
 }

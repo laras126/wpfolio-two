@@ -23,7 +23,6 @@ function my_post_gallery( $output, $attr) {
     static $instance = 0;
     $instance++;
 
-
     extract(shortcode_atts(array(
         'order'      => 'ASC',
         'orderby'    => 'menu_order ID',
@@ -31,8 +30,8 @@ function my_post_gallery( $output, $attr) {
         'itemtag'    => 'dl',
         'icontag'    => 'dt',
         'captiontag' => 'dd',
-        'columns'    => 3,
-        'size'       => 'wpf-thumb',
+        'columns'    => 4,
+        'size'       => 'wpf-thumb', // Making the thumbnail size my custom one
         'include'    => '',
         'exclude'    => ''
     ), $attr));

@@ -4,7 +4,7 @@ Theme URI: http://wpfolio.visitsteve.com/wiki/
 Description: The transition of WPFolio - the WordPress theme for artists - to the Thematic theme framework. 
 Author: <a href="http://notlaura.com">Lara Schenck</a>
 Author URI: http://themeshaper.com/
-Version: 0.9.3
+Version: 0.9.33
 License: GPL
 License URI:
 Tags: theme-options, fixed-width, white
@@ -20,6 +20,60 @@ Thematic is © Ian Stewart http://themeshaper.com/
 @import url(library/styles/plugins.css);
 @import url(wpf/css/wpf-styles.php);
 @import url(http://fonts.googleapis.com/css?family=Lobster&v1);
+
+
+/* Thematic styles */
+
+.entry-content img {
+height:auto;
+max-width:100%;
+margin:0 0 18px;
+}
+
+.alignleft,img.alignleft {
+float:left;
+margin-right:20px;
+}
+
+.alignright,img.alignright {
+display:block;
+float:right;
+margin-left:20px;
+}
+
+.aligncenter,img.aligncenter {
+margin-left:auto;
+margin-right:auto;
+display:block;
+clear:both;
+}
+
+.wp-caption {
+text-align:center;
+margin-bottom:18px;
+}
+
+.wp-caption img {
+border:0 none;
+margin:0;
+padding:0;
+}
+
+.wp-caption p.wp-caption-text {
+margin:0;
+padding:5px;
+}
+
+.gallery img {
+margin:0;
+}
+
+.wp-smiley {
+max-height:12px;
+margin:0!important;
+}
+
+/* end Thematic styles */
 
 
 /* WPF2 styles */
@@ -56,7 +110,7 @@ margin-left:20px;
 
 #branding {
 width:inherit;
-padding:36px 0 5px 20px;
+padding:36px 0 5px 12px;
 }
 
 #blog-title {
@@ -67,7 +121,7 @@ font-family:Lobster, arial, serif;
 
 #blog-description {
 font-size:1.2em;
-margin:20px 0 0 5px;
+margin:15px 0 0 7px;
 }
 
 #access {
@@ -159,11 +213,12 @@ margin:20px 0 10px;
 }
 
 .news #container {
-margin:0 0 0 24px;
+margin-left:30px;
+width:640px;
 }
 
 .news #content {
-width:620px;
+width:640px;
 }
 
 .portfolio #container {
@@ -175,7 +230,7 @@ margin: auto;
 width:940px;
 }
 
-.portfolio h1.entry-title {
+.portfolio h1.entry-title, .portfolio h1.entry-title a:active {
 text-align:center;
 font-weight:400;
 font-size:1.2em;
@@ -183,6 +238,13 @@ text-transform:uppercase;
 padding:0 0 25px;
 }
 
+.attachment h1.post-title {
+text-align:center;
+font-weight:400;
+font-size:1.2em;
+text-transform:uppercase;
+padding:0 0 25px;
+}
 
 /* Thumbnails */
 
@@ -215,6 +277,10 @@ opacity:.7;
 }
 
 /* End */
+
+.main-aside {
+width:270px;
+}
 
 #primary,#secondary,.main-aside ul li ul li {
 	list-style-type:none;
@@ -293,7 +359,12 @@ border-bottom:1px solid;
 }
 
 #siteinfo {
-padding:20px 0 20px 20px;
+padding:20px 0 40px 20px;
+color:#666;
+}
+
+#siteinfo p{
+	color:#666;
 }
 
 #credits {
@@ -307,6 +378,9 @@ margin-right:20px;
 
 #lisym {
 display:inline;
+position:relative;
+top:4px;
+right:3px;
 }
 
 .page-template-templatepage-fullwidth-php,.portfolio #comments {
@@ -358,58 +432,14 @@ h1,h2,h3,h4,h5,h6,p,#comments h3,.entry-content h2,.entry-title,textarea,input {
 font-family:Arial, Helvetica Neue, Helvetica, sans-serif;
 }
 
+.error404 #content {
+	margin:auto;
+	width:620px;
+	padding:50px;
+}
+
+.page-template-template-page-home-php #content {
+display: none;
+}
+
 /* End WPF2 styles */
-
-
-/* Thematic styles */
-
-.entry-content img {
-height:auto;
-max-width:100%;
-margin:0 0 18px;
-}
-
-.alignleft,img.alignleft {
-float:left;
-margin-right:20px;
-}
-
-.alignright,img.alignright {
-display:block;
-float:right;
-margin-left:20px;
-}
-
-.aligncenter,img.aligncenter {
-margin-left:auto;
-margin-right:auto;
-display:block;
-clear:both;
-}
-
-.wp-caption {
-text-align:center;
-margin-bottom:18px;
-}
-
-.wp-caption img {
-border:0 none;
-margin:0;
-padding:0;
-}
-
-.wp-caption p.wp-caption-text {
-margin:0;
-padding:5px;
-}
-
-.gallery img {
-margin:0;
-}
-
-.wp-smiley {
-max-height:12px;
-margin:0!important;
-}
-
-/* end Thematic styles */
