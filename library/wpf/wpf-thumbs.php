@@ -1,5 +1,29 @@
 <?php
 
+
+
+
+add_filter("attachment_fields_to_edit","my_image_attachment_fields_to_edit",null,2);
+add_filter("attachment_fields_to_save","my_image_attachment_fields_to_save",null,2);
+
+function my_image_attachment_fields_to_edit($form_fields,$post){
+    $form_fields["medium"]["label"]=__("Medium");
+    $form_fields["medium"]["value"]=get_post_meta($post->ID,"_custom6",true);
+    $form_fields["medium"]["helps"]="i.e. Mixed Media, Acrylic, etc.";
+    return $form_fields;
+}
+
+function my_image_attachment_fields_to_save($post,$attachment){
+    if(isset($attachment['medium'])){
+        update_post_meta($post['ID'],'_medium',$attachment['medium']);
+    }
+    return $post;
+}
+
+function print_my_image_attachment_fields($field,$post) {
+    
+}
+
 ////////////////
 // THUMBNAILS //
 ////////////////
