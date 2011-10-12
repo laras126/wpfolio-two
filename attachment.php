@@ -49,9 +49,11 @@
 	                        <?php 
 	                        
 	                        the_content(more_text());
+	                        global $post;
+	                        get_artwork_fields_info();
 	
 	                        wp_link_pages('before=<div class="page-link">' .__('Pages:', 'thematic') . '&after=</div>');
-	                        
+				
 	                        ?>
 	                        
 					</div><!-- .entry-content -->

@@ -2,27 +2,65 @@
 
 
 
+// Add custom fields to image uploader. To be displayed in attachments.
+function wpf_fields_edit( $form_fields, $post ) {
 
-add_filter("attachment_fields_to_edit","my_image_attachment_fields_to_edit",null,2);
-add_filter("attachment_fields_to_save","my_image_attachment_fields_to_save",null,2);
+	$post->post_type == 'attachment';
 
-function my_image_attachment_fields_to_edit($form_fields,$post){
-    $form_fields["medium"]["label"]=__("Medium");
-    $form_fields["medium"]["value"]=get_post_meta($post->ID,"_custom6",true);
-    $form_fields["medium"]["helps"]="i.e. Mixed Media, Acrylic, etc.";
-    return $form_fields;
+	$form_fields[ 'wpf_title' ] = array(
+		'label' => __( 'Title' ),
+		'input' => 'text',
+		'value' => get_post_meta( $post->ID, '_wpf_title', true )
+	);
+	$form_fields[ 'wpf_title' ][ 'label' ] = __( 'MY FIELD' );
+	$form_fields[ 'wpf_title' ][ 'input' ] = 'text';
+	$form_fields[ 'wpf_title' ][ 'value' ] = get_post_meta( $post->ID, '_wpf_title', true );
+
+
+    $form_fields[ 'wpf_medium' ] = array(
+        'label' => __( 'Medium' ),
+        'input' => 'text',
+        'value' => get_post_meta( $post->ID, '_wpf_medium', true )
+    );
+    $form_fields[ 'wpf_medium' ][ 'label' ] = __( 'Medium' );
+    $form_fields[ 'wpf_medium' ][ 'input' ] = 'text';
+    $form_fields[ 'wpf_medium' ][ 'value' ] = get_post_meta( $post->ID, '_wpf_medium', true );
+
+	return $form_fields;
 }
 
-function my_image_attachment_fields_to_save($post,$attachment){
-    if(isset($attachment['medium'])){
-        update_post_meta($post['ID'],'_medium',$attachment['medium']);
+add_filter( 'attachment_fields_to_edit', 'wpf_fields_edit', NULL, 2 );
+
+function wpf_fields_save( $post, $attachment ) {
+
+	
+    foreach ( $fields as $field ) {
+        if( isset( $attachment[ 'my_field' ] ) ) {
+    		if( trim( $attachment[ 'my_field'] ) == '' ) $post[ 'errors' ][ 'my_field' ][ 'errors' ][] = __( 'Error! Something went wrong.' );
+    		else update_post_meta( $post[ 'ID' ], '_my_field', $attachment[ 'my_field' ] );
+    	}
     }
-    return $post;
+
+	return $post;
+
 }
 
-function print_my_image_attachment_fields($field,$post) {
-    
+add_filter( 'attachment_fields_to_save', 'wpf_fields_save', NULL, 2 );
+
+function get_artwork_fields_info() {
+	
+    global $post;
+    $meta = get_post_meta( $post->ID, '_my_field', true );
+	
+    if ( $meta != '' ) {
+		echo '<br><br><strong>AN ATTACHMENT</strong>';
+		echo '<pre>';
+		
+		print_r($meta);
+		echo '</pre>';
+	} 
 }
+
 
 ////////////////
 // THUMBNAILS //
@@ -36,6 +74,47 @@ if ( function_exists( 'add_theme_support' ) ) {
     set_post_thumbnail_size( 270, 270, true );
     add_image_size('wpf-thumb', 270, 270, true);
 }
+
+// http://www.kingrosales.com/how-to-display-your-posts-first-image-thumbnail-automatically-in-wordpress/ -- (although this link is now dead, and function has been significantly hacked, it's worth a credit.)
+
+// Get post attachments
+function wpf_get_attachments() {
+	global $post;
+	return get_posts( 
+		array(
+			'post_parent' => get_the_ID(), 
+			'post_type' => 'attachment', 
+			'post_mime_type' => 'image') 
+		);
+}
+
+
+// Get the URL of the first attachment image - called in wpf-category.php. If no attachments, display default-thumb.png
+function wpf_get_first_thumb_url() {
+
+	$attr = array( 
+		'class'	=> "attachment-post-thumbnail wp-post-image");
+
+	$imgs = wpf_get_attachments();
+	if ($imgs) {
+		$keys = array_reverse($imgs);
+		$num = $keys[0];
+		$url = wp_get_attachment_image($num->ID, 'wpf-thumb', true,$attr);
+		print $url;
+	} else {
+		echo '<img src=http://notlaura.com/default-thumb.png alt="no attachments here!" title="default thumb" class="attachment-post-thumbnail wp-post-image">';
+	}
+}
+
+// END - get attachment function
+
+// Make featured image thumbnail a permalink
+add_filter( 'post_thumbnail_html', 'my_post_image_html', 10, 3 );
+function my_post_image_html( $html, $post_id, $post_image_id ) {
+	$html = '<a href="' . get_permalink( $post_id ) . '" title="' . esc_attr( get_post_field( 'post_title', $post_id ) ) . '">' . $html . '</a>';
+	return $html;
+}
+
 
 // Filter the gallery shortcode defaults
 // http://wordpress.stackexchange.com/questions/4343/how-to-customise-the-output-of-the-wp-image-gallery-shortcode-from-a-plugin
@@ -142,47 +221,6 @@ function my_post_gallery( $output, $attr) {
         </div>\n";
 
     return $output;
-}
-
-
-
-// http://www.kingrosales.com/how-to-display-your-posts-first-image-thumbnail-automatically-in-wordpress/ -- (although this link is now dead, and function has been significantly hacked, it's worth a credit.)
-
-// Get post attachments
-function wpf_get_attachments() {
-	global $post;
-	return get_posts( 
-		array(
-			'post_parent' => get_the_ID(), 
-			'post_type' => 'attachment', 
-			'post_mime_type' => 'image') 
-		);
-}
-
-// Get the URL of the first attachment image - called in wpf-category.php. If no attachments, display default-thumb.png
-function wpf_get_first_thumb_url() {
-
-	$attr = array( 
-		'class'	=> "attachment-post-thumbnail wp-post-image");
-
-	$imgs = wpf_get_attachments();
-	if ($imgs) {
-		$keys = array_reverse($imgs);
-		$num = $keys[0];
-		$url = wp_get_attachment_image($num->ID, 'wpf-thumb', true,$attr);
-		print $url;
-	} else {
-		echo '<img src=http://notlaura.com/default-thumb.png alt="no attachments here!" title="default thumb" class="attachment-post-thumbnail wp-post-image">';
-	}
-}
-
-// END - get attachment function
-
-// Make featured image thumbnail a permalink
-add_filter( 'post_thumbnail_html', 'my_post_image_html', 10, 3 );
-function my_post_image_html( $html, $post_id, $post_image_id ) {
-	$html = '<a href="' . get_permalink( $post_id ) . '" title="' . esc_attr( get_post_field( 'post_title', $post_id ) ) . '">' . $html . '</a>';
-	return $html;
 }
 
 ?>
