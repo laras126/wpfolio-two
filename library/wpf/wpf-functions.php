@@ -99,6 +99,7 @@ add_filter( 'post_class', 'post_format_class' );
 // custom constant (opposite of TEMPLATEPATH)
 define('_TEMPLATEURL', WP_CONTENT_URL . '/' . stristr(TEMPLATEPATH, 'themes'));
 
+
 include_once 'WPAlchemy/MetaBox.php';
  
 // stylesheet used by all similar meta boxes
@@ -117,6 +118,8 @@ $mb = new WPAlchemy_MetaBox(array
 ));
 
 // Display Artwork Info fields in post
+// Thanks to http://wordpress.stackexchange.com/questions/15516/conditionally-echo-br-in-meta-box-data-loop/15520#15520
+
 function display_artwork_info() {
 
 	global $mb;

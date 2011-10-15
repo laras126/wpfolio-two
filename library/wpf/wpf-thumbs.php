@@ -8,26 +8,34 @@ function wpf_fields_edit( $form_fields, $post ) {
 
 	$post->post_type == 'attachment';
 
-	$form_fields[ 'wpf_title' ] = array(
-		'label' => __( 'Title' ),
-		'input' => 'text',
-		'value' => get_post_meta( $post->ID, '_wpf_title', true )
-	);
-	$form_fields[ 'wpf_title' ][ 'label' ] = __( 'WPF FIELD' );
-	$form_fields[ 'wpf_title' ][ 'input' ] = 'text';
-	$form_fields[ 'wpf_title' ][ 'value' ] = get_post_meta( $post->ID, '_wpf_title', true );
-
-
-    $form_fields[ 'wpf_medium' ] = array(
+    $form_fields[ 'wpf_g_medium' ] = array(
         'label' => __( 'Medium' ),
         'input' => 'text',
-        'value' => get_post_meta( $post->ID, '_wpf_medium', true )
+        'value' => get_post_meta( $post->ID, '_wpf_g_medium', true )
     );
-    $form_fields[ 'wpf_medium' ][ 'label' ] = __( 'Medium' );
-    $form_fields[ 'wpf_medium' ][ 'input' ] = 'text';
-    $form_fields[ 'wpf_medium' ][ 'value' ] = get_post_meta( $post->ID, '_wpf_medium', true );
 
-    unset($form_fields['post_content']);
+    $form_fields[ 'wpf_g_medium' ][ 'label' ] = __( 'Medium' );
+    $form_fields[ 'wpf_g_medium' ][ 'input' ] = 'text';
+    $form_fields[ 'wpf_g_medium' ][ 'value' ] = get_post_meta( $post->ID, '_wpf_g_medium', true );
+
+    $form_fields[ 'wpf_g_dimen' ] = array(
+        'label' => __( 'Dimensions' ),
+        'input' => 'text',
+        'value' => get_post_meta( $post->ID, '_wpf_g_dimen', true )
+    );
+    $form_fields[ 'wpf_g_dimen' ][ 'label' ] = __( 'Dimensions' );
+    $form_fields[ 'wpf_g_dimen' ][ 'input' ] = 'text';
+    $form_fields[ 'wpf_g_dimen' ][ 'value' ] = get_post_meta( $post->ID, '_wpf_g_title', true );
+
+    $form_fields[ 'wpf_g_collabs' ] = array(
+        'label' => __( 'Collaborators' ),
+        'input' => 'text',
+        'value' => get_post_meta( $post->ID, '_wpf_g_dimen', true )
+    );
+    $form_fields[ 'wpf_g_collabs' ][ 'label' ] = __( 'Collaborators' );
+    $form_fields[ 'wpf_g_collabs' ][ 'input' ] = 'text';
+    $form_fields[ 'wpf_g_collabs' ][ 'value' ] = get_post_meta( $post->ID, '_wpf_g_collabs', true );
+
 	return $form_fields;
 }
 
@@ -35,7 +43,7 @@ add_filter( 'attachment_fields_to_edit', 'wpf_fields_edit', NULL, 2 );
 
 
 function wpf_fields_save( $post, $attachment ) {
-    $fields = array('wpf_title', 'wpf_medium');
+    $fields = array('wpf_g_medium', 'wpf_g_dimen', 'wpf_g_collabs');
     foreach( $fields as $field ) {
         $_field = '_' . $field;
         if( isset( $attachment[ $field ] ) ) {
@@ -47,39 +55,41 @@ function wpf_fields_save( $post, $attachment ) {
     
 	return $post;
 
-}
+} 
 
 add_filter( 'attachment_fields_to_save', 'wpf_fields_save', NULL, 2 );
 
+
 function get_artwork_fields_info() {
 	global $post;
-    $fields = array('wpf_title', 'wpf_medium');
+    $fields = array('wpf_g_medium', 'wpf_g_dimen', 'wpf_g_collabs');
    
     $title = $post->post_title;
-    $medium = get_post_meta( $post->ID, '_wpf_medium', true );
+    $medium = get_post_meta( $post->ID, '_wpf_g_medium', true );
 
     if( is_array($fields) ) {
 
-        echo '<div id="artwork-meta"><em>' . $title . '</em><br/>';
+        echo '<ul id="artwork-meta"><li><em>' . $title . '</em></li>';
 
         foreach ( $fields as $field ) {
             
             $_field = '_' . $field;
-            $meta = get_post_meta( $post->ID, $_field, true );
+            $meta =  get_post_meta( $post->ID, $_field, true );
 
-            if ( $field != '' ) {
-                echo $meta . '<br/>';
-            } 
-        }
+            if ( $meta ) {
+                echo '<li>';
+                echo $meta;
+                echo '</li>';
+            }
+       }
 
-         echo '</div>';
-
+       echo '</ul>';
     }
 
-    echo '<br><br><strong>AN ATTACHMENT</strong>';
+    /*echo '<strong>AN ATTACHMENT</strong>';
     echo '<pre>';
     print_r($post);
-    echo '</pre>';
+    echo '</pre>';*/
 }
 
 
