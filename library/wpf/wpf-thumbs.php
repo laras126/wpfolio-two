@@ -1,6 +1,7 @@
 <?php
 
 
+// http://net.tutsplus.com/tutorials/wordpress/creating-custom-fields-for-attachments-in-wordpress/
 
 // Add custom fields to image uploader. To be displayed in attachments.
 function wpf_fields_edit( $form_fields, $post ) {
@@ -12,7 +13,7 @@ function wpf_fields_edit( $form_fields, $post ) {
 		'input' => 'text',
 		'value' => get_post_meta( $post->ID, '_wpf_title', true )
 	);
-	$form_fields[ 'wpf_title' ][ 'label' ] = __( 'MY FIELD' );
+	$form_fields[ 'wpf_title' ][ 'label' ] = __( 'WPF FIELD' );
 	$form_fields[ 'wpf_title' ][ 'input' ] = 'text';
 	$form_fields[ 'wpf_title' ][ 'value' ] = get_post_meta( $post->ID, '_wpf_title', true );
 
@@ -26,21 +27,24 @@ function wpf_fields_edit( $form_fields, $post ) {
     $form_fields[ 'wpf_medium' ][ 'input' ] = 'text';
     $form_fields[ 'wpf_medium' ][ 'value' ] = get_post_meta( $post->ID, '_wpf_medium', true );
 
+    unset($form_fields['post_content']);
 	return $form_fields;
 }
 
 add_filter( 'attachment_fields_to_edit', 'wpf_fields_edit', NULL, 2 );
 
+
 function wpf_fields_save( $post, $attachment ) {
-
-	
-    foreach ( $fields as $field ) {
-        if( isset( $attachment[ 'my_field' ] ) ) {
-    		if( trim( $attachment[ 'my_field'] ) == '' ) $post[ 'errors' ][ 'my_field' ][ 'errors' ][] = __( 'Error! Something went wrong.' );
-    		else update_post_meta( $post[ 'ID' ], '_my_field', $attachment[ 'my_field' ] );
-    	}
+    $fields = array('wpf_title', 'wpf_medium');
+    foreach( $fields as $field ) {
+        $_field = '_' . $field;
+        if( isset( $attachment[ $field ] ) ) {
+            if( trim( $attachment[ $field ] ) == '' ) $post[ 'errors' ][ $field ][ 'errors' ][] = __( 'Error! Something went wrong.' );
+            else update_post_meta( $post[ 'ID' ], $_field, $attachment[ $field ] );
+        
+        }    
     }
-
+    
 	return $post;
 
 }
@@ -48,17 +52,34 @@ function wpf_fields_save( $post, $attachment ) {
 add_filter( 'attachment_fields_to_save', 'wpf_fields_save', NULL, 2 );
 
 function get_artwork_fields_info() {
-	
-    global $post;
-    $meta = get_post_meta( $post->ID, '_my_field', true );
-	
-    if ( $meta != '' ) {
-		echo '<br><br><strong>AN ATTACHMENT</strong>';
-		echo '<pre>';
-		
-		print_r($meta);
-		echo '</pre>';
-	} 
+	global $post;
+    $fields = array('wpf_title', 'wpf_medium');
+   
+    $title = $post->post_title;
+    $medium = get_post_meta( $post->ID, '_wpf_medium', true );
+
+    if( is_array($fields) ) {
+
+        echo '<div id="artwork-meta"><em>' . $title . '</em><br/>';
+
+        foreach ( $fields as $field ) {
+            
+            $_field = '_' . $field;
+            $meta = get_post_meta( $post->ID, $_field, true );
+
+            if ( $field != '' ) {
+                echo $meta . '<br/>';
+            } 
+        }
+
+         echo '</div>';
+
+    }
+
+    echo '<br><br><strong>AN ATTACHMENT</strong>';
+    echo '<pre>';
+    print_r($post);
+    echo '</pre>';
 }
 
 
