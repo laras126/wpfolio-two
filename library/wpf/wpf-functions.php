@@ -122,10 +122,15 @@ function display_artwork_info() {
 	global $mb;
 		
 	$mb->the_meta();
-	$values = array('title','medium','collabs','dimen','additional'); 
+	$values = array('medium','collabs','dimen','additional'); 
 	
 	echo the_content();	 
-	echo '<div id="artwork-meta">';
+	echo '<div id="artwork-meta"><em>';
+
+	if ($mb->get_the_value('title') != ''){
+		$mb->the_value('title');
+		echo '</em><br />';
+	}
 
 	foreach ($values as $val) {
 	    if ($mb->get_the_value($val) != ''){
