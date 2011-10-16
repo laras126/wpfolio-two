@@ -103,6 +103,13 @@ $options[] = array( "name" => "Blog Category",
 					"type" => "select",
 					"options" => $of_categories);
 
+$options[] = array( "name" => "Artwork Info",
+					"desc" => "Display artwork info on attachment pages?",
+					"id" => $shortname."_show_artwork_info",
+					"std" => 0,
+					"type" => "radio",
+					"options" => array("Yes","No"));
+
 $options[] = array( "name" => "Header Logo",
 					"desc" => "Unlike the 'Header' option in the Appearance panel, images uploaded here can be any size.",
 					"id" => $shortname."_logo",
@@ -115,17 +122,6 @@ $options[] = array( "name" => "",
 					"std" => "Show title",
 					"type" => "radio",
 					"options" => array('Show title above logo','Don\'t show title'));		
-						
-/*$url =  OF_DIRECTORY . '/admin/images/';
-$options[] = array( "name" => "Main Layout",
-					"desc" => "Select main content and sidebar alignment.",
-					"id" => $shortname."_layout",
-					"std" => "layout-2cr",
-					"type" => "images",
-					"options" => array(
-						'sidebar-r' => $url . '2cr.png',
-						'sidebar-l' => $url . '2cl.png')
-					); */
 					
 $options[] = array( "name" => "Custom Favicon",
 					"desc" => "Upload a 16px x 16px png/gif/ico image that will represent your website's favicon. To automatically create a favicon from a larger image, check out the <a href='http://www.degraeve.com/favicon/'>Favicon Generator</a> then upload it here.",
