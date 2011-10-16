@@ -81,7 +81,7 @@ function wpf_category_loop(){
 <?php thematic_content(); ?>
 	
 					</div><!-- .entry-content -->
-					<?php thematic_postfooter(); ?>
+					<?php wpf_postfooter(); ?>
 				</div><!-- #post -->
 
 			<?php 

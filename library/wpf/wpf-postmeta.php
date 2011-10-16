@@ -33,27 +33,35 @@ function wpf_postheader_postmeta() {
 } // end postheader_postmeta
 
 function wpf_postfooter_postcomments() {
-    if (comments_open()) {
-        $postcommentnumber = get_comments_number();
-        if ($postcommentnumber > '1') {
-            $postcomments = ' <span class="comments-link"><a href="' . apply_filters('the_permalink', get_permalink()) . '#comments" title="' . __('Comment on ', 'thematic') . the_title_attribute('echo=0') . '">';
-            $postcomments .= get_comments_number() . __(' Comments', 'thematic') . '</a></span>';
-        } elseif ($postcommentnumber == '1') {
-            $postcomments = ' <span class="comments-link"><a href="' . apply_filters('the_permalink', get_permalink()) . '#comments" title="' . __('Comment on ', 'thematic') . the_title_attribute('echo=0') . '">';
-            $postcomments .= get_comments_number() . __(' Comment', 'thematic') . '</a></span>';
-        } elseif ($postcommentnumber == '0') {
-            $postcomments = ' <span class="comments-link"><a href="' . apply_filters('the_permalink', get_permalink()) . '#comments" title="' . __('Comment on ', 'thematic') . the_title_attribute('echo=0') . '">';
-            $postcomments .= __('Leave a comment', 'thematic') . '</a></span>';
+
+    $shortname = get_option('of_shortname');
+    $comment_option = get_option($shortname.'_disable_comments');
+
+    if ( $comment_option == 1 ) {   
+        if (comments_open() ) {
+            $postcommentnumber = get_comments_number();
+            if ($postcommentnumber > '1') {
+                $postcomments = ' <span class="comments-link"><a href="' . apply_filters('the_permalink', get_permalink()) . '#comments" title="' . __('Comment on ', 'thematic') . the_title_attribute('echo=0') . '">';
+                $postcomments .= get_comments_number() . __(' Comments', 'thematic') . '</a></span>';
+            } elseif ($postcommentnumber == '1') {
+                $postcomments = ' <span class="comments-link"><a href="' . apply_filters('the_permalink', get_permalink()) . '#comments" title="' . __('Comment on ', 'thematic') . the_title_attribute('echo=0') . '">';
+                $postcomments .= get_comments_number() . __(' Comment', 'thematic') . '</a></span>';
+            } elseif ($postcommentnumber == '0') {
+                $postcomments = ' <span class="comments-link"><a href="' . apply_filters('the_permalink', get_permalink()) . '#comments" title="' . __('Comment on ', 'thematic') . the_title_attribute('echo=0') . '">';
+                $postcomments .= __('Leave a comment', 'thematic') . '</a></span>';
+            }
+        } else {
+            $postcomments = ' <span class="comments-link comments-closed-link">' . __('Comments closed', 'thematic') .'</span>';
         }
-    } else {
-        $postcomments = ' <span class="comments-link comments-closed-link">' . __('Comments closed', 'thematic') .'</span>';
+
     }
+
     // Display edit link
     if (current_user_can('edit_posts')) {
-        $postcomments .= thematic_postfooter_posteditlink();
-    }               
+        $postcomments = thematic_postfooter_posteditlink();
+    }    
+            
     return apply_filters('wpf_postfooter_postcomments',$postcomments); 
-    
 }
 
 // Filter post footer for News and Portfolio classes. Display usual entry-utility on news posts and remove it from portfolio posts.
@@ -94,7 +102,7 @@ function wpf_postfooter() {
 	    }
 	}   
     // Put it on the screen
-    echo apply_filters( 'thematic_postfooter', $postfooter ); // Filter to override default post footer
+    echo apply_filters( 'wpf_postfooter', $postfooter ); // Filter to override default post footer
 } // end postfooter
 
 

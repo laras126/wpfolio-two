@@ -330,8 +330,7 @@ padding:10px 0;
 }
 
 .edit-link a,span.edit a {
-color:#fff;
-background-color: red;
+color:red;
 font-weight:700;
 padding:5px;
 margin: 0 10px;
@@ -339,8 +338,7 @@ margin: 0 10px;
 
 .edit-link a:hover,span.edit a:hover {
 font-weight:700;
-background-color: blue;
-color:#fff;
+color:blue;
 clear:both;
 }
 

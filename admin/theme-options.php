@@ -110,6 +110,13 @@ $options[] = array( "name" => "Artwork Info",
 					"type" => "radio",
 					"options" => array("Yes","No"));
 
+$options[] = array( "name" => "Disable Comments",
+					"desc" => "Would you like to disable comments site wide?",
+					"id" => $shortname."_disable_comments",
+					"std" => 1,
+					"type" => "radio",
+					"options" => array("Yes","No"));
+
 $options[] = array( "name" => "Header Logo",
 					"desc" => "Unlike the 'Header' option in the Appearance panel, images uploaded here can be any size.",
 					"id" => $shortname."_logo",

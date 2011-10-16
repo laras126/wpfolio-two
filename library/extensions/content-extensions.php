@@ -1030,7 +1030,8 @@ if (function_exists('childtheme_override_postfooter_postcategory'))  {
 	}
 } else {
 	function thematic_postfooter_postcategory() {
-    
+    	$shortname = get_option('of_shortname');
+    	$comment_option = get_option($shortname.'_disable_comments');
 	    $postcategory = '<span class="cat-links">';
 	    if (is_single()) {
 	        $postcategory .= __('This entry was posted in ', 'thematic') . get_the_category_list(', ');
@@ -1040,8 +1041,13 @@ if (function_exists('childtheme_override_postfooter_postcategory'))  {
 	        $postcategory .= '</span> <span class="meta-sep meta-sep-tag-links">|</span>';
 	    } else {
 	        $postcategory .= __('Posted in ', 'thematic') . get_the_category_list(', ');
-	        $postcategory .= '</span> <span class="meta-sep meta-sep-tag-links">|</span>';
+	        
+	        // **** WPFolio post comments conditional **** /	
+	        if ( $comment_option == 1 ) {
+	        	$postcategory .= '</span> <span class="meta-sep meta-sep-tag-links">|</span>';
+	        }
 	    }
+
 	    return apply_filters('thematic_postfooter_postcategory',$postcategory); 
 	    
 	}
