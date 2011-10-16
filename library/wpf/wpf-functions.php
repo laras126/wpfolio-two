@@ -9,6 +9,7 @@
 // Require files in library/
 require_once("wpf-widgets.php");
 require_once("wpf-thumbs.php");
+require_once("wpf-attachmentmeta.php");
 require_once("wpf-category.php");
 require_once("wpf-postmeta.php");
 require_once("wpf-prevnext.php");
@@ -89,6 +90,7 @@ function post_format_class( $classes = array() ) {
 add_filter( 'post_class', 'post_format_class' );
 
 
+
 ///////////////////////
 // WPALCHEMY METABOX //
 ///////////////////////
@@ -97,6 +99,7 @@ add_filter( 'post_class', 'post_format_class' );
 
 // custom constant (opposite of TEMPLATEPATH)
 define('_TEMPLATEURL', WP_CONTENT_URL . '/' . stristr(TEMPLATEPATH, 'themes'));
+
 
 include_once 'WPAlchemy/MetaBox.php';
  
@@ -116,15 +119,22 @@ $mb = new WPAlchemy_MetaBox(array
 ));
 
 // Display Artwork Info fields in post
+// Thanks to http://wordpress.stackexchange.com/questions/15516/conditionally-echo-br-in-meta-box-data-loop/15520#15520
+
 function display_artwork_info() {
 
 	global $mb;
 		
 	$mb->the_meta();
-	$values = array('title','medium','collabs','dimen','additional'); 
+	$values = array('medium','collabs','dimen','additional'); 
 	
 	echo the_content();	 
-	echo '<div id="artwork-meta">';
+	echo '<div id="artwork-meta"><em>';
+
+	if ($mb->get_the_value('title') != ''){
+		$mb->the_value('title');
+		echo '</em><br />';
+	}
 
 	foreach ($values as $val) {
 	    if ($mb->get_the_value($val) != ''){

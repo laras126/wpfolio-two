@@ -189,7 +189,7 @@ if (function_exists('childtheme_override_page_title'))  {
 		if (is_attachment()) {
 				$content .= '<h2 class="page-title"><a href="';
 				$content .= apply_filters('the_permalink',get_permalink($post->post_parent));
-				$content .= '" rev="attachment"><span class="meta-nav">&laquo; </span>';
+				$content .= '" rev="attachment">';
 				$content .= get_the_title($post->post_parent);
 				$content .= '</a></h2>';
 		} elseif (is_author()) {

@@ -7,11 +7,22 @@
 // Filter page title - get rid of 'Category Archive:' text in title
 
 function wpf_page_title(){
+	
+	global $post;
+	$content = '';
+
 	if( is_category() )	{
 		echo '<h1 class=entry-title>';
 		single_cat_title();
 		echo '</h1>';
-	} 
+	} else if ( is_attachment() ) {
+		$content .= '<h1 class="post-title"><a href="';
+		$content .= apply_filters('the_permalink',get_permalink($post->post_parent));
+		$content .= '">';
+		$content .= get_the_title($post->post_parent);
+		$content .= '</a></h1>';
+	}
+	echo apply_filters('wpf_page_title', $content);
 } // end wpf_page_title
 
 
@@ -40,7 +51,7 @@ function wpf_category_loop(){
 					if ( (function_exists('has_post_thumbnail')) && (has_post_thumbnail()) ) {
 	  					the_post_thumbnail();
 					} else { ?>
-					<a href="<?php the_permalink();?>"><?php wpf_get_first_thumb_url(); ?></a> 
+						<a href="<?php the_permalink();?>"><?php wpf_get_first_thumb_url(); ?></a> 
 	 				<?php } ?></a>
 	   				<h4 class="thumb-title"><?php the_title(); ?></h4>
 					
