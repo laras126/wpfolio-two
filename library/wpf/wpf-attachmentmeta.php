@@ -92,12 +92,6 @@ add_filter( 'attachment_fields_to_save', 'wpf_fields_save', NULL, 2 );
 function get_artwork_fields_info() {
 	global $post;
 
-    // Get the image width, calculate the margin to line up list with the image
-    $img_meta = wp_get_attachment_metadata( $post->ID );
-    $height = $img_meta['height'];
-    $width = $img_meta['width'];
-    $margin = 940/2 - $width/2;
-
     $fields = array('wpf_g_medium', 'wpf_g_dimen', 'wpf_g_collabs', 'wpf_g_additional');
     $title = $post->post_title;
 
@@ -107,7 +101,7 @@ function get_artwork_fields_info() {
     // If the 'Show info' option is yes and the values exist, print them. 
     if( $show_info == 0 && $fields ) {
 
-        echo '<ul id="artwork-meta" style="margin-left:' . $margin . 'px;"><li><em>' . $title . '</em></li>';
+        echo '<ul id="artwork-meta" style="margin-left:' . get_margin() . 'px;"><li><em>' . $title . '</em></li>';
 
         foreach ( $fields as $field ) {
 
@@ -124,6 +118,23 @@ function get_artwork_fields_info() {
        echo '</ul>';
     }
 
+}
+
+function get_margin() {
+    
+    global $post;
+    // Get the image width, calculate the margin to line up list with the image
+    $img_meta = wp_get_attachment_metadata( $post->ID );
+    $width = $img_meta['width'];
+
+    // Make sure the margin stays within the page
+    if ( $width <= 940 ) {
+        $margin = 940/2 - $width/2;
+    } else {
+        $margin = 0;
+    }
+
+    return $margin;
 }
 
 ?>

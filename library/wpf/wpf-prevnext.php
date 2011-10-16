@@ -14,15 +14,22 @@ function wpf_nav_below() {
 	$cat_option = get_option($shortname.'_cats_in_blog');
 	$cat = get_cat_ID($cat_option);
 
-	if (is_single()) { ?>
-
+	if ( is_single() ) { 
+		
+		// Only show .post-bottom-title if not in blog category
+		if ( !in_category($cat)) { ?>
+		<div class="post-bottom-title navigation">   
+			<a href="<?php the_permalink() ?>" title="Permalink for <?php the_title_attribute(); ?>"><?php the_title(); ?></a> | <?php the_time('Y') ?> | <?php the_category(', '); ?> 
+		</div><!-- .post-bottom-title -->
+	<?php } ?>
+	
 		<div id="nav-below" class="navigation">
 			<div class="nav-previous"><?php wpf_previous_post_link() ?></div>
 			<div class="nav-next"><?php wpf_next_post_link() ?></div>
-		</div>
+		</div> <!-- .nav-below -->
 
 <?php
-	} elseif (in_category($cat)){ ?>
+	} elseif ( is_category($cat) ){ ?>
 	
 		<div id="nav-below" class="navigation">
             <?php if(function_exists('wp_pagenavi')) { ?>

@@ -104,7 +104,7 @@ $options[] = array( "name" => "Blog Category",
 					"options" => $of_categories);
 
 $options[] = array( "name" => "Artwork Info",
-					"desc" => "Display artwork info on attachment pages?",
+					"desc" => "Display artwork title and info on attachment pages? This is added in the Media Uploader.",
 					"id" => $shortname."_show_artwork_info",
 					"std" => 0,
 					"type" => "radio",
@@ -186,13 +186,13 @@ $options[] = array( "name" => "Body Font",
 		            "options" => $fonts ); 
 		            
 $options[] = array( "name" => "Primary Font Color",
-					"desc" => "Site title, post/page titles, headings, and paragraph text.",
+					"desc" => "Site title, post/page titles, widget headings, and paragraph text.",
 					"id" => $shortname."_primary_font_color",
 					"std" => "#000",
 					"type" => "color");
 					
 $options[] = array( "name" => "Secondary Font Color",
-					"desc" => "Date title, post meta, prev/next navigation, borders, widget text.",
+					"desc" => "Blog description, post meta, menu items, prev/next navigation, borders, widget text.",
 					"id" => $shortname."_secondary_font_color",
 					"std" => "#666",
 					"type" => "color");
@@ -213,7 +213,7 @@ $options[] = array( "name" => "Custom CSS",
 // Options to choose license and display it in footer. Option to show/don't show credits and RSS
 // Commented out: alignment options and Credits - to be added on an update
 
-$options[] = array( "name" => "Licensing", // and Credits
+$options[] = array( "name" => "Licensing/Credits", // and Credits
                     "type" => "heading");
 
 $options[] = array( "name" => "License",
@@ -226,7 +226,7 @@ $options[] = array( "name" => "License",
 $options[] = array( "name" => "",
 					"desc" => "Display license symbol?",
 					"id" => $shortname."_li_symbol_show",
-					"std" => 1,
+					"std" => 0,
 					"type" => "radio",
 					"options" => array("Yes","No"));
 

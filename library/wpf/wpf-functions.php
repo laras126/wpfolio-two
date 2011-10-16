@@ -129,9 +129,9 @@ function display_artwork_info() {
 	$values = array('medium','collabs','dimen','additional'); 
 	
 	echo the_content();	 
-	echo '<div id="artwork-meta"><em>';
-
+	echo '<div id="artwork-meta">';
 	if ($mb->get_the_value('title') != ''){
+		echo '<em>';
 		$mb->the_value('title');
 		echo '</em><br />';
 	}
