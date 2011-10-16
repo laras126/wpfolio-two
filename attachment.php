@@ -19,7 +19,7 @@
 	            the_post();
 	            
 	            /// **** WPFolio page title
-				wpf_page_title();
+				//wpf_page_title();
 				
 				thematic_abovepost();
 	            
@@ -72,14 +72,25 @@
 	            
 	            thematic_belowpost();
 	            
-	            ///*** Adding WPFolio attachment navigation ?>
-	            
+	            ///*** Adding WPFolio navigation
+	            //wpf_nav_below(); 
+
+				$parent_cat = get_the_category($post->post_parent);
+				$cat_name = get_cat_ID($parent_cat[0]->cat_name);
+				$cat_link = get_category_link($cat_name);
+
+	            ?>
+
+	            <div class="post-bottom-title navigation">   
+					<a href="<?php echo apply_filters('the_permalink',get_permalink($post->post_parent)); ?>"><?php echo get_the_title($post->post_parent); ?></a> | <?php the_time('Y') ?> | <a href="<?php echo $cat_link; ?> "><?php echo $parent_cat[0]->cat_name; ?></a>
+				</div><!-- .post-bottom-title -->
+
 				<div class="navigation">
 					<div class="nav-previous"><?php previous_image_link( 0, '&larr; Previous' ); ?></div>
 					<div class="nav-next"><?php next_image_link( 0, 'Next &rarr;' ); ?></div> 
-				</div> <!--.prevnext --> 
-	            
-	            <?php 
+				</div> <!--.prevnext -->  <?php
+	           
+
 	            ///*** WPFolio remove attachment comments 
 	            // comments_template();
 	            

@@ -4,7 +4,7 @@ Theme URI: http://wpfolio.visitsteve.com/wiki/
 Description: The transition of WPFolio - the WordPress theme for artists - to the Thematic theme framework. 
 Author: <a href="http://notlaura.com">Lara Schenck</a>
 Author URI: http://themeshaper.com/
-Version: 0.9.4
+Version: 0.9.43
 License: GPL
 License URI:
 Tags: theme-options, fixed-width, white
@@ -233,8 +233,12 @@ width:100%;
 }
 
 .portfolio #content {
-margin: 20px auto;
+margin: auto;
 width:940px;
+}
+
+.page #content, .archive #content {
+	margin-top:20px;
 }
 
 .portfolio h1.entry-title, .portfolio h1.entry-title a:active {
@@ -329,11 +333,14 @@ margin-right:auto;
 padding:10px 0;
 }
 
+.entry-utility {
+	margin: 0;
+}
+
 .edit-link a,span.edit a {
 color:red;
 font-weight:700;
 padding:5px;
-margin: 0 10px;
 }
 
 .edit-link a:hover,span.edit a:hover {

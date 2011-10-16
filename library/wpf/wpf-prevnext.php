@@ -16,11 +16,11 @@ function wpf_nav_below() {
 
 	if ( is_single() ) { 
 		
-		// Only show .post-bottom-title if not in blog category
-		if ( !in_category($cat)) { ?>
-		<div class="post-bottom-title navigation">   
-			<a href="<?php the_permalink() ?>" title="Permalink for <?php the_title_attribute(); ?>"><?php the_title(); ?></a> | <?php the_time('Y') ?> | <?php the_category(', '); ?> 
-		</div><!-- .post-bottom-title -->
+		// Only show .post-bottom-title if not in blog category or if attachment
+		if ( !in_category($cat) ) { ?>
+			<div class="post-bottom-title navigation">   
+				<a href="<?php the_permalink() ?>" title="Permalink for <?php the_title_attribute(); ?>"><?php the_title(); ?></a> | <?php the_time('Y') ?> | <?php the_category(', '); ?> 
+			</div><!-- .post-bottom-title -->
 	<?php } ?>
 	
 		<div id="nav-below" class="navigation">
