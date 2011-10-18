@@ -36,8 +36,10 @@ function wpf_postfooter_postcomments() {
 
     $shortname = get_option('of_shortname');
     $comment_option = get_option($shortname.'_disable_comments');
+    $cat_option = get_option($shortname.'_cats_in_blog');
+    $cat = get_cat_ID($cat_option);
 
-    if ( $comment_option == 1 ) {   
+    if ( $comment_option == 1 || ($comment_option == 2 && is_category($cat)) ) {   
         if (comments_open() ) {
             $postcommentnumber = get_comments_number();
             if ($postcommentnumber > '1') {
