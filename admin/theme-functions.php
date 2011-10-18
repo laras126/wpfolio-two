@@ -116,6 +116,16 @@ function get_blog_cat()	{
 
 add_filter('thematic_above_indexloop', 'get_blog_cat');
 
+function wpf_comments_option() {
+	$shortname = get_option('of_shortname');
+	$comment_option = get_option($shortname.'_disable_comments');
+	$cat_option = get_option($shortname.'_cats_in_blog');
+	$cat = get_cat_ID($cat_option);
+
+	if ( $comment_option == 1 || ($comment_option == 2 && in_category($cat)) ) {
+		thematic_comments_template();
+	}
+}
 
 /*-----------------------------------------------------------------------------------*/
 /* Add Body ides for Layout

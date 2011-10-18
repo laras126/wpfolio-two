@@ -54,14 +54,15 @@ function wpf_postfooter_postcomments() {
             $postcomments = ' <span class="comments-link comments-closed-link">' . __('Comments closed', 'thematic') .'</span>';
         }
 
+        return apply_filters('wpf_postfooter_postcomments',$postcomments); 
+    
     }
 
     // Display edit link
     if (current_user_can('edit_posts')) {
         $postcomments = thematic_postfooter_posteditlink();
     }    
-            
-    return apply_filters('wpf_postfooter_postcomments',$postcomments); 
+    
 }
 
 // Filter post footer for News and Portfolio classes. Display usual entry-utility on news posts and remove it from portfolio posts.

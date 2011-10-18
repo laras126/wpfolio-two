@@ -110,12 +110,12 @@ $options[] = array( "name" => "Artwork Info",
 					"type" => "radio",
 					"options" => array("Yes","No"));
 
-$options[] = array( "name" => "Disable Comments",
-					"desc" => "Would you like to disable comments site wide?",
+$options[] = array( "name" => "Comments",
+					"desc" => "Select if you would like comments on your site.",
 					"id" => $shortname."_disable_comments",
-					"std" => 1,
+					"std" => 2,
 					"type" => "radio",
-					"options" => array("Yes","No"));
+					"options" => array("Disable Site-wide","Do not disable comments","Show Only in the Blog Category"));
 
 $options[] = array( "name" => "Header Logo",
 					"desc" => "Unlike the 'Header' option in the Appearance panel, images uploaded here can be any size.",

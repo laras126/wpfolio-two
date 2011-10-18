@@ -16,6 +16,19 @@ require_once("wpf-prevnext.php");
 require_once("dev-functions.php");
 
 
+function no_comments_remove_sep() {
+
+	$shortname = get_option('of_shortname');
+	$comment_option = get_option($shortname.'_disable_comments');
+
+	if ( $comment_option == 0 ) {
+		echo "<style type='text/css'>\n
+			span.meta-sep-comments-link {display:none;}\n
+			</style>";
+	}
+}
+
+add_action('wp_head', 'no_comments_remove_sep');
 
 /////////////////////////////////
 // PORTFOLIO/NEWS BODY CLASSES //

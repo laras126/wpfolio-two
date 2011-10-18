@@ -1032,19 +1032,24 @@ if (function_exists('childtheme_override_postfooter_postcategory'))  {
 	function thematic_postfooter_postcategory() {
     	$shortname = get_option('of_shortname');
     	$comment_option = get_option($shortname.'_disable_comments');
+    	$cat_option = get_option($shortname.'_cats_in_blog');
+		$cat = get_cat_ID($cat_option);
 	    $postcategory = '<span class="cat-links">';
+
 	    if (is_single()) {
 	        $postcategory .= __('This entry was posted in ', 'thematic') . get_the_category_list(', ');
 	        $postcategory .= '</span>';
 	    } elseif ( is_category() && $cats_meow = thematic_cats_meow(', ') ) { /* Returns categories other than the one queried */
-	        $postcategory .= __('Also posted in ', 'thematic') . $cats_meow;
-	        $postcategory .= '</span> <span class="meta-sep meta-sep-tag-links">|</span>';
+	        $postcategory .= __('Also posted in ', 'thematic') . $cats_meow . ' </span>';
+	        if ( $comment_option == 1 || ($comment_option == 2 && is_category($cat)) ) {
+	        	$postcategory .= '<span class="meta-sep meta-sep-tag-links">|</span>';
+	        }
 	    } else {
-	        $postcategory .= __('Posted in ', 'thematic') . get_the_category_list(', ');
+	        $postcategory .= __('Posted in ', 'thematic') . get_the_category_list(', ') . ' </span>';
 	        
 	        // **** WPFolio post comments conditional **** /	
-	        if ( $comment_option == 1 ) {
-	        	$postcategory .= '</span> <span class="meta-sep meta-sep-tag-links">|</span>';
+	        if ( has_tag() ) {
+	        	$postcategory .= '<span class="meta-sep meta-sep-tag-links">|</span>';
 	        }
 	    }
 

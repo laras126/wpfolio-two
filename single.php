@@ -35,7 +35,7 @@
 				wpf_navigation_below();
 				
     	        // calling the comments template
-    	        thematic_comments_template();
+    	        wpf_comments_option();
 		
     	        // calling the widget area 'single-bottom'
     	        get_sidebar('single-bottom');
