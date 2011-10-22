@@ -14,6 +14,14 @@ function wpf_fields_edit( $form_fields, $post ) {
 
 	$post->post_type == 'attachment';
 
+    // Date
+    $form_fields[ 'wpf_g_date' ] = array(
+        'label' => __( 'Date' ),
+        'input' => 'text',
+        'value' => get_post_meta( $post->ID, '_wpf_g_date', true ),
+        'helps' => __('When did you make it?')
+    );
+
     // Medium
     $form_fields[ 'wpf_g_medium' ] = array(
         'label' => __( 'Medium' ),
@@ -26,7 +34,6 @@ function wpf_fields_edit( $form_fields, $post ) {
     $form_fields[ 'wpf_g_medium' ][ 'input' ] = 'text';
     $form_fields[ 'wpf_g_medium' ][ 'value' ] = get_post_meta( $post->ID, '_wpf_g_medium', true );
 
-
     // Dimensions
     $form_fields[ 'wpf_g_dimen' ] = array(
         'label' => __( 'Dimensions' ),
@@ -37,19 +44,6 @@ function wpf_fields_edit( $form_fields, $post ) {
     $form_fields[ 'wpf_g_dimen' ][ 'label' ] = __( 'Dimensions' );
     $form_fields[ 'wpf_g_dimen' ][ 'input' ] = 'text';
     $form_fields[ 'wpf_g_dimen' ][ 'value' ] = get_post_meta( $post->ID, '_wpf_g_dimen', true );
-
-
-    // Collaborators
-    $form_fields[ 'wpf_g_collabs' ] = array(
-        'label' => __( 'Collaborators' ),
-        'input' => 'text',
-        'value' => get_post_meta( $post->ID, '_wpf_g_collabs', true ),
-        'helps' => __('e.g. Collaborators: Harry and James, Thanks to SMFA Boston, etc.')
-    );
-    $form_fields[ 'wpf_g_collabs' ][ 'label' ] = __( 'Collaborators' );
-    $form_fields[ 'wpf_g_collabs' ][ 'input' ] = 'text';
-    $form_fields[ 'wpf_g_collabs' ][ 'value' ] = get_post_meta( $post->ID, '_wpf_g_collabs', true );
-
 
     // Additional Info
     $form_fields[ 'wpf_g_additional' ] = array(
@@ -62,6 +56,17 @@ function wpf_fields_edit( $form_fields, $post ) {
     $form_fields[ 'wpf_g_additional' ][ 'input' ] = 'textarea';
     $form_fields[ 'wpf_g_additional' ][ 'value' ] = get_post_meta( $post->ID, '_wpf_g_additional', true );
 
+    // Collaborators
+    $form_fields[ 'wpf_g_collabs' ] = array(
+        'label' => __( 'Collaborators/Credits' ),
+        'input' => 'text',
+        'value' => get_post_meta( $post->ID, '_wpf_g_collabs', true ),
+        'helps' => __('e.g. Collaborators: Harry and James, Thanks to SMFA Boston, etc.')
+    );
+    $form_fields[ 'wpf_g_collabs' ][ 'label' ] = __( 'Collaborators' );
+    $form_fields[ 'wpf_g_collabs' ][ 'input' ] = 'text';
+    $form_fields[ 'wpf_g_collabs' ][ 'value' ] = get_post_meta( $post->ID, '_wpf_g_collabs', true );
+
 	return $form_fields;
 }
 
@@ -70,7 +75,7 @@ add_filter( 'attachment_fields_to_edit', 'wpf_fields_edit', NULL, 2 );
 
 // Save the custom field values
 function wpf_fields_save( $post, $attachment ) {
-    $fields = array('wpf_g_medium', 'wpf_g_dimen', 'wpf_g_collabs', 'wpf_g_additional');
+    $fields = array('wpf_g_medium', 'wpf_g_date', 'wpf_g_dimen', 'wpf_g_additional', 'wpf_g_collabs');
     foreach( $fields as $field ) {
         $key = '_' . $field;
         if( isset( $attachment[ $field ] ) ) {
@@ -92,7 +97,7 @@ add_filter( 'attachment_fields_to_save', 'wpf_fields_save', NULL, 2 );
 function get_artwork_fields_info() {
 	global $post;
 
-    $fields = array('wpf_g_medium', 'wpf_g_dimen', 'wpf_g_collabs', 'wpf_g_additional');
+    $fields = array('wpf_g_medium', 'wpf_g_date', 'wpf_g_dimen', 'wpf_g_additional', 'wpf_g_collabs');
     $title = $post->post_title;
 
     $shortname =  get_option('of_shortname');
