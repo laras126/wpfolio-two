@@ -70,7 +70,7 @@ function wpf_fields_edit( $form_fields, $post ) {
 	return $form_fields;
 }
 
-add_filter( 'attachment_fields_to_edit', 'wpf_fields_edit', NULL, 2 );
+//add_filter( 'attachment_fields_to_edit', 'wpf_fields_edit', NULL, 2 );
 
 
 // Save the custom field values
@@ -91,7 +91,7 @@ function wpf_fields_save( $post, $attachment ) {
 
 } 
 
-add_filter( 'attachment_fields_to_save', 'wpf_fields_save', NULL, 2 );
+//add_filter( 'attachment_fields_to_save', 'wpf_fields_save', NULL, 2 );
 
 // Print the values - called in attachment.php
 function get_artwork_fields_info() {

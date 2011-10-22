@@ -103,15 +103,15 @@ $options[] = array( "name" => "Blog Category",
 					"type" => "select",
 					"options" => $of_categories);
 
-$options[] = array( "name" => "Artwork Info",
+/*$options[] = array( "name" => "Artwork Info",
 					"desc" => "Display artwork title and info on attachment pages? This is added in the Media Uploader.",
 					"id" => $shortname."_show_artwork_info",
 					"std" => 0,
 					"type" => "radio",
-					"options" => array("Yes","No"));
+					"options" => array("Yes","No"));*/
 
 $options[] = array( "name" => "Comments",
-					"desc" => "Select if you would like comments on your site.",
+					"desc" => "Select if you would like comments on your site. Disabling will not remove existing comments.",
 					"id" => $shortname."_disable_comments",
 					"std" => 2,
 					"type" => "radio",
