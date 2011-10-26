@@ -106,15 +106,17 @@ ADDFONTS;
 // Get all posts from category specified in the Blog Category option. This is the only category displayed on the blog page. 
 
 function get_blog_cat()	{
-	
+
 	$shortname = get_option('of_shortname');
 	$cat_option = get_option($shortname.'_cats_in_blog');
-	$cat = get_cat_ID($cat_option);
-	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; query_posts("cat=$cat&paged=$paged"); 
+	$catid = get_cat_ID($cat_option);
+	
+	global $query_string; // required
+	$posts = query_posts( $query_string . '&cat=' . $catid );
 		
 }
 
-add_filter('thematic_above_indexloop', 'get_blog_cat');
+add_action('thematic_above_indexloop', 'get_blog_cat');
 
 function wpf_comments_option() {
 	$shortname = get_option('of_shortname');
