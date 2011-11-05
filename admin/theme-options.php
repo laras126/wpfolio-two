@@ -253,7 +253,7 @@ $options[] = array( "name" => "",
 					"desc" => "Text following your name and date.",
 		            "id" => $shortname."_li_optional_text",
 		            "type" => "text",
-		            "std" => "unless otherwise specified");
+		            "std" => "");
 
 $options[] = array( "name" => "Show theme credits?",
 					"desc" => "It's a nice thing to do :)",
