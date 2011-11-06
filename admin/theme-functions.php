@@ -111,8 +111,7 @@ function get_blog_cat()	{
 	$cat_option = get_option($shortname.'_cats_in_blog');
 	$catid = get_cat_ID($cat_option);
 	
-	global $query_string; // required
-	$posts = query_posts( $query_string . '&cat=' . $catid );
+	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; query_posts("cat=" . $catid . "&paged=".$paged);
 		
 }
 
