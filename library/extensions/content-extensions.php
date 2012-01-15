@@ -473,7 +473,7 @@ if (function_exists('childtheme_override_index_loop'))  {
 				
 				thematic_belowpost();
 				
-				comments_template();
+				wpf_comments_option();
 
 				if ($count==$thm_insert_position) {
 						get_sidebar('index-insert');

@@ -173,5 +173,18 @@ require_once ('admin/theme-options.php');
 require_once ('admin/theme-functions.php');
 
 
+////////////////////
+//// UTILITIES /////
+////////////////////
+
+function wpf_post_class() {
+
+	if (!(THEMATIC_COMPATIBLE_POST_CLASS)) {
+		echo post_class() . '>';
+	} else {
+		echo 'class="' . thematic_post_class() . '">';
+	}
+
+}
 
 ?>

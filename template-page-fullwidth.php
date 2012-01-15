@@ -33,16 +33,11 @@
 	        
 	            ?>
 	            
-				<div id="post-<?php the_ID();
-					echo '" ';
-					if (!(THEMATIC_COMPATIBLE_POST_CLASS)) {
-						post_class();
-						echo '>';
-					} else {
-						echo 'class="';
-						thematic_post_class();
-						echo '">';
-					}
+				<div id="post- <?php the_ID(); ?>"
+
+					<?php
+
+					wpf_post_class();
 	                
 	                // creating the post header
 	                thematic_postheader();
@@ -67,7 +62,7 @@
 	        thematic_belowpost();
 	        
 	        // calling the comments template
-	        thematic_comments_template();
+	        wpf_comments_option();
 	        
 	        // calling the widget area 'page-bottom'
 	        get_sidebar('page-bottom');

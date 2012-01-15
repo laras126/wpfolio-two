@@ -25,21 +25,14 @@
 	        
 	            ?>
 	            
-				<div id="post-<?php the_ID();
-					echo '" ';
-					if (!(THEMATIC_COMPATIBLE_POST_CLASS)) {
-						post_class();
-						echo '>';
-					} else {
-						echo 'class="';
-						thematic_post_class();
-						echo '">';
-					}
-	                
-	                // creating the post header
-	                thematic_postheader();
-	                
-	                ?>
+				
+				
+				<div id=<?php echo '"post-' . the_ID() . '" ';
+
+				wpf_post_class();
+                
+                // creating the post header
+                thematic_postheader(); ?>
 	                
 					<div class="entry-content">
 					<div class="widemargins">	
@@ -62,15 +55,9 @@
 	        ?>
 	        
 	        <div class="widemargins"> <?php
-	        // calling the comments template
-       		if (THEMATIC_COMPATIBLE_COMMENT_HANDLING) {
-				if ( get_post_custom_values('comments') ) {
-					// Add a key/value of "comments" to enable comments on pages!
-					thematic_comments_template();
-				}
-			} else {
-				thematic_comments_template();
-			} ?>
+
+				wpf_comments_option();
+			?>
 	        
 	        </div> <!-- .widemargins --> <?php
 	        
