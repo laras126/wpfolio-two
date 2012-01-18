@@ -112,13 +112,13 @@ margin-left:20px;
 #branding {
 width:inherit;
 padding:36px 0 5px 12px;
-}
+} 
 
-#blog-title {
-font-size:3.4em;
+#blog-title a {
+font-size:1.5em;
 margin-bottom:7px;
 font-family:Lobster, arial, serif;
-font-weight: normal;
+font-weight:normal;
 }
 
 #blog-description {
