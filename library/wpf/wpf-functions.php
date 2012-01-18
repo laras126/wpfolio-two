@@ -117,10 +117,14 @@ define('_TEMPLATEURL', WP_CONTENT_URL . '/' . stristr(TEMPLATEPATH, 'themes'));
 include_once 'WPAlchemy/MetaBox.php';
  
 // stylesheet used by all similar meta boxes
-if (is_admin()) 
-{
-	wp_enqueue_style('custom_meta_css', THEMELIB . '/wpf/custom/meta.css');
+function metabox_enqueue_style() {
+	if (is_admin()) 
+	{
+		wp_enqueue_style('custom_meta_css', THEMELIB . '/wpf/custom/meta.css');
+	}	
 }
+add_action('wp_enqueue_style', 'metabox_enqueue_style');
+
 
 $prefix = 'wpf_';
 $mb = new WPAlchemy_MetaBox(array

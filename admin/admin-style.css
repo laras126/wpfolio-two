@@ -2,6 +2,7 @@
 /* OptionsFramework Admin Styles */
 /*-------------------------------------------------------------------------------------------*/
 
+
 .updated, .error {
 	display:none!important
 } /* disable the admin notices */
@@ -381,6 +382,10 @@ html body * span.clear, html body * div.clear, html body * li.clear, html body *
 /* WPFOLIO STYLES */
 /*-------------------------------------------------------------------------------------------*/
 
-div.option {
-	padding-bottom:0px;
+.option {
+	padding-bottom:0;
+}
+
+#of_container .controls input[type="radio"] {
+	margin-bottom: 0 !important;
 }

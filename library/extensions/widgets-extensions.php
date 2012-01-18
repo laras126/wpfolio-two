@@ -274,7 +274,8 @@ function thematic_widgets_init() {
 
 	// Finished intializing Widgets plugin, now let's load the thematic default widgets
 	
-	register_widget('THM_Widget_Search');
+	// Remove search widget until it works
+	//register_widget('THM_Widget_Search');
 	register_widget('THM_Widget_Meta');
 	register_widget('THM_Widget_RSSlinks');
 

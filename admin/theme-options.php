@@ -80,7 +80,7 @@ if ( is_dir($alt_stylesheet_path) ) {
 
 //More Options
 $uploads_arr = wp_upload_dir();
-$all_uploads_path = $uploads_arr['path'];
+//$all_uploads_path = $uploads_arr['path'];
 $all_uploads = get_option('of_uploads');
 $other_entries = array("Select a number:","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19");
 $body_repeat = array("no-repeat","repeat-x","repeat-y","repeat");
@@ -111,11 +111,11 @@ $options[] = array( "name" => "Blog Category",
 					"options" => array("Yes","No"));*/
 
 $options[] = array( "name" => "Comments",
-					"desc" => "Select if you would like comments on your site. Disabling will not remove existing comments.",
+					"desc" => "Would like comments on your site? Disabling will not remove existing comments.",
 					"id" => $shortname."_disable_comments",
 					"std" => 2,
 					"type" => "radio",
-					"options" => array("Disable Site-wide","Do not disable comments","Show Only in the Blog Category"));
+					"options" => array("Disable all comments","Do not disable comments","Show only in the Blog Category"));
 
 $options[] = array( "name" => "Header Logo",
 					"desc" => "Unlike the 'Header' option in the Appearance panel, images uploaded here can be any size.",
@@ -131,7 +131,7 @@ $options[] = array( "name" => "",
 					"options" => array('Show title above logo','Don\'t show title'));		
 					
 $options[] = array( "name" => "Custom Favicon",
-					"desc" => "Upload a 16px x 16px png/gif/ico image that will represent your website's favicon. To automatically create a favicon from a larger image, check out the <a href='http://www.degraeve.com/favicon/'>Favicon Generator</a> then upload it here.",
+					"desc" => "Upload a 16px x 16px png/gif/ico image for your website's favicon. You can create a favicon from a larger image with the <a href='http://www.degraeve.com/favicon/'>Favicon Generator</a> then upload it here.",
 					"id" => $shortname."_custom_favicon",
 					"std" => "",
 					"type" => "upload"); 

@@ -27,12 +27,14 @@
 	            
 				
 				
-				<div id=<?php echo '"post-' . the_ID() . '" ';
+				<div id=<?php echo '"post-' . the_ID() . '" ';?>
+				
+					<?php
 
-				wpf_post_class();
+					wpf_post_class();
                 
-                // creating the post header
-                thematic_postheader(); ?>
+                	// creating the post header
+                	thematic_postheader(); ?>
 	                
 					<div class="entry-content">
 					<div class="widemargins">	

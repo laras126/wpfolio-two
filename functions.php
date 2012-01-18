@@ -77,7 +77,10 @@ if ( apply_filters( 'thematic_post_thumbs', TRUE) ) {
 }
 
 // Load jQuery
-wp_enqueue_script('jquery');
+function thematic_enqueue_scripts() {
+    wp_enqueue_script('jquery');
+}
+add_action('wp_enqueue_scripts', 'thematic_enqueue_scripts');
 
 // Path constants
 define('THEMELIB', TEMPLATEPATH . '/library');

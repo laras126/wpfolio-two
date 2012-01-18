@@ -26,16 +26,12 @@ Template Name: Archives Page
 	            
 	            ?>
 	
-				<div id="post-<?php the_ID();
-					echo '" ';
-					if (!(THEMATIC_COMPATIBLE_POST_CLASS)) {
-						post_class();
-						echo '>';
-					} else {
-						echo 'class="';
-						thematic_post_class();
-						echo '">';
-					}
+				<div id=<?php echo '"post-' . the_ID() . '" ';?>
+				
+					<?php
+
+					wpf_post_class();
+                
 	                
 	                // creating the post header
 	                thematic_postheader();
@@ -62,16 +58,17 @@ Template Name: Archives Page
 	        
 	        thematic_belowpost();
 	        
-	        // calling the comments template
 	        	// calling the comments template
-        		if (THEMATIC_COMPATIBLE_COMMENT_HANDLING) {
+        		/*if (THEMATIC_COMPATIBLE_COMMENT_HANDLING) {
        				if ( get_post_custom_values('comments') ) {
 						// Add a key/value of "comments" to enable comments on pages!
 	        			thematic_comments_template();
         			}
         		} else {
        				thematic_comments_template();
-        		}
+        		}*/
+
+        		wpf_comments_option();
 	        
 	        ?>
 	
