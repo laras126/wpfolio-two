@@ -91,7 +91,7 @@ function gfonts_api($gf1, $df1) {
 
 <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js'></script>
 <script type='text/javascript'>WebFont.load({ google: {families: [ '$gf1' ]}})</script>
-<style type='text/css'>.wf-loading #blog-title {font-family: $df1;} .wf-inactive #blog-title {font-family: $df1;} .wf-active #blog-title {font-family: '$gf1';}</style>
+<style type='text/css'>.wf-loading #blog-title a {font-family: $df1;} .wf-inactive #blog-title a {font-family: $df1;} .wf-active #blog-title a {font-family: '$gf1';}</style>
 
 ADDFONTS;
 
