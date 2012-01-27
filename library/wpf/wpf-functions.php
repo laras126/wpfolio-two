@@ -118,8 +118,7 @@ include_once 'WPAlchemy/MetaBox.php';
  
 // stylesheet used by all similar meta boxes
 function metabox_enqueue_style() {
-	if (is_admin()) 
-	{
+	if (is_admin()) {
 		wp_enqueue_style('custom_meta_css', THEMELIB . '/wpf/custom/meta.css');
 	}	
 }

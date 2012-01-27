@@ -5,7 +5,7 @@
  * @copyright	Copyright (c) 2009, Dimas Begunoff, http://farinspace.com
  * @license		http://en.wikipedia.org/wiki/MIT_License The MIT License
  * @package		WPAlchemy
- * @version		1.4.4
+ * @version		1.4.15
  * @link		http://github.com/farinspace/wpalchemy
  * @link		http://farinspace.com
  */
@@ -790,9 +790,8 @@ class WPAlchemy_MetaBox
 		$meta = $this->_meta(NULL, TRUE);
 
 		// use include because users may want to use one templete for multiple meta boxes
-		include $this->template; 
-		// commented out by Lara b/c of error I haven't figured out
-			 
+		include $this->template;
+	 
 		// create a nonce for verification
 		echo '<input type="hidden" name="'. $this->id .'_nonce" value="' . wp_create_nonce($this->id) . '" />';
 
@@ -989,18 +988,10 @@ class WPAlchemy_MetaBox
 	 */
 	function _is_post_or_page()
 	{
-		$uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : NULL ;
+		$post_type = WPAlchemy_MetaBox::_get_current_post_type();
 
-		$file = basename(parse_url($uri, PHP_URL_PATH));
-
-		if ($uri AND in_array($file, array('post.php', 'post-new.php')))
+		if (isset($post_type))
 		{
-			$post_id = isset($_GET['post']) ? $_GET['post'] : NULL ;
-
-			$post_type = isset($_GET['post_type']) ? $_GET['post_type'] : NULL ;
-
-			$post_type = $post_id ? get_post_type($post_id) : $post_type ;
-
 			if ('page' == $post_type)
 			{
 				return 'page';
@@ -1015,17 +1006,76 @@ class WPAlchemy_MetaBox
 	}
 
 	/**
+	 * Used to check for the current post type, works when creating or editing a
+	 * new post, page or custom post type.
+	 *
+	 * @static
+	 * @since	1.4.6
+	 * @return	string [custom_post_type], page or post
+	 */
+	function _get_current_post_type()
+	{
+		$uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : NULL ;
+
+		$uri_parts = parse_url($uri);
+
+		$file = basename($uri_parts['path']);
+
+		if ($uri AND in_array($file, array('post.php', 'post-new.php')))
+		{
+			$post_id = WPAlchemy_MetaBox::_get_post_id();
+
+			$post_type = isset($_GET['post_type']) ? $_GET['post_type'] : NULL ;
+
+			$post_type = $post_id ? get_post_type($post_id) : $post_type ;
+
+			if (isset($post_type))
+			{
+				return $post_type;
+			}
+			else
+			{
+				// because of the 'post.php' and 'post-new.php' checks above, we can default to 'post'
+				return 'post';
+			}
+		}
+
+		return NULL;
+	}
+
+	/**
+	 * Used to get the current post id.
+	 *
+	 * @static
+	 * @since	1.4.8
+	 * @return	int post ID
+	 */
+	function _get_post_id()
+	{
+		global $post;
+
+		$p_post_id = isset($_POST['post_ID']) ? $_POST['post_ID'] : null ;
+
+		$g_post_id = isset($_GET['post']) ? $_GET['post'] : null ;
+
+		$post_id = $g_post_id ? $g_post_id : $p_post_id ;
+
+		$post_id = isset($post->ID) ? $post->ID : $post_id ;
+
+		if (isset($post_id))
+		{
+			return (integer) $post_id;
+		}
+		
+		return null;
+	}
+
+	/**
 	 * @since	1.0
 	 */
 	function can_output()
 	{
-		global $post;
-		
-		$p_post_id = isset($_POST['post_ID']) ? $_POST['post_ID'] : '' ;
-		$g_post_id = isset($_GET['post']) ? $_GET['post'] : '' ;
-
-		$post_id = $g_post_id ? $g_post_id : $p_post_id ;
-		$post_id = (!empty($post) AND $post->ID) ? $post->ID : $post_id ;
+		$post_id = WPAlchemy_MetaBox::_get_post_id();
 
 		if (!empty($this->exclude_template) OR !empty($this->include_template))
 		{
@@ -1235,13 +1285,9 @@ class WPAlchemy_MetaBox
 			}
 		}
 
-		// $_GET['post_type'] used with post-new.php
-		$post_type = isset($_GET['post_type']) ? $_GET['post_type'] : NULL ;
-		
-		// get_post_type() works only with existing posts or pages get_post_type($post_id);
-		$post_type = $post_type ? $post_type : get_post_type($post_id) ;
+		$post_type = WPAlchemy_MetaBox::_get_current_post_type();
 
-		if (! empty($post_type) AND ! in_array($post_type, $this->types))
+		if (isset($post_type) AND ! in_array($post_type, $this->types))
 		{
 			$can_output = FALSE;
 		}
@@ -1323,11 +1369,11 @@ class WPAlchemy_MetaBox
 
 				var the_group = $('.wpa_group-'+ the_name +':first.tocopy', p);
 				
-				var the_clone = the_group.clone().removeClass('tocopy');
+				var the_clone = the_group.clone().removeClass('tocopy last');
 
-				var the_props = ['name', 'id', 'for'];
+				var the_props = ['name', 'id', 'for', 'class'];
 
-				the_group.find('input, textarea, select, button, label').each(function(i,elem)
+				the_group.find('*').each(function(i, elem)
 				{
 					for (var j = 0; j < the_props.length; j++)
 					{
@@ -1339,7 +1385,19 @@ class WPAlchemy_MetaBox
 
 							if (the_match)
 							{
-								the_prop = the_prop.replace(the_match[0],'['+(+the_match[1]+1)+']');
+								the_prop = the_prop.replace(the_match[0],'['+ (+the_match[1]+1) +']');
+
+								$(elem).attr(the_props[j], the_prop);
+							}
+
+							the_match = null;
+
+							// todo: this may prove to be too broad of a search
+							the_match = the_prop.match(/n(\d+)/i);
+
+							if (the_match)
+							{
+								the_prop = the_prop.replace(the_match[0], 'n' + (+the_match[1]+1));
 
 								$(elem).attr(the_props[j], the_prop);
 							}
@@ -1554,6 +1612,8 @@ class WPAlchemy_MetaBox
 	{
 		$this->_meta(NULL, TRUE);
 
+		$value = null;
+
 		if ($this->in_loop)
 		{
 			if(isset($this->meta[$this->name]))
@@ -1566,14 +1626,14 @@ class WPAlchemy_MetaBox
 					{
 						if(isset($this->meta[$this->name][$this->current]))
 						{
-							return $this->meta[$this->name][$this->current];
+							$value = $this->meta[$this->name][$this->current];
 						}
 					}
 					else
 					{
 						if(isset($this->meta[$this->name][$this->current][$n]))
 						{
-							return $this->meta[$this->name][$this->current][$n];
+							$value = $this->meta[$this->name][$this->current][$n];
 						}
 					}
 				}
@@ -1583,14 +1643,14 @@ class WPAlchemy_MetaBox
 					{
 						if(isset($this->meta[$this->name]))
 						{
-							return $this->meta[$this->name];
+							$value = $this->meta[$this->name];
 						}
 					}
 					else
 					{
 						if(isset($this->meta[$this->name][$this->current]))
 						{
-							return $this->meta[$this->name][$this->current];
+							$value = $this->meta[$this->name][$this->current];
 						}
 					}
 				}
@@ -1600,10 +1660,33 @@ class WPAlchemy_MetaBox
 		{
 			$n = is_null($n) ? $this->name : $n ;
 
-			if(isset($this->meta[$n])) return $this->meta[$n];
+			if(isset($this->meta[$n]))
+			{
+				$value = $this->meta[$n];
+			}
 		}
 
-		return NULL;
+		if (is_string($value) || is_numeric($value))
+		{
+			if ($this->in_template)
+			{
+				return htmlentities($value, ENT_QUOTES, 'UTF-8');
+			}
+			else
+			{
+				// http://wordpress.org/support/topic/call-function-called-by-embed-shortcode-direct
+				// http://phpdoc.wordpress.org/trunk/WordPress/Embed/WP_Embed.html#run_shortcode
+
+				global $wp_embed;
+
+				return do_shortcode($wp_embed->run_shortcode($value));
+			}
+		}
+		else
+		{
+			// value can sometimes be an array
+			return $value;
+		}
 	}
 
 	/**
@@ -1630,9 +1713,9 @@ class WPAlchemy_MetaBox
 		{
 			$n = is_null($n) ? $this->subname : $n ;
 
-			if (!is_null($n)) return $this->id . '[' . $this->name . '][' . $this->current . '][' . $n . ']' ;
+			if (!is_null($n)) $the_field = $this->id . '[' . $this->name . '][' . $this->current . '][' . $n . ']' ;
 
-			$the_field = $this->id . '[' . $this->name . '][' . $this->current . ']' ;	
+			else $the_field = $this->id . '[' . $this->name . '][' . $this->current . ']' ;	
 		}
 		else
 		{
@@ -1647,7 +1730,7 @@ class WPAlchemy_MetaBox
 			WPALCHEMY_FIELD_HINT_SELECT_MULTI,
 			WPALCHEMY_FIELD_HINT_SELECT_MULTIPLE,
 		);
-		
+
 		if (in_array($this->hint, $hints))
 		{
 			$the_field .= '[]';
@@ -1739,13 +1822,13 @@ class WPAlchemy_MetaBox
 	{
 		if (is_null($v))
 		{
-			$the_value = $this->get_the_value(NULL, TRUE);
+			$the_value = $this->get_the_value(NULL);
 
 			$v = $n;
 		}
 		else
 		{
-			$the_value = $this->get_the_value($n, TRUE);
+			$the_value = $this->get_the_value($n);
 		}
 
 		if (is_array($the_value))
@@ -2095,6 +2178,8 @@ class WPAlchemy_MetaBox
 			 * @since 1.3.4
 			 */
 			if (FALSE === $new_data) return $post_id;
+
+			WPAlchemy_MetaBox::clean($new_data);
 		}
 
 		// get current fields, use $real_post_id (checked for in both modes)
@@ -2237,4 +2322,4 @@ class WPAlchemy_MetaBox
 	}
 }
 
-/* End of file */
+/* eof */
