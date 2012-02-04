@@ -63,8 +63,11 @@ function remove_sidebar() {
 	$shortname = get_option('of_shortname');
 	$cat_option = get_option($shortname.'_cats_in_blog');
 	
+	// Parse special characters in the category option string
+	$catstr = htmlentities($cat_option);
+	
 	if ( $cat_option != 'Select a Category:' ) {
-		if ( in_category($cat_option) ) {
+		if ( in_category($catstr) ) {
 			return TRUE;
 		} else {
 			return FALSE;
@@ -146,6 +149,7 @@ function display_artwork_info() {
 	
 	echo the_content();	 
 	echo '<div id="artwork-meta">';
+	
 	if ($mb->get_the_value('title') != ''){
 		echo '<em>';
 		$mb->the_value('title');

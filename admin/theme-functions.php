@@ -109,10 +109,12 @@ function get_blog_cat()	{
 
 	$shortname = get_option('of_shortname');
 	$cat_option = get_option($shortname.'_cats_in_blog');
-	$catid = get_cat_ID($cat_option);
+
+	// Parse special characters in the category option string
+	$catstr = htmlentities($cat_option);
+	$catid = get_cat_ID($catstr);
 	
 	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; query_posts("cat=" . $catid . "&paged=".$paged);
-		
 }
 
 add_action('thematic_above_indexloop', 'get_blog_cat');
