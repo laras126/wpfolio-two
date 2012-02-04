@@ -29,11 +29,10 @@ function wpf_page_title(){
 // Template for portfolio category loop - excerpts are post thumbnails only
 
 function wpf_category_loop(){
-	$shortname = get_option('of_shortname');
-	$cat_option = get_option($shortname.'_cats_in_blog');
-	$cat = get_cat_ID($cat_option);
-	
-	if ( ! is_category($cat_option) ) {
+
+	global $blog_catid;
+
+	if ( ! is_category($blog_catid) ) {
 		while (have_posts()) : the_post(); 		
 			thematic_abovepost(); 
 			?>

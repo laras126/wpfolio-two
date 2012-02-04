@@ -1,5 +1,14 @@
 <?php
 
+
+// Create global variables for blog category and comment options
+$shortname = get_option('of_shortname');
+$comment_option = get_option($shortname.'_disable_comments');
+$cat_option = get_option($shortname.'_cats_in_blog');
+$catstr = htmlentities($cat_option); // Parse special characters in the category option string
+$blog_catid = get_cat_ID($catstr);
+
+
 // Getting Theme and Child Theme Data
 // Credits: Joern Kretzschmar
 

@@ -10,14 +10,12 @@ function wpf_navigation_below() {
 
 function wpf_nav_below() {
 
-	$shortname = get_option('of_shortname');
-	$cat_option = get_option($shortname.'_cats_in_blog');
-	$cat = get_cat_ID($cat_option);
+	global $blog_catid;
 
 	if ( is_single() ) { 
 		
 		// Only show .post-bottom-title if not in blog category or if attachment
-		if ( !in_category($cat) ) { ?>
+		if ( !in_category($blog_catid) ) { ?>
 			<div class="post-bottom-title navigation">   
 				<a href="<?php the_permalink() ?>" title="Permalink for <?php the_title_attribute(); ?>"><?php the_title(); ?></a> | <?php the_time('Y') ?> | <?php the_category(', '); ?> 
 			</div><!-- .post-bottom-title -->
@@ -29,7 +27,7 @@ function wpf_nav_below() {
 		</div> <!-- .nav-below -->
 
 <?php
-	} elseif ( is_category($cat) ){ ?>
+	} elseif ( is_category($blog_catid) ){ ?>
 	
 		<div id="nav-below" class="navigation">
             <?php if(function_exists('wp_pagenavi')) { ?>

@@ -5,7 +5,7 @@
 ///////////////////
 
 
-// Test the options output. This is set to print the Blog Category - ncomment add_action to use and change variables accordingly to print different options.
+// Test the options output. This is set to print the Blog Category - uncomment add_action to use and change variables accordingly to print different options.
 function echotest() {
 	$shortname = get_option('of_shortname');
 	$cat_option = get_option($shortname.'_cats_in_blog');

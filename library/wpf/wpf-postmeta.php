@@ -34,12 +34,9 @@ function wpf_postheader_postmeta() {
 
 function wpf_postfooter_postcomments() {
 
-    $shortname = get_option('of_shortname');
-    $comment_option = get_option($shortname.'_disable_comments');
-    $cat_option = get_option($shortname.'_cats_in_blog');
-    $cat = get_cat_ID($cat_option);
+    global $blog_catid, $comment_option;
 
-    if ( $comment_option == 1 || ($comment_option == 2 && is_category($cat)) ) {   
+    if ( $comment_option == 1 || ($comment_option == 2 && is_category($blog_catid)) ) {   
         if (comments_open() ) {
             $postcommentnumber = get_comments_number();
             if ($postcommentnumber > '1') {
@@ -70,11 +67,9 @@ function wpf_postfooter_postcomments() {
 // Filter post footer for News and Portfolio classes. Display usual entry-utility on news posts and remove it from portfolio posts.
 function wpf_postfooter() {
 
-    global $id, $post, $postfooter;
-    $shortname = get_option('of_shortname');
-	$cat_option = get_option($shortname.'_cats_in_blog');
+    global $id, $post, $postfooter, $blog_catid;
 
-	if ( in_category($cat_option) ) {
+	if ( in_category($blog_catid) ) {
 	    if ($post->post_type == 'page' && current_user_can('edit_posts')) { /* For logged-in "page" search results */
 	        $postfooter = '<div class="entry-utility">' . thematic_postfooter_posteditlink();
 	        $postfooter .= "</div><!-- .entry-utility -->\n";    

@@ -18,8 +18,7 @@ require_once("dev-functions.php");
 
 function no_comments_remove_sep() {
 
-	$shortname = get_option('of_shortname');
-	$comment_option = get_option($shortname.'_disable_comments');
+	global $comment_option;
 
 	if ( $comment_option == 0 ) {
 		echo "<style type='text/css'>\n
@@ -37,11 +36,9 @@ add_action('wp_head', 'no_comments_remove_sep');
 // Add portfolio body class to anything that isn't the blog	
 function portfolio_body_class($class) {
 
-	global $post;
-	$shortname = get_option('of_shortname');
-	$cat_option = get_option($shortname.'_cats_in_blog');
+	global $post, $blog_catid;
 	
-	if ( in_category($cat_option) || is_home() ) {
+	if ( in_category($blog_catid) || is_home() ) {
 		$class[] = 'news';
 		return $class;
 	} else {
@@ -60,14 +57,13 @@ add_filter('body_class','portfolio_body_class');
 // Filter thematic_sidebar() .. remove from everything except the blog (category chosen in theme options).
 function remove_sidebar() {
 	
+	global $blog_catid;
+
 	$shortname = get_option('of_shortname');
 	$cat_option = get_option($shortname.'_cats_in_blog');
 	
-	// Parse special characters in the category option string
-	$catstr = htmlentities($cat_option);
-	
 	if ( $cat_option != 'Select a Category:' ) {
-		if ( in_category($catstr) ) {
+		if ( in_category($blog_catid) ) {
 			return TRUE;
 		} else {
 			return FALSE;

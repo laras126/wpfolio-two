@@ -1030,10 +1030,9 @@ if (function_exists('childtheme_override_postfooter_postcategory'))  {
 	}
 } else {
 	function thematic_postfooter_postcategory() {
-    	$shortname = get_option('of_shortname');
-    	$comment_option = get_option($shortname.'_disable_comments');
-    	$cat_option = get_option($shortname.'_cats_in_blog');
-		$cat = get_cat_ID($cat_option);
+    
+		global $blog_catid, $comment_option;
+
 	    $postcategory = '<span class="cat-links">';
 
 	    if (is_single()) {
@@ -1041,7 +1040,7 @@ if (function_exists('childtheme_override_postfooter_postcategory'))  {
 	        $postcategory .= '</span>';
 	    } elseif ( is_category() && $cats_meow = thematic_cats_meow(', ') ) { /* Returns categories other than the one queried */
 	        $postcategory .= __('Also posted in ', 'thematic') . $cats_meow . ' </span>';
-	        if ( $comment_option == 1 || ($comment_option == 2 && is_category($cat)) ) {
+	        if ( $comment_option == 1 || ($comment_option == 2 && is_category($blog_catid)) ) {
 	        	$postcategory .= '<span class="meta-sep meta-sep-tag-links">|</span>';
 	        }
 	    } else {
