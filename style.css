@@ -4,7 +4,7 @@ Theme URI: http://notlaura.com/wpfolio-two/
 Description: The transition of WPFolio - the WordPress theme for artists - to the Thematic theme framework. 
 Author: Lara Schenck
 Author URI: http://notlaura.com
-Version: 0.9.45b
+Version: 0.9.47b
 License: GPL
 License URI:
 Tags: theme-options, fixed-width, white
@@ -97,6 +97,7 @@ a:hover {
 #wrapper {
 	width:960px;
 	background-color:#FFF;
+	border-radius: 0.3em; 
 	margin:20px auto;
 }
 
@@ -106,7 +107,7 @@ a:hover {
 }
 
 #header {
-margin-left:20px;
+	margin-left:20px;
 }
 
 #branding {
@@ -442,7 +443,7 @@ p,#blog-title a,.entry-title a,.entry-content,h3.widgettitle,h1,h2,h3,h4 {
 }
 
 #access a,#blog-description,.aside a,.aside,.entry-meta,.entry-utility,.entry-utility a,input#s,.navigation a,#blog-title a:hover,.textwidget p {
-color:#666;
+	color:#666;
 }
 
 #footer,.news h2.entry-title,img.attachment-post-thumbnail,.single h1.entry-title,.gallery-icon {
@@ -454,11 +455,11 @@ color:#666;
 }
 
 .sf-menu,.sf-menu ul,.sf-menu .current_page_parent a,.sf-menu ul,.gallery-icon,#primary,#secondary {
-border:none;
+	border:none;
 }
 
 .portfolio .post h1.entry-title,.portfolio .entry-meta,.attachment h1.entry-title,span.meta-sep-edit,#nav-above.navigation {
-display:none;
+	display:none;
 }
 
 h1,h2,h3,h4,h5,h6,p,#comments h3,.entry-content h2,.entry-title,textarea,input {
@@ -476,3 +477,8 @@ h1,h2,h3,h4,h5,h6,p,#comments h3,.entry-content h2,.entry-title,textarea,input {
 }
 
 /* End WPF2 styles */
+
+
+body, #wrapper {
+	background-image: url("http://www.webtexture.net/wp-content/gallery/20-seamless-paper-texture/papar_texture_thumb04.jpg");
+}

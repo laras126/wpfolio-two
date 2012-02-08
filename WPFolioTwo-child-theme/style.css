@@ -16,4 +16,13 @@ http://wpfolio.visitsteve.com
 
 @import url('../wpfolio-two/style.css');
 
-/* add your changes below this line */
+/* Add your changes below this line. */
+
+/* Examples: */
+
+/* Add a texture to the background: *//*
+
+body, #wrapper {
+	background-image: url("http://www.webtexture.net/wp-content/gallery/20-seamless-paper-texture/papar_texture_thumb04.jpg");
+} */
+
