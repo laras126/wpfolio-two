@@ -283,24 +283,6 @@ h4.thumb-title,h4.thumb-title a,h4.thumb-title a:hover {
 	padding:3px;
 }
 
-.thumb-list, .gallery-icon {
-	opacity: 1;
-	-moz-opacity: 1;
-	filter:alpha(opacity=1);
-	-webkit-transition: opacity 0.5s ease;
-	-moz-transition: opacity 0.5s ease;
-	-o-transition: opacity 0.5s ease;
-	transition: opacity  0.5s ease;
-}
-
-.thumb-list:hover, .gallery-icon:hover {
-	opacity:0.7;
-	-webkit-transition: opacity 0.5s ease;
-	-moz-transition: opacity 0.5s ease;
-	-o-transition: opacity 0.5s ease;
-	transition: opacity  0.5s ease;
-}
-
 /* End */
 
 .main-aside {
