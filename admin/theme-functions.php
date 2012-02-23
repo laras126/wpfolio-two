@@ -15,20 +15,20 @@ if (!function_exists('optionsframework_wp_head')) {
 		$shortname =  get_option('of_shortname');
 	    
 		//Styles
-		 if(!isset($_REQUEST['style']))
+		/* if(!isset($_REQUEST['style']))
 		 	$style = ''; 
 		 else 
 	     	$style = $_REQUEST['style'];
 	     if ($style != '') {
 			  $GLOBALS['stylesheet'] = $style;
-	          echo '<link href="'. OF_DIRECTORY .'/styles/'. $GLOBALS['stylesheet'] . '.css" rel="stylesheet" type="text/css" />'."\n"; 
+	          echo '<link href="'. OF_DIRECTORY .'/library/styles/'. $GLOBALS['stylesheet'] . '.css" rel="stylesheet" type="text/css" />'."\n"; 
 	     } else { 
 	          $GLOBALS['stylesheet'] = get_option('of_alt_stylesheet');
 	          if($GLOBALS['stylesheet'] != '')
-	               echo '<link href="'. OF_DIRECTORY .'/styles/'. $GLOBALS['stylesheet'] .'" rel="stylesheet" type="text/css" />'."\n";         
+	               echo '<link href="'. OF_DIRECTORY .'/library/styles/'. $GLOBALS['stylesheet'] .'" rel="stylesheet" type="text/css" />'."\n";         
 	          else
-	               echo '<link href="'. OF_DIRECTORY .'/styles/default.css" rel="stylesheet" type="text/css" />'."\n";         		  
-	     }       
+	               echo '<link href="'. OF_DIRECTORY .'/library/styles/default.css" rel="stylesheet" type="text/css" />'."\n";         		  
+	     }  */     
 			
 		// This prints out the custom css and specific styling options
 		of_options_output_css();
@@ -38,14 +38,13 @@ if (!function_exists('optionsframework_wp_head')) {
 		$hdr_gfont = get_option($shortname . '_google_hdr_font' );
 		$hdr_dfont = get_option($shortname . '_default_hdr_font' );
 		
-		gfonts_api($hdr_gfont, $hdr_dfont);
-	
+		if($hdr_gfont != "") {
+			gfonts_api($hdr_gfont, $hdr_dfont);	
+		}
 	}
+
+	add_action('wp_head', 'optionsframework_wp_head');
 }
-
-add_action('wp_head', 'optionsframework_wp_head');
-
-
 
 /*-----------------------------------------------------------------------------------*/
 /* Output CSS from standarized options */
@@ -65,7 +64,7 @@ function of_head_css() {
 		
 		// Output styles
 		if ($output <> '') {
-			$output = "<!-- Custom Styling -->\n<style type=\"text/css\">\n" . $output . "</style>\n";
+			$output = "<!-- Options Styling -->\n<style type=\"text/css\">\n" . $output . "</style>\n";
 			echo $output;
 		}	
 }

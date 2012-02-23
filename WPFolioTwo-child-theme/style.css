@@ -16,13 +16,25 @@ http://wpfolio.visitsteve.com
 
 @import url('../wpfolio-two/style.css');
 
-/* Add your changes below this line. */
+/* Add your changes below this line */
 
-/* Examples: */
+/* 
+Example Styles: 
+*/
 
-/* Add a texture to the background: *//*
+/*--- Import your own web font 
+@import url('http://fonts.googleapis.com/css?family=Krona+One');
+*/
 
+/*--- Add a texture to the background 
 body, #wrapper {
 	background-image: url("http://www.webtexture.net/wp-content/gallery/20-seamless-paper-texture/papar_texture_thumb04.jpg");
-} */
+}
+*/
 
+/*--- Use webfont for page titles and make normal case
+.portfolio h1.entry-title {
+	font-family: 'Krona One', serif;
+	text-transform: none;
+}
+*/

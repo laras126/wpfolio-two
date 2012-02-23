@@ -24,7 +24,7 @@
     
     // Creating the canonical URL
     thematic_canonical_url();
-    
+
     // Loading the stylesheet
     thematic_create_stylesheet();
 

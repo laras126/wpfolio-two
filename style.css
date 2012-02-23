@@ -4,7 +4,7 @@ Theme URI: http://notlaura.com/wpfolio-two/
 Description: The transition of WPFolio - the WordPress theme for artists - to the Thematic theme framework. 
 Author: Lara Schenck
 Author URI: http://notlaura.com
-Version: 0.9.47b
+Version: 0.9.48b
 License: GPL
 License URI:
 Tags: theme-options, fixed-width, white
@@ -19,7 +19,6 @@ Thematic is © Ian Stewart http://themeshaper.com/
 @import url(library/styles/images.css);
 @import url(library/styles/default.css);
 @import url(library/styles/plugins.css);
-@import url(wpf/css/wpf-styles.php);
 @import url(http://fonts.googleapis.com/css?family=Lobster&v1);
 
 
@@ -477,8 +476,3 @@ h1,h2,h3,h4,h5,h6,p,#comments h3,.entry-content h2,.entry-title,textarea,input {
 }
 
 /* End WPF2 styles */
-
-
-body, #wrapper {
-	background-image: url("http://www.webtexture.net/wp-content/gallery/20-seamless-paper-texture/papar_texture_thumb04.jpg");
-}

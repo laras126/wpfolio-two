@@ -201,7 +201,7 @@ $content_width = 900;
 
 define('NO_HEADER_TEXT', true );
 define('HEADER_TEXTCOLOR', '');
-define('HEADER_IMAGE', '%s/images/default_header.jpg'); // %s is the template dir uri
+/*define('HEADER_IMAGE', '%s/images/default_header.jpg'); // %s is the template dir uri*/
 define('HEADER_IMAGE_WIDTH', 960); // use width and height appropriate for your theme
 define('HEADER_IMAGE_HEIGHT', 198);
 
