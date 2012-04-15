@@ -18,7 +18,7 @@
 		jQuery.noConflict();
 
 		jQuery(document).ready(function(){
-			jQuery("#content").fadeIn(1200);	
+			jQuery("#main, #footer").fadeIn(1200);	
 		});	
 		
 	</script>
