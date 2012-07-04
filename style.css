@@ -19,7 +19,6 @@ Thematic is © Ian Stewart http://themeshaper.com/
 @import url(library/styles/images.css);
 @import url(library/styles/default.css);
 @import url(library/styles/plugins.css);
-@import url(http://fonts.googleapis.com/css?family=Lobster&v1);
 
 
 /* Thematic styles */
@@ -117,7 +116,6 @@ a:hover {
 #blog-title a {
 	font-size:1.3em;
 	margin-bottom:7px;
-	font-family:Lobster, arial, serif;
 	font-weight:normal;
 }
 
