@@ -10,6 +10,7 @@ $body_text = get_option($shortname . '_body_text');
 $prim_clr = get_option($shortname . '_primary_font_color');
 $sec_clr = get_option($shortname . '_secondary_font_color');
 $menu_clr = get_option($shortname.'_menu_hover_color');
+$header_text = get_option($shortname.'_default_hdr_font');
 
 // Conditional styles for the logo option. Not using this now. 
 function title_option() {
