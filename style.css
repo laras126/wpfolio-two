@@ -285,13 +285,13 @@ h4.thumb-title,h4.thumb-title a,h4.thumb-title a:hover {
 	zoom: 1;
 	opacity: 1;
 	-moz-opacity: 1;
-	filter:alpha(opacity=1);
+	filter:alpha(opacity=100);
 }
 
 .thumb-list:hover, .gallery-icon:hover {
 	zoom: 1;
 	opacity:0.7;
-	filter:alpha(opacity=0.7);
+	filter:alpha(opacity=70);
 }
 /* End */
 
