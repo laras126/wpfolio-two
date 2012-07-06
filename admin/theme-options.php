@@ -152,11 +152,18 @@ $options[] = array( "name" => "Custom Favicon",
 
 $options[] = array( "name" => "Styling Options",
 					"type" => "heading");
-										
+
+$options[] = array( "name" => "Use WebFonts",
+					"desc" => "Check this box to use a WebFont from Google's <a href='http://google.com/webfonts' target='_blank'>WebFont Directory</a> for you
+					site's title.",
+					"id" => $shortname."_use_google_font",
+					"std" => "false",
+					"type" => "checkbox"); 
+					
 $options[] = array( "name" => "Title WebFont",
-					"desc" => "Type the name of a font from the <a href='http://google.com/webfonts' target='_blank'>Google WebFont Directory</a> for your site's title. If you'd rather not use a WebFont, leave the field empty.",
+					"desc" => "The Font to use from <a href='http://google.com/webfonts' target='_blank'>Google WebFont Directory</a> if Use WebFonts is checked above.",
 					"id" => $shortname."_google_hdr_font",
-					"std" => "Lobster",
+					"std" => "",
 					"type" => "text");
 											
 $options[] = array( "name" => "",
@@ -271,7 +278,7 @@ $options[] = array( "name" => "Show theme credits?",
 $options[] = array( "name" => "Enable Custom Footer (Left)",
 					"desc" => "Activate to add the custom text below to the theme footer.",
 					"id" => $shortname."_footer_left",
-					"std" => "false",
+					"std" => "0",
 					"type" => "checkbox");    
 
 $options[] = array( "name" => "Custom Text (Left)",

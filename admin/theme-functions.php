@@ -35,10 +35,11 @@ if (!function_exists('optionsframework_wp_head')) {
 		of_head_css();
 		
 		// Get options for WebFont and default font and put into vars. Might be better to put vars in another location so you only call the function here, but fine now.
+		$use_gfont = get_option($shortname . '_use_google_font' ); 
 		$hdr_gfont = get_option($shortname . '_google_hdr_font' );
 		$hdr_dfont = get_option($shortname . '_default_hdr_font' );
 		
-		if($hdr_gfont != "") {
+		if($use_gfont == "true") {
 			gfonts_api($hdr_gfont, $hdr_dfont);	
 		}
 	}
