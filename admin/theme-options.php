@@ -157,13 +157,13 @@ $options[] = array( "name" => "Use WebFonts",
 					"desc" => "Check this box to use a WebFont from Google's <a href='http://google.com/webfonts' target='_blank'>WebFont Directory</a> for you
 					site's title.",
 					"id" => $shortname."_use_google_font",
-					"std" => "false",
+					"std" => "true",
 					"type" => "checkbox"); 
 					
 $options[] = array( "name" => "Title WebFont",
 					"desc" => "The Font to use from <a href='http://google.com/webfonts' target='_blank'>Google WebFont Directory</a> if Use WebFonts is checked above.",
 					"id" => $shortname."_google_hdr_font",
-					"std" => "",
+					"std" => "Lobster",
 					"type" => "text");
 											
 $options[] = array( "name" => "",
