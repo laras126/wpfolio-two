@@ -154,20 +154,20 @@ $options[] = array( "name" => "Styling Options",
 					"type" => "heading");
 
 $options[] = array( "name" => "Use WebFonts",
-					"desc" => "Check this box to use a WebFont from Google's <a href='http://google.com/webfonts' target='_blank'>WebFont Directory</a> for you
+					"desc" => "Check this box to use a WebFont from Google's <a href='http://google.com/webfonts' target='_blank'>WebFont Directory</a> for your
 					site's title.",
 					"id" => $shortname."_use_google_font",
 					"std" => "true",
 					"type" => "checkbox"); 
 					
 $options[] = array( "name" => "Title WebFont",
-					"desc" => "The Font to use from <a href='http://google.com/webfonts' target='_blank'>Google WebFont Directory</a> if Use WebFonts is checked above.",
+					"desc" => "The font to use from <a href='http://google.com/webfonts' target='_blank'>Google WebFont Directory</a> if Use WebFonts is checked above.",
 					"id" => $shortname."_google_hdr_font",
 					"std" => "Lobster",
 					"type" => "text");
 											
 $options[] = array( "name" => "",
-					"desc" => "Select a font to be used while the WebFont loads, if it does not load, and if the above field is empty.",
+					"desc" => "Select a font to be used while the WebFont loads, if it does not load, and if you have chosen not to use a webfont.",
 					"id" => $shortname."_default_hdr_font",
 					"std" => "Arial",
 		            "type" => "select",
